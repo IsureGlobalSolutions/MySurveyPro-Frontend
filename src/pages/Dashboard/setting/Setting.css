@@ -1,0 +1,86 @@
+.setting-section{
+   margin:  30px;
+gap: 0px;
+border-radius: 20px;
+border: 1px solid white;
+opacity: 0px;
+background: #FFFFFF;
+
+
+}
+.coontent h2{
+font-size: 24px;
+font-weight: 700;
+line-height: 40px;
+text-align: left;
+color: #32012F;
+
+} 
+.coontent p{
+font-size: 16px;
+font-weight: 400;
+line-height: 40px;
+text-align: left;
+color: #32012F;
+}
+.pricing{
+    margin: 10px;
+    background-color: #FFFFFF !important;
+border-radius: 20px;
+border: 1ps solid white;
+  background:  
+    url("../../assets/PricingPattern.png") no-repeat;
+  background-size: contain;
+  background-position: fixed;
+  box-shadow: 0px 4px 14.7px 0px rgba(0, 0, 0, 0.15);
+}
+.pricingcard{
+  
+padding: 30px 0px 0px 0px;
+gap: 10px;
+border-radius: 26px ;
+border: 1px 0px 0px 0px;
+opacity: 0px;
+border: 1px solid #E7EBFF;
+box-shadow: 0px 26px 40px 0px #BCCAFF21;
+background: #FFFFFF;
+
+
+}
+.pricingcard h1{
+    font-size: 33px;
+    font-weight: 500;
+    line-height: 52.8px;
+    letter-spacing: -1px;
+    text-align: left;
+    color: #1B223C;
+}
+.pricingcard h2{
+font-size: 30px;
+font-weight: 500;
+line-height: 72px;
+letter-spacing: -1px;
+text-align: left;
+color: #1B223C;
+
+}
+
+.pricingcard span{
+    font-size: 20px;
+font-weight: 300;
+line-height: 32px;
+text-align: left;
+color: #797878;
+
+}
+.pricingcard-text span{
+    font-size: 20px;
+font-weight: 400;
+line-height: 40px;
+text-align: left;
+color: #1B223C;
+
+}
+.price-line{
+    border: 1px solid #E7EBFF
+}

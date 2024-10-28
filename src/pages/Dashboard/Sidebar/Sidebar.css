@@ -1,0 +1,117 @@
+.sidebartitle h1{
+font-size: 29px;
+font-weight: 600;
+line-height: 45px;
+text-align: left;
+color: #151D48;
+}
+.sidebartitle span{
+    cursor: pointer;
+    font-weight: 600;
+    line-height: 43px;
+    text-align: left;
+    color: #F97300;
+    }
+
+.verticlenavbar p{
+font-size: 18px;
+font-weight: 600;
+line-height: 32px;
+text-align: left;
+color:#737791 ;
+}
+.icon-fill{
+fill: #979797;
+}
+.icon-stroke{
+    stroke: #979797;
+}
+
+.active {
+padding: 9px 5px 9px 18px;
+border-radius: 10px ;
+background: #F97300;
+box-shadow: 0px 20px 50px 0px #3745571A;
+color: #FFFFFF;
+  }
+  .active .icon-fill{
+    fill: white;
+  }
+  .active .icon-stroke{
+    stroke: white;
+  }
+  .verticlenavbar ul{
+    margin-left: none;
+  }
+  
+.verticlenavbar li p {
+    display: inline-block;
+    transition: opacity 0.3s;
+    opacity: 1;
+}
+.container p{
+    margin: 0px;
+}
+.verticlenavbar li{
+    cursor: pointer;
+}
+.active p{
+    
+    color: #FFFFFF;
+    /* color:#737791 ; */
+    }
+.container.collapsed  li{
+    justify-content: center !important;
+    gap: 0 !important;
+
+}
+
+/* .container.collapsed .active  svg{
+    fill: white;
+    
+} */
+
+.sidebarinner.collapsed .verticlenavbar li p {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.sidebarinner ul{
+      padding-left: 1rem !important;
+}
+.container.collapsed ul{
+    padding-left: 0.5rem !important;
+
+}
+.container.collapsed p{
+    padding: 0px;
+    margin: 0px;
+}
+.sidbar-item-link{
+    text-decoration: none;
+    list-style-type: none;
+}
+.verticlenavbar ul{
+    list-style: none;
+}
+
+@media only screen and (max-width: 1599px) {
+    .sidebartitle h1{
+        font-size: 22px;
+        margin-right: 20px;
+        }
+        
+        
+       
+  }
+  @media (max-width: 1100px) {
+    .cross-icon {
+        display: none;
+    }
+    .container.collapsed {
+        margin-top: 65px;
+    }
+}
+
+  

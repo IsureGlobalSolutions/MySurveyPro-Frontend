@@ -1,0 +1,19 @@
+.mysurveypro-input-field{
+    border-radius: 10px;
+    border: 1px solid #B7BBBE;
+    padding: 18px 13px 18px 13px;
+    width: 100%;
+}
+.mysurveypro-input-field::placeholder{
+  color: #C5C5C5;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19.2px; 
+   
+}
+.mysurveypro-input-field:focus{
+outline: none;
+}
+.error-message{
+  color: red;
+}

@@ -1,0 +1,84 @@
+.website-button {
+    cursor: pointer;
+    border: 0;
+    padding: var(--padding-3xs) var(--padding-27xl);
+    background-color: var(--color-darkorange);
+    border-radius: var(--br-81xl);
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    white-space: nowrap;
+    /* width: 100%; */
+    color: white;
+    line-height: 28.8px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .website-button:hover {
+    background-color: var(--color-chocolate);
+  }
+  .website-button {
+    /* padding-left: var(--padding-xl);
+    padding-right: var(--padding-xl); */
+    box-sizing: border-box;
+  }
+
+
+  .outliner-button {
+    cursor: pointer;
+    border: 0;
+    padding: var(--padding-3xs) var(--padding-27xl);
+    border:2px solid var(--color-darkorange);
+    background-color: white;
+    border-radius: var(--br-81xl);
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    white-space: nowrap;
+    /* width: 100%; */
+    color: var(--color-darkorange);
+    line-height: 28.8px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .outliner-button:hover {
+    background-color: rgb(231, 231, 231);
+  }
+  .website-button {
+    /* padding-left: var(--padding-xl);
+    padding-right: var(--padding-xl); */
+    box-sizing: border-box;
+  }
+  @media (max-width:768px) {
+    
+    .website-button {
+   
+      padding: var(--padding-8xs) var(--padding-xs);
+      background-color: var(--color-darkorange);
+      border-radius: var(--br-81xl);
+     
+    
+   
+      line-height: 21.8px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .outliner-button {
+      padding: var(--padding-8xs) var(--padding-xs);
+      border-radius: var(--br-81xl);
+     
+    
+   
+      line-height: 21.8px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+
+  
+  

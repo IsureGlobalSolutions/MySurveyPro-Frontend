@@ -1,0 +1,25 @@
+.survey-solution-main{
+    background: #D9D9D933;
+
+
+}
+.survey-solution-content{
+    display: flex;
+justify-content: space-around;
+}
+.graph .text {
+font-size: 53px;
+line-height: 52px;
+color: #5D5D5D;
+
+}
+.solution-content{
+    width: 60%;
+}
+.solution-content .text {
+font-weight: 400;
+font-size: 23.45px;
+line-height: 39.81px;
+color: #5D5D5D;
+
+}

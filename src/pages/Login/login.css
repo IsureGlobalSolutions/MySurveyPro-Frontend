@@ -1,0 +1,128 @@
+/* Ensure the main container takes the full viewport height and width */
+.login-main-container {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; 
+    box-sizing: border-box; 
+}
+
+/* Define styles for the card */
+.card-login {
+    border-top: 10px solid #1F8BD4;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    max-width: 100%; 
+    max-height: 100%;
+    overflow-y: auto; 
+    background-color: #fff;
+}
+
+/* Define styles for the card body */
+.login-card-body {
+    width: 100%;
+}
+
+/* Define styles for the login visuals container */
+.visuals-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+}
+
+/* Define styles for the login content container */
+.login-content {
+    padding: 40px 60px;
+    box-sizing: border-box;
+}
+
+/* Center the logo inside the visuals container */
+.visuals-login .login-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+/* Define styles for the welcome text */
+.welcome-text {
+    margin: 0px;
+    font-family: var(--font-lato);
+    font-weight: 700;
+    line-height: 1.5; /* Use a relative line-height */
+    font-size: 2rem; /* Use relative units for font size */
+    color: #7E0077;
+    margin-bottom: 20px; /* Reduce margin for better spacing on small screens */
+}
+
+/* Define styles for the account creation suggestion */
+.account-creation-suggestion {
+    color: var(--color-midnightblue);
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+    margin: 5px 0px;
+}
+
+/* Define styles for the account creation suggestion span */
+.account-creation-suggestion span {
+    color: var(--color-darkorange);
+    cursor: pointer;
+}
+
+/* Define styles for input space */
+.input-space {
+    margin: 15px 0px;
+}
+
+/* Define styles for secondary input space */
+.input-space-2 {
+    margin: 15px 0px 0px 0px;
+}
+
+/* Define styles for the info image */
+.info-image {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Define styles for the login logo image */
+.login-logo img {
+    max-width: 100%;
+}
+
+/* Define styles for the forget password text */
+.forget-pass-text {
+    margin: 0px;
+    line-height: 1.5;
+    font-size: 1rem;
+    color: var(--color-darkorange);
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+/* Define styles for the sign-in border */
+.signin-border {
+    font-size: 1rem;
+    color: #757171;
+    margin: 10px 0px;
+}
+
+/* Define styles for the social login button */
+.socail-login {
+    border: 1px solid var(--color-midnightblue);
+    padding: 11px 37px;
+    border-radius: 10px;
+    width: 100%;
+    margin: 10px 0px;
+    display: flex;
+    justify-content: center; /* Center content inside button */
+}
+
+/* Define styles for the social login text */
+.socail-login p {
+    margin: 0px;
+}

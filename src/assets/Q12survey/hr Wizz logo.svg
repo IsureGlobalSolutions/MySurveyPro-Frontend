@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 375 375" style="enable-background:new 0 0 375 375;" xml:space="preserve">
+<style type="text/css">
+	.st0{clip-path:url(#SVGID_2_);fill:#FFFFFF;}
+	.st1{clip-path:url(#SVGID_4_);}
+	.st2{clip-path:url(#SVGID_6_);}
+	.st3{fill:#F7931E;}
+	.st4{font-family:'ArchivoBlack-Regular';}
+	.st5{font-size:63.2582px;}
+	.st6{fill:#FDFDFD;}
+</style>
+<g>
+	<defs>
+		<rect id="SVGID_1_" y="-8.04" width="375" height="375"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<rect y="-8.04" class="st0" width="375" height="375"/>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_3_" x="0" y="-8.04" width="375" height="383.04"/>
+	</defs>
+	<clipPath id="SVGID_4_">
+		<use xlink:href="#SVGID_3_"  style="overflow:visible;"/>
+	</clipPath>
+	<rect x="0" y="-8.04" class="st1" width="375" height="383.04"/>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_5_" x="20.66" y="0" width="375" height="375"/>
+	</defs>
+	<clipPath id="SVGID_6_">
+		<use xlink:href="#SVGID_5_"  style="overflow:visible;"/>
+	</clipPath>
+	<g class="st2">
+		<text transform="matrix(1 0 0 1 115.4209 221.4286)" class="st3 st4 st5">w</text>
+	</g>
+	<g class="st2">
+		<text transform="matrix(1 0 0 1 173.1719 221.4286)" class="st3 st4 st5">h</text>
+	</g>
+	<g class="st2">
+		<text transform="matrix(1 0 0 1 213.4024 221.4286)" class="st3 st4 st5">i</text>
+	</g>
+	<g class="st2">
+		<text transform="matrix(1 0 0 1 232.5049 221.4286)" class="st3 st4 st5">z</text>
+	</g>
+	<g class="st2">
+		<text transform="matrix(1 0 0 1 265.7139 221.4286)" class="st3 st4 st5">z</text>
+	</g>
+</g>
+<g>
+	<path class="st6" d="M75.63,196.33c2.37-3.13,7.32-8.81,15.55-12.93c8.51-4.26,16.29-4.72,20.24-4.68c0,3.06,0,6.12,0,9.18
+		c-2.89,0-13.77,0.34-23.42,8.62c-10.78,9.25-12.14,21.63-12.37,24.17C75.63,212.57,75.63,204.45,75.63,196.33z"/>
+	<path class="st3" d="M66.45,223.88c0-18.43,0-36.85,0-55.28c3.12,0,6.25,0,9.37,0c0,3.87,0,7.75,0,11.62
+		c3.47,0.73,17.03,3.99,26.7,16.96c8.34,11.17,8.82,22.88,8.81,26.8c-3.06,0-6.12,0-9.18,0c0.01-2.95-0.31-13.14-7.87-22.49
+		c-6.85-8.48-15.55-11.2-18.55-11.99c0,11.49,0.09,22.89,0.09,34.39C72.72,223.85,69.54,223.91,66.45,223.88z"/>
+</g>
+</svg>

@@ -1,0 +1,85 @@
+.choose_title p{
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 90px;
+    color: #32012F;
+    
+    }
+    .choose_title span{
+        color:  #05467E;
+        font-weight: 700;
+        font-size: 60px;
+        line-height: 60px;
+    }
+    
+    .effortless_survey h3{
+        font-weight: 800;
+        font-size: 60px;
+        line-height: 90px;
+        color: #32012F;
+    }
+    .effortless_survey p{
+        font-weight: normal;
+        font-size: 23px;
+        line-height: 34.34px;
+        color: #5D5D5D;
+        }
+        
+    .seamless_sharing h3{
+        font-weight: 800;
+        font-size: 60px;
+        line-height: 90px;
+        color: #32012F;
+    }
+    .seamless_sharing p{
+        font-weight: normal;
+        font-size: 23px;
+        line-height: 34.34px;
+        color: #5D5D5D;
+        }
+        
+    .automated_data h3{
+        font-weight: 800;
+        font-size: 60px;
+        line-height: 90px;
+        color: #32012F;
+    }
+    .automated_data p{
+        font-weight: normal;
+        font-size: 23px;
+        line-height: 34.34px;
+        color: #5D5D5D;
+        }
+        
+    .cost_effective h3{
+        font-weight: 800;
+        font-size: 60px;
+        line-height: 90px;
+        color: #32012F;
+    }
+    .cost_effective p{
+        font-weight: normal;
+        font-size: 23px;
+        line-height: 34.34px;
+        color: #5D5D5D;
+        }
+        .seamless_sharing{
+            margin-top: -50px;
+        }
+        .automated_data{
+            margin-top: -50px;
+        }
+        .cost_effective{
+            margin-top: -50px;
+        }
+       @media (max-width:786px) {
+        .seamless_sharing{
+            margin-top: 50px;
+        }
+        .automated_data{
+            margin-top: 50px;
+        }
+        .cost_effective{
+            margin-top: 50px;
+        }
+       }

@@ -1,0 +1,209 @@
+.card-child {
+  width: 400px;
+  height: 523px;
+  position: relative;
+  border-radius: var(--br-mini);
+  background-color: var(--color-white);
+  display: none;
+  max-width: 100%;
+}
+.delimiter,
+.premium {
+  position: relative;
+  line-height: 150%;
+  text-transform: capitalize;
+  display: inline-block;
+  z-index: 1;
+}
+.premium {
+  margin: 0;
+  width: 145.5px;
+  font-size: inherit;
+  font-weight: 700;
+  font-family: inherit;
+}
+.delimiter {
+  width: 71.6px;
+  font-weight: 800;
+  flex-shrink: 0;
+  min-width: 71.6px;
+  white-space: nowrap;
+}
+.month,
+.per {
+  margin: 0;
+}
+.per-month {
+  align-self: stretch;
+  position: relative;
+  line-height: 100%;
+  text-transform: capitalize;
+  z-index: 1;
+}
+.duration,
+.separator {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.duration {
+  flex: 1;
+  flex-direction: column;
+  padding: var(--padding-base) 0 0;
+  text-align: left;
+  font-size: var(--font-size-xl);
+}
+.separator {
+  width: 169.3px;
+  flex-direction: row;
+  gap: var(--gap-base-9);
+}
+.custom-css,
+.custom-domain,
+.everything-in-basic,
+.gb-workspace-storage,
+.invite-up-to,
+.k-responses-per {
+  margin-bottom: 0;
+}
+.everything-in-basic-20k-respon {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  padding-left: var(--padding-8xl);
+}
+.everything-in-basic-container {
+  flex: 1;
+  position: relative;
+  line-height: 170%;
+  text-transform: capitalize;
+  z-index: 1;
+}
+.premium-description {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 0 0 var(--padding-7xs);
+  text-align: left;
+  font-size: var(--font-size-xl);
+}
+.frame-wrapper,
+.premium-parent,
+.separator-parent {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.separator-parent {
+  flex: 1;
+  flex-direction: column;
+  gap: var(--gap-xl);
+}
+.frame-wrapper,
+.premium-parent {
+  align-self: stretch;
+}
+.frame-wrapper {
+  flex-direction: row;
+  padding: 0 0 0 var(--padding-smi);
+  box-sizing: border-box;
+  font-size: var(--font-size-17xl);
+}
+.premium-parent {
+  flex-direction: column;
+  gap: var(--gap-5xs);
+}
+.start-a-free {
+  position: relative;
+  font-size: var(--font-size-xl);
+  line-height: 100%;
+  font-family: var(--font-lato);
+  color: var(--color-white);
+  text-align: left;
+}
+.card-inner,
+.start-a-free-trial-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.start-a-free-trial-wrapper {
+  cursor: pointer;
+  border: 0;
+  padding: var(--padding-lg) var(--padding-xl);
+  background-color: var(--color-darkorange);
+  flex: 1;
+  border-radius: var(--br-81xl);
+  overflow: hidden;
+  justify-content: center;
+  white-space: nowrap;
+  z-index: 1;
+}
+.start-a-free-trial-wrapper:hover {
+  background-color: var(--color-chocolate);
+}
+.card-inner {
+  align-self: stretch;
+  justify-content: flex-end;
+  padding: 0 var(--padding-sm) 0 var(--padding-mini);
+}
+.card {
+  flex: 0.9575;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  border-radius: var(--br-mini);
+  background-color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: var(--padding-6xl) var(--padding-17xl) var(--padding-12xl)
+    var(--padding-7xl);
+  box-sizing: border-box;
+  gap: var(--gap-22xl);
+  min-width: 300px;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--font-size-13xl);
+  color: var(--color-midnightblue);
+  font-family: var(--font-lato);
+}
+@media screen and (max-width: 800px) {
+  .premium {
+    font-size: var(--font-size-7xl);
+    line-height: 38px;
+  }
+  .delimiter {
+    font-size: var(--font-size-10xl);
+    line-height: 43px;
+  }
+  .card {
+    padding-top: var(--padding-xl);
+    padding-bottom: var(--padding-xl);
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 450px) {
+  .premium {
+    font-size: var(--font-size-lgi);
+    line-height: 29px;
+  }
+  .delimiter {
+    font-size: var(--font-size-3xl);
+    line-height: 32px;
+  }
+  .everything-in-basic-container,
+  .per-month {
+    font-size: var(--font-size-base);
+    line-height: 16px;
+  }
+  .everything-in-basic-container {
+    line-height: 27px;
+  }
+  .card {
+    gap: var(--gap-xl);
+    flex: 1;
+  }
+}

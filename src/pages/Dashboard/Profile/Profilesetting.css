@@ -1,0 +1,57 @@
+.profile h1{
+font-size: 30px;
+font-weight: 600;
+line-height: 36px;
+text-align: left;
+color: #000000;
+}
+.profile-img {
+    border-radius: 50%;
+    width: 30vw; 
+    height: 30vw; 
+    max-width: 220px; 
+    max-height: 220px; 
+    object-fit: cover; 
+    margin: auto; 
+
+opacity: 0px;
+border: 3px solid #ECECEC
+/* Ensures the image covers the circle without stretching */
+  }
+  
+  
+  /* Media queries for different screen sizes */
+  @media (max-width: 768px) {
+    .profile-img {
+      width: 40vw; /* Larger relative width for smaller screens */
+      height: 40vw;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .profile-img {
+      width: 50vw; /* Even larger relative width for very small screens */
+      height: 50vw;
+    }
+  }
+  
+  
+.profile{
+border-radius: 20px ;
+border: 1px solid #D7D7D7;
+opacity: 0px;
+background: #FFFFFF;
+box-shadow: 0px 4px 14.7px 0px #00000026;
+background-image: url('../../../assets/profileinnerImage.png'); 
+background-repeat: no-repeat;
+background-position: right bottom;
+/* box-sizing: border-box; */
+
+}
+.form-label{
+font-size: 16px;
+font-weight: 600;
+line-height: 19.2px;
+text-align: left;
+color: #32012F;
+}

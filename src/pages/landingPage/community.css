@@ -1,0 +1,141 @@
+.community_title p{
+    font-weight: 700;
+    font-size: 49.27px;
+    line-height: 53.21px;
+    color: #32012F;
+    
+    }
+    .community_title span{
+        color:  #05467E;
+        font-weight: 700;
+        font-size: 49.27px;
+        line-height: 53.21px;
+    }
+    .community_content{
+        display: flex;
+        justify-content: space-between;
+    }
+    .community_text{
+        width: 45%;
+    }
+    .community_text h4{
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 42px;
+        color: #5D5D5D;
+    }
+    .community_text p{
+        font-weight: 400;
+        font-size: 21.93px;
+        line-height: 29.9px;
+        color: #5D5D5D;
+    }
+    .community_figures{
+        display: flex;
+        justify-content: space-between;
+
+    }
+    .satisfaction_card{
+        color: #EFEFEF;
+        border-radius: 15px;
+        padding: 15px;
+
+    }
+    .satisfaction_top{
+        display: flex;
+align-items: center;
+    }
+    .satisfaction_top p{
+     
+        font-size: 30.43px;
+        font-weight: 400;
+        line-height: 27.63px;
+     color: black;
+     margin-left: 10px;
+        
+    }
+    .sat_circle{
+        height:65px;
+        width: 65px;
+        border-radius: 50%;
+        background-color: #05467E;
+    }
+    .sat_percent{
+        
+        font-size: 36.9px;
+        font-weight: 700;
+        line-height: 27.63px;
+        color: black;
+         
+    }
+    .sat_percent span{
+       
+        font-size: 24.89px;
+        font-weight: 300;
+        line-height: 27.63px;
+        color: black;
+         
+    }
+    .sat_desc{
+      
+font-size: 17.17px;
+font-weight: 400;
+line-height: 20.24px;
+color: #5D5D5D;
+
+    }
+
+
+
+
+
+
+    .feedback_card{
+        color: #EFEFEF;
+        border-radius: 15px;
+        padding: 15px;
+
+    }
+    .feedback_top{
+        display: flex;
+align-items: center;
+    }
+    .feedback_top p{
+     
+        font-size: 30.43px;
+        font-weight: 400;
+        line-height: 27.63px;
+        color: black;
+        margin-left: 10px;
+
+    }
+    .feed_circle{
+        height:65px;
+        width: 65px;
+        border-radius: 50%;
+        background-color: #05467E;
+    }
+    .feed_percent{
+        
+        font-size: 36.9px;
+        font-weight: 700;
+        line-height: 27.63px;
+        color: black;
+         
+    }
+    .feed_percent span{
+       
+        font-size: 24.89px;
+        font-weight: 300;
+        line-height: 27.63px;
+        color: black;
+         
+    }
+    .feed_desc{
+      
+font-size: 17.17px;
+font-weight: 400;
+line-height: 20.24px;
+color: #5D5D5D;
+
+    }

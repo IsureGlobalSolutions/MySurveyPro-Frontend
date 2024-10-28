@@ -1,0 +1,283 @@
+import React, { useEffect, useState } from 'react'
+import './dash-screen.css'
+import Charts from './chats/Charts'
+import Dropdown from 'react-bootstrap/Dropdown';
+
+import HeroCards from './HeroCards';
+import StartSurveyScreen from '../startSurveyScreens'
+import { useDispatch, useSelector } from 'react-redux';
+import { checkPaymentStatus, downloadOverAllSurveyReport, getAllSurveyList, getOverAllSurveyReport, getTotalNumberOfRespondent, updatePaymentStatus } from '../../../Redux/slice/surveySlice';
+import SurveyTable from '../../../components/table/SurveyTable';
+import DepartmentReport from './DepartmentReport';
+import GradeReport from './GradeReport';
+import GenderReport from './GenderReport';
+import { jwtDecode } from "jwt-decode";
+import { store } from '../../../Redux/store';
+import Topnavbar from '../Topnavbar/Topnavbar';
+import { GetUserDetail } from '../../../Redux/slice/auth';
+import { saveAs } from 'file-saver';
+import toast from 'react-hot-toast';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
+import { Navbarvalue } from '../../../context/NavbarValuesContext';
+import DropdownButton from '../../../components/mySurveyProWebsiteBtn/DropdownButton';
+
+const index = () => {
+  const dispatch = useDispatch()
+  const [listOfSurvey, setlistOfSurvey] = useState([])
+  const [isLoading, setisLoading] = useState(false)
+  const [surveyOverAllData, setsurveyOverAllData] = useState([])
+  const { paymentStatus } = useSelector((state) => state.survey)
+  const { selectedDashboardValues, DashboardStateHandler } = Navbarvalue()
+
+
+
+  const questionLabel = 'Questions';
+  const questionDataKey = 'question';
+
+  const { surveysList } = useSelector((state) => state.survey)
+
+  const { userData } = useSelector((state) => state.user)
+
+  const tokenValues = jwtDecode(userData?.accessToken)
+
+
+  const getSurveyList = async () => {
+    await dispatch(getAllSurveyList())
+  }
+
+  const paymentStatusHandler = async () => {
+    dispatch(checkPaymentStatus(tokenValues.sid))
+      .then((res) => {
+        if (res?.payload?.paymentStatus === 'paid') {
+          store.dispatch(updatePaymentStatus(res?.payload?.paymentStatus))
+
+        }
+        else {
+          store.dispatch(updatePaymentStatus('unpaid'))
+
+        }
+
+
+      })
+  }
+
+  useEffect(() => {
+
+    getSurveyList()
+
+  }, [])
+
+  useEffect(() => {
+    if (tokenValues.sid) {
+
+
+      dispatch(GetUserDetail(tokenValues?.sid))
+    }
+    if (selectedDashboardValues?.survey?.id) {
+      dispatch(getTotalNumberOfRespondent(selectedDashboardValues?.survey?.id))
+    }
+
+    paymentStatusHandler(selectedDashboardValues?.survey?.id)
+
+  }, [selectedDashboardValues?.survey?.id])
+
+  useEffect(() => {
+
+    setlistOfSurvey(surveysList)
+
+  }, [surveysList])
+
+  //get over all survey report data
+  useEffect(() => {
+    if (paymentStatus === 'paid' && selectedDashboardValues?.survey?.id) {
+
+      setisLoading(true)
+      dispatch(getOverAllSurveyReport({ surveyId: selectedDashboardValues?.survey?.id }))
+        .then((res) => {
+          setisLoading(false)
+          setsurveyOverAllData(res?.payload)
+        })
+    }
+
+
+  }, [paymentStatus, selectedDashboardValues?.survey?.id,])
+
+
+
+
+
+
+
+  // Utility function to convert a label to camelCase dataKey
+  const toCamelCase = str => {
+    return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, (match, index) =>
+      index === 0 ? match.toLowerCase() : match.toUpperCase()
+    ).replace(/\s+/g, '');
+  };
+
+
+
+
+
+  let columns = [
+    { width: 300, label: questionLabel, dataKey: questionDataKey }
+  ];
+
+  // Extracting choices labels and creating columns dynamically
+  if (surveyOverAllData?.length > 0 && surveyOverAllData[0]?.choicesResult) {
+    Object.keys(surveyOverAllData[0].choicesResult).forEach(choice => {
+      columns.push({
+        width: 120,
+        label: choice,
+        dataKey: toCamelCase(choice),
+        numeric: true
+      });
+    });
+  }
+  else {
+    columns = null
+  }
+
+  // Map the API response to the required data structure for SurveyTable
+
+  const data = Array.isArray(surveyOverAllData) ?
+    surveyOverAllData?.length > 0 ?
+      surveyOverAllData?.map(item => {
+        const rowData = {
+          [questionDataKey]: item.question.Text
+        };
+
+        // Assigning the choicesResult values to corresponding dataKeys
+        Object.keys(item?.choicesResult).forEach(choice => {
+          rowData[toCamelCase(choice)] = item.choicesResult[choice];
+        });
+
+        return rowData;
+      })
+      :
+      null
+    :
+    null
+
+
+  const downloadReport = () => {
+    if (surveyOverAllData.length > 0) {
+      dispatch(downloadOverAllSurveyReport(surveyOverAllData))
+        .then((res) => {
+
+          const blob = new Blob([res?.payload], { type: 'text/csv;charset=utf-8;' });
+          saveAs(blob, 'Over-All_survey.csv');
+        })
+
+    }
+    else {
+      toast.error('data not Found')
+    }
+  }
+
+
+
+  const handleSelect = (selectedObject) => {
+   
+    DashboardStateHandler('survey', { id: selectedObject.id, name: selectedObject.name });
+
+  };
+
+
+
+  return (
+    <>
+      <HeroCards />
+      {/* dashboard screen  */}
+      <div className="d-flex  px-3 my-3">
+        <div className="d-flex align-items-center"><p className='fs-5 fw-semibold m-0'>Select Survey</p></div>
+
+        {/* <div className="">
+          <Dropdown onSelect={handleSelect}>
+            <Dropdown.Toggle className='border rounded-4' variant="outline-secondary" id="dropdown-basic">
+              {selectedDashboardValues?.survey?.name ? selectedDashboardValues?.survey?.name : 'Survey'}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {
+                isLoading ?
+                  <div className="">loading...</div>
+                  :
+                  listOfSurvey?.length > 0 ?
+                    listOfSurvey?.map((item, index) => {
+
+                      return (
+                        <Dropdown.Item key={index} eventKey={index}>{item.name}</Dropdown.Item>
+                      )
+                    })
+                    :
+                    <div className="">no Data</div>
+              }
+
+
+            </Dropdown.Menu>
+          </Dropdown>
+        </div> */}
+        <DropdownButton items={listOfSurvey} onSelect={handleSelect}/>
+
+      </div>
+      <div className="">
+        <div className="px-3">
+          <div className="bg-white d-flex   shadow  px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
+            <div className="">
+              <p className='ps-2 py-2 fs-6 fw-bold m-0 '>OverAll Survey Report</p>
+            </div>
+            <div className="d-flex align-items-center">
+              <OverlayTrigger
+                placement="bottom"
+                overlay={<Tooltip id="button-tooltip-2">Download report file</Tooltip>}
+              >
+                <small className='ps-2 py-2  fw-bold m-0 ' style={{ color: 'orange', cursor: 'pointer' }} onClick={downloadReport}>Download</small>
+              </OverlayTrigger>
+
+            </div>
+
+
+          </div>
+        </div>
+
+        <SurveyTable
+          columns={columns ?
+            columns
+            :
+
+            [
+              { width: 300, label: 'Questions', dataKey: 'Questions' },
+              { width: 120, label: 'Strongly Disagree', dataKey: 'stronglyDisagree', numeric: true },
+              { width: 120, label: 'Disagree', dataKey: 'Disagree', numeric: true },
+              { width: 120, label: 'Neutral', dataKey: 'Neutral', numeric: true },
+              { width: 120, label: 'Agree', dataKey: 'Agree', numeric: true },
+              { width: 120, label: 'Strongly Agree', dataKey: 'stronglyAgree', numeric: true },
+            ]
+          }
+          data={data ?
+            data
+            :
+            [
+              { Questions: 'No Data', stronglyDisagree: 0, Disagree: 0, Neutral: 0, Agree: 0, stronglyAgree: 0 },
+              { Questions: 'No Data', stronglyDisagree: 0, Disagree: 0, Neutral: 0, Agree: 0, stronglyAgree: 0 },
+
+            ]
+          }
+          isLoading={isLoading}
+        />
+
+      </div>
+
+      <DepartmentReport />
+      <GradeReport />
+      <GenderReport />
+      {/* <Charts/> */}
+    </>
+  )
+}
+
+
+
+export default index

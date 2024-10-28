@@ -1,0 +1,69 @@
+.total-survey-card{
+    background: linear-gradient(257.63deg, #5781E7 3.58%, #1DDFDC 61.66%);
+    border-radius: 10px;
+
+}
+.response-card{
+    background: linear-gradient(257.63deg, #F6509F 3.58%, #FD7276 61.66%);
+    border-radius: 10px;
+}
+.not-response-card{
+    background: linear-gradient(257.63deg, #41E197 3.58%, #3DB6B6 61.66%);
+    border-radius: 10px;
+}
+.pending-card{
+    background: linear-gradient(257.63deg, #FDD543 3.58%, #FF8755 61.66%);
+    border-radius: 10px;
+}
+.total-survey-icon{
+    width:91px;
+     height:90px;
+}
+.response-survey-icon{
+    width:90px;
+     height:91px;
+}
+.not-response-survey-icon{
+    width:91px;
+     height:91px;
+}
+.pending-survey-icon{
+    width:91px;
+     height:91px;
+}
+@media (max-width:1300px) {
+    .total-survey-icon{
+        width:71px;
+         height:70px;
+    }
+    .response-survey-icon{
+        width:70px;
+         height:71px;
+    }
+    .not-response-survey-icon{
+        width:71px;
+         height:71px;
+    }
+    .pending-survey-icon{
+        width:71px;
+         height:71px;
+    }
+}
+@media (max-width:1150px) {
+    .total-survey-icon{
+        width:51px;
+         height:50px;
+    }
+    .response-survey-icon{
+        width:50px;
+         height:51px;
+    }
+    .not-response-survey-icon{
+        width:51px;
+         height:51px;
+    }
+    .pending-survey-icon{
+        width:51px;
+         height:51px;
+    }
+}

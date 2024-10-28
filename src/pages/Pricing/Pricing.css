@@ -1,0 +1,97 @@
+.pricing{
+    margin: 10px;
+    background-color: #FFFFFF !important;
+border-radius: 20px;
+border: 1ps solid white;
+  background:  
+    url("../../assets/PricingPattern.png") no-repeat;
+  background-size: contain;
+  background-position: fixed;
+  box-shadow: 0px 4px 14.7px 0px rgba(0, 0, 0, 0.15);
+}
+
+.paymentsuccess{
+    border-radius: 20px;
+    border: 1px solid #E1E3E8;
+    box-shadow: 0px 4px 15px 0px #00000026;
+    background-color:#FFFF !important;
+    background:  
+    url("../../assets/Q12survey/backgournd.png") no-repeat;
+  /* background-size: contain; */
+  background-position: fixed;
+}
+.paymentsuccess h1{
+font-size: 60px;
+font-weight: 700;
+line-height: 90px;
+text-align: center;
+color: #00C900;
+}
+.paymentsuccess h2{
+font-size: 40px;
+font-weight: 400;
+line-height: 60px;
+text-align: center;
+    color: #000000;
+    }
+.paymentsuccess p{
+font-size: 24px;
+font-weight: 400;
+line-height: 36px;
+text-align: center;
+color: #000000;
+}
+.sidbar-item-link{
+    text-decoration: none;
+    list-style-type: none;
+}
+.pricingcard{
+  
+padding: 30px 0px 0px 0px;
+gap: 10px;
+border-radius: 26px ;
+border: 1px 0px 0px 0px;
+opacity: 0px;
+border: 1px solid #E7EBFF;
+box-shadow: 0px 26px 40px 0px #BCCAFF21;
+background: #FFFFFF;
+
+
+}
+.pricingcard h1{
+    font-size: 33px;
+    font-weight: 500;
+    line-height: 52.8px;
+    letter-spacing: -1px;
+    text-align: left;
+    color: #1B223C;
+}
+.pricingcard h2{
+font-size: 30px;
+font-weight: 500;
+line-height: 72px;
+letter-spacing: -1px;
+text-align: left;
+color: #1B223C;
+
+}
+
+.pricingcard span{
+    font-size: 20px;
+font-weight: 300;
+line-height: 32px;
+text-align: left;
+color: #797878;
+
+}
+.pricingcard-text span{
+    font-size: 20px;
+font-weight: 400;
+line-height: 40px;
+text-align: left;
+color: #1B223C;
+
+}
+.price-line{
+    border: 1px solid #E7EBFF
+}

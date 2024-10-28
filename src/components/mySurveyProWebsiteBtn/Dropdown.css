@@ -1,0 +1,50 @@
+.custom-dropdown-container {
+    position: relative;
+    width: 15%;  
+  }
+  
+  .select-survey {
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid lightgrey;
+    padding: 8px;
+    border-radius: 10px;
+    transition: background-color 0.3s, color 0.3s;  /* Smooth transition for background and text color */
+  }
+  .textdropdown {
+    white-space: nowrap;    
+    overflow: hidden;      
+    text-overflow: ellipsis; 
+  }
+  .select-survey:hover {
+    background-color: #6c757d;        /* Blue background on hover */
+    color: white;                  /* White text color on hover */
+  }
+  
+  .dropdowndummy {
+    position: absolute;
+    min-width: 100%;
+    top: 100%;
+    cursor: pointer;
+    /* left: 0; */
+    right: 0;
+    border: 1px solid #ddd;
+    border-top: none;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure it is on top of other elements */
+    display: block; /* Make sure it's displayed */
+    overflow-y: auto;
+    overflow-x: none;
+    max-height: 300px;
+  }
+  
+  .dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f1f1f1;
+  }

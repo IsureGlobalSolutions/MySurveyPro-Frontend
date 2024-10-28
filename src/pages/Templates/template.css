@@ -1,0 +1,92 @@
+.template-hero-main{
+    background-color: #F7F7F7;
+    max-width: 100%;
+    padding: 10px;
+}
+.template-hero-title{
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 75px;
+
+}
+
+.template-hero-description{
+    font-size: 18px;
+    line-height: 35px;
+    font-weight: 400px;
+}
+.hero-button{
+    display: flex;
+    gap: 35px;
+    justify-content: start;
+    width: 100%;
+}
+.template-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.templateSignup-main{
+    margin-top: 80px;
+}
+.template-input-main{
+    display: flex;
+    justify-content: center;
+}
+.templateSignup-input{
+    border: 0px;
+    /* padding: 10px 15px; */
+}
+.templateSignup-input::placeholder{
+    color: grey;
+    font-family: var(--font-lato);
+    font-size: 18px;
+}
+.templateSignup-input:focus{
+    outline: none;
+}
+.search-main-input{
+      border-radius: 20px;
+      padding: 8px;
+    border: 1px solid #B7BBBE;
+    display: flex;
+    gap: 10px;
+width: 100%;
+}
+.template-signup-button{
+    display: flex;
+    gap: 35px;
+}
+
+.templateSignup-title{
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 75px;
+
+}
+
+.templateSignup-description{
+    font-size: 18px;
+    line-height: 35px;
+    font-weight: 400px;
+}
+.templateSignup-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+@media (max-width:650px) {
+    .hero-button{
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+    } 
+
+    .template-signup-button{
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+    }
+}

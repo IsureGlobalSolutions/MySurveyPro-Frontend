@@ -1,0 +1,41 @@
+.startToday_heading p{
+    font-weight: 700;
+    font-size: 51px;
+    line-height: 65px;
+    color: #32012F;
+    
+    }
+    .startToday_heading span{
+        color:  #05467E;
+        font-weight: 700;
+        font-size: 51px;
+        line-height: 65px;
+    }
+    .startToday_description p{
+        font-weight: normal;
+        font-size: 36.92px;
+        line-height: 42.6px;
+        color: #5D5D5D;
+        }
+        .startToday_content{
+            display: flex;
+            justify-content: space-between;
+        }
+        .st_text{
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+        }
+        .st_text h3{
+            font-weight: 800;
+            font-size: 28.4px;
+            line-height: 55.39px;
+            color: balck;
+        }
+        .st_text p{
+            font-weight: normal;
+            font-size: 25.56px;
+            line-height: 38.34px;
+            color: #5D5D5D;
+            }
+            

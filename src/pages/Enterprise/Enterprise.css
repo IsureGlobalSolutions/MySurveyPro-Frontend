@@ -1,0 +1,209 @@
+.enterprise{
+    background-color: #F7F7F7;
+    /* height: 543px; */
+ }
+ .watchsection{
+    background-color: #F6F6F6;
+ }
+ .enterprise h2{
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 36px;
+    text-align: left;
+    color: #32012F;
+ }
+ .enterprise h1{
+font-size: 48px;
+font-weight: 700;
+line-height: 72px;
+text-align: left;
+    color: #32012F;
+ }
+ .enterprise p{
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 42px;
+    text-align: left;
+        color: #32012F;
+     }
+.cardtexts h1{
+font-size: 25px;
+font-weight: 700;
+line-height: 37.5px;
+text-align: center;
+color: #32012F;
+}
+.cardtexts p{
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 36px;
+    text-align: center;
+    color: #32012F;
+}
+.enterprisetext h2{
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 57.6px;
+    text-align: left;
+    color: var(--color-midnightblue);
+}
+.enterprisetext span{
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 57.6px;
+    text-align: left;
+    color: var(--color-darkorange);
+}
+.enterprisetext p{
+font-size: 22px;
+font-weight: 700;
+line-height: 29px;
+text-align: left;
+color: var(--color-midnightblue);
+
+}
+.Questions h2{
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 23px;
+    text-align: left;
+    color: var(--color-midnightblue);
+
+}
+.cotentsectioncard{
+    background-color: #fff;
+    padding: 13px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.Questions{
+    box-shadow: 0px 4px 4px 0px #00000040;
+    background-color: #FFFFFF;
+padding: 14px ;
+border-radius: 20px ;
+}
+.enterprisewatchtext h1{
+font-size: 38px;
+font-weight: 700;
+line-height: 45.6px;
+text-align: left;
+color: var(--color-midnightblue);
+
+
+}
+.enterprisewatchtext ul {
+font-size: 26px;
+font-weight: 400;
+line-height: 52px;
+text-align: left;
+    color: #000000;
+    }
+    .headertext{
+        color: #000000;
+font-size: 48px;
+font-weight: 700;
+line-height: 57.6px;
+text-align: left;
+
+    }
+.custom-linebreak{
+        height: 8px;
+        background-color: var(--color-darkorange);
+        width: 60px;
+}
+    .add-item{
+font-size: 26px;
+font-weight: 400;
+line-height: 38px;
+text-align: left;
+color: #000000;
+    }
+.watchsectioncard{
+border-radius: 20px  ;
+border: 1px solid #D9D9D9;
+background-color: #fff;
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+}
+.card-title{
+font-size: 34px;
+font-weight: 700;
+line-height: 40.8px;
+text-align: left;
+color: var(--color-midnightblue);
+    }
+    .cotentsectioncard p{
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 28.8px;
+        text-align: left;
+        color: #000000;
+    }
+    .titletext{
+font-size: 24px;
+font-weight: 400;
+line-height: 28.8px;
+text-align: left;
+color: #000000;
+
+    }
+    
+    .mainposition {
+        position: relative;
+      }
+      
+      .absouluteposition {
+        position: absolute;
+        right:40px;
+      }
+      
+      .absouluteposition3 {
+        position: absolute;
+        right: 70px;
+      }
+      
+
+  .watchsectioncard {
+    /* transition: transform 0.3s ease, border-color 0.3s ease; */
+  }
+  
+  .watchsectioncard:hover {
+    border-color: #F97300;
+  }
+  
+  .watchsectioncard:hover .card-title  {
+    color: #F97300;
+  }
+  .watchsectioncard:hover .titletext  {
+    color: #F97300;
+  }
+  
+  .watchsectioncard:hover  { 
+    
+    transform: scale(1.02);
+    transition: transform 0.9s linear, filter 0.8s linear;
+  }
+  
+
+  .card-img{
+    border-bottom: 1px solid #D7D7D7
+    ;
+  }
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+  .imgfluid{
+    width: 60.29px;
+height: 60.29px;
+left: 232.93px;
+gap: 0px;
+border: 1px 0px 0px 0px;
+opacity: 0px;
+  }

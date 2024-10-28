@@ -1,0 +1,41 @@
+.customize-form-parent-image{
+    background-image: url('../../assets/landingPage/formsectionimage.png');
+    height: 598px;
+    width: 100%;
+
+    background-size:cover;
+    background-position:center;
+    background-repeat: no-repeat;
+position: relative;
+}
+.customize-form-shade-image{
+    position: absolute;
+    background-image: url("../../assets/landingPage/fromsectionshade.png");
+    width: 100%;
+    height: 100%;
+    
+    background-size:cover;
+    background-position:center;
+    background-repeat: no-repeat;
+}
+.customize-form-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: inherit;
+
+}
+.custm-heading{
+    color: white;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 43px;
+
+}
+.custm-description{
+    font-weight: 300;
+    color: white;
+    font-size: 19px;
+    line-height: 23px;
+}
