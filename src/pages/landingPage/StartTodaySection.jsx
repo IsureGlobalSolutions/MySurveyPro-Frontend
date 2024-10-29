@@ -14,9 +14,9 @@ const StartTodaySection = () => {
         <p>Transform the way you understand your team's 
             engagement and effectiveness.</p>
     </div>
-    <div className="startToday_content my-5">
-        <div className="st_text">
-            <h3>Experience The Future of Surveys with MySurveyPro</h3>
+    <div className="startToday_content my-5 pt-3">
+        <div className="st_text gap-2">
+            <h1>Experience The Future of Surveys with MySurveyPro</h1>
             <p>Sign up now and take the first step
 towards a more connected and
 productive workforce.</p>
