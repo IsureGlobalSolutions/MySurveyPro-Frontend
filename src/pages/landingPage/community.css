@@ -22,7 +22,7 @@
         font-weight: 700;
         font-size: 32px;
         line-height: 42px;
-        color: #5D5D5D;
+        color: black;
     }
     .community_text p{
         font-weight: 400;
@@ -139,3 +139,21 @@ line-height: 20.24px;
 color: #5D5D5D;
 
     }
+@media (max-width:600px) {
+    .community_content{
+        margin: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .community_text{
+        width: 100%;
+    }
+    .community_figures{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+
+    }
+    
+}

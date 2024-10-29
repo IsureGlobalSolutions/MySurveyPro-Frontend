@@ -17,14 +17,17 @@ const LandingPage = () => {
   return (
     <div className="my-survey-pro">
 
-      <section className="hero-banner">
+      <section className="hero-banner pt-4">
         <h1 className="create-forms-that-container container">
           <p className="create-forms-that">Transform the Way You Measure Human Capital Success with  <span className="engagements">MySurveyPro!</span></p>
              <p className="hero-banner-tagline mt-3">Struggling to gather accurate insights on team performance and engagement?</p>
         </h1>
   
       </section>  
-      <img src={heroImage} alt="" />
+      <div className=" w-100"  style={{  background: "#D9D9D91F"}} >
+      <img src={heroImage} alt="" className="img-fluid"/>
+
+      </div>
     
      <div className="work-eff w-100">
       <div className="work-eff-content container">
@@ -53,7 +56,7 @@ const LandingPage = () => {
     
       </div>
      </div>
-     <div className="container my-3">
+     <div className="container my-5">
       <img src={brandList} className="img-fluid" alt="no Image of brands" />
      </div>
 

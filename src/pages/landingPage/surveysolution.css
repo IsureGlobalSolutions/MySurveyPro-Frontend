@@ -1,5 +1,5 @@
 .survey-solution-main{
-    background: #D9D9D933;
+    background: #D9D9D91F;
 
 
 }
@@ -8,9 +8,11 @@
 justify-content: space-around;
 }
 .graph .text {
-font-size: 53px;
-line-height: 52px;
-color: #5D5D5D;
+    font-size: 60.02px;
+    font-weight: 700;
+    line-height: 70px;
+    letter-spacing: -2px;  
+      color: #5D5D5D;
 
 }
 .solution-content{

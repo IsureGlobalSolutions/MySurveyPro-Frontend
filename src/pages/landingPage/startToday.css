@@ -24,18 +24,35 @@
         .st_text{
             display: flex;
             flex-direction: column;
-            justify-content: end;
+            justify-content: center;
         }
         .st_text h3{
             font-weight: 800;
-            font-size: 28.4px;
-            line-height: 55.39px;
-            color: balck;
+            font-size: 37.4px;
+            line-height: 53.39px;
+            color: black;
         }
         .st_text p{
             font-weight: normal;
             font-size: 25.56px;
             line-height: 38.34px;
             color: #5D5D5D;
+            }
+            @media (max-width: 768px) {
+                .startToday_content {
+                    flex-direction: row;
+                    justify-content: space-between;
+                    text-align: left;
+                }
+            
+                .st_text {
+                    margin-right: 20px;
+                    text-align: left;
+                }
+                .startToday_content{
+                    display: flex;
+                    flex-direction: column;
+                }
+                
             }
             

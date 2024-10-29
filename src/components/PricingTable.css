@@ -187,7 +187,7 @@
 }
 .pricing-table {
   align-self: stretch;
-  background-color: var(--color-whitesmoke);
+  /* background-color: var(--color-whitesmoke); */
   justify-content: center;
   padding: var(--padding-91xl) var(--padding-xl) var(--padding-74xl);
   text-align: center;

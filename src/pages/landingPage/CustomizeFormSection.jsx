@@ -10,7 +10,7 @@ const CustomizeFormSection = () => {
     <div className="customize-form-parent-image">
         <div className="customize-form-shade-image">
             <div className="customize-form-content container ">
-                <p className='custm-heading w-50'>
+                <p className='custm-heading '>
                 Customize Your Forms in Minutes: Choose from Our Wide Range of Templates
                 </p>
                 <p className="custm-description my-5 w-50">Create professional, customized forms in minutes using our wide range

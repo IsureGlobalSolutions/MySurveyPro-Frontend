@@ -6,10 +6,11 @@ const SurvySolution = () => {
   return (
     <>
     
-    <div className="survey-solution-main py-5 w-100">
+    <div className="survey-solution-main py-5 w-100"  >
     <div className="survey-solution-content container">
         <div className="graph">
-            <p className="text mb-4">efficient
+            <p className="text mb-4">
+            Efficient
             survey solutions</p>
             <img src={conversationGraph} className='img-fluid' alt="" />
         </div>

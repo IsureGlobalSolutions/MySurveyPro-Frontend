@@ -20,8 +20,20 @@ line-height: 50px;
 color: #5D5D5D;
 }
 .effortless_description{
-font-weight: normal;
+font-weight: 400;
 font-size: 24px;
-line-height: 27px;
+line-height: 34px;
 color: #5D5D5D;
+}
+@media (max-width: 600px) {
+        .effortless_heading {
+            margin: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        
+    
+    
 }

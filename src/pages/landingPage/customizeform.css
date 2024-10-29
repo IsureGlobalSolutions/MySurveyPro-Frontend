@@ -27,15 +27,49 @@ position: relative;
 
 }
 .custm-heading{
+    max-width: 60%;
     color: white;
     font-weight: 700;
     font-size: 40px;
-    line-height: 43px;
-
+    line-height: 50px;
 }
 .custm-description{
     font-weight: 300;
     color: white;
-    font-size: 19px;
-    line-height: 23px;
+    font-size: 23px;
+    line-height: 28px;
+}
+@media (max-width:750px){
+    .custm-heading{
+        max-width: 80%;
+        color: white;
+        font-weight: 700;
+        font-size: 30px;
+        line-height: 50px;
+    }
+    .custm-description{
+        width: 70%;
+        font-weight: 300;
+        color: white;
+        font-size: 15px;
+        line-height: 25px;
+    }
+    
+}
+@media (max-width:400px){
+    .custm-heading{
+        max-width: 100%;
+        color: white;
+        font-weight: 700;
+        font-size: 25px;
+        line-height: 50px;
+    }
+    .custm-description{
+        width: 70%;
+        font-weight: 300;
+        color: white;
+        font-size: 15px;
+        line-height: 20px;
+    }
+    
 }

@@ -20,7 +20,7 @@ const StartTodaySection = () => {
             <p>Sign up now and take the first step
 towards a more connected and
 productive workforce.</p>
-<div className="">
+<div className="mb-4">
     <WebsiteButton type='button' className='mt-3' style={{backgroundColor:' #05467E'}}>
     Sign Up
 </WebsiteButton>
@@ -29,7 +29,7 @@ productive workforce.</p>
 
         </div>
         <div className="st_image">
-            <img src={getstartImage} alt="" />
+            <img src={getstartImage} alt="" className='img-fluid' />
         </div>
     </div>
    </div>

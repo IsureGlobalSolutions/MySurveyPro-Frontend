@@ -1,4 +1,15 @@
 
+.create-forms-that{
+font-size: 52.31px;
+font-weight: 700;
+line-height: 75px;
+text-align: center;
+color:  #32012F;
+
+}
+.herosection{
+  background: #D9D9D91F;
+}
 .create-forms-that,
 .engagements {
   margin: 0;
@@ -28,6 +39,8 @@ font-weight: 400;
  
 }
 .hero-banner {
+  background: #D9D9D91F;
+
   align-self: stretch;
   display: flex;
   flex-direction: row;
@@ -42,14 +55,14 @@ font-weight: 400;
   font-family: var(--font-lato);
 }
 .work-eff{
-  margin-top: 15px;
- background-color: #f5f5f5;
+  padding-top: 15px;
+  background: #D9D9D91F;
 }
 .trust-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
+    padding: 20px 15px;
 
     width: 100%;
 }
@@ -59,10 +72,11 @@ font-weight: 400;
 }
 
 .text-content h2 {
-    font-size: 51px;
-    font-weight: 400;
-    line-height: 53px;
-    color: #4a4a4a;
+  font-size: 51.02px;
+  font-weight: 700;
+  line-height: 60px;
+  letter-spacing: -2px;  
+    color: #5D5D5D;
 }
 
 .stats {
@@ -160,3 +174,64 @@ font-weight: 400;
     line-height: 54px;
   }
 }
+
+
+
+/* Base styles */
+
+
+
+
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5rem;
+  min-width: 100px;
+}
+
+.number {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.divider {
+  display: none;
+}
+
+/* Larger screens */
+@media (min-width: 768px) {
+  .stats {
+    flex-wrap: nowrap;
+    gap: 2rem;
+  }
+ 
+  .divider {
+    display: block;
+    width: 2px;
+    height: 50px;
+    background-color: #ddd;
+    align-self: center;
+  }
+}
+
+@media (max-width:700px){
+  .text-content h2 {
+    font-size: 40.02px;
+    font-weight: 700;
+    line-height: 60px;
+    letter-spacing: -2px;
+    color: #5D5D5D;
+}
+}
+/* Extra large screens */
+

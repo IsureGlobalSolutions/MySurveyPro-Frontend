@@ -6,7 +6,7 @@ const Community = () => {
     
     <>
     <div className="container my-5">
-        <div className="community_title text-center my-5">
+        <div className="community_title text-center my-5  ">
            <p>Join a community of 
             businesses that are leading the way in<span>
             employee engagement  </span></p> 
@@ -20,11 +20,11 @@ const Community = () => {
                     engagement and effectiveness with ease.
                 Sign up today and watch your workforce become more 
                 connected and productive!</p>
-                <WebsiteButton className='' style={{background:'#05467E'}}>
+                <WebsiteButton className='mt-4' style={{background:'#05467E'}}>
                     Sign Up
                 </WebsiteButton>
             </div>
-            <div className="community_figures">
+            <div className="community_figures ms-5 mt-4">
                 <div className="satisfaction_card">
                     <div className="satisfaction_top mb-3">
                         <div className="sat_circle"></div>
