@@ -16,15 +16,17 @@
         justify-content: space-between;
     }
     .community_text{
-        width: 45%;
+        width: 65%;
     }
     .community_text h4{
+        
         font-weight: 700;
         font-size: 32px;
         line-height: 42px;
         color: black;
     }
     .community_text p{
+        width: 85%;
         font-weight: 400;
         font-size: 21.93px;
         line-height: 29.9px;
@@ -33,10 +35,12 @@
     .community_figures{
         display: flex;
         justify-content: space-between;
+        
 
     }
     .satisfaction_card{
-        color: #EFEFEF;
+        border: 1px solid  #EFEFEF;
+        background-color: #EFEFEF;
         border-radius: 15px;
         padding: 15px;
 
