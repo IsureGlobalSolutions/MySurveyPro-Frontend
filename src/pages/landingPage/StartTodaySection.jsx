@@ -8,7 +8,7 @@ const StartTodaySection = () => {
    <div className="container">
     <div className="startToday_heading text-center mt-5">
         <p>Get Started <span>Today!</span></p>
-       
+        
     </div>
     <div className="startToday_description my-5">
         <p>Transform the way you understand your team's 
