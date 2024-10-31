@@ -1,3 +1,65 @@
+.create-forms-that-container {
+  text-align: center;
+}
+
+.create-forms-that {
+  display: inline-block;
+  white-space: nowrap; 
+  overflow: hidden; 
+  border-right: 2px solid black; 
+}
+
+.first-line {
+  animation: typing 4s steps(40, end), blink 0.75s step-end infinite; 
+}
+
+.engagements {
+  display: inline-block;
+  white-space: nowrap; 
+  overflow: hidden; 
+  border-right: 2px solid black; 
+  opacity: 0; 
+  animation: none; 
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+@keyframes typing-mysurveypro {
+  from {
+    width: 0;
+  }
+  to {
+    width: 28%;
+  }
+}
+
+
+.hover-container {
+  position: relative; 
+  overflow: hidden; 
+}
+
+.hover-container img {
+  transition: transform 1.5s ease; 
+}
+
+.hover-container:hover img {
+  transform: scale(1.1);
+}
+
 
 .create-forms-that{
 font-size: 52.31px;

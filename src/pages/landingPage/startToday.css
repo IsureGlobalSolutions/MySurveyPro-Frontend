@@ -1,3 +1,15 @@
+.hover-container {
+    position: relative; 
+    overflow: hidden; 
+  }
+  
+  .hover-container img {
+    transition: transform 1.5s ease; 
+  }
+  
+  .hover-container:hover img {
+    transform: scale(1.1);
+  }
 .startToday_heading p{
     font-weight: 700;
     font-size: 51px;
