@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import SurveyTable from '../../../components/table/SurveyTable'
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useDispatch, useSelector } from 'react-redux';
-import { downloadColumnWiseReport, getOverAllSurveyReport } from '../../../Redux/slice/surveySlice';
+import { downloadColumnWiseReport, downloadOverAllSurveyReport, getOverAllSurveyReport } from '../../../Redux/slice/surveySlice';
 import { saveAs } from 'file-saver';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
@@ -119,7 +119,7 @@ showSelectedValues(selectedDashboardValues?.gender)
 
   const downloadReport = ()=>{
     if(surveyOverAllData.length>0){
-       dispatch(downloadColumnWiseReport(surveyOverAllData))
+       dispatch(downloadOverAllSurveyReport(surveyOverAllData))
        .then((res)=>{    
          
            const blob = new Blob([res?.payload], { type: 'text/csv;charset=utf-8;' });
@@ -155,7 +155,7 @@ toast.error('data not Found')
 
                         </div>
 
- <DropdownButton items={listOfGender} onSelect={handleSelect}/>
+ <DropdownButton items={listOfGender} onSelect={handleSelect} initialValue={'male'}/>
                     </div>
 
                     <SurveyTable

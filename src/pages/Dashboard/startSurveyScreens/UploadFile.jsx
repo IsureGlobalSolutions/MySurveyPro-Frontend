@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './startsurvey.css'
 import WebsiteButton from '../../../components/mySurveyProWebsiteBtn/WebsiteButtton';
 import UploadFileIcon from '../../../assets/dashboredsvg/upload-file.svg?react';
@@ -11,15 +11,23 @@ import { saveAs } from 'file-saver';
 import xlsxFile from '../../../assets/downloadable-files/RecipientsDetail.xlsx'
 import csvFile from '../../../assets/downloadable-files/RecipientsDetail.csv'
 import { selectClasses } from '@mui/material';
+import Tooltip from '../../../components/Tooltip/Tooltip';
 
+const csvText='Download template file to fill in required data. After filling out, upload it';
+const downloadText = 'Upload the file containing the required data for all individuals to whom the survey will be launched'
 const UploadFile = ({ setstepper }) => {
-
+const fileInputRef = useRef(null);
   const dispatch = useDispatch()
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [toggleSelector, settoggleSelector] = useState(false)
   const { paymentStatus } = useSelector((state) => state.survey)
   const {isLaoding}=useSelector((state)=>state.user)
 const navigate = useNavigate()
+
+
+const handleClickChangePicture = () => {
+  fileInputRef.current.click(); // Simulate click on hidden file input
+};
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: (acceptedFiles) => {
@@ -60,16 +68,31 @@ navigate('/pricing')
       <div className="shadow rounded-4 bg-white w-100  d-flex justify-content-center py-5 ">
         <div className="upload-file-main">
           <div className="upload-file-buttons  p-md-4 p-2">
-            <WebsiteButton type='button' onClick={() => { }}>
+          <Tooltip text={downloadText}>
+                 <WebsiteButton type='button' onClick={handleClickChangePicture}
+              >
               Upload CSV
             </WebsiteButton>
-           
+        </Tooltip>
+         
+            <input type="file"
+                    id='uploadFileInput'
+                    ref={fileInputRef}
+                    accept=".xlsx, .csv,"
+                    onChange={(e) => setUploadedFiles([e.target.files[0]])}
+                  />
+       
 <div className="" style={{position:'relative'}}>
-     <WebsiteButton type='button' onClick={() => { 
+    <Tooltip text={csvText}>
+         <WebsiteButton type='button' onClick={() => { 
               settoggleSelector(!toggleSelector)
             }} buttonDesign='outliner'>
               Download CSV
             </WebsiteButton> 
+    </Tooltip>
+          
+     
+
             <div className={`format-selector-dropdown shadow-sm ${toggleSelector? 'active-selector':""}`}>
               <p onClick={()=>{
                  settoggleSelector(false)
@@ -88,11 +111,13 @@ onClick={()=>{
 
           </div>
           <div className="files-description p-md-4 p-2">
-            <p>
+                    <p>
               Explore, pick, and customize from our extensive
               collection of customizable templates designed
               to meet all your form and survey needs.
             </p>
+  
+         
           </div>
 
 
