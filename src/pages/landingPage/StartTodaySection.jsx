@@ -25,10 +25,8 @@ productive workforce.</p>
     Sign Up
 </WebsiteButton>
 </div>
-
-
         </div>
-        <div className="st_image">
+        <div className="st_image hover-container">
             <img src={getstartImage} alt="" className='img-fluid' />
         </div>
     </div>

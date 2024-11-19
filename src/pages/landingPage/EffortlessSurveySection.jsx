@@ -31,7 +31,7 @@ const EffortlessSurveySection = () => {
            that deliver actionable insights.
         </p>
     </div>
-    <div className="effortless_image">
+    <div className="effortless_image hover-container">
         <img src={effortlessImage} className='img-fluid' alt="" />
     </div>
    </div>

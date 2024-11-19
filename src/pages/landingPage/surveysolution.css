@@ -1,3 +1,17 @@
+
+.hover-container {
+    position: relative; 
+    overflow: hidden; 
+  }
+  
+  .hover-container img {
+    transition: transform 1.5s ease; 
+  }
+  
+  .hover-container:hover img {
+    transform: scale(1.1);
+  }
+
 .survey-solution-main{
     background: #D9D9D91F;
 

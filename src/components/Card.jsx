@@ -67,7 +67,7 @@ const Card = ({
             <div className="separator">
               <div className="delimiter">{delimiter}</div>
               <div className="duration">
-                <b className="per-month">
+                <b className="per-month d-flex">
                   <p className="per">Per/</p>
                   <p className="month">Month</p>
                 </b>
@@ -92,7 +92,7 @@ const Card = ({
           </div>
         </div>
       </div>
-      <div className="card-inner" style={frameDiv1Style}>
+      <div className="card-inner" >
         <button className="start-a-free-trial-wrapper">
           <b className="start-a-free">Start a free trial</b>
         </button>

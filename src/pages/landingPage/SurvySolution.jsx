@@ -12,14 +12,19 @@ const SurvySolution = () => {
             <p className="text mb-4">
             Efficient
             survey solutions</p>
+            <div className='hover-container'>
             <img src={conversationGraph} className='img-fluid' alt="" />
+            </div>
         </div>
         <div className="solution-content">
             <p className="text mb-4">Welcome to MySurveyPro, your ultimate 
                 solution for simplifying survey processes while boosting 
                 team productivity and collaboration. We offer seamless,
                  efficient survey solutions to help you assess team dynamics.</p>
-            <img src={statistic} className='img-fluid' alt="" />
+                 <div className='hover-container'>
+                              <img src={statistic} className='img-fluid ' alt="" />
+
+                 </div>
         </div>
 
     </div>
