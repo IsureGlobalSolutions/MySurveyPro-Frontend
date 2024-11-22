@@ -128,9 +128,9 @@ const LandingPage = () => {
 <EffortlessSurveySection/>
 <StartTodaySection/>
 <WhyChooseUs/>
-<Community/>
+{/* <Community/>
       <Bluesection />
-      <PricingTable />
+      <PricingTable /> */}
       {/* <Footer /> */}
     </div>
   );

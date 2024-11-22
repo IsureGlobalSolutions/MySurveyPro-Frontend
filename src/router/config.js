@@ -25,6 +25,7 @@ const Surveylist= lazy(()=>import("../pages/Dashboard/surveylist/Surveylist.jsx"
 const  Survey =lazy(()=>import("../pages/Dashboard/survey/q12survey/SurveyResponseQuestion.jsx"))
 const Template=lazy(()=>import("../pages/Dashboard/templates/q12template/PreviewQuestion.jsx"))
 const Paymentsuccess=lazy(()=>import ("../pages/Pricing/Success.jsx"))
+const Guidance =lazy(()=>import("../pages/Guidance/guidance.jsx"))
 const config = [
   {
   path: '/',
@@ -160,6 +161,12 @@ const config = [
   loginRequired:false,
   layout: LoginLayout,
   component:Paymentsuccess
+},
+{
+  path: '/guidance',
+  loginRequired: false,
+  layout: PublicLayout,
+  component:Guidance
 },
 
 ];

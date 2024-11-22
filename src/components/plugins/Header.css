@@ -15,9 +15,19 @@
   color: black;
   white-space: nowrap;
 }
+.guidance{
+  min-width: 118px;
+  height: 38px;
+  position: relative;
+  line-height: 150%;
+  text-transform: capitalize;
+  display: inline-block;
+  cursor: pointer;
+}
 .item-highlighted {
   font-weight: 700;
   color: var(--color-darkorange);
+  padding-top: 1px;
   /* min-width: 89px; */
 }
 .sidbar-highlighted a{
@@ -93,6 +103,17 @@
   display: inline-block;
   min-width: 66px;
   cursor: pointer;
+}
+.how-to-use{
+  margin-top: -4px;
+}
+.btn{
+  border-radius: 10px !important;
+  border: 1px solid rgb(184, 178, 178) !important;
+}
+.btn-outline-secondary:hover {
+  background-color: #f97300 !important;
+  border-color: #f97300 !important;
 }
 .signup-button-container {
   flex: 0.541;

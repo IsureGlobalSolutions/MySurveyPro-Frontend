@@ -92,7 +92,7 @@ const [sidbarHighlighter, setsidbarHighlighter] = useState(1)
        
         </ul>
     </div>
-    <div className="template-sidbar-selected-screen">
+    <div className="template-sidbar-selected-screen border-0 shadow-none ms-4">
             <div className="template-selected-screen-topnavbar">
    
                     <div className="topnavbar-items">

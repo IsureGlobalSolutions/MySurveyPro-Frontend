@@ -59,7 +59,7 @@ const HeroCards = () => {
            <div className="d-flex py-4 px-3 justify-content-between">
             <div className="not-response-content">
                 <p className='my-3 text-white fw-semibold'>{getTotalNumberOfRespondentValue?.pendingRespondents? getTotalNumberOfRespondentValue.pendingRespondents: 0}</p>
-                <p className='text-white fw-semibold'>Not Started Yet</p>
+                <p className='text-white fw-semibold'>Not Yet Started </p>
             </div>
             <div className="not-response-icon d-flex justify-content-center align-items-center">
                 <NotResponseSurvey className="not-response-survey-icon"/>
@@ -72,7 +72,7 @@ const HeroCards = () => {
            <div className="d-flex py-4 px-3 justify-content-between">
             <div className="pending-content">
                 <p className='my-3 text-white fw-semibold'>{getTotalNumberOfRespondentValue?.incompleteRespondents? getTotalNumberOfRespondentValue.incompleteRespondents: 0}</p>
-                <p className='text-white fw-semibold'>Pending</p>
+                <p className='text-white fw-semibold'>Inprogress</p>
             </div>
             <div className="pending-icon d-flex justify-content-center align-items-center">
                 <PendingSurvey className="pending-survey-icon"/>
