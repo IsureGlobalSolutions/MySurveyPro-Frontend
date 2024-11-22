@@ -111,6 +111,11 @@
   border-radius: 10px !important;
   border: 1px solid rgb(184, 178, 178) !important;
 }
+.btn-outline-secondary{
+  background-color: #f97300 !important;
+  border-color: #f97300 !important;
+  color: #ffffff !important;
+}
 .btn-outline-secondary:hover {
   background-color: #f97300 !important;
   border-color: #f97300 !important;

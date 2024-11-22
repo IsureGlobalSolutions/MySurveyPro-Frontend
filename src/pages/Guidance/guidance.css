@@ -211,7 +211,7 @@ color: #000000;
 .watchsectioncard{
 border-radius: 20px  ;
 border: 1px solid #D9D9D9;
-/* background-color: #d6d6d6; */
+background-color: #FFFFFF !important;
 display: flex;
 flex-direction: column;
 align-items: center;

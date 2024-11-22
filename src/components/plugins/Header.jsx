@@ -40,7 +40,7 @@ const sidbarHighligherHandler=(id)=>{
             <Link to={'/resources'} className={`main-item ${highlighter==='05'? 'item-highlighted':''}`} id="05"onClick={()=>highlighterHandler('05')}>Resources</Link>
             <Link to={'/guidance'} className={`main-item ${highlighter==='06'? 'item-highlighted':''}`} id="06"onClick={()=>highlighterHandler('06')}>
             <div className="how-to-use ms-4">
-            <button type="button" className="btn btn-outline-secondary" onClick={()=>navigate('/guidance')}>How to use</button>
+            <button type="button"   className={`btn ${highlighter==='06'? 'btn-outline-secondary':''}`} onClick={()=>navigate('/guidance')}>How to use</button>
             {/* <div className="guidance" ></div> */}
 
 </div>
@@ -52,12 +52,12 @@ const sidbarHighligherHandler=(id)=>{
         <div className="user-actions-container">
           <div className="auth-links-container">
             <div className="user-options">
-              <Link to={'/contact'} id="06" className={`main-item ${highlighter==='06'? 'item-highlighted':''}`} onClick={()=>highlighterHandler('06')}>Contact Sales</Link>
+              <Link to={'/contact'} id="07" className={`main-item ${highlighter==='07'? 'item-highlighted':''}`} onClick={()=>highlighterHandler('07')}>Contact Sales</Link>
             </div>
             <div className="user-options1">
-              <Link to={'/login'} id="07" className={`main-item ${highlighter==='07'? 'item-highlighted':''}`} 
+              <Link to={'/login'} id="08" className={`main-item ${highlighter==='08'? 'item-highlighted':''}`} 
               onClick={()=>{
-                highlighterHandler('07')
+                highlighterHandler('08')
                 }}>
                 Login
                 </Link>
