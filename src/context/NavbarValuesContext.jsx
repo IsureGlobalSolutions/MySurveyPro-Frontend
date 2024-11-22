@@ -15,9 +15,9 @@ const NavbarValuesContext = ({ children }) => {
   const [DashboardNavValues, setDashboardNavValues] = useState(1)
   const [startSurveyStepper, setstartSurveyStepper] = useState(1)
   const [selectedDashboardValues, setSelectedDashboardValues] = useState({
-    department:'',
-    grade:'',
-    gender:'',
+    department:'All',
+    grade:'A',
+    gender:'male',
     survey:{id:'',name:''}
   })
 

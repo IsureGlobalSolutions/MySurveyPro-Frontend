@@ -103,6 +103,7 @@ const {surveysList,isLoading}=useSelector((state)=>state.survey)
                     ) : (
                       <>
                         {surveyList?.map((item, index) => {
+                          const date = item?.createdDate.split("T")[0];
                           return (
                             <>
                               <tr
@@ -134,7 +135,7 @@ const {surveysList,isLoading}=useSelector((state)=>state.survey)
                                   </div>
                                 </td>
                                 <td className="p-4">{item.description}</td>
-                                <td className="p-4">{item.createdDate}</td>
+                                <td className="p-4">{date}</td>
                               
                               </tr>
                             </>

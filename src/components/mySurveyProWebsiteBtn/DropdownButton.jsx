@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import './Dropdown.css';
 import { FaCaretDown } from "react-icons/fa";
 
-const DropdownButton = ({ items, onSelect }) => {
+const DropdownButton = ({ items, onSelect ,initialValue }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState('Select an option');
+  const [selectedItem, setSelectedItem] = useState(`${initialValue? initialValue: 'Select an option'}`);
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
