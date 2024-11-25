@@ -124,29 +124,21 @@ export const FunnelChartData = ( series = {}) =>
                 }
             },
             "markers": {},
-            "series": [series ? series:
+            "series": [series?.data ? series:
                 {
                     "name": "Funnel",
                     "data": [
                         {
-                            "x": "Dept 1",
+                            "x": "NoData 1",
                             "y": "40"
                         },
                         {
-                            "x": "Dept 2",
+                            "x": "NoData 2",
                             "y": "35"
                         },
                         {
-                            "x": "Dept 3",
+                            "x": "NoData 3",
                             "y": "59"
-                        },
-                        {
-                            "x": "Dept 4",
-                            "y": "89"
-                        },
-                        {
-                            "x": "Dept 5",
-                            "y": "81"
                         }
                     ],
                     "group": "apexcharts-axis-0"

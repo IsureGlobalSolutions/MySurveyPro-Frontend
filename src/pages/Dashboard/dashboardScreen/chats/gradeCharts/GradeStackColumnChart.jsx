@@ -1,21 +1,22 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import Chart from 'react-apexcharts';
-import { saveAs } from 'file-saver';
-import * as ExcelJS from 'exceljs';
-
-import { toPng } from 'html-to-image'; 
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-import { MultiBarChartData } from '../../../../../components/cartsComponents/MultiBarChartData';
+import {StackChartData} from '../../../../../components/cartsComponents/StackChartData';
 import { Navbarvalue } from '../../../../../context/NavbarValuesContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOverAllDepartmentReport } from '../../../../../Redux/slice/surveySlice';
+import { getOverAllGradeReport } from '../../../../../Redux/slice/surveySlice';
 import Loader from '../../../../../components/plugins/Loader';
-const DepartMultiBarChart = () => {
+const GradeStackColumnChart = () => {
   const [reportValues, setreportValues] = useState()
   const [isLoading, setisLoading] = useState(false)
 
-const chartValues = MultiBarChartData(reportValues?.xaxisValues,reportValues?.series);
+const chartValues = StackChartData(reportValues);
+    
+
+
+
 const {selectedDashboardValues}=Navbarvalue()
 
 const { paymentStatus } = useSelector((state) => state.survey)
@@ -26,16 +27,17 @@ const dispatch = useDispatch()
 const showSelectedValues=()=>{
   setisLoading(true)
 
-      dispatch(getOverAllDepartmentReport({surveyId:selectedDashboardValues?.survey?.id}))
- .then((res) => {
- 
-    SetReportValueHandler(res?.payload)
-     
- }) 
- 
- .finally(()=>{
+    dispatch(getOverAllGradeReport(selectedDashboardValues?.survey?.id))
+.then((res) => {
+
+  SetReportValueHandler(res?.payload)
+   
+}) 
+.finally(()=>{
   setisLoading(false)
  })
+
+
 
 }
 
@@ -43,73 +45,93 @@ useEffect(() => {
 if(paymentStatus==='paid' && selectedDashboardValues?.survey?.id){
 
 
-     showSelectedValues()
- 
+   showSelectedValues()
+
 }
 
 
 }, [paymentStatus, selectedDashboardValues?.survey?.id])
 
 
-
 const SetReportValueHandler = (data) => {
   if (Array.isArray(data) && data.length > 0) {
-    // Initialize structure
-    const chartData = {
-      xaxisValues: [], // Holds department names
-      series: [
-        { name: "Actively Engaged", data: [] },
-        { name: "Actively Disengaged", data: [] },
-        { name: "Not Engaged", data: [] },
-      ],
-    };
+    // Initialize the structure for the series
+    const transformedData = [
+      {
+        name: "Actively Engaged",
+        data: [],
+        group: "apexcharts-axis-0",
+        zIndex: 0,
+      },
+      {
+        name: "Actively Disengaged",
+        data: [],
+        group: "apexcharts-axis-0",
+        zIndex: 0,
+      },
+      {
+        name: "Not Engaged",
+        data: [],
+        group: "apexcharts-axis-0",
+        zIndex: 0,
+      },
+    ];
 
-    // Populate chartData
+    // Loop through the data to populate x and y values
     data.forEach((item) => {
-      // Add department name to xaxisValues
-      chartData.xaxisValues.push(item.department);
+      const department = item.grade;
+      const responsesReport = item.responsesReport;
 
-      // Add respective response values to series
-      chartData.series[0].data.push(item.responsesReport["Actively Engaged"]);
-      chartData.series[1].data.push(item.responsesReport["Actively Disengaged"]);
-      chartData.series[2].data.push(item.responsesReport["Not Engaged"]);
+      if (responsesReport) {
+        transformedData[0].data.push({
+          x: department,
+          y: responsesReport["Actively Engaged"] || 0,
+        });
+
+        transformedData[1].data.push({
+          x: department,
+          y: responsesReport["Actively Disengaged"] || 0,
+        });
+
+        transformedData[2].data.push({
+          x: department,
+          y: responsesReport["Not Engaged"] || 0,
+        });
+      }
     });
 
-    // Set the transformed data to state
-    setreportValues(chartData);
-    setisLoading(false)
+    // Return the transformed data
+   setreportValues(transformedData)
+   setisLoading(false)
 
-  } else {
-    console.error("Invalid data or empty array passed to SetReportValueHandler");
-    setisLoading(false)
   }
+
+  return [];
 };
 
 
 
 
 useEffect(()=>{
- if(selectedDashboardValues?.department){
+if(selectedDashboardValues?.department){
+
   setisLoading(true)
 
-   
 showSelectedValues(selectedDashboardValues?.department)
- }
+}
 
 },[selectedDashboardValues?.department])
-
-
 
   return (
     <>
     <div className="age-card rounded-3 border p-3 shadow bg-white">
  <div className="d-flex justify-content-between">
         <div className="title d-flex align-items-center m-0">
-            <div className=""><p className='m-0 pb-3'>Department </p></div>
+            <div className=""><p className='m-0 pb-3'>Grades </p></div>
             
         </div>
         <div className="d-flex align-items-center">
-  
+
  
     </div>
     </div>
@@ -134,9 +156,10 @@ showSelectedValues(selectedDashboardValues?.department)
      
     </div>
     
+    
     </>
   )
  
 }
 
-export default DepartMultiBarChart
+export default GradeStackColumnChart

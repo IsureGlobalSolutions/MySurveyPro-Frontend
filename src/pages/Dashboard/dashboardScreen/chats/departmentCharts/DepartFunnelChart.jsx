@@ -13,6 +13,7 @@ import { Navbarvalue } from '../../../../../context/NavbarValuesContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOverAllDepartmentReport } from '../../../../../Redux/slice/surveySlice';
 import DropdownButton from '../../../../../components/mySurveyProWebsiteBtn/DropdownButton';
+import Loader from '../../../../../components/plugins/Loader';
 
 const listOfResponseReport=[
   {name:'Actively Engaged'},
@@ -22,10 +23,10 @@ const listOfResponseReport=[
 const DepartFunnelChart = () => {
 
 const [reportValues, setreportValues] = useState()
-console.log("🚀 ~ DepartFunnelChart ~ reportValues:", reportValues)
 const [selectedReport, setselectedReport] = useState('Actively Engaged')
-  console.log("🚀 ~ DepartFunnelChart ~ selectedReport:", selectedReport)
   const chartValues = FunnelChartData(reportValues);
+  const [isLoading, setisLoading] = useState(false)
+
   const [getAllReportData, setgetAllReportData] = useState()
 
 
@@ -36,6 +37,7 @@ const { paymentStatus } = useSelector((state) => state.survey)
 const dispatch = useDispatch()
 
 const showSelectedValues=()=>{
+  setisLoading(true)
 
   dispatch(getOverAllDepartmentReport({surveyId:selectedDashboardValues?.survey?.id}))
 .then((res) => {
@@ -45,7 +47,9 @@ setgetAllReportData(res?.payload)
  
 }) 
 
-
+.finally(()=>{
+  setisLoading(false)
+ })
 
 }
 
@@ -91,6 +95,8 @@ if (Array.isArray(data) && data.length > 0) {
 
   // Return the transformed data
  setreportValues(transformedData)
+ setisLoading(false)
+
 }
 
 return [];
@@ -102,6 +108,7 @@ return [];
 useEffect(()=>{
 if(selectedDashboardValues?.department){
 
+  setisLoading(true)
 
 showSelectedValues(selectedDashboardValues?.department)
 }
@@ -131,12 +138,19 @@ SetReportValueHandler(getAllReportData,data?.name)
     </div>
     <hr  className='m-1'/>
     <div className=""  >
+    {
+             isLoading?  
+             <div className="loader-div d-flex justify-content-center align-items-center h-100">
+              <Loader/>
+               </div> 
+               :
          <Chart 
             options={chartValues}
             series={chartValues?.series}
             type="bar"
             height='320'
           /> 
+    }
     </div>
      
     </div>

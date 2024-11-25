@@ -107,10 +107,10 @@ export const getOverAllGradesQuestionsReport = createAsyncThunk('survey/getOverA
   }
 });
 
-export const getOverAllGradeReport = createAsyncThunk('survey/getOverAllGradeReport', async (surveyId, thunkAPI) => {
+export const getOverAllGradeReport = createAsyncThunk('survey/getOverAllGradeReport', async ({surveyId,option}, thunkAPI) => {
   try {
     const res = await axiosPrivate.get(`api/SurveyReport/GetOverAllGradesReport`, {
-      params:{surveyId}
+      params:{surveyId,option}
     });
     return res.data;
   } catch (error) {

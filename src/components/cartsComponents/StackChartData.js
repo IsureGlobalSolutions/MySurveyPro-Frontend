@@ -115,28 +115,16 @@ export const StackChartData = ( series = []) => ({
             "name": "Actively Engaged",
             "data": [
                 {
-                    "x": "depart 1",
+                    "x": "noData 1",
                     "y": 10
                 },
                 {
-                    "x": "depart 2",
+                    "x": "noData 2",
                     "y": 20
                 },
                 {
-                    "x": "depart 3",
+                    "x": "noData 3",
                     "y": 30
-                },
-                {
-                    "x": "depart 4",
-                    "y": 40
-                },
-                {
-                    "x": "depart 5",
-                    "y": 10
-                },
-                {
-                    "x": "depart 6",
-                    "y": 10
                 }
             ],
             "group": "apexcharts-axis-0",
@@ -146,28 +134,16 @@ export const StackChartData = ( series = []) => ({
             "name": "Actively Disengaged",
             "data": [
                 {
-                    "x": "depart 1",
+                    "x": "noData 1",
                     "y": 15
                 },
                 {
-                    "x": "depart 2",
+                    "x": "noData 2",
                     "y": 10
                 },
                 {
-                    "x": "depart 3",
+                    "x": "noData 3",
                     "y": 25
-                },
-                {
-                    "x": "depart 4",
-                    "y": "20"
-                },
-                {
-                    "x": "depart 5",
-                    "y": 10
-                },
-                {
-                    "x": "depart 6",
-                    "y": 10
                 }
             ],
             "group": "apexcharts-axis-0",
@@ -178,28 +154,16 @@ export const StackChartData = ( series = []) => ({
             "group": "apexcharts-axis-0",
             "data": [
                 {
-                    "x": "depart 1",
+                    "x": "noData 1",
                     "y": "12"
                 },
                 {
-                    "x": "depart 2",
+                    "x": "noData 2",
                     "y": "23"
                 },
                 {
-                    "x": "depart 3",
+                    "x": "noData 3",
                     "y": "40"
-                },
-                {
-                    "x": "depart 4",
-                    "y": "30"
-                },
-                {
-                    "x": "depart 5",
-                    "y": 10
-                },
-                {
-                    "x": "depart 6",
-                    "y": 10
                 }
             ],
             "zIndex": 2

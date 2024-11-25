@@ -1,9 +1,9 @@
 import React from 'react'
 import AgeChart from './AgeChart'
 import DepartmentCharts from './departmentCharts/DepartmentCharts'
-import DesignationChart from './DesignationChart'
 import GenderChart from './GenderChart'
 import SurveysPerformanceChart from './SurveysPerformanceChart'
+import DesignationChart from './gradeCharts/DesignationChart'
 
 const Charts = () => {
   return (

@@ -9,9 +9,9 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import { MultiBarChartData } from '../../../../../components/cartsComponents/MultiBarChartData';
 import { Navbarvalue } from '../../../../../context/NavbarValuesContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOverAllDepartmentReport } from '../../../../../Redux/slice/surveySlice';
+import { getOverAllDepartmentReport, getOverAllGradeReport } from '../../../../../Redux/slice/surveySlice';
 import Loader from '../../../../../components/plugins/Loader';
-const DepartMultiBarChart = () => {
+const GradeMultiBarChart = () => {
   const [reportValues, setreportValues] = useState()
   const [isLoading, setisLoading] = useState(false)
 
@@ -26,16 +26,18 @@ const dispatch = useDispatch()
 const showSelectedValues=()=>{
   setisLoading(true)
 
-      dispatch(getOverAllDepartmentReport({surveyId:selectedDashboardValues?.survey?.id}))
+      dispatch(getOverAllGradeReport(selectedDashboardValues?.survey?.id))
  .then((res) => {
- 
+  console.log("🚀 ~ .then ~ res?.payload:", res?.payload)
     SetReportValueHandler(res?.payload)
      
  }) 
- 
  .finally(()=>{
   setisLoading(false)
  })
+   
+ 
+
 
 }
 
@@ -67,7 +69,7 @@ const SetReportValueHandler = (data) => {
     // Populate chartData
     data.forEach((item) => {
       // Add department name to xaxisValues
-      chartData.xaxisValues.push(item.department);
+      chartData.xaxisValues.push(item.grade);
 
       // Add respective response values to series
       chartData.series[0].data.push(item.responsesReport["Actively Engaged"]);
@@ -79,10 +81,7 @@ const SetReportValueHandler = (data) => {
     setreportValues(chartData);
     setisLoading(false)
 
-  } else {
-    console.error("Invalid data or empty array passed to SetReportValueHandler");
-    setisLoading(false)
-  }
+  } 
 };
 
 
@@ -105,7 +104,7 @@ showSelectedValues(selectedDashboardValues?.department)
     <div className="age-card rounded-3 border p-3 shadow bg-white">
  <div className="d-flex justify-content-between">
         <div className="title d-flex align-items-center m-0">
-            <div className=""><p className='m-0 pb-3'>Department </p></div>
+            <div className=""><p className='m-0 pb-3'>Grades </p></div>
             
         </div>
         <div className="d-flex align-items-center">
@@ -134,9 +133,10 @@ showSelectedValues(selectedDashboardValues?.department)
      
     </div>
     
+    
     </>
   )
  
 }
 
-export default DepartMultiBarChart
+export default GradeMultiBarChart

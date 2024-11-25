@@ -111,29 +111,21 @@ export const LineChartData = ( series = {}) => ({
             "sizeOffset": 6
         }
     },
-    "series": [series ? series:
+    "series": [series?.data ? series:
         {
             "name": "Line",
             "data": [
                 {
-                    "x": "Item 1",
+                    "x": "No data 1",
                     "y": 31
                 },
                 {
-                    "x": "Item 2",
+                    "x": "No data 2",
                     "y": 40
                 },
                 {
-                    "x": "Item 3",
+                    "x": "No data 3",
                     "y": 28
-                },
-                {
-                    "x": "Item 4",
-                    "y": 51
-                },
-                {
-                    "x": "Item 5",
-                    "y": 42
                 }
             ],
             "group": "apexcharts-axis-0"
