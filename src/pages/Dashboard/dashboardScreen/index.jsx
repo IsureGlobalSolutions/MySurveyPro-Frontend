@@ -22,6 +22,13 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import { Navbarvalue } from '../../../context/NavbarValuesContext';
 import DropdownButton from '../../../components/mySurveyProWebsiteBtn/DropdownButton';
 
+
+import DepartFunnelChart from './chats/departmentCharts/DepartFunnelChart';
+import DepartLineChart from './chats/departmentCharts/DepartLineChart';
+import DepartStackColumnChart from './chats/departmentCharts/DepartStackColumnChart';
+import DepartMultiBarChart from './chats/departmentCharts/DepartMultiBarChart';
+
+
 const index = () => {
   const dispatch = useDispatch()
   const [listOfSurvey, setlistOfSurvey] = useState([])
@@ -270,9 +277,33 @@ const index = () => {
 
       </div>
 
-      <DepartmentReport />
+      <DepartmentReport />  
+      <div className="row m-0 p-0 mb-4">
+        <div className="col-md-6">  
+            <DepartMultiBarChart/>
+          
+        </div>
+        <div className="col-md-6">
+        <DepartStackColumnChart/>
+        </div>
+      </div>
+      <div className="row m-0 p-0 mb-4">
+        <div className="col-md-6">
+         
+ <DepartLineChart/> 
+        </div>
+        <div className="col-md-6">
+        <DepartFunnelChart/>
+
+        </div>
+      </div>
+      
       <GradeReport />
       <GenderReport />
+    
+      
+     
+      
       {/* <Charts/> */}
     </>
   )

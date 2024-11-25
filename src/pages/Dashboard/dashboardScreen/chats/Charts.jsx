@@ -1,6 +1,6 @@
 import React from 'react'
 import AgeChart from './AgeChart'
-import DepartmentCharts from './DepartmentCharts'
+import DepartmentCharts from './departmentCharts/DepartmentCharts'
 import DesignationChart from './DesignationChart'
 import GenderChart from './GenderChart'
 import SurveysPerformanceChart from './SurveysPerformanceChart'

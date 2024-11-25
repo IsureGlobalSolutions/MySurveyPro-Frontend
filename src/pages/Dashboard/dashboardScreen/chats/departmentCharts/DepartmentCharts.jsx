@@ -5,8 +5,8 @@ import * as ExcelJS from 'exceljs';
 
 import { toPng } from 'html-to-image'; 
 import { useDispatch, useSelector } from 'react-redux';
-import {  getOverAllDepartmentReport } from '../../../../Redux/slice/surveySlice';
-import { Navbarvalue } from '../../../../context/NavbarValuesContext';
+import {  getOverAllDepartmentReport } from '../../../../../Redux/slice/surveySlice';
+import { Navbarvalue } from '../../../../../context/NavbarValuesContext';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 const DepartmentCharts = () => {
@@ -52,10 +52,6 @@ if(paymentStatus==='paid' && selectedDashboardValues?.survey?.id){
                 :
                   'All'
               )
-        
-
-    
-       
 
 }
        

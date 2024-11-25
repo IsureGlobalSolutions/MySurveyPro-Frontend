@@ -15,6 +15,7 @@ const DesignationChart = () => {
     const {selectedDashboardValues}=Navbarvalue()
 
 const [reportValues, setreportValues] = useState()
+console.log("🚀 ~ DesignationChart ~ reportValues:", reportValues)
 const { paymentStatus } = useSelector((state) => state.survey)
 const chartRef = useRef(null);  
     const dispatch = useDispatch()

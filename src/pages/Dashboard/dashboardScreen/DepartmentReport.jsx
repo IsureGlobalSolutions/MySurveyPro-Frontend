@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import SurveyTable from '../../../components/table/SurveyTable'
-import DepartmentCharts from './chats/DepartmentCharts'
 import { useDispatch, useSelector } from 'react-redux';
 import { getListOfCoumnProperty, getDepartmentQuestionsReport, downloadColumnWiseReport } from '../../../Redux/slice/surveySlice';
 import { saveAs } from 'file-saver';
@@ -9,6 +8,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import {Navbarvalue} from '../../../context/NavbarValuesContext';
 import DropdownButton from '../../../components/mySurveyProWebsiteBtn/DropdownButton';
+import DepartmentCharts from './chats/departmentCharts/DepartmentCharts';
 
 const DepartmentReport = () => {
   const dispatch = useDispatch()
@@ -215,7 +215,7 @@ showSelectedValues(selectedDashboardValues?.department)
           />
         </div>
         <div className="department-card-data col-md-5 m-0 p-0">
-          <DepartmentCharts  />
+          <DepartmentCharts    />``
 
         </div>
       </div>

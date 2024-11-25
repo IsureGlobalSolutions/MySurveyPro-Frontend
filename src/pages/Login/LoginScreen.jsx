@@ -37,6 +37,8 @@ try {
   dispatch(signInUser(finalData))
 .then((res)=>{
 if(res?.payload.isSuccess===true){
+  console.log(res?.payload);
+  
   store.dispatch(updateAccessToken(res?.payload))
   toast.success('Login Successfully!')
   navigate('/dashboard')
