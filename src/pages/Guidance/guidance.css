@@ -301,15 +301,16 @@ color: #000000;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Optional shadow for readability */
 }
 
-.card-img {
-    border-radius: 10px; /* Optional: add border radius for aesthetics */
-}
 
 
-  .card-img{
-    border-bottom: 1px solid #D7D7D7;
-    border-radius: 20px 20px 20px 20px ;
-    /* height: 70%; */
+.templage-header{
+    width: calc( 95%);
+    background-color: #ffffff;
+    border: 1px solid #EDEDED;
+    /* background-color: #d5d1d5; */
+    background-color: #e7e6e7;
+    border-radius: 10px;
+    /* box-shadow: 0px 4px 4px 0px #00000040; */
   }
   .img-fluid {
     max-width: 100%;

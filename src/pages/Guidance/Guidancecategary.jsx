@@ -24,32 +24,32 @@ const [sidbarHighlighter, setsidbarHighlighter] = useState(1)
 const sidbarList= [
     {
         icon:<BookingAndOrder />,
-        title:'Viewing the Dashboard',
+        title:'Dashboard Guidance',
         id:1
     },
         {
             icon:<Survey />,
-            title:'How to Start Survey',
+            title:'Start Survey Guidance',
             id:2
         },
         {
             icon:<LeadGeneratoin />,
-            title:'How to View Survey',
+            title:'View Survey Guidance',
             id:3
         },
         {
             icon:<Registration />,
-            title:'How to View Survey Questions',
+            title:'Look Survey Questions View',
             id:4
         },
         {
             icon:<Marketing />,
-            title:'Viewing the  Pricing',
+            title:'  Pricing Guidance',
             id:5
         },
         {
             icon:<Education />,
-            title:'Viewing the  Profile',
+            title:' Profile Guidance',
             id:6
         },
         
@@ -92,9 +92,12 @@ const sidbarList= [
     }
   return (
     <>
+    <div className="templage-header mt-4">
+             <p className='fw-bold h3 ps-5 py-2 m-0 d-flex justify-content-center'>User Guidance Hub</p>
+             {/* <hr  className='my-1' style={{color:'#aeaeae'}}/> */}
+             </div>
+    <div className="template-catagories-main my-1">
    
-    <div className="template-catagories-main my-5  ">
-     
      <div className="template-sidbar">
          <p className='fw-bold h3 ps-5 py-2 m-0'>Categories</p>
          <hr  className='my-1' style={{color:'#aeaeae'}}/>
