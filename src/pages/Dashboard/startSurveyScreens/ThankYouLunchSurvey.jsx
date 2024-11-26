@@ -7,6 +7,7 @@ import { IoIosCopy } from "react-icons/io";
 import { jwtDecode } from "jwt-decode";
 import {  useSelector } from 'react-redux';
 import { FRONTEND_URL } from '../../../consts/environments';
+import Tooltip from '../../../components/Tooltip/Tooltip';
 
 const ThankYouLunchSurvey = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -39,12 +40,9 @@ const ThankYouLunchSurvey = () => {
   <p className='m-0 text-muted fs-4 fw-bold'>Survey Link : </p></div>
 <div className="border px-4 py-3 m-0 rounded-4 bg-light d-flex gap-2">
   <p className='m-0'>{FRONTEND_URL}/q12survey/{id}</p>
-   <abbr 
-   title={`${abbrTitle}`} 
-   style={{cursor:'pointer'}}
-   >
+  <Tooltip text={abbrTitle}>
     <IoIosCopy style={{color:'#F97300'}} onClick={copyToClipboard}/>
-    </abbr>
+ </Tooltip>
 </div>
 </div>
 <div className="thanks-info">

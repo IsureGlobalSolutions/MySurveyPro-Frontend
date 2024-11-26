@@ -17,6 +17,7 @@ import Loader from '../../../../components/plugins/Loader';
 import Q12survey from './Q12survey';
 import img1 from '../../../../assets/Q12survey/stepperimage.png';
 import { jwtDecode } from "jwt-decode";
+import { useParams } from 'react-router-dom';
 
 const SurveyResponseQuestion = () => {
 
@@ -24,11 +25,13 @@ const SurveyResponseQuestion = () => {
     const [data, setData] = useState([]);
     const [staffid, setstaffid] = useState('');
     const {isLoading,userData} =useSelector((state)=>state.user)
-  const decodedToken = jwtDecode(userData.accessToken);
-  const userid = decodedToken.sid;
+    const {id}=useParams();
+ 
+  const userid = id;
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(111);
     const [selectchoiseid, setselectchoiseid] = useState([]);
+    console.log("🚀 ~ SurveyResponseQuestion ~ selectchoiseid:", selectchoiseid)
 
     useEffect(() => {
         fetchSurveyData();
@@ -70,6 +73,11 @@ const SurveyResponseQuestion = () => {
     };
 
     const handleNext = async () => {
+        if(!selectchoiseid[activeStep])
+        {
+            toast.error('please select any choice')
+            return;
+        }
         if (activeStep < data.length - 1) {
             const choiceId = selectchoiseid[activeStep];
             const questionId=data[activeStep].questionId
