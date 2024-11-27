@@ -16,7 +16,7 @@ export const FunnelChartData = ( series = {}) =>
                 "id": "gMc5V",
                 "stackOnlyBar": true,
                 "toolbar": {
-                    "show": false
+                    "show": true
                 },
                 "type": "bar",
                 "width": 507,

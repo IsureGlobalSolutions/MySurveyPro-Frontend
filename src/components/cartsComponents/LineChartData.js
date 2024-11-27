@@ -11,7 +11,7 @@ export const LineChartData = ( series = {}) => ({
         "id": "zzywa",
         "stackOnlyBar": true,
         "toolbar": {
-            "show": false
+            "show": true
         },
         "width": 480,
         "zoom": {
