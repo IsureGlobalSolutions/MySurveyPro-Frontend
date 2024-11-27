@@ -40,7 +40,7 @@ const ThankYouLunchSurvey = () => {
   <p className='m-0 text-muted fs-4 fw-bold'>Survey Link : </p></div>
 <div className="border px-4 py-3 m-0 rounded-4 bg-light d-flex gap-2">
   <p className='m-0'>{FRONTEND_URL}/q12survey/{id}</p>
-  <Tooltip text={abbrTitle}>
+  <Tooltip text={abbrTitle} style={{width:'150px'}}>
     <IoIosCopy style={{color:'#F97300'}} onClick={copyToClipboard}/>
  </Tooltip>
 </div>

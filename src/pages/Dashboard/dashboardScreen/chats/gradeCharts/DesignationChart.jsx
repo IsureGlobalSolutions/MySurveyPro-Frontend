@@ -21,6 +21,7 @@ const chartRef = useRef(null);
     const dispatch = useDispatch()
 
 
+
     const showSelectedValues=(value)=>{
          setisLoading(true)
          if(value !='All')
@@ -72,12 +73,13 @@ if(paymentStatus ==='paid' && selectedDashboardValues?.survey?.id){
         data?.length>0 ?
         data.map((item,index)=>{
             
-                if(value===item?.grade){
+                if(value===item?.grade ||value ===item?.report){
                     let labels=Object.keys(item?.responsesReport) 
                     let series = Object.values(item?.responsesReport)
 setreportValues({labels,series})
 setisLoading(false)
                 }
+                
             
         })
         :

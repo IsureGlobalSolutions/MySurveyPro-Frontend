@@ -85,7 +85,7 @@ export const signout = createAsyncThunk('authentication/signout', async (_, thun
 });
 export const getSurveyById = createAsyncThunk('Survey/getSurveyById', async (_, thunkAPI) => {
   try {
-    const res = await axiosPrivate.get('api/Survey/getSurveyById/1');
+    const res = await instance.get('api/Survey/getSurveyById/1');
     return res.data;
 
   } catch (error) {

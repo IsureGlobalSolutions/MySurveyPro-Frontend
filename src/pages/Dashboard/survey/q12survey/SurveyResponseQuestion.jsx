@@ -31,7 +31,6 @@ const SurveyResponseQuestion = () => {
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(111);
     const [selectchoiseid, setselectchoiseid] = useState([]);
-    console.log("🚀 ~ SurveyResponseQuestion ~ selectchoiseid:", selectchoiseid)
 
     useEffect(() => {
         fetchSurveyData();

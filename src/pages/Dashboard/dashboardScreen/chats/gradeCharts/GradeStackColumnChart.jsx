@@ -27,7 +27,7 @@ const dispatch = useDispatch()
 const showSelectedValues=()=>{
   setisLoading(true)
 
-    dispatch(getOverAllGradeReport(selectedDashboardValues?.survey?.id))
+    dispatch(getOverAllGradeReport({surveyId:selectedDashboardValues?.survey?.id}))
 .then((res) => {
 
   SetReportValueHandler(res?.payload)

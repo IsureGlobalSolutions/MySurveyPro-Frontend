@@ -19,14 +19,13 @@ const chartValues = MultiBarChartData(reportValues?.xaxisValues,reportValues?.se
 const {selectedDashboardValues}=Navbarvalue()
 
 const { paymentStatus } = useSelector((state) => state.survey)
-const chartRef = useRef(null);  
 
 const dispatch = useDispatch()
 
 const showSelectedValues=()=>{
   setisLoading(true)
 
-      dispatch(getOverAllGradeReport(selectedDashboardValues?.survey?.id))
+      dispatch(getOverAllGradeReport({surveyId:selectedDashboardValues?.survey?.id}))
  .then((res) => {
   console.log("🚀 ~ .then ~ res?.payload:", res?.payload)
     SetReportValueHandler(res?.payload)
@@ -37,7 +36,6 @@ const showSelectedValues=()=>{
  })
    
  
-
 
 }
 
