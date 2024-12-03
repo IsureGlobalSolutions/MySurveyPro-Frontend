@@ -12,7 +12,39 @@ export const getAllSurveyList = createAsyncThunk('survey/getAllSurvey', async (d
     return thunkAPI.rejectWithValue(message);
   }
 });
-
+export const getAllSurveyFiles = createAsyncThunk('survey/getAllSurveyfiles', async (surveyId, thunkAPI) => {
+  try {
+    const res = await axiosPrivate.get('api/Recipient/GetListOfFileNames' , {
+      params : {surveyid : surveyId}
+    });
+    return res.data;
+  } catch (error) {
+    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+export const VeiwUniqueFileName = createAsyncThunk('survey/viewfileWithUniqueName', async (filename, thunkAPI) => {
+  try {
+    const res = await axiosPrivate.get('api/Recipient/GetSurveyRecipientsByUniqueFileName' , {
+      params : {uniqueFileName : filename}
+    });
+    return res.data;
+  } catch (error) {
+    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+export const EditUniqueFile = createAsyncThunk('survey/editfileWithUniqueName', async (filename, thunkAPI) => {
+  try {
+    const res = await axiosPrivate.get('api/Recipient/EditRecipientInFile' , {
+      params : {uniqueFileName : filename}
+    });
+    return res.data;
+  } catch (error) {
+    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
 export const paymentSurvey = createAsyncThunk('survey/CreateSurveyChargeAsync', async (data, thunkAPI) => {
   try {
     const res = await axiosPrivate.post('api/Survey/CreateSurveyChargeAsync', data);
@@ -22,8 +54,6 @@ export const paymentSurvey = createAsyncThunk('survey/CreateSurveyChargeAsync', 
     return thunkAPI.rejectWithValue(message);
   }
 });
-
-
 export const checkPaymentStatus = createAsyncThunk('survey/CheckSubscriptionPaymentStatus', async (id, thunkAPI) => {
   try {
     const res = await axiosPrivate.post(`api/Survey/CheckSubscriptionPaymentStatus/${id}`, {});
@@ -33,8 +63,6 @@ export const checkPaymentStatus = createAsyncThunk('survey/CheckSubscriptionPaym
     return thunkAPI.rejectWithValue(message);
   }
 });
-
-
 export const getOverAllSurveyReport = createAsyncThunk('survey/getOverAllSurveyReport', async ({ surveyId, gender }, thunkAPI) => {
   try {
     const res = await axiosPrivate.get(`api/SurveyReport/GetOverAllSurveyOrGenderReport`,{
@@ -46,7 +74,6 @@ export const getOverAllSurveyReport = createAsyncThunk('survey/getOverAllSurveyR
     return thunkAPI.rejectWithValue(message);
   }
 });
-
 export const getDepartmentQuestionsReport = createAsyncThunk('survey/getDepartmentQuestionsReport', async ({surveyId,department}, thunkAPI) => {
   try {
     const res = await axiosPrivate.get(`api/SurveyReport/GetDepartmentQuestionsReport`, {
@@ -58,7 +85,6 @@ export const getDepartmentQuestionsReport = createAsyncThunk('survey/getDepartme
     return thunkAPI.rejectWithValue(message);
   }
 });
-
 export const getOverAllDepartmentsQuestionsReport = createAsyncThunk('survey/getOverAllDepartmentsQuestionsReport', async (surveyId, thunkAPI) => {
   try {
     const res = await axiosPrivate.get(`api/SurveyReport/GetOverAllDepartmentsQuestionsReport`, {
@@ -70,7 +96,6 @@ export const getOverAllDepartmentsQuestionsReport = createAsyncThunk('survey/get
     return thunkAPI.rejectWithValue(message);
   }
 });
-
 export const getOverAllDepartmentReport = createAsyncThunk('survey/getOverAllDepartmentReport', async ({surveyId,option}, thunkAPI) => {
   try {
     const res = await axiosPrivate.get(`api/SurveyReport/GetOverAllDepartmentalReport`, {
@@ -82,7 +107,6 @@ export const getOverAllDepartmentReport = createAsyncThunk('survey/getOverAllDep
     return thunkAPI.rejectWithValue(message);
   }
 });
-
 export const getGradeQuestionsReport = createAsyncThunk('survey/getGradeQuestionsReport', async ({surveyId,grade}, thunkAPI) => {
   try {
     const res = await axiosPrivate.get(`api/SurveyReport/GetGradeQuestionsReport`, {
@@ -94,7 +118,6 @@ export const getGradeQuestionsReport = createAsyncThunk('survey/getGradeQuestion
     return thunkAPI.rejectWithValue(message);
   }
 });
-
 export const getOverAllGradesQuestionsReport = createAsyncThunk('survey/getOverAllGradesQuestionsReport', async (surveyId, thunkAPI) => {
   try {
     const res = await axiosPrivate.get(`api/SurveyReport/GetOverAllGradesQuestionsReport`, {
@@ -129,7 +152,6 @@ export const getTotalNumberOfRespondent = createAsyncThunk('survey/getTotalNumbe
     return thunkAPI.rejectWithValue(message);
   }
 });
-
 export const getListOfCoumnProperty = createAsyncThunk('survey/getListOfCoumnProperty', async ({surveyId,columnProperty}, thunkAPI) => {
   try {
     const res = await axiosPrivate.get(`api/Recipient/GetListOfColumnProperty`, {
@@ -141,7 +163,6 @@ export const getListOfCoumnProperty = createAsyncThunk('survey/getListOfCoumnPro
     return thunkAPI.rejectWithValue(message);
   }
 });
-
 export const downloadOverAllSurveyReport = createAsyncThunk('survey/downloadOverAllSurveyReport', async (data, thunkAPI) => {
   try {
     const res = await axiosPrivate.post(`api/ReportFileDownload/DownloadOverallSurveyReport`, data);
@@ -161,15 +182,11 @@ export const downloadColumnWiseReport = createAsyncThunk('survey/downloadColumnW
   }
 });
 
-
-
-
 const initialState = {
   isLoading: false,
   surveysList: {},
   getTotalNumberOfRespondentValue:{},
   getOverAllDepartmentReportValue:{},
-
   message: '',
   paymentStatus:'',
   error: null,
@@ -198,8 +215,7 @@ const surveySlice = createSlice({
         state.isLoading = false;
         state.error = action.payload || action.error.message;
       })
-
-
+     
       .addCase(paymentSurvey.pending, (state) => {
         state.isLoading = true;
       })

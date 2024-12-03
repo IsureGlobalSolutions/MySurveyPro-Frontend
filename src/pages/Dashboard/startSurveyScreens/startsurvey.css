@@ -71,3 +71,25 @@
         gap:15px;
     }
 }
+
+.table-bordered-custom {
+    border: 1px solid #e9e6e1;
+  }
+  
+  .table-bordered-custom th,
+  .table-bordered-custom td {
+    border: 1px solid #e9e6e1;
+  }
+  .btn-outline-info:hover{
+    color: orange;
+  }
+  .MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.MuiTablePagination-toolbar.css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar{
+    display: flex;
+    align-items: baseline;
+    justify-self: center;
+    color: #0e0e0d ;
+    font-weight: 900;
+  }
+  .btn-outline-danger:hover{
+    color: red;
+  }

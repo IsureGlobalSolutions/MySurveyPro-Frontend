@@ -18,7 +18,7 @@ const NavbarValuesContext = ({ children }) => {
     department:'All',
     grade:'All',
     gender:'male',
-    survey:{id:'',name:''}
+    survey:{id:'', name:''}
   })
 
 //main website topnavbar values 

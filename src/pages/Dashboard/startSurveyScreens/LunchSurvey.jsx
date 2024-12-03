@@ -10,7 +10,7 @@ const LunchSurvey = ({setstepper}) => {
             Launch Now.</p>
             <img className='img-fluid' src={LunchServey} alt="" />
             <div className="d-flex justify-content-center">
-                 <WebsiteButton type='button' onClick={()=>{setstepper(4)}}>
+                 <WebsiteButton type='button' onClick={()=>{setstepper(5)}}>
                 Lunch Survey
             </WebsiteButton>
             </div>
