@@ -3,7 +3,7 @@ import './startsurvey.css'
 import WebsiteButton from '../../../components/mySurveyProWebsiteBtn/WebsiteButtton';
 import UploadFileIcon from '../../../assets/dashboredsvg/upload-file.svg?react';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadFileOfEmployeesData } from '../../../Redux/slice/auth';
+import { uploadEditFileOfEmployeesData } from '../../../Redux/slice/auth';
 import { useDropzone } from 'react-dropzone';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
@@ -12,10 +12,10 @@ import xlsxFile from '../../../assets/downloadable-files/RecipientsDetail.xlsx'
 import csvFile from '../../../assets/downloadable-files/RecipientsDetail.csv'
 import { selectClasses } from '@mui/material';
 import Tooltip from '../../../components/Tooltip/Tooltip';
+import { getAllSurveyFiles } from '../../../Redux/slice/surveySlice';
 
-const csvText='Download template file to fill in required data. After filling out, upload it';
 const downloadText = 'Upload the file containing the required data for all individuals to whom the survey will be launched'
-const UploadFile = ({ setstepper , getUploadFile , surveyId }) => {
+const EditUploadFile = ({ getUploadFile  , Uniquefilename , handleCloseEditdata , surveyId}) => {
 const fileInputRef = useRef(null);
   const dispatch = useDispatch()
   const [uploadedFiles, setUploadedFiles] = useState([]);
@@ -37,43 +37,50 @@ const handleClickChangePicture = () => {
     },
   });
   const uploadFileHandler = async () => {
-    if(paymentStatus==='paid'){
-         if (uploadedFiles.length > 0) {
-      const formdata = new FormData()
-      formdata.append('file', uploadedFiles[0])
-      formdata.append('surveyId',surveyId)
-      const response = await dispatch(uploadFileOfEmployeesData(formdata))
-        .then((res) => {
-          if(res?.payload?.isSuccess===true){
-            toast.success(res?.payload?.alertMessage)
-             setstepper(3)
-          }else {
-            toast.error(res.payload.alertMessage)
+    if (paymentStatus === 'paid') {
+      if (uploadedFiles.length > 0) {
+        const formdata = new FormData();
+        formdata.append('file', uploadedFiles[0]);
+        formdata.append('surveyId', surveyId);
+        formdata.append('uniqueFileName', Uniquefilename);
+  
+        try {
+           dispatch(uploadEditFileOfEmployeesData(formdata)).then(
+         (response)=>{
+          if (response?.payload?.isSuccess === true) {
+            toast.success(response.payload.alertMessage);
+            handleCloseEditdata(false);
+            dispatch(getAllSurveyFiles(surveyId));
+          } 
+          else {
+            toast.error(response?.payload?.alertMessage || 'An error occurred while uploading the file.');
           }
-         
-        })
+         }
+          )
+          
+        } catch (error) {
+          // If there's an exception, show the error message
+          toast.error(error.response?.alertMessage || 'An unexpected error occurred.');
+        }
+      }
+    } else {
+      toast.error('Please Buy Q12 Survey first');
+      navigate('/pricing');
     }
-    }
-    else{
-toast.error('Please Buy Q12 Survey first');
-navigate('/pricing')
-    }
-
- 
-
-  }
+  };
+  
 
   return (
 
 
     <>
-      <div className="shadow rounded-4 bg-white w-100  d-flex justify-content-center py-5 ">
+      <div className="shadow rounded-4 bg-white w-100  d-flex justify-content-center py-5  mt-4">
         <div className="upload-file-main">
           <div className="upload-file-buttons  p-md-4 p-2">
           <Tooltip text={downloadText}>
                  <WebsiteButton type='button' onClick={handleClickChangePicture}
               >
-              Upload CSV
+              Upload Edit File
             </WebsiteButton>
         </Tooltip>
          
@@ -83,7 +90,7 @@ navigate('/pricing')
                     accept=".xlsx, .csv,"
                     onChange={(e) => setUploadedFiles([e.target.files[0]])}
                   />
-       
+{/*        
 <div className="" style={{position:'relative'}}>
     <Tooltip text={csvText}>
          <WebsiteButton type='button' onClick={() => { 
@@ -108,7 +115,7 @@ onClick={()=>{
 }}
 >XLSX Formate</p>
             </div>
-</div>
+</div> */}
          
 
           </div>
@@ -126,7 +133,7 @@ onClick={()=>{
           <div className="card-upload-file rounded-4 shadow border my-4 py-3">
             <div className="d-flex justify-content-center align-items-center">
               <div className="text-center">
-                <p className='my-3 h4 fw-light'>Drop Your CSV file here </p>
+                <p className='my-3 h4 fw-light'>Drop Your Edit File Here </p>
                 <div {...getRootProps()}>
                   <input accept=".xlsx, .csv," {...getInputProps()} />
                   {uploadedFiles?.length > 0 ?
@@ -175,9 +182,4 @@ onClick={()=>{
   )
 }
 
-export default UploadFile
-
-
-
-
-
+export default EditUploadFile

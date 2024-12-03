@@ -73,6 +73,41 @@ export const uploadFileOfEmployeesData = createAsyncThunk('authentication/upload
   }
 });
 
+export const uploadEditFileOfEmployeesData = createAsyncThunk('authentication/uploadEditFileOfEmployeesData', async (data, thunkAPI) => {
+  try {
+    const res = await axiosPrivate.post('api/Recipient/EditRecipientInFile', data, {
+      headers: {
+        'content-type': 'application/form-data',
+      },
+    });
+    return res.data;
+  } catch (error) {
+    console.log("🚀 ~ uploadEditFileOfEmployeesData ~ error:", error)
+    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    // toast.error(message);
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+export const deleteFile = createAsyncThunk('authentication/deleteuniqueFileName', async ({surveyId, uniqueFileName },  thunkAPI) => {
+  try {
+    const res = await axiosPrivate.delete('api/Recipient/DeleteRecipientsByUniqueFileName',  {
+      params : {
+        surveyId , uniqueFileName
+      },
+      headers: {
+        'content-type': 'application/form-data',
+      },
+      
+    });
+    return res.data;
+  } catch (error) {
+    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    // toast.error(message);
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 export const signout = createAsyncThunk('authentication/signout', async (_, thunkAPI) => {
   try {
     const res = await instance.post('api/Authentication/UserSignOut', {});

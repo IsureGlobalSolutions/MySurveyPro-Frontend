@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllSurveyList } from '../../../Redux/slice/surveySlice';
 import SurveyCheckbox from '../../../components/checkbox/SurveyCheckbox';
 
-const SurveySelection = ({setstepper}) => {
+const SurveySelection = ({setstepper , sendIdToParent}) => {
 
   const dispatch = useDispatch()
   const [surveyList, setsurveyList] = useState()
@@ -13,7 +13,9 @@ const SurveySelection = ({setstepper}) => {
 const {surveysList,isLoading}=useSelector((state)=>state.survey)
    
      
-  const handleCheckboxClick = (item) => {
+  const handleCheckboxClick = (item , data) => {
+    console.log("🚀 ~ handleCheckboxClick ~ item:", data);
+    sendIdToParent(data?.id)
     if (planId === item) {
       setplanId(null);
     } else {
@@ -120,7 +122,7 @@ const {surveysList,isLoading}=useSelector((state)=>state.survey)
                                         index={index}
                                         checked={planId === index}
                                         onChange={() =>
-                                          handleCheckboxClick(index)
+                                          handleCheckboxClick(index,item)
                                         }
                                       
                                       />
@@ -153,7 +155,7 @@ const {surveysList,isLoading}=useSelector((state)=>state.survey)
     <div className="d-flex justify-content-end mt-2">
         <WebsiteButton type='button' onClick={()=>{
           if(planId!=null){
-              setstepper(3)
+              setstepper(2)
           }
           
         }}>Next</WebsiteButton>

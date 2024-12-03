@@ -1,0 +1,81 @@
+import React from 'react';
+
+const Uniquefiledata = ({ Veiwdata, Filename }) => {
+  return (
+    <>
+      <div className="card m-4">
+        {/* File Name Section */}
+        <div className="d-flex pt-2 card-header" style={{backgroundColor:"#f97300"}}>
+          <div className=" d-flex justify-content-center">
+            <strong>File Name  :</strong>
+          </div>
+          <div className="mb-0 ms-2 mt-0 pt-0 pb-2 col-lg-8" style={{color:"white" }}>
+          {Filename?.toUpperCase()}
+          <a
+              href="#"
+              className="card-fullscreen ms-3"
+              data-bs-toggle="tooltip"
+              title="Card Full-Screen"
+            >
+              <i className="icon-size-fullscreen" />
+            </a>
+          </div>
+        </div>
+
+        {/* Table Section */}
+        <div className=" mb-0 col-xl-12 ">
+          <div className="table-container">
+            <table className="data-table table table-bordered">
+              <thead>
+                <tr>
+                  <th>Employee ID</th>
+                  <th>Name</th>
+                  <th>Department</th>
+                  <th>Designation</th>
+                  <th>Grade</th>
+                  <th>DOB</th>
+                  <th>Age</th>
+                  <th>Gender</th>
+                  <th>DOJ</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Veiwdata.length > 0 ? (
+                  Veiwdata.map((data, index) => (
+                    <tr
+                      key={index}
+                      className={`data-row ${
+                        index === 0 ? "bg-lighttest" : ""
+                      }`}
+                    >
+                      <td>{data.employeeId}</td>
+                      <td>{data.name}</td>
+                      <td>{data.department}</td>
+                      <td>{data.designation || "null"}</td>
+                      <td>{data.grade || "null"}</td>
+                      <td>{data.dob || "null"}</td>
+                      <td>{data.age || "null"}</td>
+                      <td>{data.gender || "null"}</td>
+                      <td>{data.doj || "null"}</td>
+                      <td>{data.status || "null"}</td>
+
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="5" className="text-center">
+                      No Data Available
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Uniquefiledata;

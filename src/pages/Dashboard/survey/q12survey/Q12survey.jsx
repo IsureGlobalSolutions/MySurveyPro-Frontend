@@ -29,8 +29,7 @@
     const Q12survey = ({stepUPSendValue , sendIdParent}) => {
         const dispatch =useDispatch();
         const { register , handleSubmit , formState: { errors } } = useForm();
-         const params = useParams()
-
+         const params = useParams();
           const onSubmit = async (data) => {
             const id = data.userid;
             try {
