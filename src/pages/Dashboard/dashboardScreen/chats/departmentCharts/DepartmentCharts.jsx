@@ -9,9 +9,11 @@ import {  getOverAllDepartmentReport } from '../../../../../Redux/slice/surveySl
 import { Navbarvalue } from '../../../../../context/NavbarValuesContext';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
+import Loader from '../../../../../components/plugins/Loader';
 const DepartmentCharts = () => {
 
     const {selectedDashboardValues}=Navbarvalue()
+    const [isLoading, setisLoading] = useState(false)
 
 const [reportValues, setreportValues] = useState()
 const { paymentStatus } = useSelector((state) => state.survey)
@@ -20,6 +22,8 @@ const chartRef = useRef(null);
     const dispatch = useDispatch()
 
     const showSelectedValues=(value)=>{
+        setisLoading(true)
+
          if(value !='All')
          {
             dispatch(getOverAllDepartmentReport({surveyId:selectedDashboardValues?.survey?.id}))
@@ -29,15 +33,21 @@ const chartRef = useRef(null);
         }) 
            
 
-
+        .finally(()=>{
+            setisLoading(false)
+           })
 
          }
          else{
              dispatch(getOverAllDepartmentReport({surveyId:selectedDashboardValues?.survey?.id,option:value}))
         .then((res) => {
            SetReportValueHandler(value,res?.payload)
+            console.log(value, res?.payload);
             
         }) 
+        .finally(()=>{
+            setisLoading(false)
+           })
          }
    
        
@@ -70,10 +80,13 @@ if(paymentStatus==='paid' && selectedDashboardValues?.survey?.id){
                     let labels=Object.keys(item?.responsesReport) 
                     let series = Object.values(item?.responsesReport)
 setreportValues({labels,series})
+setisLoading(false)
                 }else if(value=== item?.report){
                     let labels=Object.keys(item?.responsesReport) 
                     let series = Object.values(item?.responsesReport)
 setreportValues({labels,series})
+setisLoading(false)
+
                 }
             
         })
@@ -88,7 +101,8 @@ null
       useEffect(()=>{
         if(selectedDashboardValues?.department){
         
-          
+            setisLoading(true)
+
     showSelectedValues(selectedDashboardValues?.department)
         }
     
@@ -115,7 +129,7 @@ null
             "id": "0JyaF",
             "stackOnlyBar": true,
             "toolbar": {
-                "show": false
+                "show": true
             },
             "type": "donut",
             "width": 480,
@@ -311,37 +325,37 @@ null
   
 
 
-    const downloadXLSXWithImage = async () => {
-        try {
-            const dataUrl = await toPng(chartRef.current);  // Capture the chart as an image
-            const workbook = new ExcelJS.Workbook();
-            const worksheet = workbook.addWorksheet('ChartSheet');
+    // const downloadXLSXWithImage = async () => {
+    //     try {
+    //         const dataUrl = await toPng(chartRef.current);  // Capture the chart as an image
+    //         const workbook = new ExcelJS.Workbook();
+    //         const worksheet = workbook.addWorksheet('ChartSheet');
 
-            // Add some dummy data
-            worksheet.addRow(['Chart Data']);
-            worksheet.addRow(['Category', 'Value']);
-            reportValues?.labels.forEach((label, index) => {
-                worksheet.addRow([label, reportValues?.series[index]]);
-            });
+    //         // Add some dummy data
+    //         worksheet.addRow(['Chart Data']);
+    //         worksheet.addRow(['Category', 'Value']);
+    //         reportValues?.labels.forEach((label, index) => {
+    //             worksheet.addRow([label, reportValues?.series[index]]);
+    //         });
 
-            // Add the image to the worksheet
-            const imageId = workbook.addImage({
-                base64: dataUrl,
-                extension: 'png',
-            });
+    //         // Add the image to the worksheet
+    //         const imageId = workbook.addImage({
+    //             base64: dataUrl,
+    //             extension: 'png',
+    //         });
 
-            worksheet.addImage(imageId, {
-                tl: { col: 0.5, row: 5 },
-                ext: { width: 500, height: 320 }
-            });
+    //         worksheet.addImage(imageId, {
+    //             tl: { col: 0.5, row: 5 },
+    //             ext: { width: 500, height: 320 }
+    //         });
 
-            // Save the file
-            const buffer = await workbook.xlsx.writeBuffer();
-            saveAs(new Blob([buffer]), 'chart_data_with_image.xlsx');
-        } catch (error) {
-            console.error('Error generating Excel file with image:', error);
-        }
-    };
+    //         // Save the file
+    //         const buffer = await workbook.xlsx.writeBuffer();
+    //         saveAs(new Blob([buffer]), 'chart_data_with_image.xlsx');
+    //     } catch (error) {
+    //         console.error('Error generating Excel file with image:', error);
+    //     }
+    // };
   return (
     <>
     <div className="age-card rounded-3 border p-3 shadow bg-white">
@@ -351,17 +365,23 @@ null
             
         </div>
         <div className="d-flex align-items-center">
-              <OverlayTrigger
+              {/* <OverlayTrigger
       placement="bottom"
       overlay={<Tooltip id="button-tooltip-2">Download report file</Tooltip>}
     >
             <small className='ps-2 py-2  fw-bold m-0 ' style={{color:'orange',cursor:'pointer'}} onClick={downloadXLSXWithImage}>Download</small>
-    </OverlayTrigger>
+    </OverlayTrigger> */}
  
     </div>
     </div>
     <hr  className='m-1'/>
     <div className="" ref={chartRef} >
+    {
+             isLoading?  
+             <div className="loader-div d-flex justify-content-center align-items-center h-100">
+              <Loader/>
+               </div> 
+               :
          <Chart 
             options={chartValues}
             series={chartValues.series}
@@ -370,6 +390,7 @@ null
 
             // width="500"
           /> 
+    }
     </div>
      
     </div>

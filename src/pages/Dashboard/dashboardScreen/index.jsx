@@ -27,6 +27,10 @@ import DepartFunnelChart from './chats/departmentCharts/DepartFunnelChart';
 import DepartLineChart from './chats/departmentCharts/DepartLineChart';
 import DepartStackColumnChart from './chats/departmentCharts/DepartStackColumnChart';
 import DepartMultiBarChart from './chats/departmentCharts/DepartMultiBarChart';
+import GradeMultiBarChart from './chats/gradeCharts/GradeMultiBarChart';
+import GradeStackColumnChart from './chats/gradeCharts/GradeStackColumnChart';
+import GradetLineChart from './chats/gradeCharts/GradetLineChart';
+import GradeFunnelChart from './chats/gradeCharts/GradeFunnelChart';
 
 
 const index = () => {
@@ -299,6 +303,26 @@ const index = () => {
       </div>
       
       <GradeReport />
+
+      <div className="row m-0 p-0 mb-4">
+        <div className="col-md-6">  
+            <GradeMultiBarChart/>
+          
+        </div>
+        <div className="col-md-6">
+        <GradeStackColumnChart/>
+        </div>
+      </div>
+      <div className="row m-0 p-0 mb-4">
+        <div className="col-md-6">
+         
+ <GradetLineChart/> 
+        </div>
+        <div className="col-md-6">
+        <GradeFunnelChart/>
+
+        </div>
+      </div>
       <GenderReport />
     
       

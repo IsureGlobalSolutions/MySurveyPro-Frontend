@@ -7,9 +7,11 @@ import {StackChartData} from '../../../../../components/cartsComponents/StackCha
 import { Navbarvalue } from '../../../../../context/NavbarValuesContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOverAllDepartmentReport } from '../../../../../Redux/slice/surveySlice';
+import Loader from '../../../../../components/plugins/Loader';
 const DepartStackColumnChart = () => {
   const [reportValues, setreportValues] = useState()
- 
+  const [isLoading, setisLoading] = useState(false)
+
 const chartValues = StackChartData(reportValues);
     
 
@@ -23,6 +25,7 @@ const chartRef = useRef(null);
 const dispatch = useDispatch()
 
 const showSelectedValues=()=>{
+  setisLoading(true)
 
     dispatch(getOverAllDepartmentReport({surveyId:selectedDashboardValues?.survey?.id}))
 .then((res) => {
@@ -30,6 +33,9 @@ const showSelectedValues=()=>{
   SetReportValueHandler(res?.payload)
    
 }) 
+.finally(()=>{
+  setisLoading(false)
+ })
 
 
 
@@ -96,6 +102,8 @@ const SetReportValueHandler = (data) => {
 
     // Return the transformed data
    setreportValues(transformedData)
+   setisLoading(false)
+
   }
 
   return [];
@@ -107,7 +115,8 @@ const SetReportValueHandler = (data) => {
 useEffect(()=>{
 if(selectedDashboardValues?.department){
 
- 
+  setisLoading(true)
+
 showSelectedValues(selectedDashboardValues?.department)
 }
 
@@ -128,6 +137,12 @@ showSelectedValues(selectedDashboardValues?.department)
     </div>
     <hr  className='m-1'/>
     <div className=""  >
+    {
+             isLoading?  
+             <div className="loader-div d-flex justify-content-center align-items-center h-100">
+              <Loader/>
+               </div> 
+               :
          <Chart 
             options={chartValues}
             series={chartValues?.series}
@@ -136,6 +151,7 @@ showSelectedValues(selectedDashboardValues?.department)
 
             // width="500"
           /> 
+    }
     </div>
      
     </div>

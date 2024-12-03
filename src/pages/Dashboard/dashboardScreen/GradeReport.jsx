@@ -1,18 +1,18 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import SurveyTable from '../../../components/table/SurveyTable'
-import DesignationChart from './chats/DesignationChart';
 import { useDispatch, useSelector } from 'react-redux';
-import { downloadColumnWiseReport, getGradeQuestionsReport, getListOfCoumnProperty } from '../../../Redux/slice/surveySlice';
+import { downloadColumnWiseReport,getDepartmentQuestionsReport, getGradeQuestionsReport, getListOfCoumnProperty } from '../../../Redux/slice/surveySlice';
 import { saveAs } from 'file-saver';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import {Navbarvalue} from '../../../context/NavbarValuesContext';
 import DropdownButton from '../../../components/mySurveyProWebsiteBtn/DropdownButton';
+import DesignationChart from './chats/gradeCharts/DesignationChart';
 
 const GradeReport = () => {
   const dispatch = useDispatch()
-const [isloading, setisloading] = useState(false)
   const [listofGrades, setlistofGrades] = useState([])
+  // const [isloading, setisloading] = useState(false)
   const {selectedDashboardValues,DashboardStateHandler}=Navbarvalue()
 
   const [getGradeQuesitonsSurveyData, setgetGradeQuesitonsSurveyData] = useState([])
@@ -22,19 +22,28 @@ const [isloading, setisloading] = useState(false)
     const questionDataKey = 'question';
 
     const showSelectedValues=(value)=>{ 
-  setisloading(true)
+      if(value && value !='All'){
+  // setisloading(true)
       dispatch(getGradeQuestionsReport({ surveyId: selectedDashboardValues?.survey?.id, grade: value }))
          .then((res) => {
-          setisloading(false)
+          // setisloading(false)
            setgetGradeQuesitonsSurveyData(res?.payload)
          })
+        }else if (!value || value ==='All'){
+          // setisLoading(true)
+     dispatch(getDepartmentQuestionsReport({ surveyId: selectedDashboardValues?.survey?.id}))
+        .then((res) => {
+          // setisLoading(false)
+          setgetGradeQuesitonsSurveyData(res?.payload)
+        })}
    }
 
   useEffect(()=>{
   if(paymentStatus==='paid' && selectedDashboardValues?.survey?.id){
      dispatch(getListOfCoumnProperty({surveyId:selectedDashboardValues?.survey?.id,columnProperty:'grade'}))
     .then((res)=>{
-      setlistofGrades(res?.payload)
+      const Grades = [{ columnValue: "All" }, ...res?.payload];
+      setlistofGrades(Grades)
       showSelectedValues(selectedDashboardValues?.grade? 
         selectedDashboardValues?.grade:
           res?.payload?.length>0?
@@ -162,7 +171,7 @@ showSelectedValues(selectedDashboardValues?.grade)
         </div> 
 
        
-         <DropdownButton items={listofGrades} onSelect={handleSelect}/>
+         <DropdownButton items={listofGrades} onSelect={handleSelect} initialValue={'All'}/>
             </div>
         
          <SurveyTable
@@ -187,11 +196,13 @@ showSelectedValues(selectedDashboardValues?.grade)
       
     ]
   }
-  isLoading={isloading}
+  // isLoading={isloading}
 />
          </div>
          <div className="department-card-data col-md-5 m-0 p-0">
-            <DesignationChart/>
+            <DesignationChart
+           
+             />
 
          </div>
     </div>

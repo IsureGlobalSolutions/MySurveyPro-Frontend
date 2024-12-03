@@ -31,7 +31,7 @@ const {Profiledata} =useSelector((state)=>state.user)
     
     </div>
     <div className="profile-section">
-      <div className="topnav-search">
+      {/* <div className="topnav-search">
         <div className="topnav-input-main">
             <SearchIcon/>
            <input type="search" 
@@ -39,7 +39,7 @@ const {Profiledata} =useSelector((state)=>state.user)
            className='topnavbar-input' />
         </div>
        
-      </div>
+      </div> */}
       <div className="topnav-profile">
     {/* <NotificationIcon/> */}
 

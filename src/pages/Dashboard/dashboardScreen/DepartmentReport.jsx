@@ -215,7 +215,7 @@ showSelectedValues(selectedDashboardValues?.department)
           />
         </div>
         <div className="department-card-data col-md-5 m-0 p-0">
-          <DepartmentCharts    />``
+          <DepartmentCharts    />
 
         </div>
       </div>

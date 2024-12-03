@@ -9,7 +9,7 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import { FunnelChartData } from '../../../../../components/cartsComponents/FunnelChartData';
 import { Navbarvalue } from '../../../../../context/NavbarValuesContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOverAllDepartmentReport } from '../../../../../Redux/slice/surveySlice';
+import { getOverAllDepartmentReport, getOverAllGradeReport } from '../../../../../Redux/slice/surveySlice';
 import DropdownButton from '../../../../../components/mySurveyProWebsiteBtn/DropdownButton';
 import { LineChartData } from '../../../../../components/cartsComponents/LineChartData';
 import Loader from '../../../../../components/plugins/Loader';
@@ -19,7 +19,7 @@ const listOfResponseReport=[
   {name:'Actively Disengaged'},
  { name:'Not Engaged'}
 ]
-const DepartLineChart = () => {
+const GradetLineChart = () => {
 
 const [reportValues, setreportValues] = useState()
 console.log("🚀 ~ DepartFunnelChart ~ reportValues:", reportValues)
@@ -40,17 +40,18 @@ const dispatch = useDispatch()
 const showSelectedValues=()=>{
   setisLoading(true)
 
-  dispatch(getOverAllDepartmentReport({surveyId:selectedDashboardValues?.survey?.id}))
+  dispatch(getOverAllGradeReport({surveyId:selectedDashboardValues?.survey?.id}))
 .then((res) => {
 
 SetReportValueHandler(res?.payload,selectedReport)
 setgetAllReportData(res?.payload)
  
 }) 
-
 .finally(()=>{
   setisLoading(false)
  })
+
+
 
 }
 
@@ -81,7 +82,7 @@ if (Array.isArray(data) && data.length > 0) {
   // Loop through the data to populate x and y values
   data.forEach((item) => {
 
-    const department = item.department;
+    const department = item.grade;
     const responsesReport = item.responsesReport;
 
     if (responsesReport) {
@@ -127,7 +128,7 @@ SetReportValueHandler(getAllReportData,data?.name)
     <div className="age-card rounded-3 border p-3 shadow bg-white">
  <div className="d-flex justify-content-between">
         <div className="title d-flex align-items-center m-0">
-            <div className=""><p className='m-0 pb-3'>Department </p></div>
+            <div className=""><p className='m-0 pb-3'>Grades </p></div>
             
         </div>
         <div className="d-flex align-items-center w-100 justify-content-end">
@@ -155,9 +156,10 @@ SetReportValueHandler(getAllReportData,data?.name)
      
     </div>
     
+    
     </>
   )
  
 }
 
-export default DepartLineChart
+export default GradetLineChart

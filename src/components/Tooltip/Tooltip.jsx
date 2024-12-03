@@ -1,11 +1,11 @@
 import React  from 'react'
 import './tooltip.css'
-const Tooltip = ({children,text}) => {
+const Tooltip = ({children,text,...props}) => {
   return (
     <>
-    <div className="tooltip-container">
+    <div className="tooltip-container" >
         {children}
-    <div className="tooltip-text">{text}</div>
+    <div className="tooltip-text" {...props} >{text}</div>
     </div>
     </>
   )
