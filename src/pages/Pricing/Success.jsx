@@ -10,6 +10,7 @@ import {store} from '../../Redux/store';
 import { updatePaymentStatus } from '../../Redux/slice/surveySlice'; 
 const Success = () => {
   const params = useParams()
+  const [isLoading, setisLoading] = useState(false)
   const dispatch = useDispatch()
 
 
@@ -17,12 +18,14 @@ const Success = () => {
 
   useEffect(()=>{
 if(params.id){
+  setisLoading(true)
 dispatch(checkPaymentStatus(params.id))
 .then((res)=>{
 if(res?.payload?.paymentStatus==='paid') 
   store.dispatch(updatePaymentStatus(res?.payload?.paymentStatus));
  
-  toast.success('payment has been successfully paid') 
+  toast.success('payment has been successfully paid')
+   setisLoading(false)
 })
 }
   },[params])
@@ -38,9 +41,9 @@ if(res?.payload?.paymentStatus==='paid')
           <img src={img1} className="img-fluid" alt="Success Image" />
         </span>
         <h2>Payment Received!</h2>
-        
-        <Link to="/Dashboard" className="sidbar-item-link">
-          <WebsiteButton>Back to Dashboard</WebsiteButton>
+     
+        <Link to= {`${isLoading ? '#':"/Dashboard"}`} className="sidbar-item-link">
+          <WebsiteButton disabled={isLoading}> {isLoading ? "Please Wait":' Back to Dashboard'}</WebsiteButton>
         </Link>
       </div>
     </div>
