@@ -27,7 +27,7 @@ const sidbarHighligherHandler=(id)=>{
       <header className="top-nav-container">
         
         <div className="pt-2 ">
-        <Link to={'/'} className={`main-item ${highlighter==='09'? 'item-highlighted':''}`} id="09" onClick={()=>highlighterHandler('09')}>  <Logo width={120}/>  </Link>
+        <Link to={'/'} className={`main-ite ${highlighter==='09'? 'item-highlighted':''}`} id="09" onClick={()=>highlighterHandler('09')}>  <Logo width={120}/>  </Link>
           
         
         </div>
@@ -38,7 +38,7 @@ const sidbarHighligherHandler=(id)=>{
             <Link to={'/templates'} className={`main-item ${highlighter==='02'? 'item-highlighted':''}`} id="02"onClick={()=>highlighterHandler('02')}>Templates</Link>
              <Link to={'/enterprise'} className={`main-item ${highlighter==='04'? 'item-highlighted':''}`} id="04"onClick={()=>highlighterHandler('04')}>Enterprise</Link>
             <Link to={'/resources'} className={`main-item ${highlighter==='05'? 'item-highlighted':''}`} id="05"onClick={()=>highlighterHandler('05')}>Resources</Link>
-            <Link to={'/guidance'} className={`main-item ${highlighter==='06'? 'item-highlighted':''}`} id="06"onClick={()=>highlighterHandler('06')}>
+            <Link to={'/guidance'} className={`main-ite ${highlighter==='06'? 'item-highlighted':''}`} id="06"onClick={()=>highlighterHandler('06')}>
             <div className="how-to-use ms-4">
             <button type="button"   className={`btn ${highlighter==='06'? 'btn-outline-secondary':''}`} onClick={()=>navigate('/guidance')}>How to use</button>
             {/* <div className="guidance" ></div> */}

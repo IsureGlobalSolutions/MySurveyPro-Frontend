@@ -5,7 +5,7 @@ const Uniquefiledata = ({ Veiwdata, Filename }) => {
     <>
       <div className="card m-4">
         {/* File Name Section */}
-        <div className="d-flex pt-2 card-header" style={{backgroundColor:"#f97300"}}>
+        <div className="d-flex pt-2 card-header" style={{backgroundColor:"#f97300" , fontSize:"20px"}}>
           <div className=" d-flex justify-content-center">
             <strong>File Name  :</strong>
           </div>
@@ -24,8 +24,8 @@ const Uniquefiledata = ({ Veiwdata, Filename }) => {
 
         {/* Table Section */}
         <div className=" mb-0 col-xl-12 ">
-          <div className="table-container">
-            <table className="data-table table table-bordered">
+        <div className="table-container" >
+        <table className="data-table table table-bordered" style={{fontSize:"17px"}}>
               <thead>
                 <tr>
                   <th>Employee ID</th>
@@ -48,6 +48,7 @@ const Uniquefiledata = ({ Veiwdata, Filename }) => {
                       className={`data-row ${
                         index === 0 ? "bg-lighttest" : ""
                       }`}
+                      style={{fontSize:"17px"}}
                     >
                       <td>{data.employeeId}</td>
                       <td>{data.name}</td>

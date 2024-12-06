@@ -4,7 +4,7 @@ import './whychooseus.css';
 const WhyChooseUs = () => {
   return (
    <>
-   <div className="w-100 mb-5 pb-3" style={{background: '#D9D9D91F'}}>
+   <div className="w-100 mb-5 pb-3" style={{background: 'rgb(57 190 201 / 7%)'}}>
     <div className="container">
         <div className="choose_title my-5 text-center">  
             <p>Why Choose<span> Us?</span></p>

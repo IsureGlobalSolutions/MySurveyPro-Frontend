@@ -5,7 +5,7 @@ import WebsiteButton from '../../components/mySurveyProWebsiteBtn/WebsiteButtton
 const EffortlessSurveySection = () => {
   return (
    <>
-   <div className="w-100" style={{background: '#D9D9D91F'}}>
+   <div className="w-100" style={{background: 'rgb(57 190 201 / 7%)'}}>
   <div className="effortless_main container my-5">
     <div className="effortless_heading">
         <div className="e_heading my-3">
