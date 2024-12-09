@@ -25,6 +25,7 @@ const {surveysList,isLoading}=useSelector((state)=>state.survey)
       
 
       const ListOfSuveysHandler = async()=>{
+        
         dispatch(getAllSurveyList())
         .then((res)=>{
           setsurveyList(res?.payload)
