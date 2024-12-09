@@ -187,6 +187,7 @@ const initialState = {
   surveysList: {},
   getTotalNumberOfRespondentValue:{},
   getOverAllDepartmentReportValue:{},
+  listOfAllFilesData:[],
   message: '',
   paymentStatus:'',
   error: null,
@@ -302,6 +303,19 @@ const surveySlice = createSlice({
         state.error = null;
       })
       .addCase(getOverAllDepartmentReport.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload || action.error.message;
+      })
+      .addCase(getAllSurveyFiles.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllSurveyFiles.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+        state.listOfAllFilesData=action.payload
+        state.error = null;
+      })
+      .addCase(getAllSurveyFiles.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload || action.error.message;
       })

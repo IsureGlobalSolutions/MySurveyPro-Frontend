@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import './startsurvey.css'
 import WebsiteButton from '../../../components/mySurveyProWebsiteBtn/WebsiteButtton';
 import UploadFileIcon from '../../../assets/dashboredsvg/upload-file.svg?react';
@@ -12,22 +12,45 @@ import xlsxFile from '../../../assets/downloadable-files/RecipientsDetail.xlsx'
 import csvFile from '../../../assets/downloadable-files/RecipientsDetail.csv'
 import { selectClasses } from '@mui/material';
 import Tooltip from '../../../components/Tooltip/Tooltip';
+import { getAllSurveyFiles } from '../../../Redux/slice/surveySlice';
+import Loader from '../../../components/plugins/Loader';
 
 const csvText='Download template file to fill in required data. After filling out, upload it';
 const downloadText = 'Upload the file containing the required data for all individuals to whom the survey will be launched'
 const UploadFile = ({ setstepper , getUploadFile , surveyId }) => {
+console.log("🚀 ~ UploadFile ~ surveyId:", surveyId)
 const fileInputRef = useRef(null);
   const dispatch = useDispatch()
+  const [isLoading, setisLoading] = useState(false)
+  const [isLoadingStart, setisLoadingStart] = useState(false)
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [toggleSelector, settoggleSelector] = useState(false)
   const { paymentStatus } = useSelector((state) => state.survey)
-  const {isLaoding}=useSelector((state)=>state.user)
+  const {listOfAllFilesData}=useSelector((state)=>state.user)
 const navigate = useNavigate()
 
 
 const handleClickChangePicture = () => {
   fileInputRef.current.click(); // Simulate click on hidden file input
 };
+useEffect(()=>{
+  if (surveyId) {
+    setisLoadingStart(true)
+      dispatch(getAllSurveyFiles(surveyId))
+  .then((res)=>{
+    if(res?.payload?.length>0){
+      setstepper(3)
+      setisLoadingStart(false)
+      console.log('stepper launch');
+      
+    }
+  })
+  .finally(()=>{
+    setisLoadingStart(false)
+  })
+  }
+
+},[surveyId])
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: (acceptedFiles) => {
@@ -39,6 +62,7 @@ const handleClickChangePicture = () => {
   const uploadFileHandler = async () => {
     if(paymentStatus==='paid'){
          if (uploadedFiles.length > 0) {
+          setisLoading(true)
       const formdata = new FormData()
       formdata.append('file', uploadedFiles[0])
       formdata.append('surveyId',surveyId)
@@ -46,9 +70,11 @@ const handleClickChangePicture = () => {
         .then((res) => {
           if(res?.payload?.isSuccess===true){
             toast.success(res?.payload?.alertMessage)
+            setisLoading(false)
              setstepper(3)
           }else {
             toast.error(res.payload.alertMessage)
+            setisLoading(false)
           }
          
         })
@@ -67,7 +93,12 @@ navigate('/pricing')
 
 
     <>
-      <div className="shadow rounded-4 bg-white w-100  d-flex justify-content-center py-5 ">
+    {isLoadingStart?
+    <div className="d-flex justify-content-center align-items-center">
+<Loader/>
+    </div>
+  :
+<div className="shadow rounded-4 bg-white w-100  d-flex justify-content-center py-5 ">
         <div className="upload-file-main">
           <div className="upload-file-buttons  p-md-4 p-2">
           <Tooltip text={downloadText}>
@@ -155,8 +186,8 @@ onClick={()=>{
                 <div className="my-3 d-flex justify-content-center">
                   <WebsiteButton type='button' onClick={() => {
                     uploadFileHandler()
-                  }}  disabled={isLaoding}>
-                    {isLaoding? 'Uploading...': 'Submit'}
+                  }}  disabled={isLoading}>
+                    {isLoading? 'Uploading...': 'Submit'}
                   </WebsiteButton>
                 </div>
 
@@ -164,12 +195,12 @@ onClick={()=>{
 
             </div>
           </div>
-          {/* <div className="d-flex justify-content-center mt-5 next-button-main">
-<WebsiteButton type='button' onClick={()=>{}}>Next</WebsiteButton>
-   </div> */}
+          
 
         </div>
       </div>
+  }
+      
 
     </>
   )

@@ -88,7 +88,7 @@ const Filedata = ({ setstepper, surveyId }) => {
   };
   useEffect(() => {
     ListOfSuveysHandler();
-  }, [Editshow , ]);
+  }, [Editshow  ]);
 
  
   const handleClosedata = () => {
