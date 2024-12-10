@@ -12,10 +12,28 @@ import EffortlessSurveySection from "./EffortlessSurveySection";
 import StartTodaySection from "./StartTodaySection";
 import WhyChooseUs from "./WhyChooseUs";
 import Community from "./Community";
+import brandVideo from "../../assets/landingpagevedio/kl_1.webm"
 const LandingPage = () => {
   const [count, setCount] = useState(0);
   const [countone, setcountone] = useState(0);
   const [counttwo, setcounttwo] = useState(0);
+  const [text, setText] = useState("");
+  const fullText = "MySurveyPro!";
+
+  useEffect(() => {
+    let currentIndex = 0;
+
+    const interval = setInterval(() => {
+      if (currentIndex < fullText.length) {
+        setText((prev) => prev + fullText[currentIndex]);
+        currentIndex++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 150); 
+
+    return () => clearInterval(interval); 
+  }, []);
   useEffect(() => {
     let interval = null;
 
@@ -48,80 +66,108 @@ const LandingPage = () => {
 
     if (count < 85) {
       interval = setInterval(() => {
-        setCount((prevCount) => Math.min(prevCount + 1, 85)); // Increment count, but don't exceed 85
-      }, 30); // Adjust the interval duration to control speed (30ms for smooth counting)
+        setCount((prevCount) => Math.min(prevCount + 1, 85)); 
+      }, 30);
     } else if (count === 85) {
-      clearInterval(interval); // Clear interval when count reaches 85
+      clearInterval(interval); 
     }
 
-    return () => clearInterval(interval); // Cleanup on unmount
+    return () => clearInterval(interval);
   }, [count]);
-  useEffect(() => {
-    const mysurveypro = document.getElementById('mysurveypro');
-    const firstLine = document.getElementById('first-line');
-    mysurveypro.style.opacity = '0';
-    const timer = setTimeout(() => {
-      mysurveypro.style.opacity = '1';
-      mysurveypro.style.animation = 'typing-mysurveypro 4s steps(70, end), blink 0.95s step-end infinite';
-      setTimeout(() => {
-        mysurveypro.style.borderRight = 'none'; 
-      }, 4000);
-    }, 4000); 
-    setTimeout(() => {
-      firstLine.style.borderRight = 'none'; 
-    }, 4000);
-    return () => clearTimeout(timer);
-  }, []);
+  
   return (
-    <div className="my-survey-pro">
+    <div className="my-survey-pro  mt-0 pt-0">
+     <div className='topherosection  conatiner ps-4'>
+<div className='d-flex  hero-section '>
+     <div className='col-lg-5  col-md-4'>
+   <div className='left-herosection d-flex flex-column gap-3'>
+   <h1>Transform the way
+you measure human
+capital success with </h1>
+<h2 aria-label="Hi! I'm a developer" className='ms-0'>
+  <h2 class="typewriter"></h2>
+</h2>
+<span>Struggling to gather accurate insights on 
+team performance and engagement?</span>
+<div>  
+  <button type="button" class="startbutton">Lets Get started</button>
+</div>
+<div>
+<div className="work-eff w-100">
+      <div className="work-eff-content ">
+      <section className="trust-section d-flex  ">
+  <div className="text-content col-lg-4 col-md-6 mt-4  ">
+    <h3>We earn trust by working efficiently</h3>
+  </div>
+  <div className="stats col-lg-8 col-md-6 row text-center mt-4">
+    <div className="col-12 col-md-4 d-flex flex-column align-items-center">
+      <div className="stat-item">
+        <span className="number display-4">{count}+</span>
+        <span className="label">Subscriptions</span>
+      </div>
+    </div>
+    {/* <div className="divider d-none d-md-block col-md-1"></div> */}
+    <div className="col-12 col-md-4 d-flex flex-column align-items-center mt-3 mt-md-0">
+      <div className="stat-item">
+        <span className="number display-4">{countone}+</span>
+        <span className="label" style={{ whiteSpace: "nowrap" }}>Daily Order</span>
+      </div>
+    </div>
+    {/* <div className="divider d-none d-md-block col-md-1"></div> */}
+    <div className="col-12 col-md-4 d-flex flex-column align-items-center mt-3 mt-md-0">
+      <div className="stat-item">
+        <span className="number display-4">{counttwo}+</span>
+        <span className="label" style={{ whiteSpace: "nowrap" }}>Current Survey</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <section className="hero-banner pt-4">
+    
+      </div>
+     </div>
+    
+</div>
+   </div>
+
+      {/* <section className="hero-banner pt-4">
         <h1 className="create-forms-that-container container">
- <div className="create-forms-that-container">
+     <div className="create-forms-that-container">
       <p className="create-forms-that first-line" id="first-line">
-        Transform the Way You Measure Human Capital Success with 
+        Transform the way you measure human capital success with 
       </p>
     </div>
-    <span className="engagements" id="mysurveypro">MySurveyPro!</span>
+    <span className="engagements" id="mysurveypro">Mysurveypro!</span>
              <p className="hero-banner-tagline mt-3">Struggling to gather accurate insights on team performance and engagement?</p>
         </h1>
   
-      </section>  
-      <div className="w-100 hover-container" style={{ background: "#D9D9D91F" }}>
-  <img src={heroImage} alt="" className="img-fluid" />
-</div>
-
-    
-     <div className="work-eff w-100">
-      <div className="work-eff-content container">
- 
-        <section className="trust-section">
-        <div className="text-content">
-            <h2>We earn trust by working efficiently</h2>
-        </div>
-        <div className="stats">
-        <div className="stat-item">
-      <span className="number">{count}+</span>
-      <span className="label">Subscriptions</span>
-    </div>
-            <div className="divider"></div>
-            <div className="stat-item">
-      <span className="number">{countone}+</span>
-      <span className="label" style={{whiteSpace:"nowrap"}}>Daily Order</span>
-    </div>
-            <div className="divider"></div>
-            <div className="stat-item">
-      <span className="number">{counttwo}+</span>
-      <span className="label" style={{whiteSpace:"nowrap"}}>Current Survey</span>
-    </div>
-        </div>
-    </section>
-    
+      </section>  */}
+        </div> 
+       <div className='col-lg-7 ms-5 '>
+       <div className="contain ">
+      <div className="video-container">
+        <video 
+          className="video-fluid" 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+        >
+          <source src={brandVideo}  />
+          Your browser does not support the video tag.
+        </video>
       </div>
+    </div>
+       </div> 
+  </div>
+     
      </div>
      <div className="container  my-5">
       <img src={brandList} className="img-fluid" alt="no Image of brands" />
      </div>
+     
+    
+    
 
 <SurvySolution/>
 <CustomizeFormSection/>

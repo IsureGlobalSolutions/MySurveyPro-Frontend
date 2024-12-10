@@ -14,6 +14,12 @@
   cursor: pointer;
   color: black;
   white-space: nowrap;
+  z-index: 1;
+  flex-wrap: wrap;  
+  text-decoration: none;
+  color: inherit;
+  font-size: 1.3rem;
+  display: inline-block;
 }
 .guidance{
   min-width: 118px;
@@ -167,9 +173,9 @@
 .header {
   width: 100%;
   justify-content: flex-start;
-  padding: 0 var(--padding-mini) var(--padding-xs);
+  padding: 0 20px  0 20px;
   box-sizing: border-box;
-  border-top: 10px solid #1F8BD4;
+  border-top: 10px solid rgba(5, 70, 126, 1);
 }
 .sidbar-icon-container{
   display: none;
@@ -206,6 +212,25 @@
 }
 
 
+.main-item::after {
+  position: absolute;
+  z-index: 1;
+  line-height: 1;
+  left: 50%; /* Position it centrally */
+  bottom: -5px; /* Adjust this to control the distance between the text and the line */
+  width: 0;
+  height: 3px; /* Thickness of the line */
+  content: "";
+  background-color: rgba(5, 70, 126, 1); /* Line color */
+  transition: .25s all ease; /* Smooth animation */
+  transform: translateX(-50%); /* Ensure the line is centered */
+}
+
+.main-item:hover::after {
+  width: 100%; /* Expand the line on hover */
+}
+
+
 @media screen and (max-width: 1250px) {
   .navigation {
     display: none;
@@ -229,3 +254,4 @@
     width: 0;
   }
 }
+
