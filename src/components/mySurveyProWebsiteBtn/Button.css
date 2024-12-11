@@ -12,6 +12,7 @@
     white-space: nowrap;
     /* width: 100%; */
     color: white;
+    user-select: none;
     line-height: 28.8px;
     font-size: 18px;
     font-weight: 600;
@@ -35,6 +36,7 @@
     border-radius: var(--br-81xl);
     overflow: hidden;
     display: flex;
+    user-select: none;
     flex-direction: row;
     align-items: flex-start;
     justify-content: center;

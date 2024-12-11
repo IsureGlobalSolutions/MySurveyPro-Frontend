@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import thanksImage from '../../../assets/dashboredsvg/launch-thanks.png';
 import ThanksInfo from '../../../assets/dashboredsvg/thanks-info.png';
-import InputField from '../../../components/mySurveyProInput/InputField';
 import { useForm } from 'react-hook-form';
 import { IoIosCopy } from "react-icons/io";
 import { jwtDecode } from "jwt-decode";

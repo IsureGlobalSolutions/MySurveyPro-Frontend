@@ -8,7 +8,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { TableVirtuoso } from 'react-virtuoso';
-import Dropdown from 'react-bootstrap/Dropdown';
 import Loader from '../plugins/Loader'
 const VirtuosoTableComponents = {
   Scroller: React.forwardRef((props, ref) => (
@@ -84,7 +83,7 @@ const SurveyTable = ({ columns, data,isLoading }) => {
     :
   <TableVirtuoso
       
-        data={data}
+        data={'data'}
         components={VirtuosoTableComponents}
         fixedHeaderContent={() => fixedHeaderContent(columns)}
         itemContent={(index, row) => rowContent(columns, index, row)}

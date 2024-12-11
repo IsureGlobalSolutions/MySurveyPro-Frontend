@@ -181,6 +181,24 @@ export const downloadColumnWiseReport = createAsyncThunk('survey/downloadColumnW
     return thunkAPI.rejectWithValue(message);
   }
 });
+export const LaunchSurveyApi = createAsyncThunk('survey/LaunchSurveyApi', async (data, thunkAPI) => {
+  try {
+    const res = await axiosPrivate.post(`api/Survey/LaunchSurvey`, data);
+    return res.data;
+  } catch (error) {
+    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+export const LaunchedSurveysStatusApi = createAsyncThunk('survey/LaunchedSurveysStatusApi', async (data, thunkAPI) => {
+  try {
+    const res = await axiosPrivate.get(`api/Survey/SurveyLaunchCheck`, data);
+    return res.data;
+  } catch (error) {
+    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
 
 const initialState = {
   isLoading: false,

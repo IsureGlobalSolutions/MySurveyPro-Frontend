@@ -15,14 +15,17 @@ const Index = () => {
   const { startSurveyStepper, StapperHandler } = Navbarvalue();
   const [uploadfilename, setuploadfilename] = useState();
   const [surveyId, setsurveyId] = useState();
+  const [selectedFilesArray, setselectedFileName] = useState([])
 
   const getSurveyIdHandle = (data) => {
-    console.log("🚀 ~ getSurveyIdHandle ~ data:", data);
     setsurveyId(data);
+  };
+  const getSelectedFiles = (data) => {
+    setselectedFileName(data);
+    
   };
 
   const getUploadFile = (data) => {
-    console.log("🚀 ~ getUploadFile ~ data:", data);
     setuploadfilename(data);
   };
 
@@ -60,14 +63,21 @@ const Index = () => {
           <Filedata
             setstepper={StapperHandler}
             surveyId={surveyId}
-            uploadfilename={uploadfilename}
+            uploadfilename={uploadfilename} 
+            sendSelectedFilesToParent={getSelectedFiles}
           />
         ) : startSurveyStepper === 4 ? (
-          <LunchSurvey setstepper={StapperHandler} />
+
+          <LunchSurvey setstepper={StapperHandler}
+           surveyId={surveyId} 
+           selectedFilesArray={selectedFilesArray}/>
+
         ) : startSurveyStepper === 5 ? (
+
           <ThankYouLunchSurvey setstepper={StapperHandler}/>
         ) : 
-         ( <Dashboard setstepper={StapperHandler} />
+         ( 
+         <Dashboard setstepper={StapperHandler} />
          
         )}
       </div>

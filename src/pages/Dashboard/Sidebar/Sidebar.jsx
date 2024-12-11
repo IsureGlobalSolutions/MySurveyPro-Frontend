@@ -75,7 +75,7 @@ const Sidebar = ({ collapsed, setcollapsed }) => {
 
                             onClick={() => handleButtonClick(1)}
                         >
-                            <Link className='d-flex sidbar-item-link justify-content-start gap-3' to={'/startsurvey'}>
+                            <Link className='d-flex sidbar-item-link justify-content-start gap-3 sidbar-text' to={'/startsurvey'}>
                                 <Surveyicon className="icon-fill" />
                                 <p>Start Survey</p>
 

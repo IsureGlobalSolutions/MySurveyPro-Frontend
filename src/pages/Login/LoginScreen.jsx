@@ -22,7 +22,7 @@ const LoginScreen = () => {
 
 useLayoutEffect(() => {
   if(userData?.accessToken){
-    navigate('/dashboard')
+    navigate('/startsurvey')
   }
 
 }, [])
@@ -41,7 +41,7 @@ if(res?.payload.isSuccess===true){
   
   store.dispatch(updateAccessToken(res?.payload))
   toast.success('Login Successfully!')
-  navigate('/dashboard')
+  navigate('/startsurvey')
 }
 })
 } catch (error) {

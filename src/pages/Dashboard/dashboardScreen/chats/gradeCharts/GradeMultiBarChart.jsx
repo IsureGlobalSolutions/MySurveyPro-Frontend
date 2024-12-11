@@ -3,9 +3,6 @@ import Chart from 'react-apexcharts';
 import { saveAs } from 'file-saver';
 import * as ExcelJS from 'exceljs';
 
-import { toPng } from 'html-to-image'; 
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
 import { MultiBarChartData } from '../../../../../components/cartsComponents/MultiBarChartData';
 import { Navbarvalue } from '../../../../../context/NavbarValuesContext';
 import { useDispatch, useSelector } from 'react-redux';

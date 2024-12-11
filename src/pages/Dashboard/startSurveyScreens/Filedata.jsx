@@ -2,12 +2,8 @@ import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import WebsiteButton from "../../../components/mySurveyProWebsiteBtn/WebsiteButtton";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  VeiwUniqueFileName,
-  getAllSurveyFiles,
-  
-  
-} from "../../../Redux/slice/surveySlice";
+import { VeiwUniqueFileName,
+  getAllSurveyFiles} from "../../../Redux/slice/surveySlice";
 import SurveyCheckbox from "../../../components/checkbox/SurveyCheckbox";
 import { RxDownload } from "react-icons/rx";
 import { GrFormView } from "react-icons/gr";
@@ -23,10 +19,10 @@ import Loader from "../../../components/plugins/Loader";
 import EditUploadFile from "./EditUploadFile";
 import toast from "react-hot-toast";
 import { deleteFile } from "../../../Redux/slice/auth";
-const Filedata = ({ setstepper, surveyId }) => {
+const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
   const dispatch = useDispatch();
   const [surveyList, setsurveyList] = useState();
-  const [planId, setplanId] = useState(null);
+  const [selectedFiles, setselectedFiles] = useState([]);
   const { surveysList, isLoading } = useSelector((state) => state.survey);
   const [popupMessage, setPopupMessage] = useState("");
   const [show, setShow] = useState(false);
@@ -51,14 +47,13 @@ const Filedata = ({ setstepper, surveyId }) => {
     }
   }, [surveyList]);
 
-  const currentData =
-    listOfDepartment && Array.isArray(listOfDepartment)
+  const currentData = listOfDepartment && Array.isArray(listOfDepartment)
       ? listOfDepartment.slice(
           page * rowsPerPage,
           page * rowsPerPage + rowsPerPage
         )
       : [];
-
+    console.log("🚀 ~ Filedata ~ currentData:", currentData)
   const handleChangeRowsPerPage = (event) => {
     const newRowsPerPage = +event.target.value;
     setRowsPerPage(newRowsPerPage);
@@ -71,12 +66,16 @@ const Filedata = ({ setstepper, surveyId }) => {
   const handleCloseEditdata = (data) => {
     setEditshow(data);
   };
-  const [fullscreen, setFullscreen] = useState(true);
   const handleCheckboxClick = (item) => {
-    if (planId === item) {
-      setplanId(null);
+  
+    if (selectedFiles.includes(item)) {
+      // If already selected, remove it
+      setselectedFiles(selectedFiles.filter((selected) => selected !== item));
     } else {
-      setplanId(item);
+      // If not selected, add it
+      setselectedFiles([...selectedFiles, item])
+      //send data to parent component
+      sendSelectedFilesToParent([...selectedFiles, item]) 
     }
   };
   const ListOfSuveysHandler = async () => {
@@ -126,7 +125,6 @@ const Filedata = ({ setstepper, surveyId }) => {
     setfilenameupdate(item.uniqueFileName);
   };
   const handledelete = (item) => {
-    console.log("🚀 ~ handledelete ~ item:", item);
     setShow(true);
     setPopupMessage("Are you want to Delete this FILE ");
     setdeletedata(item.uniqueFileName);
@@ -256,18 +254,14 @@ const Filedata = ({ setstepper, surveyId }) => {
                         >
                           <th
                             className="p-4"
-                            style={{
-                              color: "",
-                            }}
+                            
                           >
                             File Name
                           </th>
 
                           <th
                             className="p-4"
-                            style={{
-                              color: "",
-                            }}
+                            
                           >
                             Actions
                           </th>
@@ -303,11 +297,11 @@ const Filedata = ({ setstepper, surveyId }) => {
                                         <div className=" mx-2">
                                           {" "}
                                           <SurveyCheckbox
-                                            value={planId}
+                                            value={selectedFiles}
                                             index={index}
-                                            checked={planId === index}
+                                            checked={selectedFiles.includes(item?.uniqueFileName)}
                                             onChange={() =>
-                                              handleCheckboxClick(index)
+                                              handleCheckboxClick(item?.uniqueFileName)
                                             }
                                           />
                                         </div>
@@ -375,7 +369,7 @@ const Filedata = ({ setstepper, surveyId }) => {
                 <WebsiteButton
                   type="button"
                   onClick={() => {
-                    if (planId != null) {
+                    if (selectedFiles != null) {
                       setstepper(4);
                     }
                   }}
