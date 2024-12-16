@@ -60,30 +60,35 @@ useEffect(()=>{
     },
   });
   const uploadFileHandler = async () => {
-    if(paymentStatus==='paid'){
+    console.log('status',paymentStatus);
+    
+   
          if (uploadedFiles.length > 0) {
           setisLoading(true)
       const formdata = new FormData()
       formdata.append('file', uploadedFiles[0])
       formdata.append('surveyId',surveyId)
-      const response = await dispatch(uploadFileOfEmployeesData(formdata))
+     dispatch(uploadFileOfEmployeesData(formdata))
         .then((res) => {
           if(res?.payload?.isSuccess===true){
             toast.success(res?.payload?.alertMessage)
             setisLoading(false)
              setstepper(3)
-          }else {
-            toast.error(res.payload.alertMessage)
+          }else if(res?.payload==="Survey subscription not found."){
+            toast.error(res.payload)
+            setisLoading(false)
+            
+            navigate('/pricing')
+          }
+          else{
+            
             setisLoading(false)
           }
          
         })
     }
-    }
-    else{
-toast.error('Please Buy Q12 Survey first');
-navigate('/pricing')
-    }
+    
+  
 
  
 

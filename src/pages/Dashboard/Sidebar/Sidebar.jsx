@@ -6,13 +6,15 @@ import Surveylist from '../../../assets/dashboredsvg/Surveylist.svg?react'
 
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross1 } from "react-icons/rx";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Navbarvalue } from '../../../context/NavbarValuesContext';
 
 const Sidebar = ({ collapsed, setcollapsed }) => {
     const dispatch = useDispatch()
-    const { DashboardNavValues, updateDashbaordNavValues } = Navbarvalue()
+    const { DashboardNavValues, updateDashbaordNavValues,startSurveyHandler, StapperHandler } = Navbarvalue()
+    const { startSurveyStepper,  } = Navbarvalue();
+const navigate = useNavigate()
 
     const location = useLocation();
 
@@ -51,6 +53,11 @@ const Sidebar = ({ collapsed, setcollapsed }) => {
         };
     }, [setcollapsed]);
 
+    const moveToHome=()=>{
+        StapperHandler(1)
+        startSurveyHandler(false)
+
+    }
     return (
         <div>
             <div className='m-4 sidebartitle  gap-2  d-flex justify-content-between'>
@@ -60,7 +67,7 @@ const Sidebar = ({ collapsed, setcollapsed }) => {
                     </span>
                 ) : (
                     <>
-                        <h1>SurveyPro</h1>
+                        <h1 style={{cursor:'pointer'}} onClick={moveToHome}>Mysurveypro</h1>
                         <span onClick={handleHamburgerClick}>
                             <GiHamburgerMenu size={25} />
                         </span>

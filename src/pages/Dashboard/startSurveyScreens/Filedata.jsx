@@ -53,7 +53,6 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
           page * rowsPerPage + rowsPerPage
         )
       : [];
-    console.log("🚀 ~ Filedata ~ currentData:", currentData)
   const handleChangeRowsPerPage = (event) => {
     const newRowsPerPage = +event.target.value;
     setRowsPerPage(newRowsPerPage);

@@ -4,18 +4,23 @@ import WebsiteButton from '../../../components/mySurveyProWebsiteBtn/WebsiteButt
 import { useDispatch } from 'react-redux'
 import { LaunchSurveyApi } from '../../../Redux/slice/surveySlice'
 import toast from 'react-hot-toast'
+import { useState } from 'react'
 const LunchSurvey = ({setstepper,selectedFilesArray,surveyId}) => {
+  const [isLoading, setisLoading] = useState(false)
   const dispatch = useDispatch();
 
   const launchSurvey= ()=>{
+    setisLoading(true)
     if(selectedFilesArray.length>0 && surveyId){
     dispatch(LaunchSurveyApi({surveyId, uniqueFileNames:selectedFilesArray})).then((res)=>{
 if(res?.payload?.isSuccess===true){
-  toast.success(res?.payload?.message)
+  toast.success(res?.payload?.alertMessage)
   setstepper(5)
+  setisLoading(false)
 }
 else{
   toast.error("some thing went wrong please try agian!")
+  setisLoading(false)
 }
     })
      
@@ -30,8 +35,8 @@ else{
             Launch Now.</p>
             <img className='img-fluid' src={LunchServey} alt="" />
             <div className="d-flex justify-content-center">
-                 <WebsiteButton type='button' onClick={launchSurvey}>
-                Lunch Survey
+                <WebsiteButton type='button' disabled={isLoading} onClick={launchSurvey}>
+                {isLoading? 'please Wait':'Lunch Survey'}
             </WebsiteButton>
             </div>
            

@@ -68,7 +68,7 @@ export const uploadFileOfEmployeesData = createAsyncThunk('authentication/upload
     return res.data;
   } catch (error) {
     const message = error.response?.data?.alertMessage || error.message || error.toString();
-    toast.error(message);
+    // toast.error(message);
     return thunkAPI.rejectWithValue(message);
   }
 });
@@ -82,7 +82,7 @@ export const uploadEditFileOfEmployeesData = createAsyncThunk('authentication/up
     });
     return res.data;
   } catch (error) {
-    console.log("🚀 ~ uploadEditFileOfEmployeesData ~ error:", error)
+    
     const message = error.response?.data?.alertMessage || error.message || error.toString();
     // toast.error(message);
     return thunkAPI.rejectWithValue(message);

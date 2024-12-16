@@ -14,6 +14,7 @@ const NavbarValuesContext = ({ children }) => {
   const [topNavValue, setTopNavValue] = useState(null);
   const [DashboardNavValues, setDashboardNavValues] = useState(1)
   const [startSurveyStepper, setstartSurveyStepper] = useState(1)
+    const [startSurvey, setstartSurvey] = useState(false)
   const [selectedDashboardValues, setSelectedDashboardValues] = useState({
     department:'All',
     grade:'All',
@@ -33,6 +34,10 @@ const NavbarValuesContext = ({ children }) => {
 //dashboard start survey tab values
   const StapperHandler = (value) => {
     setstartSurveyStepper(value);
+  };
+//start survey check value
+  const startSurveyHandler = (value) => {
+    setstartSurvey(value);
   };
 
 
@@ -61,6 +66,8 @@ const NavbarValuesContext = ({ children }) => {
      StapperHandler,
      selectedDashboardValues,
      DashboardStateHandler,
+     startSurvey,
+     startSurveyHandler
    
 
      }}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Stepper, Step } from "react-form-stepper";
 import HeroCards from "../dashboardScreen/HeroCards";
 import UploadFile from "./UploadFile";
@@ -10,13 +10,26 @@ import { Navbarvalue } from "../../../context/NavbarValuesContext";
 import Filedata from "./Filedata";
 import Surveylist from "../surveylist/Surveylist";
 import Dashboard from "../../Dashboard/dashboardScreen"
+import { useDispatch, useSelector } from "react-redux";
+
 
 const Index = () => {
   const { startSurveyStepper, StapperHandler } = Navbarvalue();
   const [uploadfilename, setuploadfilename] = useState();
   const [surveyId, setsurveyId] = useState();
   const [selectedFilesArray, setselectedFileName] = useState([])
-
+const [isLoading, setisLoading] = useState(false)
+const dispatch = useDispatch()
+//   const {surveyPaymentStatuses}=useSelector((state)=>state.survey)
+//   useEffect(()=>{
+//     setisLoading(true)
+//     dispatch(LaunchedSurveysStatusApi())
+//     .then((res)=>{
+// if(res?.payload){
+//   setisLoading(false)
+// }
+//     })
+//   },[])
   const getSurveyIdHandle = (data) => {
     setsurveyId(data);
   };
@@ -32,8 +45,9 @@ const Index = () => {
   return (
     <>
       <div className="px-2">
-        {/* Stepper Integration */}
-        <Stepper
+      
+ 
+  <Stepper
           steps={[
             { label: "Select Survey" },
             { label: "Upload File" },
@@ -52,6 +66,7 @@ const Index = () => {
 
         {/* Step Content Rendering */}
         {startSurveyStepper === 1 ? (
+      
           <Surveylist setstepper={StapperHandler} sendIdToParent={getSurveyIdHandle} />
         ) : startSurveyStepper === 2 ? (
           <UploadFile
@@ -80,6 +95,10 @@ const Index = () => {
          <Dashboard setstepper={StapperHandler} />
          
         )}
+  
+     
+       
+     
       </div>
     </>
   );

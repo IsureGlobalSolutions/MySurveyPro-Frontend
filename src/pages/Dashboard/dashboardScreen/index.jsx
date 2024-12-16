@@ -189,11 +189,6 @@ const index = () => {
 
 
 
-  const handleSelect = (selectedObject) => {
-   
-    DashboardStateHandler('survey', { id: selectedObject.id, name: selectedObject.name });
-
-  };
 
 
 
@@ -201,38 +196,7 @@ const index = () => {
     <>
       <HeroCards />
       {/* dashboard screen  */}
-      <div className="d-flex  px-3 my-3">
-        <div className="d-flex align-items-center"><p className='fs-5 fw-semibold m-0'>Select Survey</p></div>
-
-        {/* <div className="">
-          <Dropdown onSelect={handleSelect}>
-            <Dropdown.Toggle className='border rounded-4' variant="outline-secondary" id="dropdown-basic">
-              {selectedDashboardValues?.survey?.name ? selectedDashboardValues?.survey?.name : 'Survey'}
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              {
-                isLoading ?
-                  <div className="">loading...</div>
-                  :
-                  listOfSurvey?.length > 0 ?
-                    listOfSurvey?.map((item, index) => {
-
-                      return (
-                        <Dropdown.Item key={index} eventKey={index}>{item.name}</Dropdown.Item>
-                      )
-                    })
-                    :
-                    <div className="">no Data</div>
-              }
-
-
-            </Dropdown.Menu>
-          </Dropdown>
-        </div> */}
-        <DropdownButton items={listOfSurvey} onSelect={handleSelect}/>
-
-      </div>
+ 
       <div className="">
         <div className="px-3">
           <div className="bg-white d-flex   shadow  px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
