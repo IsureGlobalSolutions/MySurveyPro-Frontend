@@ -217,14 +217,14 @@
   position: absolute;
   z-index: 1;
   line-height: 1;
-  left: 50%; /* Position it centrally */
-  bottom: -5px; /* Adjust this to control the distance between the text and the line */
+  left: 50%; 
+  bottom: -5px; 
   width: 0;
-  height: 3px; /* Thickness of the line */
+  height: 3px;
   content: "";
-  background-color: rgba(5, 70, 126, 1); /* Line color */
-  transition: .25s all ease; /* Smooth animation */
-  transform: translateX(-50%); /* Ensure the line is centered */
+  background-color: rgba(5, 70, 126, 1);
+  transition: 0.30s all ease; 
+  transform: translateX(-50%); 
 }
 
 .main-item:hover::after {

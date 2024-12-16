@@ -26,6 +26,7 @@ const  Survey =lazy(()=>import("../pages/Dashboard/survey/q12survey/SurveyRespon
 const Template=lazy(()=>import("../pages/Dashboard/templates/q12template/PreviewQuestion.jsx"))
 const Paymentsuccess=lazy(()=>import ("../pages/Pricing/Success.jsx"))
 const Guidance =lazy(()=>import("../pages/Guidance/guidance.jsx"))
+const TEITemplate = lazy(()=>import("../pages/Dashboard/templates/TEItemplate/TEIPreviewQuestion.jsx"))
 const config = [
   {
   path: '/',
@@ -149,6 +150,12 @@ const config = [
   loginRequired:true,
   layout: DashboardLayout,
   component:Template
+},
+{
+  path: '/TEITemplate',
+  loginRequired:true,
+  layout: DashboardLayout,
+  component:TEITemplate
 },
 {
   path: '/q12survey/:id*',

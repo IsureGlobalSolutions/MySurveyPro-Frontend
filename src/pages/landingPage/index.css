@@ -313,8 +313,9 @@ color: rgba(93, 93, 93, 1);
   }
 
   .left-herosection h2 {
-    font-size: 30px;  /* Adjusted font for mobile */
+    font-size: 30px;  
   }
+
 
   .left-herosection span {
     font-size: 15;  /* Smaller span for mobile */
@@ -435,17 +436,17 @@ color: rgba(93, 93, 93, 1);
 
 .typewriter::before {
   content: "";
-  animation: typing 8.5s infinite;
+  animation: typing 8s infinite;
 }
 
 .typewriter::after {
   content: "";
   border-right: 4px solid var(--caret);
-  animation: blink 0.5s linear infinite;
+  animation: blink 5s linear infinite;
 }
 
 .typewriter.thick::after {
-  border-right: 1ch solid var(--caret);
+  border-right: 4px solid var(--caret);
 }
 
 .typewriter.nocaret::after {
