@@ -79,7 +79,7 @@ const LandingPage = () => {
     <div className="my-survey-pro  mt-0 pt-0">
      <div className='topherosection  conatiner ps-4'>
 <div className='d-flex  hero-section '>
-     <div className='col-lg-5  col-md-4'>
+     <div className='col-lg-6  col-md-5'>
    <div className='left-herosection d-flex flex-column gap-3'>
    <h1>Transform the way
 you measure human
@@ -90,13 +90,13 @@ capital success with </h1>
 <span>Struggling to gather accurate insights on 
 team performance and engagement?</span>
 <div>  
-  <button type="button" class="startbutton">Lets Get started</button>
+  <button type="button" class="startbutton mt-2">Lets Get started</button>
 </div>
 <div>
 <div className="work-eff w-100">
       <div className="work-eff-content ">
       <section className="trust-section d-flex  ">
-  <div className="text-content col-lg-4 col-md-6 mt-4  ">
+  <div className="text-content col-lg-4 col-md-6 mt-2 ">
     <h3>We earn trust by working efficiently</h3>
   </div>
   <div className="stats col-lg-8 col-md-6 row text-center mt-4">
@@ -143,7 +143,7 @@ team performance and engagement?</span>
   
       </section>  */}
         </div> 
-       <div className='col-lg-7 ms-5 '>
+       <div className='col-lg-6 ms-5 mt-4 '>
        <div className="contain ">
       <div className="video-container">
         <video 
@@ -160,7 +160,6 @@ team performance and engagement?</span>
     </div>
        </div> 
   </div>
-     
      </div>
      <div className="container  my-5">
       <img src={brandList} className="img-fluid" alt="no Image of brands" />

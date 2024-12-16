@@ -51,6 +51,8 @@ const {surveysList}=useSelector((state)=>state.survey)
           title: "TEI",
           text: "Start your survey by clicking the 'View Survey'",
           buttontext: "Coming soon",
+          buttontext: "View Survey",
+          link: "/TEITemplate",
         }])
         });
       }
