@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 import { getSurveyById } from '../../../../Redux/slice/auth';
 import toast from 'react-hot-toast';
 import Loader from '../../../../components/plugins/Loader';
-import img1 from '../../../../assets/Q12survey/stepperimage.png'
+import img1 from '../../../../assets/Q12survey/c2.png'
 import './TEItemplate.css'
 import PreveiwCongratulationsurvey from '../q12template/PreveiwCongratulationsurvey';
 import TEItemplate from './TEItemplate';
@@ -191,7 +191,7 @@ const TEIPreviewQuestion = () => {
                 <div className=' '>
                 <div className='d-flex justify-content-start flex-wrap gap-5 mb-4 m-0 p-4'>
                   <div className="steppercard d-flex flex-column align-items-start w-100">
-                    <img type="button" src={img1} className="card-img img-fluid mb-3" />
+                    <img type="button" src={img1} className="card-img img-fluid mb-5 " style={{borderRadius:"20px 20px 0px 0px"}} />
                     <div className='container'>
                       <div className='row'>
                         <div className='col-12 p-5'>
@@ -351,7 +351,7 @@ const TEIPreviewQuestion = () => {
                         ))} */}
                                             <div className='tableheader m-0 p-0'>
 
-                        <div className='table-body  p-2 '>
+                        <div className='table-body  p-2  mb-1'>
                         <div className="d-flex align-items-center ">
       <img src={img3} alt="Image" className="custom-img"  />
       <span className="ms-2 me-2" style={{ fontSize: '18px', color: 'white' }}>1.</span> 
@@ -478,10 +478,7 @@ const TEIPreviewQuestion = () => {
                     </div>        
                   </div>
                 </div>
-              </div>
-              
-
-             
+              </div>             
             )}
         </>
     );

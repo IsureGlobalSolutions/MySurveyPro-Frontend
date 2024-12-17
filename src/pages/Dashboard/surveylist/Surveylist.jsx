@@ -13,13 +13,13 @@ const Surveylist = ({setstepper , sendIdToParent}) => {
   const [surveyListData, setsurveyListData] = useState([])
   //  const [planId, setplanId] = useState(null);
 const {surveysList}=useSelector((state)=>state.survey)
-   console.log("🚀 ~ Surveylist ~ surveysList:", surveyListData)
+   console.log("🚀 ~ Surveylist ~ surveysList------------:", surveyListData)
    
      
   const handleCheckboxClick = (data) => {
     console.log("🚀 ~ handleCheckboxClick ~ item:", data);
-    sendIdToParent(data?.id)
-    setstepper(2)
+    sendIdToParent(data.id)
+    setstepper(3)
  
   };
       
@@ -34,30 +34,36 @@ const {surveysList}=useSelector((state)=>state.survey)
         ListOfSuveysHandler()
       },[])
 
-      useEffect(()=>{
-      if(surveysList){
-        
-        surveysList?.forEach(element => {
-          setsurveyListData([{
-            img:element.name==='Q12'? q12image:'',
-            title:element?.name,
-            id:element?.id,
-            text:"Start your survey by clicking the 'View Survey'",
-            buttontext: "View Survey",
-      link: "/q12template",
-          },
-        {
-          img: form360img,
-          title: "TEI",
-          text: "Start your survey by clicking the 'View Survey'",
-          buttontext: "Coming soon",
-          buttontext: "View Survey",
-          link: "/TEITemplate",
-        }])
-        });
-      }
-     
-      },[surveysList])
+      useEffect(() => {
+        if (surveysList?.length > 0) {
+          const formattedData = surveysList.map((element) => {
+            if (element.name === 'Q12') {
+              return {
+                img: q12image,
+                title: element.name,
+                id: element.id, // Backend ID for Q12
+                text: "Start your survey by clicking the 'View Survey'",
+                buttonviewsurvey: 'View Survey',
+                buttonusersurvey: 'Use Survey',
+                link: '/q12template',
+              };
+            } else if (element.name === 'TEI') {
+              return {
+                img: form360img,
+                title: element.name,
+                id: element.id, // Backend ID for TEI
+                text: "Start your survey by clicking the 'View Survey'",
+                buttonviewsurvey: 'View Survey',
+                buttonusersurvey: 'Use Survey',
+                link: '/TEITemplate',
+              };
+            }
+            return null; // Handle unexpected data
+          });
+    
+          setsurveyListData(formattedData.filter(Boolean)); // Remove null entries
+        }
+      }, [surveysList]);
 
 
 
@@ -68,6 +74,7 @@ const {surveysList}=useSelector((state)=>state.survey)
       </div>
       <div className='d-flex justify-content-start flex-wrap gap-5 mb-4 p-4'>
         {surveyListData?.length>0 ?
+        
         surveyListData?.map((content, index) => (
           <div
             className="watchsectioncard col-sm-6 col-md-6 col-lg-3 d-flex flex-column align-items-start"
@@ -80,16 +87,18 @@ const {surveysList}=useSelector((state)=>state.survey)
                 <p className='titletext d-flex justify-content-start flex-column'>{content.text}</p>
               </div>
               <div className='d-flex justify-content-end mb-2 gap-2'>
-  <Link to={content.link}  className='sidbar-item-link'>   
+             <Link to={content.link}  className='sidbar-item-link'>   
                  <WebsiteButton style={{padding:'2px 10px',fontSize:'14px'}} onClick={()=>{}}>
-                {content.buttontext}
+                {content.buttonviewsurvey}
                 </WebsiteButton>
-                </Link>    {content?.id? 
-                <WebsiteButton style={{padding:'2px 10px',fontSize:'14px'}} onClick={()=>handleCheckboxClick(content)}>
-                User Survey
+                </Link >
+                <Link to={content.id} className='sidbar-item-link'> <WebsiteButton style={{padding:'2px 10px',fontSize:'14px'}} onClick={()=>handleCheckboxClick(content)}>
+                {content.buttonusersurvey}
                 </WebsiteButton>
-                :''   
-              }
+                </Link>  
+               
+                  
+              
                         
             
               </div>

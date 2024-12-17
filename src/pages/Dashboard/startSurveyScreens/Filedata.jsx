@@ -19,6 +19,7 @@ import Loader from "../../../components/plugins/Loader";
 import EditUploadFile from "./EditUploadFile";
 import toast from "react-hot-toast";
 import { deleteFile } from "../../../Redux/slice/auth";
+import UploadFile from "./UploadFile";
 const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
   const dispatch = useDispatch();
   const [surveyList, setsurveyList] = useState();
@@ -36,6 +37,7 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
   const [page, setPage] = useState(0);
   const [listOfDepartment, setlistOfDepartment] = useState(null);
   const [Editshow, setEditshow] = useState(false);
+  const [addnewfile, setaddnewfile] = useState(false)
   const [Uniquefilename, setUniquefilename] = useState();
   const [filenameupdate, setfilenameupdate] = useState(null);
   const handleChangePage = (event, newPage) => {
@@ -64,6 +66,9 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
   };
   const handleCloseEditdata = (data) => {
     setEditshow(data);
+  };
+  const handleCloseaddfile = (data) => {
+    setaddnewfile(data);
   };
   const handleCheckboxClick = (item) => {
   
@@ -99,6 +104,9 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
     setEditshow(true);
     setFilename(filename);
   };
+  const handleAddFile =()=>{
+    setaddnewfile(true);
+  }
   useEffect(() => {
     if (filenameupdate) {
       try {
@@ -233,13 +241,45 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
           />
         </Modal.Body>
       </Modal>
+  
+      <Modal
+        show={addnewfile}
+        onHide={handleCloseaddfile}
+        size="lg"
+        className=""
+      >
+        <button
+          type="button"
+          className="btn-close "
+          aria-label="Close"
+          style={{
+            position: "absolute",
+            top: "8px",
+            right: "13px",
+            zIndex: "1051",
+          }}
+          onClick={() => handleCloseaddfile(false)}
+        />
+
+        <Modal.Body>
+          <UploadFile
+          surveyId={surveyId}
+          setaddnewfile ={setaddnewfile}
+          />
+        </Modal.Body>
+      </Modal>
+
       <div className="shadow rounded-4 bg-white w-100  d-flex justify-content-center py-5 ">
         <div className="w-100 ">
           <div className="row m-0 p-0 justify-content-center">
             <div className="col-md-11">
               <div className="">
-                <div className="title px-2">
+                <div className="title d-flex justify-content-between px-2">
                   <p className="fw-bold fs-3">Surveys File List</p>
+                  <WebsiteButton className="m-0" onClick={handleAddFile}
+                  >
+                    Add new file
+                  </WebsiteButton>
                 </div>
               </div>
               <div style={{}}>
