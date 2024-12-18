@@ -2,7 +2,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
-import authReducer from './slice/auth';
+import authReducer from './slice/authSlice';
 import pathReducer from './slice/pathSlice';
 import surveyReducer from './slice/surveySlice';
 import { FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';

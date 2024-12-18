@@ -1,26 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import './dash-screen.css'
-import Charts from './chats/Charts'
-import Dropdown from 'react-bootstrap/Dropdown';
+
 
 import HeroCards from './HeroCards';
-import StartSurveyScreen from '../startSurveyScreens'
 import { useDispatch, useSelector } from 'react-redux';
-import { checkPaymentStatus, downloadOverAllSurveyReport, getAllSurveyList, getOverAllSurveyReport, getTotalNumberOfRespondent, updatePaymentStatus } from '../../../Redux/slice/surveySlice';
+import {  downloadOverAllSurveyReport, getAllSurveyList, getOverAllSurveyReport } from '../../../Redux/slice/surveySlice';
 import SurveyTable from '../../../components/table/SurveyTable';
 import DepartmentReport from './DepartmentReport';
 import GradeReport from './GradeReport';
 import GenderReport from './GenderReport';
 import { jwtDecode } from "jwt-decode";
-import { store } from '../../../Redux/store';
-import Topnavbar from '../Topnavbar/Topnavbar';
-import { GetUserDetail } from '../../../Redux/slice/auth';
 import { saveAs } from 'file-saver';
 import toast from 'react-hot-toast';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { Navbarvalue } from '../../../context/NavbarValuesContext';
-import DropdownButton from '../../../components/mySurveyProWebsiteBtn/DropdownButton';
 
 
 import DepartFunnelChart from './chats/departmentCharts/DepartFunnelChart';
@@ -57,21 +51,21 @@ const index = () => {
     await dispatch(getAllSurveyList())
   }
 
-  const paymentStatusHandler = async () => {
-    dispatch(checkPaymentStatus(tokenValues.sid))
-      .then((res) => {
-        if (res?.payload?.paymentStatus === 'paid') {
-          store.dispatch(updatePaymentStatus(res?.payload?.paymentStatus))
+  // const paymentStatusHandler = async () => {
+  //   dispatch(checkPaymentStatus(tokenValues.sid))
+  //     .then((res) => {
+  //       if (res?.payload?.paymentStatus === 'paid') {
+  //         store.dispatch(updatePaymentStatus(res?.payload?.paymentStatus))
 
-        }
-        else {
-          store.dispatch(updatePaymentStatus('unpaid'))
+  //       }
+  //       else {
+  //         store.dispatch(updatePaymentStatus('unpaid'))
 
-        }
+  //       }
 
 
-      })
-  }
+  //     })
+  // }
 
   useEffect(() => {
 
@@ -79,19 +73,19 @@ const index = () => {
 
   }, [])
 
-  useEffect(() => {
-    if (tokenValues.sid) {
+  // useEffect(() => {
+  //   if (tokenValues.sid) {
 
 
-      dispatch(GetUserDetail(tokenValues?.sid))
-    }
-    if (selectedDashboardValues?.survey?.id) {
-      dispatch(getTotalNumberOfRespondent(selectedDashboardValues?.survey?.id))
-    }
+  //     dispatch(GetUserDetail(tokenValues?.sid))
+  //   }
+  //   if (selectedDashboardValues?.survey?.id) {
+  //     dispatch(getTotalNumberOfRespondent(selectedDashboardValues?.survey?.id))
+  //   }
 
-    paymentStatusHandler(selectedDashboardValues?.survey?.id)
+  //   paymentStatusHandler(selectedDashboardValues?.survey?.id)
 
-  }, [selectedDashboardValues?.survey?.id])
+  // }, [selectedDashboardValues?.survey?.id])
 
   useEffect(() => {
 
@@ -101,7 +95,7 @@ const index = () => {
 
   //get over all survey report data
   useEffect(() => {
-    if (paymentStatus === 'paid' && selectedDashboardValues?.survey?.id) {
+    if (selectedDashboardValues?.survey?.id && paymentStatus[selectedDashboardValues?.survey?.id].paymentStatus===true) {
 
       setisLoading(true)
       dispatch(getOverAllSurveyReport({ surveyId: selectedDashboardValues?.survey?.id }))

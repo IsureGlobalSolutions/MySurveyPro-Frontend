@@ -56,6 +56,7 @@ const navigate = useNavigate()
     const moveToHome=()=>{
         StapperHandler(1)
         startSurveyHandler(false)
+        navigate('/startsurvey')
 
     }
     return (

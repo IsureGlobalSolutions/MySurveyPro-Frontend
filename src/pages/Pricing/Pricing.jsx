@@ -12,6 +12,7 @@ import {store} from '../../Redux/store';
 const Pricing = () => {
   const dispatch = useDispatch()
   const {surveysList,isLoading}=useSelector((state)=>state.survey)
+  console.log("🚀 ~ Pricing ~ surveysList:", surveysList)
   const { paymentStatus } = useSelector((state) => state.survey)
 
 
@@ -38,14 +39,17 @@ const Pricing = () => {
     <div className='pricing p-3'>
       <div className='container mt-4 mb-4'>
         <div className='row justify-content-center'>
-          <div className='col-lg-4 col-md-6 mb-4'>
+          {surveysList?.map((item,index)=>{
+            return(
+              <>
+                 <div className='col-lg-4 col-md-6 mb-4'key={index}>
             <div className='pricingcard'>
               <div className='text-start m-4 mt-0'>
                 <div className='mb-3'>
                   <img src={pricingIcon} alt="Pricing Icon" className='img-fluid'/>
                 </div>
                 <div className='mb-3'>
-                  <h1>Q12 </h1>
+                  <h1>{item?.name} </h1>
                 </div>
                 <div className='mb-3'>
                   <span>Unleash the Power of Your Business <br />with Pro Plan.</span>
@@ -74,13 +78,13 @@ const Pricing = () => {
                 </div>
                 <div className='text-center'>
                {
-                paymentStatus==='paid'?
-                  <WebsiteButton type='button' buttonDesign='outliner' disabled={paymentStatus==='paid'} onClick={()=>sendPyament('Q12')}>
+                paymentStatus[item?.id]?.paymentStatus===true?
+                  <WebsiteButton type='button' buttonDesign='outliner' disabled={paymentStatus[item?.id].paymentStatus===true} >
                    paid
                   </WebsiteButton>
                  
                   :
- <WebsiteButton type='button' buttonDesign='outliner' disabled={isLoading} onClick={()=>sendPyament('Q12')}>
+ <WebsiteButton type='button' buttonDesign='outliner' disabled={isLoading} onClick={()=>sendPyament(item?.name)}>
                    {isLoading?'loading...':' Get Started'}
                   </WebsiteButton>
                }
@@ -91,48 +95,12 @@ const Pricing = () => {
               </div>
             </div>
           </div>
-          {/* <div className='col-lg-4 col-md-6 mb-4'>
-            <div className='pricingcard'>
-              <div className='text-start m-4 mt-0'>
-                <div className='mb-3'>
-                  <img src={pricingIcon} alt="Pricing Icon" className='img-fluid'/>
-                </div>
-                <div className='mb-3'>
-                  <h1>Pro</h1>
-                </div>
-                <div className='mb-3'>
-                  <span>Unleash the Power of Your Business <br />with Pro Plan.</span>
-                </div>
-                <div className='d-flex justify-content-start mb-3'>
-                  <h1>$34</h1>
-                  <span className='m-3'>per month</span>
-                </div>
-                <div className='d-flex price-line mb-3'></div>
-                
-                <div className='d-flex pricingcard-text mb-2 justify-content-start align-items-center'>
-                  <Tickicon />
-                  <span className='ms-2'>Enhanced Analytics</span>
-                </div>
-                <div className='d-flex pricingcard-text mb-2 justify-content-start align-items-center'>
-                  <Tickicon />
-                  <span className='ms-2'>Enhanced Analytics</span>
-                </div>
-                <div className='d-flex pricingcard-text mb-2 justify-content-start align-items-center'>
-                  <Tickicon />
-                  <span className='ms-2'>Enhanced Analytics</span>
-                </div>
-                <div className='d-flex pricingcard-text mb-4 justify-content-start align-items-center'>
-                  <Tickicon />
-                  <span className='ms-2'>Enhanced Analytics</span>
-                </div>
-                <div className='text-center'>
-                  <WebsiteButton type='button' buttonDesign='outliner'>
-                    Get Started
-                  </WebsiteButton>
-                </div>
-              </div>
-            </div>
-          </div> */}
+              </>
+            )
+          })}
+       
+       
+         
         </div>
       </div>
     </div>

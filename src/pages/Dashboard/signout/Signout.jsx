@@ -4,14 +4,15 @@ import Signoutimg from '../../../assets/dashboredsvg/signoutimg.svg?react';
 import signoutimage from '../../../assets/signoutimage.png'
 import WebsiteButton from '../../../components/mySurveyProWebsiteBtn/WebsiteButtton';
 import { useDispatch, useSelector } from 'react-redux';
-import { signout } from '../../../Redux/slice/auth';
+import {  signout } from '../../../Redux/slice/authSlice';
 import toast from 'react-hot-toast';
+
+import { emptyAllStatesLogout } from '../../../Redux/slice/surveySlice';
+
 
 const Signout =()=> {
   const {isLoading,userData} =useSelector((state)=>state.user)
-  
   const dispatch = useDispatch();
-  // const navigate = useNavigate() 
   const handleSubmit=()=>{
     try {
     dispatch(signout())
@@ -20,6 +21,8 @@ const Signout =()=> {
     if(res?.payload.isSuccess===true){
       toast.success(res?.payload.alertMessage)
       navigate('/login')
+      store.dispatch(emptyAllStatesLogout([]));
+    
     }
     })
     } catch (error) {

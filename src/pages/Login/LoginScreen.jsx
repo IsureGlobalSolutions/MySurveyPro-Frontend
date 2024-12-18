@@ -10,7 +10,7 @@ import InputField from '../../components/mySurveyProInput/InputField'
 import WebsiteButton from '../../components/mySurveyProWebsiteBtn/WebsiteButtton';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signInUser, updateAccessToken } from '../../Redux/slice/auth';
+import { signInUser, updateAccessToken } from '../../Redux/slice/authSlice';
 
 import toast from 'react-hot-toast';
 import { store } from '../../Redux/store';

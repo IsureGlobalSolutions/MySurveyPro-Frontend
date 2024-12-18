@@ -34,7 +34,7 @@ const listOfGender=[
 
              //get over all survey report data
     useEffect(()=>{
-      if(paymentStatus==='paid' && selectedDashboardValues?.survey?.id){
+      if(selectedDashboardValues?.survey?.id && paymentStatus[selectedDashboardValues?.survey?.id].paymentStatus===true ){
 
    showSelectedValues('male')
 }
