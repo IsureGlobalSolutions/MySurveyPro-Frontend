@@ -29,6 +29,7 @@ const Guidance =lazy(()=>import("../pages/Guidance/guidance.jsx"))
 const TEITemplate = lazy(()=>import("../pages/Dashboard/templates/TEItemplate/TEIPreviewQuestion.jsx"))
 const config = [
   {
+    
   path: '/',
   loginRequired: false,
   layout: PublicLayout,

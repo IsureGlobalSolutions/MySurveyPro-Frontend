@@ -3,6 +3,7 @@
     border: 0;
     padding: var(--padding-3xs) var(--padding-27xl);
     background-color: var(--color-darkorange);
+    
     border-radius: var(--br-81xl);
     overflow: hidden;
     display: flex;

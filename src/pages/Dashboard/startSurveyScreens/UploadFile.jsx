@@ -17,7 +17,7 @@ import Loader from '../../../components/plugins/Loader';
 
 const csvText='Download template file to fill in required data. After filling out, upload it';
 const downloadText = 'Upload the file containing the required data for all individuals to whom the survey will be launched'
-const UploadFile = ({ setstepper , getUploadFile , surveyId }) => {
+const UploadFile = ({ setstepper , getUploadFile , surveyId , setaddnewfile }) => {
 console.log("🚀 ~ UploadFile ~ surveyId:", surveyId)
 const fileInputRef = useRef(null);
   const dispatch = useDispatch()
@@ -42,7 +42,7 @@ useEffect(()=>{
       setstepper(3)
       setisLoadingStart(false)
       console.log('stepper launch');
-      
+      setaddnewfile(false);
     }
   })
   .finally(()=>{
