@@ -3,7 +3,7 @@ import './startsurvey.css'
 import WebsiteButton from '../../../components/mySurveyProWebsiteBtn/WebsiteButtton';
 import UploadFileIcon from '../../../assets/dashboredsvg/upload-file.svg?react';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadEditFileOfEmployeesData } from '../../../Redux/slice/auth';
+import { uploadEditFileOfEmployeesData } from '../../../Redux/slice/authSlice';
 import { useDropzone } from 'react-dropzone';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';

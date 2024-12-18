@@ -1,7 +1,7 @@
 // src/hooks/refreshToken.js
 import { axiosPrivate, baseURL, instance } from '../axios/axios';
 import {store} from '../Redux/store';
-import { updateAccessToken } from '../Redux/slice/auth'; 
+import { updateAccessToken } from '../Redux/slice/authSlice'; 
 import toast from 'react-hot-toast';
 import { FRONTEND_URL } from '../consts/environments';
 

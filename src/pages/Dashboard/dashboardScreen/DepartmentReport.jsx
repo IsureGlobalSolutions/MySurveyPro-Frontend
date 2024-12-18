@@ -47,7 +47,9 @@ const DepartmentReport = () => {
 
 
   useEffect(() => {
-if(paymentStatus==='paid' && selectedDashboardValues?.survey?.id){
+if(selectedDashboardValues?.survey?.id && paymentStatus[selectedDashboardValues?.survey?.id].paymentStatus===true ){
+ 
+  
    dispatch(getListOfCoumnProperty({ surveyId: selectedDashboardValues?.survey?.id, columnProperty: 'department' }))
       .then((res) => {
      
