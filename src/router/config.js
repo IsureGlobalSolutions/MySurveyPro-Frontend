@@ -159,13 +159,13 @@ const config = [
   component:TEITemplate
 },
 {
-  path: '/q12survey/:id*',
+  path: '/q12survey',
   loginRequired:false,
-  layout: PublicLayout,
+  layout: DashboardLayout,
   component:Survey
 },
 {
-  path: '/paymentsuccess/:userId/:surveyId',
+  path: '/paymentsuccess/:id*',
   loginRequired:false,
   layout: LoginLayout,
   component:Paymentsuccess

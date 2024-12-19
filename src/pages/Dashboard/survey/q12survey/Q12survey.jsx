@@ -1,21 +1,5 @@
 
-    // const { register, handleSubmit , formState: { errors } } = useForm();
-    // const onSubmit = (data) => {
-    //     console.log("resetdata", data);
-    //     if (data.userid) {
-    //       navigate('/survey');
-    //     }
-    //   };
-      const handleSubmit = async ()=>{
-        stepUPSendValue(0)
-        try {
-          dispatch(getstaffid(staffid))
-
-        } catch (error) {
-          toast.error(error.message);
-        }
-      }
- 
+    
     import React from 'react';
     import './Q12survey.css';
     import img1 from '../../../../assets/Q12survey/Q12surveystepperimg.png';
@@ -23,7 +7,7 @@
     import { useForm } from 'react-hook-form';
     import WebsiteButton from '../../../../components/mySurveyProWebsiteBtn/WebsiteButtton';
     import { useNavigate, useParams } from 'react-router-dom';
-    import { getstaffid } from '../../../../Redux/slice/auth';
+    import { getstaffid } from '../../../../Redux/slice/authSlice';
     import toast from 'react-hot-toast';
     import { useDispatch } from 'react-redux';
     const Q12survey = ({stepUPSendValue , sendIdParent}) => {
