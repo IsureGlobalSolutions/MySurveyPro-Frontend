@@ -11,7 +11,7 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import Congratulationsurvey from './Congratulationsurvey';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSurveyById, surveyresponse } from '../../../../Redux/slice/auth';
+import { getSurveyById, surveyresponse } from '../../../../Redux/slice/authSlice';
 import toast from 'react-hot-toast';
 import Loader from '../../../../components/plugins/Loader';
 import Q12survey from './Q12survey';
@@ -20,7 +20,7 @@ import { jwtDecode } from "jwt-decode";
 import { useParams } from 'react-router-dom';
 
 const SurveyResponseQuestion = () => {
-
+    const Q12SurveyId = useSelector((state) => state.user.selectedSurveyId);
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
     const [staffid, setstaffid] = useState('');
@@ -33,14 +33,14 @@ const SurveyResponseQuestion = () => {
     const [selectchoiseid, setselectchoiseid] = useState([]);
 
     useEffect(() => {
-        fetchSurveyData();
+        fetchSurveyData(Q12SurveyId);
         loadProgress();
         clearProgress();
     }, [dispatch]);
 
-    const fetchSurveyData = async () => {
+    const fetchSurveyData = async (Q12SurveyId) => {
         try {
-            const res = await dispatch(getSurveyById());
+            const res = await dispatch(getSurveyById(Q12SurveyId));
             setData(res?.payload.questions);
         } catch (error) {
             toast.error(error.message);

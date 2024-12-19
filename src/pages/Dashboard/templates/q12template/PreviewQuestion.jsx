@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import { useDispatch } from 'react-redux';
-import { getSurveyById } from '../../../../Redux/slice/auth';
+import { getSurveyById } from '../../../../Redux/slice/authSlice';
 import toast from 'react-hot-toast';
 import Loader from '../../../../components/plugins/Loader';
 import img1 from '../../../../assets/Q12survey/stepperimage.png'
@@ -22,8 +22,9 @@ const PreviewQuestion = () => {
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(111);
     const fetchSurveyData = async () => {
+        const surveyid=1;
         try {
-            const res = await dispatch(getSurveyById());
+            const res = await dispatch(getSurveyById(surveyid));
             setData(res?.payload?.questions || []);
         } catch (error) {
             toast.error(error)

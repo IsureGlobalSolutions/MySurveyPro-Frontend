@@ -18,7 +18,7 @@ import Uniquefiledata from "./Uniquefiledata";
 import Loader from "../../../components/plugins/Loader";
 import EditUploadFile from "./EditUploadFile";
 import toast from "react-hot-toast";
-import { deleteFile } from "../../../Redux/slice/auth";
+import { deleteFile } from "../../../Redux/slice/authSlice";
 import UploadFile from "./UploadFile";
 const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
   const dispatch = useDispatch();

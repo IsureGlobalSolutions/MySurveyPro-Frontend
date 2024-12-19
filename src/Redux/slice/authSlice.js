@@ -118,9 +118,9 @@ export const signout = createAsyncThunk('authentication/signout', async (_, thun
     return thunkAPI.rejectWithValue(message);
   }
 });
-export const getSurveyById = createAsyncThunk('Survey/getSurveyById', async (_, thunkAPI) => {
+export const getSurveyById = createAsyncThunk('Survey/getSurveyById', async (surveyid, thunkAPI) => {
   try {
-    const res = await instance.get('api/Survey/getSurveyById/1');
+    const res = await instance.get(`api/Survey/GetCompleteSurveyById/${surveyid}`);
     return res.data;
 
   } catch (error) {
@@ -189,14 +189,21 @@ const initialState = {
   Profiledata:{},
   message: '',
   error: null,
+  selectedSurveyId:null,
 };
 
 const authSlice = createSlice({
   name: 'authentication',
   initialState,
+
   reducers: {
     updateAccessToken: (state, action) => {
       state.userData = action.payload;
+    },
+    setSelectedSurveyId: (state, action) => {
+      
+      state.selectedSurveyId = action.payload;
+      console.log("Setting surveysId:", state.surveysId);
     },
   },
   extraReducers: (builder) => {
@@ -365,6 +372,5 @@ const authSlice = createSlice({
       })
   },
 });
-
-export const { updateAccessToken } = authSlice.actions;
+export const { updateAccessToken,setSelectedSurveyId } = authSlice.actions;
 export default authSlice.reducer;
