@@ -27,6 +27,11 @@ export const   MultiBarChartData = (xaxis = [], series = []) =>
               endingShape: 'rounded'
             },
           },
+          colors: [
+            "#FDA779",
+            "#F97300",
+            "#6FCFFD"
+        ],
           dataLabels: {
             enabled: false
           },
@@ -49,13 +54,7 @@ export const   MultiBarChartData = (xaxis = [], series = []) =>
           fill: {
             opacity: 1
           },
-          // tooltip: {
-          //   y: {
-          //     formatter: function (val) {
-          //       return "$ " + val + " thousands"
-          //     }
-          //   }
-          // }
+         
           }
   
 );

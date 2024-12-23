@@ -1,12 +1,7 @@
 
-
-
 import React, { useEffect, useState, useRef } from 'react';
 import Chart from 'react-apexcharts';
 
-import Tooltip from 'react-bootstrap/Tooltip';
-
-import { FunnelChartData } from '../../../../../components/cartsComponents/FunnelChartData';
 import { Navbarvalue } from '../../../../../context/NavbarValuesContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOverAllDepartmentReport } from '../../../../../Redux/slice/surveySlice';
@@ -22,9 +17,7 @@ const listOfResponseReport=[
 const DepartLineChart = () => {
 
 const [reportValues, setreportValues] = useState()
-console.log("🚀 ~ DepartFunnelChart ~ reportValues:", reportValues)
 const [selectedReport, setselectedReport] = useState('Actively Engaged')
-  console.log("🚀 ~ DepartFunnelChart ~ selectedReport:", selectedReport)
   const [isLoading, setisLoading] = useState(false)
 
   const chartValues = LineChartData(reportValues);

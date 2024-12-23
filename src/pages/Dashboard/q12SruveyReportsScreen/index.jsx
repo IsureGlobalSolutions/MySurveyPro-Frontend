@@ -51,7 +51,21 @@ const index = () => {
     await dispatch(getAllSurveyList())
   }
 
+  // const paymentStatusHandler = async () => {
+  //   dispatch(checkPaymentStatus(tokenValues.sid))
+  //     .then((res) => {
+  //       if (res?.payload?.paymentStatus === 'paid') {
+  //         store.dispatch(updatePaymentStatus(res?.payload?.paymentStatus))
 
+  //       }
+  //       else {
+  //         store.dispatch(updatePaymentStatus('unpaid'))
+
+  //       }
+
+
+  //     })
+  // }
 
   useEffect(() => {
 
@@ -59,6 +73,19 @@ const index = () => {
 
   }, [])
 
+  // useEffect(() => {
+  //   if (tokenValues.sid) {
+
+
+  //     dispatch(GetUserDetail(tokenValues?.sid))
+  //   }
+  //   if (selectedDashboardValues?.survey?.id) {
+  //     dispatch(getTotalNumberOfRespondent(selectedDashboardValues?.survey?.id))
+  //   }
+
+  //   paymentStatusHandler(selectedDashboardValues?.survey?.id)
+
+  // }, [selectedDashboardValues?.survey?.id])
 
   useEffect(() => {
 

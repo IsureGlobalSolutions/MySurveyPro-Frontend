@@ -1,12 +1,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import Chart from 'react-apexcharts';
-import { saveAs } from 'file-saver';
-import * as ExcelJS from 'exceljs';
 
-import { toPng } from 'html-to-image'; 
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
 
 import { FunnelChartData } from '../../../../../components/cartsComponents/FunnelChartData';
 import { Navbarvalue } from '../../../../../context/NavbarValuesContext';

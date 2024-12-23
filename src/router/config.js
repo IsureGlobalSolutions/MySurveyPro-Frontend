@@ -7,7 +7,7 @@ import DashboardLayout from '../components/plugins/DashboardLayout.jsx';
 const LandingPage =lazy(()=>import("../pages/landingPage"))
 const LoginScreen =lazy(()=>import("../pages/Login/LoginScreen"))
 const SignupScreen =lazy(()=>import("../pages/signup/Signup"))
-const Dashboard =lazy(()=>import("../pages/Dashboard/dashboardScreen"))
+const Q12report =lazy(()=>import("../pages/Dashboard/q12SruveyReportsScreen"))
 const StartSurvey =lazy(()=>import("../pages/Dashboard/startSurveyScreens/ListOfLaunchedServey.jsx"))
 const ForgotPassword =lazy(()=>import("../pages/ForgotPassword/ForgotPassword.jsx"))
 const ResetPassword =lazy(()=>import("../pages/ResetPassword/ResetPassword.jsx"))
@@ -104,10 +104,10 @@ const config = [
   component:AccountVerified
 },
 {
-  path: '/Dashboard',
+  path: '/q12report',
   loginRequired:true,
   layout: DashboardLayout,
-  component:Dashboard
+  component:Q12report
 },
 {
   path: '/startsurvey',

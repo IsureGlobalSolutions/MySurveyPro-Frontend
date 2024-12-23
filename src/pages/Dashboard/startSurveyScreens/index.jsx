@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Stepper, Step } from "react-form-stepper";
-import HeroCards from "../dashboardScreen/HeroCards";
+import HeroCards from "../q12SruveyReportsScreen/HeroCards";
 import UploadFile from "./UploadFile";
 import "./startsurvey.css";
 import LunchSurvey from "./LunchSurvey";
@@ -9,7 +9,7 @@ import SurveySelection from "./SurveySelection";
 import { Navbarvalue } from "../../../context/NavbarValuesContext";
 import Filedata from "./Filedata";
 import Surveylist from "../surveylist/Surveylist";
-import Dashboard from "../../Dashboard/dashboardScreen"
+import Q12ReportScreen from "../../Dashboard/q12SruveyReportsScreen"
 import { useDispatch, useSelector } from "react-redux";
 
 
@@ -20,16 +20,7 @@ const Index = () => {
   const [selectedFilesArray, setselectedFileName] = useState([])
 const [isLoading, setisLoading] = useState(false)
 const dispatch = useDispatch()
-//   const {surveyPaymentStatuses}=useSelector((state)=>state.survey)
-//   useEffect(()=>{
-//     setisLoading(true)
-//     dispatch(LaunchedSurveysStatusApi())
-//     .then((res)=>{
-// if(res?.payload){
-//   setisLoading(false)
-// }
-//     })
-//   },[])
+
   const getSurveyIdHandle = (data) => {
     setsurveyId(data);
   };
@@ -92,7 +83,7 @@ const dispatch = useDispatch()
           <ThankYouLunchSurvey setstepper={StapperHandler}/>
         ) : 
          ( 
-         <Dashboard setstepper={StapperHandler} />
+         <Q12ReportScreen setstepper={StapperHandler} />
          
         )}
   

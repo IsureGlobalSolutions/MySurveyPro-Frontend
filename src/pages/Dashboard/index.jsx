@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import Sidebar from './Sidebar/Sidebar'
 import Topnavbar from './Topnavbar/Topnavbar'
 import './Dashboard.css'
-import DashboardScreen from './dashboardScreen'
+import DashboardScreen from './q12SruveyReportsScreen'
 const index = () => {
   const [collapsed, setcollapsed] = useState(false)
 

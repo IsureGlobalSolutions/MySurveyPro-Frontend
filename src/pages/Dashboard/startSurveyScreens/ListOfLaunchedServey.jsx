@@ -1,5 +1,5 @@
 import { Paper, TablePagination } from '@mui/material';
-import React, { lazy, useEffect, useState } from 'react';
+import React, { lazy, useEffect, useLayoutEffect, useState } from 'react';
 import Loader from '../../../components/plugins/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTotalNumberOfRespondent, LaunchedSurveysStatusApi, updatePaymentStatus } from '../../../Redux/slice/surveySlice';
@@ -47,7 +47,7 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
 
   }, [tokenValues.sid])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setisLoading(true);
     dispatch(LaunchedSurveysStatusApi())
       .then((res) => {

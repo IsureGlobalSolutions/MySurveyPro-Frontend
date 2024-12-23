@@ -1,32 +1,34 @@
-// chartValues.js
-export const StackChartData = ( series = []) => ({
+export const donutChartData = ( reportValues = {}) => 
+    (
+{
     "annotations": {},
     "chart": {
         "animations": {
             "enabled": false
         },
-        "background": "",
         "foreColor": "#333",
         "fontFamily": "Roboto",
-        "height": 261,
-        "id": "Znd2P",
-        "stacked": true,
+        "height": 248,
+        "id": "XqUpw",
         "stackOnlyBar": true,
         "toolbar": {
-            "show": true
+            "show": false
         },
-        "type": "bar",
-        "width": 481,
+        "type": "donut",
+        "width": 492,
         "zoom": {
             "allowMouseWheelZoom": true
         }
     },
     "plotOptions": {
         "line": {
-            "isSlopeChart": false
+            "isSlopeChart": false,
+            "colors": {
+                "threshold": 0
+            }
         },
         "bar": {
-            "columnWidth": "18%",
+            "borderRadius": 10,
             "borderRadiusApplication": "end",
             "borderRadiusWhenStacked": "last",
             "hideZeroBarsWhenGrouped": false,
@@ -97,83 +99,69 @@ export const StackChartData = ( series = []) => ({
             "dropShadow": {}
         }
     },
+    "fill": {
+        "opacity": 1
+    },
     "grid": {
         "padding": {
             "right": 25,
-            "left": 15
+            "left": 20
         }
     },
+    "labels": Array.isArray(reportValues?.labels)?
+    reportValues?.labels?.length>0 ?
+    reportValues.labels
+    :
+     [
+        "No Data",
+        "No Data",
+        "No Data",
+        
+    ]
+    :
+    [
+        "No Data",
+        "No Data",
+        "No Data",
+        
+    ],
     "legend": {
+        "position": "right",
         "fontSize": 14,
         "offsetY": 0,
+        "clusterGroupedSeries": true,
+        "clusterGroupedSeriesOrientation": "vertical",
         "markers": {
-            "size": 7,
-            "shape": "square"
+            "size": 7
         },
         "itemMargin": {
             "vertical": 0
         }
     },
     "markers": {},
-    "series":series.length>0? series: [
-        {
-            "name": "Actively Engaged",
-            "data": [
-                {
-                    "x": "noData 1",
-                    "y": 10
-                },
-                {
-                    "x": "noData 2",
-                    "y": 20
-                },
-                {
-                    "x": "noData 3",
-                    "y": 30
-                }
-            ],
-            "group": "apexcharts-axis-0",
-            "zIndex": 0
-        },
-        {
-            "name": "Actively Disengaged",
-            "data": [
-                {
-                    "x": "noData 1",
-                    "y": 15
-                },
-                {
-                    "x": "noData 2",
-                    "y": 10
-                },
-                {
-                    "x": "noData 3",
-                    "y": 25
-                }
-            ],
-            "group": "apexcharts-axis-0",
-            "zIndex": 1
-        },
-        {
-            "name": "Not Engaged",
-            "group": "apexcharts-axis-0",
-            "data": [
-                {
-                    "x": "noData 1",
-                    "y": "12"
-                },
-                {
-                    "x": "noData 2",
-                    "y": "23"
-                },
-                {
-                    "x": "noData 3",
-                    "y": "40"
-                }
-            ],
-            "zIndex": 2
-        }
+    "series": Array.isArray(reportValues?.series)?
+    reportValues?.series?.length>0 ?
+    reportValues.series
+    :
+     [
+        33.9,
+        33.9,
+        33.9
+    ]
+    :
+     [
+        33.9,
+        33.9,
+        33.9
     ],
+    "states": {
+        "hover": {
+            "filter": {}
+        },
+        "active": {
+            "filter": {}
+        }
+    },
     "stroke": {
         "fill": {
             "type": "solid",
@@ -195,18 +183,13 @@ export const StackChartData = ( series = []) => ({
         }
     },
     "tooltip": {
-        "shared": false,
         "hideEmptySeries": false,
-        "intersect": true
+        "fillSeriesColor": true
     },
     "xaxis": {
-        "offsetY": -4,
         "labels": {
-            "rotateAlways": true,
             "trim": true,
-            "style": {},
-            "offsetX": -2,
-            "offsetY": 9
+            "style": {}
         },
         "group": {
             "groups": [],
@@ -217,28 +200,16 @@ export const StackChartData = ( series = []) => ({
                 "cssClass": ""
             }
         },
-        "tickPlacement": "between",
         "title": {
             "style": {
                 "fontWeight": 700
             }
-        },
-        "tooltip": {
-            "enabled": false
         }
     },
     "yaxis": {
-        min: 0,
-        max: 100, 
-        tickAmount: 10,
         "labels": {
             "showDuplicates": false,
-            "offsetX": 6,
             "style": {}
-        },
-        "axisTicks": {
-            "show": true,
-            "color": "#C51616"
         },
         "title": {
             "style": {
@@ -247,5 +218,5 @@ export const StackChartData = ( series = []) => ({
         }
     },
   
-});
-  
+}
+    )
