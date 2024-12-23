@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import "./Header.css";
-import Logo from '../../assets/svgs/logofinal.svg?react'
+import Logo from '../../assets/svgs/MySurveyproLogo.svg?react'
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from "react";
@@ -27,7 +27,7 @@ const sidbarHighligherHandler=(id)=>{
       <header className="top-nav-container">
         
         <div className="pt-2 ">
-        <Link to={'/'} className={`main-ite ${highlighter==='09'? 'item-highlighted':''}`} id="09" onClick={()=>highlighterHandler('09')}>  <Logo width={120}/>  </Link>
+        <Link to={'/'} className={`main-ite ${highlighter==='09'? 'item-highlighted':''}`} id="09" onClick={()=>highlighterHandler('09')}>  <Logo width={90}/>  </Link>
         </div>
         <nav className="navigation">
           <nav className="product-links-container ">

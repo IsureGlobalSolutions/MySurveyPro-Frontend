@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import InputField from '../../components/mySurveyProInput/InputField';
 import WebsiteButton from '../../components/mySurveyProWebsiteBtn/WebsiteButtton';
 import { useDispatch, useSelector } from 'react-redux';
-import { signUpUser } from '../../Redux/slice/auth';
+import { signUpUser } from '../../Redux/slice/authSlice';
 import toast from 'react-hot-toast';
 
 const SignupScreen = () => {

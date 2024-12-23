@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
+
 import WebsiteButton from "../../../components/mySurveyProWebsiteBtn/WebsiteButtton";
 import { useDispatch, useSelector } from "react-redux";
 import { VeiwUniqueFileName,
@@ -15,11 +16,13 @@ import Paper from "@mui/material/Paper";
 import { LiaEditSolid } from "react-icons/lia";
 import "./startsurvey.css";
 import Uniquefiledata from "./Uniquefiledata";
+
 import Loader from "../../../components/plugins/Loader";
 import EditUploadFile from "./EditUploadFile";
 import toast from "react-hot-toast";
 import { deleteFile } from "../../../Redux/slice/authSlice";
 import UploadFile from "./UploadFile";
+import Addnewfile from "./Addnewfile";
 const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
   const dispatch = useDispatch();
   const [surveyList, setsurveyList] = useState();
@@ -28,9 +31,11 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
   const [popupMessage, setPopupMessage] = useState("");
   const [show, setShow] = useState(false);
   const [deletedata, setdeletedata] = useState();
+  
   const [veiwloading, setVeiwloading] = useState(false);
   const [Filename, setFilename] = useState(null);
   const [Veiwdata, setVeiwdata] = useState([]);
+  
   const [Viewshow, setViewshow] = useState(false);
   const [departmentId, setdepartmentId] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -65,9 +70,11 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
     setViewshow(false);
   };
   const handleCloseEditdata = (data) => {
+  
     setEditshow(data);
   };
   const handleCloseaddfile = (data) => {
+   
     setaddnewfile(data);
   };
   const handleCheckboxClick = (item) => {
@@ -89,14 +96,19 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
       });
     }
   };
+  const getFile = async () => {
+      dispatch(getAllSurveyFiles(surveyId)).then((res) => {
+        setsurveyList(res?.payload);
+      });
+  
+  };
   useEffect(() => {
     ListOfSuveysHandler();
   }, [Editshow  ]);
 
  
-  const handleClosedata = () => {
+  const handleClosedata = (datatrue) => {
     setShow(false);
-    //   setActiveTab("nav_week1");
   };
   const handleEditFile = (item, filename) => {
     const uniqueFileName = item.uniqueFileName;
@@ -104,8 +116,8 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
     setEditshow(true);
     setFilename(filename);
   };
-  const handleAddFile =()=>{
-    setaddnewfile(true);
+  const handleAddFile =(data) => {
+    setaddnewfile(data);
   }
   useEffect(() => {
     if (filenameupdate) {
@@ -146,7 +158,9 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
         }
       );
   };
-    
+  const closeModal = () => {
+    setaddnewfile(data);
+  };
   return (
     <>
       <Modal show={show} onHide={handleClosedata} centered>
@@ -246,7 +260,7 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
         show={addnewfile}
         onHide={handleCloseaddfile}
         size="lg"
-        className=""
+        className="m-4 "
       >
         <button
           type="button"
@@ -262,9 +276,10 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
         />
 
         <Modal.Body>
-          <UploadFile
-          surveyId={surveyId}
-          setaddnewfile ={setaddnewfile}
+          <Addnewfile
+               surveyId={surveyId}
+               closeModal ={handleCloseaddfile}
+               getFile={getFile}
           />
         </Modal.Body>
       </Modal>

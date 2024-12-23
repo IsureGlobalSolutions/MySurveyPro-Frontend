@@ -8,23 +8,42 @@ import { FRONTEND_URL } from '../../../consts/environments';
 import Tooltip from '../../../components/Tooltip/Tooltip';
 import WebsiteButton from '../../../components/mySurveyProWebsiteBtn/WebsiteButtton';
 
-const ThankYouLunchSurvey = ({setstepper}) => {
+const ThankYouLunchSurvey = ({setstepper , surveyId}) => {
+  console.log("🚀 ~ ThankYouLunchSurvey ~ surveyId:", surveyId)
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [abbrTitle, setAbbrTitle] = useState('copy Link!');
   const {isLoading,userData} =useSelector((state)=>state.user)
   const decodedToken = jwtDecode(userData.accessToken);
  const id=decodedToken?.sid;
- const [text, setText] = useState(`${FRONTEND_URL}/q12survey/${id}`);
+ const [surveytext, setsurveytext] = useState('');
+ console.log("🚀 ~ ThankYouLunchSurvey ~ surveytext:", surveytext)
+ const q12text = `${FRONTEND_URL}/q12survey/${id}`;
+ const TEItext = `${FRONTEND_URL}/TeamEffectivenessSurvey/${id}`;
+
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(text).then(
-      () => {
-       setAbbrTitle('copied!')
-      },
-      (err) => {
-        console.error('Could not copy text: ', err);
-      }
-    );
+    if (surveyId===2){ 
+      navigator.clipboard.writeText(TEItext).then(
+        () => {
+         setAbbrTitle('copied!')
+        },
+        (err) => {
+          console.error('Could not copy text: ', err);
+        }
+      );
+    }else{         
+      navigator.clipboard.writeText(q12text).then(
+
+        () => {
+         setAbbrTitle('copied!')
+        },
+        (err) => {
+          console.error('Could not copy text: ', err);
+        }
+      );
+    }
+    
+  
   };
 
   return (
@@ -37,7 +56,7 @@ const ThankYouLunchSurvey = ({setstepper}) => {
 <div className="">
   <p className='m-0 text-muted fs-4 fw-bold'>Survey Link : </p></div>
 <div className="border px-4 py-3 m-0 rounded-4 bg-light d-flex gap-2">
-  <p className='m-0'>{FRONTEND_URL}/q12survey/{id}</p>
+  <p className='m-0'>{surveyId===2?TEItext:q12text}</p>
   <Tooltip text={abbrTitle} style={{width:'150px'}}>
     <IoIosCopy style={{color:'#F97300'}} onClick={copyToClipboard}/>
  </Tooltip>

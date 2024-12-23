@@ -1,3 +1,5 @@
+
+
 import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import PublicLayout from '../components/plugins/PublicLayout';
@@ -23,6 +25,7 @@ const Prining=lazy(()=>import("../pages/Pricing/Pricing.jsx"))
 const Setting=lazy (()=>import("../pages/Dashboard/setting/Setting.jsx"))
 const Surveylist= lazy(()=>import("../pages/Dashboard/surveylist/Surveylist.jsx"))
 const  Survey =lazy(()=>import("../pages/Dashboard/survey/q12survey/SurveyResponseQuestion.jsx"))
+const TEISurveyTemplate=lazy(()=>import("../pages/Dashboard/survey/TEISurvey/TEISurveyResponseQuestions.jsx"))
 const Template=lazy(()=>import("../pages/Dashboard/templates/q12template/PreviewQuestion.jsx"))
 const Paymentsuccess=lazy(()=>import ("../pages/Pricing/Success.jsx"))
 const Guidance =lazy(()=>import("../pages/Guidance/guidance.jsx"))
@@ -159,11 +162,18 @@ const config = [
   component:TEITemplate
 },
 {
-  path: '/q12survey',
+  path: '/q12survey/:id*',
   loginRequired:false,
-  layout: DashboardLayout,
+  layout: PublicLayout,
   component:Survey
 },
+{
+  path: '/TeamEffectivenessSurvey/:id*',
+  loginRequired:false,
+  layout: PublicLayout,
+  component:TEISurveyTemplate
+},
+
 {
   path: '/paymentsuccess/:id*',
   loginRequired:false,

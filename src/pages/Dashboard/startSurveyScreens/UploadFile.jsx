@@ -17,7 +17,7 @@ import Loader from '../../../components/plugins/Loader';
 
 const csvText='Download template file to fill in required data. After filling out, upload it';
 const downloadText = 'Upload the file containing the required data for all individuals to whom the survey will be launched'
-const UploadFile = ({ setstepper , getUploadFile , surveyId , setaddnewfile }) => {
+const UploadFile = ({ setstepper , getUploadFile , surveyId  }) => {
 console.log("🚀 ~ UploadFile ~ surveyId:", surveyId)
 const fileInputRef = useRef(null);
   const dispatch = useDispatch()
@@ -42,7 +42,6 @@ useEffect(()=>{
       setstepper(3)
       setisLoadingStart(false)
       console.log('stepper launch');
-      setaddnewfile(false);
     }
   })
   .finally(()=>{
@@ -60,9 +59,6 @@ useEffect(()=>{
     },
   });
   const uploadFileHandler = async () => {
-    console.log('status',paymentStatus);
-    
-   
          if (uploadedFiles.length > 0) {
           setisLoading(true)
       const formdata = new FormData()
@@ -75,7 +71,7 @@ useEffect(()=>{
             setisLoading(false)
              setstepper(3)
           }else if(res?.payload==="Survey subscription not found."){
-            toast.error(res.payload)
+            // toast.error(res.payload)
             setisLoading(false)
             
             navigate('/pricing')
