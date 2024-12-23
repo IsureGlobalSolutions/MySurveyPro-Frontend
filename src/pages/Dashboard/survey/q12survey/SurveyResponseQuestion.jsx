@@ -101,7 +101,7 @@ const SurveyResponseQuestion = () => {
                     await dispatch(surveyresponse(requestData));
                     saveProgress();
                     clearProgress();
-                    setActiveStep(data.length); // This should ensure the next step triggers the next component
+                    setActiveStep(data.length); 
                 } catch (error) {
                     toast.error(error.message);
                 }

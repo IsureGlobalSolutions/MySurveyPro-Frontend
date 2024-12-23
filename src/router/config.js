@@ -30,6 +30,7 @@ const Template=lazy(()=>import("../pages/Dashboard/templates/q12template/Preview
 const Paymentsuccess=lazy(()=>import ("../pages/Pricing/Success.jsx"))
 const Guidance =lazy(()=>import("../pages/Guidance/guidance.jsx"))
 const TEITemplate = lazy(()=>import("../pages/Dashboard/templates/TEItemplate/TEIPreviewQuestion.jsx"))
+const Congratulation=lazy((import("../pages/Dashboard/survey/TEISurvey/TEICongratulation.jsx")))
 const config = [
   {
     
@@ -172,6 +173,12 @@ const config = [
   loginRequired:false,
   layout: PublicLayout,
   component:TEISurveyTemplate
+},
+{
+  path: '/thankupage',
+  loginRequired:false,
+  layout: PublicLayout,
+  component:Congratulation
 },
 
 {
