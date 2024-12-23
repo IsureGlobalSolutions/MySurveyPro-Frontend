@@ -179,7 +179,7 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
                               ))}
                             </td>
                             <td>
-                              { responseData.totalRespondent|| 0}/{responseData.totalReceiver || 0} respondent
+                              { responseData?.totalRespondents|| 0}/{responseData?.totalReceiver || 0} respondent
                             </td>
                             <td>
                               <IconButton

@@ -255,9 +255,6 @@ const TEISurveyResponseQuestions = () => {
                             <WebsiteButton
                               size="small"
                               onClick={handleNext}
-                              disabled={
-                                activeStep === data.dimensions.length - 1
-                              }
                             >
                               Next
                               {theme.direction === "rtl" ? (
