@@ -71,50 +71,43 @@ const SurveyResponseQuestion = () => {
         localStorage.removeItem('selectchoiseid');
     };
 
-   
-const handleNext = async () => {
-    const currentDimension = data.dimensions[activeStep];
-    const navigate = useNavigate();
-
-    // Check if all questions in the current dimension are answered
-    const allAnswered = currentDimension.questions.every(
-        (question) => selectchoiseid[question.questionId] !== undefined
-    );
-
-    if (!allAnswered) {
-        toast.error("Please answer all questions before proceeding.");
-        return;
-    }
-
-    try {
-        // Prepare API request data for all questions in the current dimension
-        const responses = currentDimension.questions.map((question) => ({
-            questionId: question.questionId,
-            choiceId: selectchoiseid[question.questionId],
-            recipientId: Number(staffid),
-            userId: userid,
-            surveyId: question.surveyId, // Assuming surveyId is part of the question object
-        }));
-
-        // Dispatch responses as a batch or individual calls
-        for (const response of responses) {
-            await dispatch(surveyresponse(response));
+    const handleNext = async () => {
+        if(!selectchoiseid[activeStep])
+        {
+            toast.error('please select any choice')
+            return;
         }
-
-        saveProgress();
-
-        if (activeStep < data.dimensions.length - 1) {
-            // Move to the next dimension
-            setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        } else {
-            // Final dimension - handle end of survey logic
-            clearProgress();
-            navigate('/thank-you'); // Redirect to the Thank You page
+        if (activeStep < data.length - 1) {
+            const choiceId = selectchoiseid[activeStep];
+            const questionId=data[activeStep].questionId
+            const recipientId= Number(staffid)
+            if (choiceId) {
+                try {
+                    const requestData = { choiceId, recipientId: recipientId , userId: userid , surveyId:Q12SurveyId , questionId };
+                    await dispatch(surveyresponse(requestData));
+                    saveProgress();
+                } catch (error) {
+                    toast.error(error.message);
+                }
+            }
+            setActiveStep(prevActiveStep => prevActiveStep + 1);
+        } else if (activeStep === data.length - 1) {
+            const choiceId = selectchoiseid[activeStep];
+            const questionId=data[activeStep].questionId
+            const recipientId= Number(staffid)
+            if (choiceId) {
+                try {
+                    const requestData = { choiceId, recipientId: recipientId , userId: userid , surveyId:Q12SurveyId, questionId };
+                    await dispatch(surveyresponse(requestData));
+                    saveProgress();
+                    clearProgress();
+                    setActiveStep(data.length); // This should ensure the next step triggers the next component
+                } catch (error) {
+                    toast.error(error.message);
+                }
+            }
         }
-    } catch (error) {
-        toast.error(error.message || "An error occurred. Please try again.");
-    }
-};
+    };
 
     const handleBack = () => {
         setActiveStep(prevActiveStep => prevActiveStep - 1);
