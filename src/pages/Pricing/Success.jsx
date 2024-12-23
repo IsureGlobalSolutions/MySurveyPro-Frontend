@@ -26,18 +26,11 @@ const Success = () => {
           console.log(res?.payload, 'success check payment status api');
           if (res?.payload?.paymentStatus === 'paid') {
             toast.success('payment has been successfully paid');
-          }
-          setisLoading(false);
-        });
-    }
-  }, []);
 
-  useEffect(() => {
-    setisLoading(true);
-    dispatch(LaunchedSurveysStatusApi())
+   dispatch(LaunchedSurveysStatusApi())
       .then((res) => {
         if (res?.payload) {
-          setisLoading(false);
+          
 
           if (res?.payload?.length > 0) {
             const paymentStatusUpdates = {};
@@ -49,12 +42,21 @@ const Success = () => {
             });
 
             // Dispatch the collected payment status updates to the store
-            store.dispatch(updatePaymentStatus(paymentStatusUpdates));
+            store.dispatch(updatePaymentStatus(paymentStatusUpdates)); 
+            setisLoading(false);
           }
         }
       });
-  }, [dispatch]);
 
+
+
+          }
+         
+        });
+    }
+  }, []);
+
+  
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center ">
       <div className="paymentsuccess col-md-7 col-lg-6  m-4 p-4">
