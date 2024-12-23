@@ -15,6 +15,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Index = () => {
   const { startSurveyStepper, StapperHandler } = Navbarvalue();
+  const Lunchsurveyid= useSelector((state)=>state.user.selectedSurveyId);
+  console.log("🚀 ~ Index ~ Lunchsurveyid:", Lunchsurveyid)
   const [uploadfilename, setuploadfilename] = useState();
   const [surveyId, setsurveyId] = useState();
   const [selectedFilesArray, setselectedFileName] = useState([])
@@ -22,11 +24,11 @@ const [isLoading, setisLoading] = useState(false)
 const dispatch = useDispatch()
 
   const getSurveyIdHandle = (data) => {
+    console.log("🚀 ~ getSurveyIdHandle ~ data:", data)
     setsurveyId(data);
   };
   const getSelectedFiles = (data) => {
     setselectedFileName(data);
-    
   };
 
   const getUploadFile = (data) => {
@@ -80,7 +82,7 @@ const dispatch = useDispatch()
 
         ) : startSurveyStepper === 5 ? (
 
-          <ThankYouLunchSurvey setstepper={StapperHandler}/>
+          <ThankYouLunchSurvey setstepper={StapperHandler} surveyId={Lunchsurveyid}/>
         ) : 
          ( 
          <Q12ReportScreen setstepper={StapperHandler} />

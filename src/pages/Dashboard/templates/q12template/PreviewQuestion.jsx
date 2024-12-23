@@ -8,7 +8,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getSurveyById } from '../../../../Redux/slice/authSlice';
 import toast from 'react-hot-toast';
 import Loader from '../../../../components/plugins/Loader';
@@ -18,11 +18,13 @@ import PreveiwCongratulationsurvey from './PreveiwCongratulationsurvey';
 import Q12template from './Q12template';
 const PreviewQuestion = () => {
     const dispatch = useDispatch();
+    
+    const q12SurveyId = useSelector((state) => state.user.selectedSurveyId);
+
     const [data, setData] = useState([]);
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(111);
-    const fetchSurveyData = async () => {
-        const surveyid=1;
+    const fetchSurveyData = async (surveyid) => {
         try {
             const res = await dispatch(getSurveyById(surveyid));
             setData(res?.payload?.questions || []);
@@ -31,7 +33,7 @@ const PreviewQuestion = () => {
         }
     };
     useEffect(() => {
-        fetchSurveyData();
+        fetchSurveyData(q12SurveyId);
     }, [dispatch]);
 
     const handleNext = () => {

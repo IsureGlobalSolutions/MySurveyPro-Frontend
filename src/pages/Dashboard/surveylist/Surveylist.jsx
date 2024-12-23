@@ -17,19 +17,19 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
   const [surveyListData, setsurveyListData] = useState([]);
   const { surveysList } = useSelector((state) => state.survey);
   const handleSurveyCheckboxClick = (content) => {
-    console.log("🚀 ~ handleCheckboxClick ~ content:", content.id);
-    if (content.title === "TEI" || content.title === "Q12") {
-      store.dispatch(setSelectedSurveyId(content.id))
-      navigate(content.Surveylink); 
+  console.log("🚀 ~ handleSurveyCheckboxClick ~ content:", content.id)
+  if (content.title === "TEI" || content.title=== "Q12"){
+    store.dispatch(setSelectedSurveyId(content.id))
     } else {
       console.error("Unknown survey type");
     }
     sendIdToParent(content.id);
-    setstepper(3);
+    setstepper(2);
   };
 const handlePreviewCheckboxClick =(content)=>{
-  console.log("🚀 ~ handleCheckboxClick ~ content:", content.PreviewSurveylink);
+  console.log("🚀 ~ handleCheckboxClick ~ content:", content.id);
   if (content.title === "TEI" || content.title=== "Q12"){
+    store.dispatch(setSelectedSurveyId(content.id))
     navigate(content.PreviewSurveylink); 
     } else {
       console.error("Unknown survey type");
@@ -49,23 +49,23 @@ const handlePreviewCheckboxClick =(content)=>{
           return {
             img: q12image,
             title: element.name,
-            id: element.id, // Backend ID for Q12
+            id: element.id, 
             text: "Start your survey by clicking the 'View Survey'",
             buttonviewsurvey: "View Survey",
             buttonusersurvey: "Use Survey",
             PreviewSurveylink:"/q12template",
-            Surveylink: "/q12survey",
+            // Surveylink: "/q12survey",
           };
         } else if (element.name === "TEI") {
           return {
             img: form360img,
             title: element.name,
-            id: element.id, // Backend ID for TEI
+            id: element.id, 
             text: "Start your survey by clicking the 'View Survey'",
             buttonviewsurvey: "View Survey",
             buttonusersurvey: "Use Survey",
             PreviewSurveylink: "/TEITemplate",
-            Surveylink:"/TEITemplate",
+            // Surveylink:"/TEIsurvey",
           };
         }
         return null; 

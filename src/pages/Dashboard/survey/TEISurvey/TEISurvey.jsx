@@ -1,7 +1,7 @@
 
     
     import React from 'react';
-    import './Q12survey.css';
+    import './TEISurvey.css';
     import img1 from '../../../../assets/Q12survey/Q12surveystepperimg.png';
     import InputField from '../../../../components/mySurveyProInput/InputField';
     import { useForm } from 'react-hook-form';
@@ -9,15 +9,16 @@
     import { useNavigate, useParams } from 'react-router-dom';
     import { getstaffid } from '../../../../Redux/slice/authSlice';
     import toast from 'react-hot-toast';
-    import { useDispatch } from 'react-redux';
-    const Q12survey = ({stepUPSendValue , sendIdParent}) => {
+    import { useDispatch, useSelector } from 'react-redux';
+    const TEISurvey = ({stepUPSendValue , sendIdParent}) => {
+      const surveyId= useSelector((state)=>state.user.selectedSurveyId)
         const dispatch =useDispatch();
         const { register , handleSubmit , formState: { errors } } = useForm();
          const params = useParams();
           const onSubmit = async (data) => {
             const id = data.userid;
             try {
-             dispatch(getstaffid({surveyId:1,employeeId:id,userId:params?.id}))
+             dispatch(getstaffid({surveyId:surveyId,employeeId:id,userId:params?.id}))
             .then((res)=>{
               if(res.payload.isSuccess===true){
                 toast.success(res.payload.alertMessage)
@@ -37,7 +38,7 @@
             <div className='stepper row p-5'>
               <div className='col-md-4 p-5 mt-3'>
                 <div className='text'>
-                  <h1>Q12 Survey</h1>
+                  <h1 >Team effectiveness survey</h1>
                   <p>Please enter user id</p>
                 </div>
                 <div  className="g-4 mt-4 " >
@@ -70,5 +71,5 @@
       );
     }
     
-    export default Q12survey;
+    export default TEISurvey;
     

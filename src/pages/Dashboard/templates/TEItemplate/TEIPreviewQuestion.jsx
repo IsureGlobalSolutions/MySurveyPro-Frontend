@@ -27,7 +27,7 @@ const TEIPreviewQuestion = () => {
   const fetchSurveyData = async (TEISurveyId) => {
     try {
       const res = await dispatch(getSurveyById(TEISurveyId));
-      setData(res?.payload || []);
+      setData(res?.payload);
       console.log("res.payload", res.payload);
     } catch (error) {
       toast.error(error);
@@ -53,14 +53,9 @@ const TEIPreviewQuestion = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
-  if (!Array.isArray(data.dimensions)) {
-    return (
-      <div>
-        <Loader />
-      </div>
-    );
-  }
+  if (!Array.isArray(data.dimensions) || data.dimensions.length === 0) {
+    return <Loader />;
+}
   const handleactivestep = (value) => {
     setActiveStep(value);
   };
@@ -68,7 +63,7 @@ const TEIPreviewQuestion = () => {
     <>
       {activeStep === 111 ? (
         <TEItemplate stepUPSendValue={handleactivestep} />
-      ) : activeStep === data.dimensions ? (
+      ) : activeStep === data?.dimensions.length ?  (
         <div className=" ">
           <div className="d-flex justify-content-start flex-wrap gap-5 mb-4 m-0 p-4">
             <div className="steppercard d-flex flex-column align-items-start w-100">
@@ -104,79 +99,7 @@ const TEIPreviewQuestion = () => {
                   <div className="col-12 p-5">
                     <div className="row">
                       <div className="col-12 col-md-7 surveyQuestion">
-                        {/* <div className='text-start gap-3'>
-                            <Box className="ms-5" sx={{ maxWidth: 900 }}>
-                                <Box>
-                                    <Paper
-                                        square
-                                        elevation={0}
-                                        sx={{
-                                            display: "flex",
-                                            alignItems: "start",
-                                            flexDirection: "column"
-                                        }}
-                                    >
-                                        <h1 className='ms-1'>Question {data[activeStep].questionId}</h1>
-                                        <p className='ms-2'>{data[activeStep].questionText}</p>
-                                    </Paper>
-                                    {data[activeStep].choices.map((choice) => (
-                                        <Paper
-                                            key={choice.choiceId}
-                                            square
-                                            elevation={0}
-                                            sx={{
-                                                display: "flex",
-                                                alignItems: "start",
-                                            }}
-                                            className='mt-3 ms-2'
-                                        >
-                                        
-                                            <input type="checkbox" className="form-check-input" id={`choice${choice.choiceId}`} />
-                                            <span className='ms-3 checkmark'>{choice.text}</span>
-                                        </Paper>
-                                    ))}
-                                    <Box sx={{ height: 25, width: "100%", p: 2 }}>
-                                        {data[activeStep].description}
-                                    </Box>
-                                    <MobileStepper
-                                        variant="text"
-                                        steps={data.length}
-                                        position="static"
-                                        activeStep={activeStep}
-                                        nextButton={
-                                            <WebsiteButton
-                                                size="small"
-                                                onClick={handleNext}
-                                                disabled={activeStep === data.length}
-                                            >
-                                                Next
-                                                {theme.direction === "rtl" ? (
-                                                    <KeyboardArrowLeft />
-                                                ) : (
-                                                    <KeyboardArrowRight />
-                                                )}
-                                            </WebsiteButton>
-                                        }
-                                        backButton={
-                                            <WebsiteButton>
-                                                <Button
-                                                    size="small"
-                                                    onClick={handleBack}
-                                                    disabled={activeStep === 0}
-                                                >
-                                                    {theme.direction === "rtl" ? (
-                                                        <KeyboardArrowRight />
-                                                    ) : (
-                                                        <KeyboardArrowLeft />
-                                                    )}
-                                                    Back
-                                                </Button>
-                                            </WebsiteButton>
-                                        }
-                                    />
-                                </Box>
-                            </Box>
-                        </div> */}
+                       
                       </div>
                       <div className="tableheader m-0 p-0">
                         <div>

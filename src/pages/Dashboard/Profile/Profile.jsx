@@ -4,7 +4,7 @@ import profilebackgroundimg from '../../../assets/profilebackgroundimg.png'
 import WebsiteButton from '../../../components/mySurveyProWebsiteBtn/WebsiteButtton'
 import InputField from '../../../components/mySurveyProInput/InputField'
 import { useForm } from 'react-hook-form';
-import {  GetUserDetail, profileapi } from '../../../Redux/slice/auth';
+import {  GetUserDetail, profileapi } from '../../../Redux/slice/authSlice';
 import { jwtDecode } from "jwt-decode";
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
