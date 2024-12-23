@@ -86,14 +86,16 @@ const TEISurveyResponseQuestions = () => {
         }
     
         try {
+            // Prepare API request data for all questions in the current dimension
             const responses = currentDimension.questions.map((question) => ({
                 questionId: question.questionId,
                 choiceId: selectchoiseid[question.questionId],
-                dimensionId: question.dimensionId,
+                recipientId: Number(staffid),
                 userId: userid,
-                surveyId: question.surveyId, 
+                surveyId: question.surveyId, // Assuming surveyId is part of the question object
             }));
     
+            // Dispatch responses as a batch or individual calls
             for (const response of responses) {
                 await dispatch(surveyresponse(response));
             }
@@ -101,13 +103,15 @@ const TEISurveyResponseQuestions = () => {
             saveProgress();
     
             if (activeStep < data.dimensions.length - 1) {
+                // Move to the next dimension
                 setActiveStep((prevActiveStep) => prevActiveStep + 1);
             } else {
+                // Final dimension - handle end of survey logic
                 console.log("etyeyeyu");
                 setActiveStep(data.dimensions.length);
                 clearProgress();
+                // Move to the summary or finish screen
             }
-            
         } catch (error) {
             toast.error(error.message || "An error occurred. Please try again.");
         }
