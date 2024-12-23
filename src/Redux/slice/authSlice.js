@@ -2,6 +2,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { instance, axiosPrivate } from '../../axios/axios';
 import toast from 'react-hot-toast';
+import { PURGE } from 'redux-persist';
 
 export const signUpUser = createAsyncThunk('authentication/signUpUser', async (data, thunkAPI) => {
   try {
@@ -208,6 +209,8 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+        .addCase(PURGE, () => initialState) 
+    
       .addCase(signUpUser.pending, (state) => {
         state.isLoading = true;
       })
@@ -243,11 +246,13 @@ const authSlice = createSlice({
       .addCase(signout.fulfilled, (state, action) => {
         state.isLoading = false;
         state.userData = {};
+
         state.error = null;
       })
       .addCase(signout.rejected, (state, action) => {
         state.isLoading = false;
         state.userData = {};
+        state.Profiledata={};
         state.error = action.payload || action.error.message;
       })
       .addCase(forgotPasswordApi.pending, (state) => {

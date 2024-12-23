@@ -7,22 +7,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import {  signout } from '../../../Redux/slice/authSlice';
 import toast from 'react-hot-toast';
 
-import { emptyAllStatesLogout } from '../../../Redux/slice/surveySlice';
+import { updatePaymentStatus } from '../../../Redux/slice/teiSlice';
+import { updateSurveyPaymentStatuses } from '../../../Redux/slice/surveySlice';
+import { persistor } from '../../../Redux/store';
+import { useNavigate } from 'react-router-dom';
 
 
 const Signout =()=> {
   const {isLoading,userData} =useSelector((state)=>state.user)
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleSubmit=()=>{
     try {
     dispatch(signout())
-    .then((res)=>{
+    .then(async(res)=>{
 
     if(res?.payload.isSuccess===true){
       toast.success(res?.payload.alertMessage)
       navigate('/login')
-      store.dispatch(emptyAllStatesLogout([]));
-    
+      // let emptyPyamentStatus = {};
+      // let emptySurveyPaymentStatuses = [];
+      // store.dispatch(updatePaymentStatus(emptyPyamentStatus));
+      // store.dispatch(updateSurveyPaymentStatuses(emptySurveyPaymentStatuses));
+      persistor.purge()
+ 
     }
     })
     } catch (error) {

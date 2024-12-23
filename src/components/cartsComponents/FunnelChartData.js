@@ -96,6 +96,10 @@ export const FunnelChartData = ( series = {}) =>
                         "#fff"
                     ]
                 },
+                "enabled": true,
+                "formatter": function (val, opt) {
+                    return opt.w.globals.labels[opt.dataPointIndex] + ':  ' + val
+                  },
                 "background": {
                     "enabled": false,
                     "dropShadow": {}
@@ -169,55 +173,55 @@ export const FunnelChartData = ( series = {}) =>
                 "hideEmptySeries": false,
                 "intersect": true
             },
-            "xaxis": {
-                "labels": {
-                    "show": false,
-                    "trim": true,
-                    "style": {}
-                },
-                "group": {
-                    "groups": [],
-                    "style": {
-                        "colors": [],
-                        "fontSize": "12px",
-                        "fontWeight": 400,
-                        "cssClass": ""
-                    }
-                },
-                "axisBorder": {
-                    "show": false
-                },
-                "axisTicks": {
-                    "show": false
-                },
-                "title": {
-                    "style": {
-                        "fontWeight": 700
-                    }
-                },
-                "tooltip": {
-                    "enabled": false
-                }
-            },
-            "yaxis": {
-                "tickAmount": 11,
-                "max": 100,
-                "min": 0,
-                "floating": true,
-                "labels": {
-                    "showDuplicates": false,
-                    "offsetX": 74,
-                    "style": {
-                        "fontSize": 12
-                    }
-                },
-                "title": {
-                    "text": "",
-                    "style": {
-                        "fontWeight": 700
-                    }
-                }
-            },
+            // "xaxis": {
+            //     "labels": {
+            //         "show": false,
+            //         "trim": true,
+            //         "style": {}
+            //     },
+            //     "group": {
+            //         "groups": [],
+            //         "style": {
+            //             "colors": [],
+            //             "fontSize": "12px",
+            //             "fontWeight": 400,
+            //             "cssClass": ""
+            //         }
+            //     },
+            //     "axisBorder": {
+            //         "show": false
+            //     },
+            //     "axisTicks": {
+            //         "show": false
+            //     },
+            //     "title": {
+            //         "style": {
+            //             "fontWeight": 700
+            //         }
+            //     },
+            //     "tooltip": {
+            //         "enabled": false
+            //     }
+            // },
+            // "yaxis": {
+            //     "tickAmount": 11,
+            //     "max": 100,
+            //     "min": 0,
+            //     "floating": true,
+            //     "labels": {
+            //         "showDuplicates": false,
+            //         "offsetX": 74,
+            //         "style": {
+            //             "fontSize": 12
+            //         }
+            //     },
+            //     "title": {
+            //         "text": "",
+            //         "style": {
+            //             "fontWeight": 700
+            //         }
+            //     }
+            // },
        
         }
 );

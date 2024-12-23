@@ -79,6 +79,7 @@ const TEISurveyResponseQuestions = () => {
         const allAnswered = currentDimension.questions.every(
             (question) => selectchoiseid[question.questionId] !== undefined
         );
+        console.log("🚀 ~ handleNext ~ allAnswered:", allAnswered)
     
         if (!allAnswered) {
             toast.error("Please answer all questions before proceeding.");

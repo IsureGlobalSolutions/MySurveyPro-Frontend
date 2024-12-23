@@ -125,8 +125,8 @@ export const RadialBarChart = ( reportValues ) =>
                 }
             },
             "markers": {},
-            "series": [
-                82
+            "series":reportValues|| [
+                99
             ],
             "states": {
                 "hover": {

@@ -2,6 +2,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { instance, axiosPrivate } from '../../axios/axios';
 import toast from 'react-hot-toast';
+import { PURGE } from 'redux-persist';
 
 export const overAllTeiSurveyReportApi = createAsyncThunk('survey/overAllTeiSurveyReportApi', async (surveyId, thunkAPI) => {
   try {
@@ -18,7 +19,7 @@ export const overAllTeiSurveyReportApi = createAsyncThunk('survey/overAllTeiSurv
 const initialState = {
   isLoading: false,
   message: '',
-  overAllTEISurveyReport: [],
+  overAllTEISurveyReport: {},
   error: null,
 };
 
@@ -33,6 +34,8 @@ const surveySlice = createSlice({
 //   },
   extraReducers: (builder) => {
     builder
+        .addCase(PURGE, () => initialState) 
+    
       .addCase(overAllTeiSurveyReportApi.pending, (state) => {
         state.isLoading = true;
       })

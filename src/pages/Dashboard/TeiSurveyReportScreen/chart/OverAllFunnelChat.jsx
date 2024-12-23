@@ -1,66 +1,24 @@
 
 import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Chart from 'react-apexcharts';
 import Loader from '../../../../components/plugins/Loader';
 import { FunnelChartData } from '../../../../components/cartsComponents/FunnelChartData';
 
-const payload={
-    "overallScore": 78,
-    "overallTEIResults": [
-        {
-            "name": "MISSION DRIVEN",
-            "score": 76
-        },
-        {
-            "name": "ROLE CLARITY",
-            "score": 81
-        },
-        {
-            "name": "LEADERSHIP",
-            "score": 82
-        },
-        {
-            "name": "SOLIDARITY",
-            "score": 80
-        },
-        {
-            "name": "FEEL GOOD CLIMATE",
-            "score": 83
-        },
-        {
-            "name": "COLLABORATION",
-            "score": 75
-        },
-        {
-            "name": "WORKING OUT LOUD",
-            "score": 77
-        },
-        {
-            "name": "TENSION PROCESSING",
-            "score": 71
-        },
-        {
-            "name": "TEAM MUSCLE",
-            "score": 78
-        },
-        {
-            "name": "INFRASTRUCTURE",
-            "score": 75
-        }
-    ]
-}
+
 const OverAllFunnelChat = () => {
 const dispatch =useDispatch();
 const [reportValues, setreportValues] = useState()
 const [isLoading, setisLoading] = useState(false)
 const chartRef = useRef(null); 
+const{overAllTEISurveyReport}=useSelector((state)=>state.teiSurvey)
+
 
   const chartValues = FunnelChartData(reportValues);
 
 useEffect(() => {
 
-    if (Array.isArray(payload?.overallTEIResults) && payload?.overallTEIResults?.length > 0) {
+    if (Array.isArray(overAllTEISurveyReport?.overallTEIResults) && overAllTEISurveyReport?.overallTEIResults?.length > 0) {
       // Initialize the structure for the series
       const transformedData = {
           name: 'overallTEResults',
@@ -72,13 +30,13 @@ useEffect(() => {
       
     
       // Loop through the data to populate x and y values
-      payload?.overallTEIResults?.forEach((item) => {
+      overAllTEISurveyReport?.overallTEIResults?.forEach((item) => {
     
         const name = item.name;
         const score = item.score;
     
         // if () {
-          transformedData.data.push({
+          transformedData?.data?.push({
             x: name,
             y: score || 0,
           });
@@ -95,7 +53,7 @@ useEffect(() => {
     
   
    
-}, [])
+}, [overAllTEISurveyReport])
 
 
 
@@ -124,7 +82,7 @@ useEffect(() => {
                :
          <Chart 
             options={chartValues}
-            series={chartValues.series}
+            series={chartValues?.series}
             type="bar"
             // height={320}
             // width={400}

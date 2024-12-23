@@ -13,6 +13,7 @@ import { Navbarvalue } from '../../../context/NavbarValuesContext';
 import { jwtDecode } from 'jwt-decode';
 import { GetUserDetail } from '../../../Redux/slice/authSlice';
 import { store } from '../../../Redux/store';
+import { set } from 'lodash';
 
 const options = [
   'Analyze results',
@@ -32,6 +33,7 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
   const { StapperHandler, DashboardStateHandler, startSurvey, startSurveyHandler } = Navbarvalue();
 
   const { surveyPaymentStatuses } = useSelector((state) => state.survey);
+  console.log("🚀 ~ ListOfLaunchedServey ~ surveyPaymentStatuses:", surveyPaymentStatuses)
   const { userData } = useSelector((state) => state.user)
 
   const tokenValues = jwtDecode(userData?.accessToken)
@@ -48,13 +50,14 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
   }, [tokenValues.sid])
 
   useEffect(() => {
-    setisLoading(true);
+    if(surveyPaymentStatuses?.length === 0){
+ setisLoading(true);
     dispatch(LaunchedSurveysStatusApi())
       .then((res) => {
         if (res?.payload) {
           console.log(res?.payload);
           
-          setisLoading(false);
+       
         
           if (res?.payload?.length > 0) {
             const paymentStatusUpdates = {}; 
@@ -86,13 +89,60 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
             store.dispatch(updatePaymentStatus(paymentStatusUpdates));
   
             
-            setlaunchSurveyData(launch);
+            setlaunchSurveyData(launch); 
+              setisLoading(false);
           }else{
-              store.dispatch(updatePaymentStatus({}));
+              store.dispatch(updatePaymentStatus([]));
+              setisLoading(false);
           }
         }
       });
-  }, [dispatch]);
+    }
+   
+  }, []);
+
+  useEffect(() => {
+if(surveyPaymentStatuses){
+  setisLoading(true);
+  if (surveyPaymentStatuses?.length > 0) {
+    const paymentStatusUpdates = {}; 
+    const launch = []; 
+
+    surveyPaymentStatuses.forEach((element) => {
+      // Add payment status object to the paymentStatusUpdates object
+      paymentStatusUpdates[element?.surveyId] = {
+        paymentStatus: element?.surveyPaymentStatus,
+      };
+
+      if (element?.surveyLaunchStatus) {
+        launch.push(element);
+
+        // Fetch total number of respondents
+        dispatch(getTotalNumberOfRespondent(element?.surveyId))
+          .then((res) => {
+            setresponsesData((prevState) => ({
+              ...prevState,
+              [element?.surveyId]: {
+                response: res?.payload,
+              },
+            }));
+          });
+      }
+    });
+
+    // Dispatch the collected payment status updates to the store
+    store.dispatch(updatePaymentStatus(paymentStatusUpdates));
+
+    
+    setlaunchSurveyData(launch);
+    setisLoading(false);
+  }else{
+      store.dispatch(updatePaymentStatus([]));
+      setisLoading(false);
+  }
+}
+
+  }, [surveyPaymentStatuses?.length]);
   
 
   const handleChangeRowsPerPage = (event) => {
@@ -124,7 +174,16 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
 
   return (
     <>
-      {launchSurveyData?.length > 0 && !startSurvey ? (
+      {isLoading?
+      <div className="d-flex justify-content-between">
+         <Loader /> 
+      </div> 
+     
+      :
+      
+      launchSurveyData?.length > 0 && !startSurvey ? 
+      
+      (
         <>
           <div className="top-section my-5 mx-2 d-flex justify-content-between">
             <h2 className='ps-3'>Welcome</h2>
@@ -167,21 +226,21 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
                             style={{ borderBottom: "1px solid #D9D5EC" }}
                             className="shadow-sm rounded-4 fw-semibold"
                           >
-                            <td className="p-4">
+                            <td className="pt-3">
                               <div className="d-flex">
                                 <p className='p-1' style={{ backgroundColor: 'green' }}>{item.surveyLaunchStatus === true ? "Active" : "InActive"}</p>
                               </div>
                             </td>
                             <td className="pt-3">{item?.surveyName}</td>
-                            <td>
+                            <td className='pt-3'>
                               {item.fileNames?.map((data, index) => (
                                 <p key={index}>{data}</p>
                               ))}
                             </td>
-                            <td>
+                            <td className="pt-3">
                               { responseData?.totalRespondents|| 0}/{responseData?.totalReceiver || 0} respondent
                             </td>
-                            <td>
+                            <td >
                               <IconButton
                                 aria-label="more"
                                 id="long-button"
@@ -233,7 +292,9 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
             </Paper>
           </div>
         </>
-      ) : (
+      ) 
+      : 
+      (
         <NewSurvey />
       )}
     </>

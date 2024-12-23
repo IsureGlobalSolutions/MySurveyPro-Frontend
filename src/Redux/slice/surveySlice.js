@@ -2,6 +2,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { instance, axiosPrivate } from '../../axios/axios';
 import toast from 'react-hot-toast';
+import { PURGE } from 'redux-persist';
 
 export const getAllSurveyList = createAsyncThunk('survey/getAllSurvey', async (data, thunkAPI) => {
   try {
@@ -219,10 +220,16 @@ const surveySlice = createSlice({
     updatePaymentStatus: (state, action) => {
       state.paymentStatus = action.payload;
     },
+    updateSurveyPaymentStatuses: (state, action) => {
+      state.surveyPaymentStatuses = action.payload;
+    }
     
   },
+  
   extraReducers: (builder) => {
     builder
+    .addCase(PURGE, () => initialState) 
+
       .addCase(getAllSurveyList.pending, (state) => {
         state.isLoading = true;
       })
@@ -356,5 +363,5 @@ const surveySlice = createSlice({
   },
 });
 
-export const { updatePaymentStatus,emptyAllStatesLogout } = surveySlice.actions;
+export const { updatePaymentStatus,emptyAllStatesLogout,updateSurveyPaymentStatuses } = surveySlice.actions;
 export default surveySlice.reducer;

@@ -9,13 +9,15 @@ import { RxCross1 } from "react-icons/rx";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Navbarvalue } from '../../../context/NavbarValuesContext';
+import WebsiteButton from '../../../components/mySurveyProWebsiteBtn/WebsiteButtton';
+import { Padding } from '@mui/icons-material';
+import PaymentPlan from '../../../assets/Dashboredpng/paymentPlan.png'
 
 const Sidebar = ({ collapsed, setcollapsed }) => {
     const dispatch = useDispatch()
-    const { DashboardNavValues, updateDashbaordNavValues,startSurveyHandler, StapperHandler } = Navbarvalue()
-    const { startSurveyStepper,  } = Navbarvalue();
-const navigate = useNavigate()
-
+    const { DashboardNavValues, updateDashbaordNavValues, startSurveyHandler, StapperHandler } = Navbarvalue()
+    const { startSurveyStepper, } = Navbarvalue();
+    const navigate = useNavigate()
     const location = useLocation();
 
     const handleButtonClick = (id) => {
@@ -33,8 +35,8 @@ const navigate = useNavigate()
         // Update DashboardNavValues based on the current pathname
         if (location.pathname === '/startsurvey') {
             updateDashbaordNavValues(1);
-        } 
-        
+        }
+
 
     }, [location.pathname]);
 
@@ -53,7 +55,7 @@ const navigate = useNavigate()
         };
     }, [setcollapsed]);
 
-    const moveToHome=()=>{
+    const moveToHome = () => {
         StapperHandler(1)
         startSurveyHandler(false)
         navigate('/startsurvey')
@@ -68,7 +70,7 @@ const navigate = useNavigate()
                     </span>
                 ) : (
                     <>
-                        <h1 style={{cursor:'pointer'}} onClick={moveToHome}>Mysurveypro</h1>
+                        <h1 style={{ cursor: 'pointer' }} onClick={moveToHome}>Mysurveypro</h1>
                         <span onClick={handleHamburgerClick}>
                             <GiHamburgerMenu size={25} />
                         </span>
@@ -90,10 +92,26 @@ const navigate = useNavigate()
                             </Link>
                         </li>
                     </ul>
-                
-                   
-                   
-                   
+
+                    <div className="card-plan header border rounded-3">
+                        <div className="">
+                            <div className="d-flex justify-content-start mb-2">
+                                <img src={PaymentPlan} width={40} className='pt-3' alt="" />
+                                
+
+                            </div>
+                            <small className='fw-bolder' >Get more with a paid plan</small>
+
+                            <li className='my-3'> <small style={{ fontSize: '14px' }}>Use advanced question types</small></li>
+                            <div className="d-flex justify-content-center">
+                                <WebsiteButton className='py-1 px-2 mb-2' onClick={()=>navigate('/pricing')}> 
+                                    <small>Plans</small></WebsiteButton>
+                            </div>
+                        </div>
+
+                    </div>
+
+
                 </div>
             </div>
         </div>

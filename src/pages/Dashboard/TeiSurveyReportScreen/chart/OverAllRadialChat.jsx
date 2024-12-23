@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Chart from 'react-apexcharts';
 import { RadialBarChart } from '../../../../components/cartsComponents/RadialBarChart';
 import Loader from '../../../../components/plugins/Loader';
@@ -7,15 +7,13 @@ import Loader from '../../../../components/plugins/Loader';
 
 const OverAllRadialChat = () => {
 const dispatch =useDispatch();
-const [reportValues, setreportValues] = useState([82])
 const [isLoading, setisLoading] = useState(false)
 const chartRef = useRef(null); 
+const{overAllTEISurveyReport}=useSelector((state)=>state.teiSurvey)
 
-  const chartValues = RadialBarChart(reportValues);
+  const chartValues = RadialBarChart([overAllTEISurveyReport?.overallScore]);
 
-// useEffect(() => {
-//     dispatch()
-// }, [])
+
   return (
     <>
      <div className="age-card rounded-3 border p-3 shadow bg-white">
@@ -39,7 +37,7 @@ const chartRef = useRef(null);
                :
          <Chart 
             options={chartValues}
-            series={chartValues.series}
+            series={chartValues?.series}
             type="radialBar"
             // height='320'
 
