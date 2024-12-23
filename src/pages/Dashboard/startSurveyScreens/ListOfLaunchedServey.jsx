@@ -47,7 +47,7 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
 
   }, [tokenValues.sid])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setisLoading(true);
     dispatch(LaunchedSurveysStatusApi())
       .then((res) => {

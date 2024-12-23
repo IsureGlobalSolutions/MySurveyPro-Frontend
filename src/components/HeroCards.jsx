@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 
-import TotalSurveyIcon from '../../../assets/dashboredsvg/totalSurvey.svg?react';
-import CompleteSurveyIcon from '../../../assets/dashboredsvg/completeSurvey.svg?react';
-import NotYetStartCompleteIcon from '../../../assets/dashboredsvg/notYetStartSurvey.svg?react';
-import InprogressIcon from '../../../assets/dashboredsvg/inprogessSurvey.svg?react';
+import TotalSurveyIcon from '../assets/dashboredsvg/totalSurvey.svg?react';
+import CompleteSurveyIcon from '../assets/dashboredsvg/completeSurvey.svg?react';
+import NotYetStartCompleteIcon from '../assets/dashboredsvg/notYetStartSurvey.svg?react';
+import InprogressIcon from '../assets/dashboredsvg/inprogessSurvey.svg?react';
 import { useDispatch, useSelector } from 'react-redux'
-import { getTotalNumberOfRespondent } from '../../../Redux/slice/surveySlice'
-import {Navbarvalue} from '../../../context/NavbarValuesContext';
+import { getTotalNumberOfRespondent } from '../Redux/slice/surveySlice'
+import {Navbarvalue} from '../context/NavbarValuesContext';
 
 const HeroCards = () => {
 

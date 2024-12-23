@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './dash-screen.css'
 
 
-import HeroCards from './HeroCards';
+import HeroCards from '../../../components/HeroCards';
 import { useDispatch, useSelector } from 'react-redux';
 import {  downloadOverAllSurveyReport, getAllSurveyList, getOverAllSurveyReport } from '../../../Redux/slice/surveySlice';
 import SurveyTable from '../../../components/table/SurveyTable';

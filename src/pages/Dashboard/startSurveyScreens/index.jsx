@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Stepper, Step } from "react-form-stepper";
-import HeroCards from "../q12SruveyReportsScreen/HeroCards";
+import HeroCards from "../../../components/HeroCards";
 import UploadFile from "./UploadFile";
 import "./startsurvey.css";
 import LunchSurvey from "./LunchSurvey";
@@ -10,21 +10,23 @@ import { Navbarvalue } from "../../../context/NavbarValuesContext";
 import Filedata from "./Filedata";
 import Surveylist from "../surveylist/Surveylist";
 import Q12ReportScreen from "../../Dashboard/q12SruveyReportsScreen"
+import TEIReportScreen from "../../Dashboard/TeiSurveyReportScreen"
 import { useDispatch, useSelector } from "react-redux";
 
 
 const Index = () => {
   const { startSurveyStepper, StapperHandler } = Navbarvalue();
   const Lunchsurveyid= useSelector((state)=>state.user.selectedSurveyId);
-  console.log("🚀 ~ Index ~ Lunchsurveyid:", Lunchsurveyid)
   const [uploadfilename, setuploadfilename] = useState();
   const [surveyId, setsurveyId] = useState();
   const [selectedFilesArray, setselectedFileName] = useState([])
+    const { selectedDashboardValues, DashboardStateHandler } = Navbarvalue()
+    console.log("🚀 ~ Index ~ selectedDashboardValues:", selectedDashboardValues)
+  
 const [isLoading, setisLoading] = useState(false)
 const dispatch = useDispatch()
 
   const getSurveyIdHandle = (data) => {
-    console.log("🚀 ~ getSurveyIdHandle ~ data:", data)
     setsurveyId(data);
   };
   const getSelectedFiles = (data) => {
@@ -85,6 +87,9 @@ const dispatch = useDispatch()
           <ThankYouLunchSurvey setstepper={StapperHandler} surveyId={Lunchsurveyid}/>
         ) : 
          ( 
+         selectedDashboardValues?.survey?.name==='TEI'?
+         <TEIReportScreen setstepper={StapperHandler} />
+         :
          <Q12ReportScreen setstepper={StapperHandler} />
          
         )}

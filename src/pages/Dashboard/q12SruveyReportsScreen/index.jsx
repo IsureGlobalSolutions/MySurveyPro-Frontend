@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './dash-screen.css'
 
 
-import HeroCards from './HeroCards';
+import HeroCards from '../../../components/HeroCards';
 import { useDispatch, useSelector } from 'react-redux';
 import {  downloadOverAllSurveyReport, getAllSurveyList, getOverAllSurveyReport } from '../../../Redux/slice/surveySlice';
 import SurveyTable from '../../../components/table/SurveyTable';
@@ -51,41 +51,12 @@ const index = () => {
     await dispatch(getAllSurveyList())
   }
 
-  // const paymentStatusHandler = async () => {
-  //   dispatch(checkPaymentStatus(tokenValues.sid))
-  //     .then((res) => {
-  //       if (res?.payload?.paymentStatus === 'paid') {
-  //         store.dispatch(updatePaymentStatus(res?.payload?.paymentStatus))
-
-  //       }
-  //       else {
-  //         store.dispatch(updatePaymentStatus('unpaid'))
-
-  //       }
-
-
-  //     })
-  // }
 
   useEffect(() => {
 
     getSurveyList()
 
   }, [])
-
-  // useEffect(() => {
-  //   if (tokenValues.sid) {
-
-
-  //     dispatch(GetUserDetail(tokenValues?.sid))
-  //   }
-  //   if (selectedDashboardValues?.survey?.id) {
-  //     dispatch(getTotalNumberOfRespondent(selectedDashboardValues?.survey?.id))
-  //   }
-
-  //   paymentStatusHandler(selectedDashboardValues?.survey?.id)
-
-  // }, [selectedDashboardValues?.survey?.id])
 
   useEffect(() => {
 

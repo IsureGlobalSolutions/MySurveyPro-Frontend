@@ -7,14 +7,11 @@ import {Link} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllSurveyList, paymentSurvey } from '../../Redux/slice/surveySlice';
 import toast from 'react-hot-toast';
-import {store} from '../../Redux/store';
 
 const Pricing = () => {
   const dispatch = useDispatch()
   const {surveysList,isLoading}=useSelector((state)=>state.survey)
-  console.log("🚀 ~ Pricing ~ surveysList:", surveysList)
   const { paymentStatus } = useSelector((state) => state.survey)
-  console.log("🚀 ~ Pricing ~ paymentStatus:", paymentStatus)
 
 
 
