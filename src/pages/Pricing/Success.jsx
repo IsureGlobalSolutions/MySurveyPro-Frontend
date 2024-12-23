@@ -30,7 +30,7 @@ const Success = () => {
           setisLoading(false);
         });
     }
-  }, [userId]);
+  }, []);
 
   useEffect(() => {
     setisLoading(true);

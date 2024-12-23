@@ -90,32 +90,7 @@ const handleClickChangePicture = () => {
                     accept=".xlsx, .csv,"
                     onChange={(e) => setUploadedFiles([e.target.files[0]])}
                   />
-{/*        
-<div className="" style={{position:'relative'}}>
-    <Tooltip text={csvText}>
-         <WebsiteButton type='button' onClick={() => { 
-              settoggleSelector(!toggleSelector)
-            }} buttonDesign='outliner'>
-              Download CSV
-            </WebsiteButton> 
-    </Tooltip>
-          
-     
 
-            <div className={`format-selector-dropdown shadow-sm ${toggleSelector? 'active-selector':""}`}>
-              <p onClick={()=>{
-                 settoggleSelector(false)
-                saveAs(csvFile,'employeeDataFormate.csv')
-              }}>CSV Formate</p>
-              <p
-onClick={()=>{
-  settoggleSelector(false)
-  saveAs(xlsxFile,'employeeDataFormate.xlsx')
-
-}}
->XLSX Formate</p>
-            </div>
-</div> */}
          
 
           </div>

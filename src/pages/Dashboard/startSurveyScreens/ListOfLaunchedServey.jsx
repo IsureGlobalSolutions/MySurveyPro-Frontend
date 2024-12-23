@@ -52,6 +52,8 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
     dispatch(LaunchedSurveysStatusApi())
       .then((res) => {
         if (res?.payload) {
+          console.log(res?.payload);
+          
           setisLoading(false);
         
           if (res?.payload?.length > 0) {

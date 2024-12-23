@@ -70,18 +70,22 @@ useEffect(()=>{
             toast.success(res?.payload?.alertMessage)
             setisLoading(false)
              setstepper(3)
-          }else if(res?.payload==="Survey subscription not found."){
-            // toast.error(res.payload)
-            setisLoading(false)
-            
-            navigate('/pricing')
-          }
-          else{
-            
-            setisLoading(false)
-          }
-         
-        })
+            }  else if(res?.payload?.isSuccess === false) {
+
+              if(res?.payload?.alertMessage === 'Survey subscription not found.'){
+                toast.error(res.payload.alertMessage);
+                navigate('/pricing');
+                setisLoading(false); 
+                  return;
+              }
+              else{
+                    toast.error(res?.payload?.alertMessage);
+              setisLoading(false);
+              return
+              }
+            }
+        }
+      )
     }
     
   

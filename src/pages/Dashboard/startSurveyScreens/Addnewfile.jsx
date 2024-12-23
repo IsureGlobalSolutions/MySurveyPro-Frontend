@@ -71,12 +71,20 @@ const Addnewfile = ({ setstepper, getUploadFile, closeModal, getFile}) => {
             await getFile(); // Call the parent's API function
             setisLoading(false);
             closeModal(); // Close the modal
-          } else if (res?.payload === 'Survey subscription not found.') {
-            toast.error(res.payload);
+          }  else if(res?.payload?.isSuccess === false) {
+
+            if(res?.payload?.alertMessage === 'Survey subscription not found.'){
+              toast.error(res.payload.alertMessage);
+              navigate('/pricing');
+              setisLoading(false); 
+                return;
+            }
+            else{
+                  toast.error(res?.payload?.alertMessage);
             setisLoading(false);
-            navigate('/pricing');
-          } else {
-            setisLoading(false);
+            return
+            }
+        
           }
         })
         .catch(() => {

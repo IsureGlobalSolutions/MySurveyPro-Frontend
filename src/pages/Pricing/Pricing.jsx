@@ -14,6 +14,7 @@ const Pricing = () => {
   const {surveysList,isLoading}=useSelector((state)=>state.survey)
   console.log("🚀 ~ Pricing ~ surveysList:", surveysList)
   const { paymentStatus } = useSelector((state) => state.survey)
+  console.log("🚀 ~ Pricing ~ paymentStatus:", paymentStatus)
 
 
 

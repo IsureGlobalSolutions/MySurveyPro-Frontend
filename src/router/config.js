@@ -175,7 +175,7 @@ const config = [
 },
 
 {
-  path: '/paymentsuccess/:id*',
+  path: '/paymentsuccess/:userId/:surveyId*',
   loginRequired:false,
   layout: LoginLayout,
   component:Paymentsuccess
