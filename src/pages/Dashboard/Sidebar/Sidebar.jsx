@@ -56,6 +56,7 @@ const Sidebar = ({ collapsed, setcollapsed }) => {
         StapperHandler(1)
         startSurveyHandler(false)
         navigate('/startsurvey')
+        
 
     }
     return (

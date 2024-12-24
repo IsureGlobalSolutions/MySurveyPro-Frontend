@@ -20,6 +20,7 @@ import Surveyurl from '../../../assets/svgs/Url Icon2.svg'
 const ITEM_HEIGHT = 48;
 
 const ListOfLaunchedServey = () => {
+
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [page, setPage] = useState(0);
   const [isLoading, setisLoading] = useState(false);
@@ -30,7 +31,7 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
   const { StapperHandler, DashboardStateHandler, startSurvey, startSurveyHandler } = Navbarvalue();
 
   const { surveyPaymentStatuses } = useSelector((state) => state.survey);
-  console.log("🚀 ~ ListOfLaunchedServey ~ surveyPaymentStatuses:", surveyPaymentStatuses)
+
   const { userData } = useSelector((state) => state.user)
 
   const tokenValues = jwtDecode(userData?.accessToken)
@@ -99,9 +100,10 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
   }, []);
 
   useEffect(() => {
-if(surveyPaymentStatuses){
-  setisLoading(true);
-  if (surveyPaymentStatuses?.length > 0) {
+
+
+  if (surveyPaymentStatuses?.length > 0) { 
+     setisLoading(true);
     const paymentStatusUpdates = {}; 
     const launch = []; 
 
@@ -137,9 +139,9 @@ if(surveyPaymentStatuses){
       store.dispatch(updatePaymentStatus([]));
       setisLoading(false);
   }
-}
 
-  }, [surveyPaymentStatuses?.length]);
+
+  }, [surveyPaymentStatuses[0]?.surveyLaunchStatus]);
   
 
   const handleChangeRowsPerPage = (event) => {
@@ -179,7 +181,7 @@ if(surveyPaymentStatuses){
      
       :
       
-      launchSurveyData?.length > 0 && !startSurvey ? 
+      (launchSurveyData?.length > 0 && !startSurvey) || (surveyPaymentStatuses[0]?.surveyLaunchStatus && !startSurvey)? 
       
       (
         <>
