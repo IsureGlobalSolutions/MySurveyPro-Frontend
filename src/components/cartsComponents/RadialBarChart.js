@@ -16,7 +16,7 @@ export const RadialBarChart = ( reportValues=[] ) =>
                 "id": "opwmS",
                 "stackOnlyBar": true,
                 "toolbar": {
-                    "show": false
+                    "show": true,
                 },
                 "type": "radialBar",
                 "width": 572,

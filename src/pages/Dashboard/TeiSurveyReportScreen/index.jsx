@@ -6,6 +6,9 @@ import OverAllFunnelChat from './chart/OverAllFunnelChat'
 import { use } from 'react'
 import { useDispatch } from 'react-redux'
 import { overAllTeiSurveyReportApi } from '../../../Redux/slice/teiSlice'
+import DepartmentAndDimensionTable from './DepartmentAndDimensionTable'
+import UserDimensionsDataForAllDeparments from './UserDimensionsDataForAllDeparments'
+import DimensionsAsRowsComponent from './DimensionsAsRowsComponent'
 
 const index = () => {
       const { selectedDashboardValues, DashboardStateHandler } = Navbarvalue()
@@ -19,13 +22,16 @@ useEffect(() => {
   return (
    <>
    <HeroCards/>
-   <div className="row">
+   <div className="row m-0 p-0">
 
     <div className="col-md-6"> <OverAllFunnelChat/></div>
     <div className="col-md-6"><OverAllRadialChat/></div>
    
     
    </div>
+   <DepartmentAndDimensionTable/>
+   <UserDimensionsDataForAllDeparments/>
+   <DimensionsAsRowsComponent/>
    </>
   )
 }
