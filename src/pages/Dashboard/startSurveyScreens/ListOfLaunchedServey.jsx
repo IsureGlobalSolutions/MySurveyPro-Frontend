@@ -16,6 +16,7 @@ import { store } from '../../../Redux/store';
 
 import Analyze from '../../../assets/svgs/Analyze Icon.svg'
 import Surveyurl from '../../../assets/svgs/Url Icon2.svg'
+import Tooltip from '../../../components/Tooltip/Tooltip';
 
 const ITEM_HEIGHT = 48;
 
@@ -244,14 +245,19 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
       </td>
      
         <td>
-    <img src={Analyze}  alt="analyze result" width="30" height="30" 
+      <Tooltip text={'Analyse results'} style={{width:'140px'}} >
+         <img src={Analyze}  alt="analyze result" width="30" height="30" 
     className='vsgraph' size={28} style={{cursor:"pointer" , border:"2px solid #dee2e6" , padding:"2px" , color:"#F97300" , borderRadius:"5px"}}
     onClick={()=> handleClose('Analyze results',item)}
     />
-    <img src={Surveyurl}  alt="survey url" width="30" height="30"
+        </Tooltip>    
+        <Tooltip text={'Survey Url'} style={{width:'140px'}} >
+           <img src={Surveyurl}  alt="survey url" width="30" height="30"
     className='ms-2'  size={28} style={{cursor:"pointer" , border:"2px solid #dee2e6" , padding:"2px" , color:"#F97300" , borderRadius:"5px"}}
     onClick={()=> handleClose('Survey Url',item)}
     />
+        </Tooltip>
+   
 
  
   <Menu
