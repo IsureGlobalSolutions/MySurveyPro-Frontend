@@ -32,12 +32,9 @@ const Sidebar = ({ collapsed, setcollapsed }) => {
         setcollapsed(!collapsed);
     };
     useEffect(() => {
-        // Update DashboardNavValues based on the current pathname
         if (location.pathname === '/startsurvey') {
             updateDashbaordNavValues(1);
         }
-
-
     }, [location.pathname]);
 
     useEffect(() => {
@@ -64,17 +61,31 @@ const Sidebar = ({ collapsed, setcollapsed }) => {
     }
     return (
         <div>
-            <div className='m-4 sidebartitle  gap-2  d-flex justify-content-between'>
+            <div className='m-3 mt-1 sidebartitle  gap-2  d-flex justify-content-between'>
                 {collapsed ? (
                     <span className="cross-icon" onClick={handleclosesidebar}>
                         <RxCross1 size={30} />
                     </span>
                 ) : (
                     <>
-                        <h1 style={{ cursor: 'pointer' }} onClick={moveToHome}>Mysurveypro</h1>
-                        <span onClick={handleHamburgerClick}>
-                            <GiHamburgerMenu size={25} />
-                        </span>
+       {/* <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}> */}
+  {/* Hamburger Icon in the first row */}
+  {/* <span
+    onClick={handleHamburgerClick}
+    style={{ position: 'absolute', right: '10px', cursor: 'pointer' }}
+  >
+    <GiHamburgerMenu size={25} />
+  </span> */}
+
+  {/* Text in the second row */}
+  <h1
+    className='Mysurveypro mt-3'
+    style={{ }}  // Adjust for spacing between the icon and text
+    onClick={moveToHome}
+  >
+    Mysurveypro
+  </h1>
+{/* </div> */}
                     </>
                 )}
             </div>

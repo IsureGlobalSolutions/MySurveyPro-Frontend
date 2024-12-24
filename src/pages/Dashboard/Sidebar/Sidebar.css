@@ -104,7 +104,20 @@ color: #FFFFFF;
         font-size: 22px;
         margin-right: 20px;
         }
-        
+        .Mysurveypro{
+            display: inline-block;
+            padding: 0 10px; /* Default padding */
+            transition: all 0.3s ease;
+            font-size: 10px;
+        }
+        .Mysurveypro:hover {
+            border-radius: 8px;
+            user-select: none;
+            cursor: pointer;
+            background-color: rgb(247, 247, 246);
+            padding: 0 5px; /* Ensures the padding doesn't change */
+         
+          }
         
        
   }
@@ -116,5 +129,19 @@ color: #FFFFFF;
         margin-top: 65px;
     }
 }
+.Mysurveypro{
+    display: inline-block;
+    padding: 0 20px; /* Default padding */
+    transition: all 0.3s ease;
+    font-size: 15px;
+  }
 
+  .Mysurveypro:hover {
+    border-radius: 8px;
+    user-select: none;
+    cursor: pointer;
+    background-color: rgb(247, 247, 246);
+    padding: 0 20px; /* Ensures the padding doesn't change */
+ 
+  }
   
