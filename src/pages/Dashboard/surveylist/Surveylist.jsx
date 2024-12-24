@@ -9,16 +9,18 @@ import { getAllSurveyList } from "../../../Redux/slice/surveySlice";
 import { Stepper } from "react-form-stepper";
 import { setSelectedSurveyId } from "../../../Redux/slice/authSlice";
 import { store } from "../../../Redux/store";
+import { Navbarvalue } from "../../../context/NavbarValuesContext";
 
 const Surveylist = ({ setstepper, sendIdToParent }) => {
+    const { startSurveyHandler } = Navbarvalue();
   
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [surveyListData, setsurveyListData] = useState([]);
   const { surveysList } = useSelector((state) => state.survey);
   const handleSurveyCheckboxClick = (content) => {
-  console.log("🚀 ~ handleSurveyCheckboxClick ~ content:", content.id)
   if (content.title === "TEI" || content.title=== "Q12"){
+    startSurveyHandler(true);
     store.dispatch(setSelectedSurveyId(content.id))
     } else {
       console.error("Unknown survey type");
@@ -27,7 +29,6 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
     setstepper(2);
   };
 const handlePreviewCheckboxClick =(content)=>{
-  console.log("🚀 ~ handleCheckboxClick ~ content:", content.id);
   if (content.title === "TEI" || content.title=== "Q12"){
     store.dispatch(setSelectedSurveyId(content.id))
     navigate(content.PreviewSurveylink); 
