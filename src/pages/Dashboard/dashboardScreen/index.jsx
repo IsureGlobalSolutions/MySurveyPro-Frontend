@@ -32,6 +32,7 @@ const index = () => {
   const [listOfSurvey, setlistOfSurvey] = useState([])
   const [isLoading, setisLoading] = useState(false)
   const [surveyOverAllData, setsurveyOverAllData] = useState([])
+  console.log("🚀 ~ index ~ surveyOverAllData:", surveyOverAllData)
   const { paymentStatus } = useSelector((state) => state.survey)
   const { selectedDashboardValues, DashboardStateHandler } = Navbarvalue()
 
@@ -120,6 +121,7 @@ const index = () => {
   // Map the API response to the required data structure for SurveyTable
 
   const data = Array.isArray(surveyOverAllData) ?
+  
     surveyOverAllData?.length > 0 ?
       surveyOverAllData?.map(item => {
         const rowData = {
@@ -138,7 +140,7 @@ const index = () => {
     :
     null
 
-
+  console.log("🚀 ~ index ~ data:", data)
   const downloadReport = () => {
     if (surveyOverAllData.length > 0) {
       dispatch(downloadOverAllSurveyReport(surveyOverAllData))

@@ -7,6 +7,7 @@ import {  useSelector } from 'react-redux';
 import { FRONTEND_URL } from '../../../consts/environments';
 import Tooltip from '../../../components/Tooltip/Tooltip';
 import WebsiteButton from '../../../components/mySurveyProWebsiteBtn/WebsiteButtton';
+import { Navbarvalue } from '../../../context/NavbarValuesContext';
 
 const ThankYouLunchSurvey = ({setstepper , surveyId}) => {
   console.log("🚀 ~ ThankYouLunchSurvey ~ surveyId:", surveyId)
@@ -15,6 +16,8 @@ const ThankYouLunchSurvey = ({setstepper , surveyId}) => {
   const {isLoading,userData} =useSelector((state)=>state.user)
   const decodedToken = jwtDecode(userData.accessToken);
  const id=decodedToken?.sid;
+     const { selectedDashboardValues, DashboardStateHandler } = Navbarvalue()
+ 
  const [surveytext, setsurveytext] = useState('');
  console.log("🚀 ~ ThankYouLunchSurvey ~ surveytext:", surveytext)
  const q12text = `${FRONTEND_URL}/q12survey/${id}`;
@@ -56,7 +59,7 @@ const ThankYouLunchSurvey = ({setstepper , surveyId}) => {
 <div className="">
   <p className='m-0 text-muted fs-4 fw-bold'>Survey Link : </p></div>
 <div className="border px-4 py-3 m-0 rounded-4 bg-light d-flex gap-2">
-  <p className='m-0'>{surveyId===2?TEItext:q12text}</p>
+  <p className='m-0'>{surveyId===2 ||selectedDashboardValues?.survey?.name==='TEI'?TEItext:q12text}</p>
   <Tooltip text={abbrTitle} style={{width:'150px'}}>
     <IoIosCopy style={{color:'#F97300'}} onClick={copyToClipboard}/>
  </Tooltip>

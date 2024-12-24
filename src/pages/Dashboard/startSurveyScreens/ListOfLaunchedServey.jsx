@@ -158,33 +158,18 @@ if(surveyPaymentStatuses){
     setAnchorEl(event.currentTarget);
   };
 
- 
-    // else if (option === 'Survey Url') {
-    //   StapperHandler(5);
-    //   startSurveyHandler(true);
-    // }
-    const handleClose = (data) => {
-      console.log("🚀 ~ handleClose ~ data:", data);
-    
-      if (data?.surveyName === 'Q12') {
-        StapperHandler(6); // State is used for numbering the start survey stepper
-        startSurveyHandler(true); // State is used to start the stepper of survey
-        DashboardStateHandler('survey', { id: data?.surveyId, name: data?.surveyName }); // State is used to select the survey
-      } else if (data?.surveyName === 'TEI') {
-        StapperHandler(7); // Example: Adjust step number as needed
-        startSurveyHandler(true); // State is used to start the stepper of survey
-        DashboardStateHandler('survey', { id: data?.surveyId, name: data?.surveyName }); // State is used to select the survey
-      }
-    
-      setAnchorEl(null); // Close the anchor
-    };
-    const handleCloseSurveyUrl=(data)=>{
-      console.log("🚀 ~ handleClose ~ data:", data);
-      // if (data?.surveyName === 'Survey Url') {
-        StapperHandler(5);
+  const handleClose = (option, data) => {
+     DashboardStateHandler('survey', { id: data?.surveyId, name: data?.surveyName }); 
+    if (option === 'Analyze results') {
+      StapperHandler(6); 
+      startSurveyHandler(true); 
+     
+    } else if (option === 'Survey Url') {
+      StapperHandler(5);
       startSurveyHandler(true);
-      setAnchorEl(null); 
     }
+    setAnchorEl(null);
+  };
 
   return (
     <>
@@ -233,7 +218,6 @@ if(surveyPaymentStatuses){
                   ) : (
                     <>
                      {launchSurveyData?.map((item, index) => {
-  console.log("🚀 ~ {launchSurveyData?.map ~ item:", item);
   const responseData = responsesData[item?.surveyId]?.response || {};
   return (
     <tr
@@ -259,21 +243,12 @@ if(surveyPaymentStatuses){
       </td>
      
         <td>
-  {/* <IconButton
-    aria-label="more"
-    id={`long-button-${index}`}
-    aria-controls={anchorEl ? 'long-menu' : undefined}
-    aria-expanded={anchorEl ? 'true' : undefined}
-    aria-haspopup="true"
-    onClick={(event) => handleClick(event, item)} // Pass both event and item
-  >
-    <MoreVertIcon />
-  </IconButton> */}
+
   <VscGraph className='vsgraph' size={28} style={{cursor:"pointer" , border:"2px solid #F97300" , padding:"2px" , color:"#F97300" , borderRadius:"5px"}}
-  onClick={()=> handleClose(item)}
+  onClick={()=> handleClose('Analyze results',item)}
   />
 <GiTentacurl className='ms-2'  size={28} style={{cursor:"pointer" , border:"2px solid #F97300" , padding:"2px" , color:"#F97300" , borderRadius:"5px"}}
-  onClick={()=> handleCloseSurveyUrl(item)}
+  onClick={()=> handleClose('Survey Url',item)}
   />
   <Menu
     id="long-menu"

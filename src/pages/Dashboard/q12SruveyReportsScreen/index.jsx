@@ -135,6 +135,7 @@ const index = () => {
       null
     :
     null
+console.log('data',data);
 
 
   const downloadReport = () => {

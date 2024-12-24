@@ -83,7 +83,7 @@ const SurveyTable = ({ columns, data,isLoading }) => {
     :
   <TableVirtuoso
       
-        data={'data'}
+        data={data}
         components={VirtuosoTableComponents}
         fixedHeaderContent={() => fixedHeaderContent(columns)}
         itemContent={(index, row) => rowContent(columns, index, row)}
