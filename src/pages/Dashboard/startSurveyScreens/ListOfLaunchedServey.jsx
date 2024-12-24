@@ -14,11 +14,9 @@ import { jwtDecode } from 'jwt-decode';
 import { GetUserDetail } from '../../../Redux/slice/authSlice';
 import { store } from '../../../Redux/store';
 import { set } from 'lodash';
+import { VscGraph } from "react-icons/vsc";
+import { GiTentacurl } from "react-icons/gi";
 
-const options = [
-  'Analyze results',
-  'Survey Url'
-];
 
 const ITEM_HEIGHT = 48;
 
@@ -160,17 +158,33 @@ if(surveyPaymentStatuses){
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = (option, data) => {
-    if (option === 'Analyze results') {
-      StapperHandler(6); // State is used for numbering the start survey stepper
-      startSurveyHandler(true); // State is used to start the stepper of survey
-      DashboardStateHandler('survey', { id: data?.surveyId, name: data?.surveyName }); // State is used to select the survey
-    } else if (option === 'Survey Url') {
-      StapperHandler(5);
+ 
+    // else if (option === 'Survey Url') {
+    //   StapperHandler(5);
+    //   startSurveyHandler(true);
+    // }
+    const handleClose = (data) => {
+      console.log("🚀 ~ handleClose ~ data:", data);
+    
+      if (data?.surveyName === 'Q12') {
+        StapperHandler(6); // State is used for numbering the start survey stepper
+        startSurveyHandler(true); // State is used to start the stepper of survey
+        DashboardStateHandler('survey', { id: data?.surveyId, name: data?.surveyName }); // State is used to select the survey
+      } else if (data?.surveyName === 'TEI') {
+        StapperHandler(7); // Example: Adjust step number as needed
+        startSurveyHandler(true); // State is used to start the stepper of survey
+        DashboardStateHandler('survey', { id: data?.surveyId, name: data?.surveyName }); // State is used to select the survey
+      }
+    
+      setAnchorEl(null); // Close the anchor
+    };
+    const handleCloseSurveyUrl=(data)=>{
+      console.log("🚀 ~ handleClose ~ data:", data);
+      // if (data?.surveyName === 'Survey Url') {
+        StapperHandler(5);
       startSurveyHandler(true);
+      setAnchorEl(null); 
     }
-    setAnchorEl(null);
-  };
 
   return (
     <>
@@ -218,69 +232,73 @@ if(surveyPaymentStatuses){
                     </tr>
                   ) : (
                     <>
-                      {launchSurveyData?.map((item, index) => {
-                        const responseData = responsesData[item?.surveyId]?.response || {};
-                        return (
-                          <tr
-                            key={index}
-                            style={{ borderBottom: "1px solid #D9D5EC" }}
-                            className="shadow-sm rounded-4 fw-semibold"
-                          >
-                            <td className="pt-3">
-                              <div className="d-flex">
-                                <p className='p-1' style={{ backgroundColor: 'green' }}>{item.surveyLaunchStatus === true ? "Active" : "InActive"}</p>
-                              </div>
-                            </td>
-                            <td className="pt-3">{item?.surveyName}</td>
-                            <td className='pt-3'>
-                              {item.fileNames?.map((data, index) => (
-                                <p key={index}>{data}</p>
-                              ))}
-                            </td>
-                            <td className="pt-3">
-                              { responseData?.totalRespondents|| 0}/{responseData?.totalReceiver || 0} respondent
-                            </td>
-                            <td >
-                              <IconButton
-                                aria-label="more"
-                                id="long-button"
-                                aria-controls={open ? 'long-menu' : undefined}
-                                aria-expanded={open ? 'true' : undefined}
-                                aria-haspopup="true"
-                                onClick={handleClick}
-                              >
-                                <MoreVertIcon />
-                              </IconButton>
-                              <Menu
-                                id="long-menu"
-                                MenuListProps={{ 'aria-labelledby': 'long-button' }}
-                                anchorEl={anchorEl}
-                                open={open}
-                                onClose={handleClose}
-                                slotProps={{
-                                  paper: {
-                                    style: {
-                                      maxHeight: ITEM_HEIGHT * 4.5,
-                                      width: '20ch',
-                                    },
-                                  },
-                                }}
-                              >
+                     {launchSurveyData?.map((item, index) => {
+  console.log("🚀 ~ {launchSurveyData?.map ~ item:", item);
+  const responseData = responsesData[item?.surveyId]?.response || {};
+  return (
+    <tr
+      key={index}
+      style={{ borderBottom: "1px solid #D9D5EC" }}
+      className="shadow-sm rounded-4 fw-semibold"
+    >
+      <td className="pt-3">
+        <div className="d-flex">
+          <p className="p-1" style={{ backgroundColor: 'green' }}>
+            {item.surveyLaunchStatus === true ? "Active" : "InActive"}
+          </p>
+        </div>
+      </td>
+      <td className="pt-3">{item?.surveyName}</td>
+      <td className="pt-3">
+        {item.fileNames?.map((data, index) => (
+          <p key={index}>{data}</p>
+        ))}
+      </td>
+      <td className="pt-3">
+        {responseData?.totalRespondents || 0}/{responseData?.totalReceiver || 0} respondent
+      </td>
+     
+        <td>
+  {/* <IconButton
+    aria-label="more"
+    id={`long-button-${index}`}
+    aria-controls={anchorEl ? 'long-menu' : undefined}
+    aria-expanded={anchorEl ? 'true' : undefined}
+    aria-haspopup="true"
+    onClick={(event) => handleClick(event, item)} // Pass both event and item
+  >
+    <MoreVertIcon />
+  </IconButton> */}
+  <VscGraph className='vsgraph' size={28} style={{cursor:"pointer" , border:"2px solid #F97300" , padding:"2px" , color:"#F97300" , borderRadius:"5px"}}
+  onClick={()=> handleClose(item)}
+  />
+<GiTentacurl className='ms-2'  size={28} style={{cursor:"pointer" , border:"2px solid #F97300" , padding:"2px" , color:"#F97300" , borderRadius:"5px"}}
+  onClick={()=> handleCloseSurveyUrl(item)}
+  />
+  <Menu
+    id="long-menu"
+    MenuListProps={{ 'aria-labelledby': 'long-button' }}
+    anchorEl={anchorEl}
+    open={Boolean(anchorEl)}
+    onClose={handleClose}
+    slotProps={{
+      paper: {
+        style: {
+          maxHeight: ITEM_HEIGHT * 4.5,
+          width: '20ch',
+        },
+      },
+    }}
+  >
 
-                                {options.map((option) => {
-                                  return(
-                                     <MenuItem key={option} onClick={() => handleClose(option, item)}>
-                                    {option}
-                                  </MenuItem> 
-                                  )
-                                }
-                                
-                                )}
-                              </Menu>
-                            </td>
-                          </tr>
-                        );
-                      })}
+  </Menu>
+</td>
+
+    
+    </tr>
+  );
+})}
+
                     </>
                   )}
                 </tbody>
