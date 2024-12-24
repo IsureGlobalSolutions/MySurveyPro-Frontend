@@ -9,6 +9,7 @@ import { overAllTeiSurveyReportApi } from '../../../Redux/slice/teiSlice'
 import DepartmentAndDimensionTable from './DepartmentAndDimensionTable'
 import UserDimensionsDataForAllDeparments from './UserDimensionsDataForAllDeparments'
 import DimensionsAsRowsComponent from './DimensionsAsRowsComponent'
+import TeiDimensionForAllDepartmentChart from './chart/TeiDimensionForAllDepartmentChart'
 
 const index = () => {
       const { selectedDashboardValues, DashboardStateHandler } = Navbarvalue()
@@ -30,7 +31,9 @@ useEffect(() => {
     
    </div>
    <DepartmentAndDimensionTable/>
+
    <UserDimensionsDataForAllDeparments/>
+   <TeiDimensionForAllDepartmentChart/>
    <DimensionsAsRowsComponent/>
    </>
   )
