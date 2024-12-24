@@ -2,7 +2,7 @@ import React from 'react'
 import LunchServey from '../../../assets/dashboredsvg/launch-servey.png'
 import WebsiteButton from '../../../components/mySurveyProWebsiteBtn/WebsiteButtton'
 import { useDispatch } from 'react-redux'
-import { LaunchSurveyApi } from '../../../Redux/slice/surveySlice'
+import { LaunchedSurveysStatusApi, LaunchSurveyApi } from '../../../Redux/slice/surveySlice'
 import toast from 'react-hot-toast'
 import { useState } from 'react'
 const LunchSurvey = ({setstepper,selectedFilesArray,surveyId}) => {
@@ -17,6 +17,7 @@ if(res?.payload?.isSuccess===true){
   toast.success(res?.payload?.alertMessage)
   setstepper(5)
   setisLoading(false)
+  dispatch(LaunchedSurveysStatusApi())
 }
 else{
   toast.error("some thing went wrong please try agian!")

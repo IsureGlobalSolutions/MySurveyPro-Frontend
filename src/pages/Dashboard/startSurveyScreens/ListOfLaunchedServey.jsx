@@ -50,7 +50,7 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
   }, [tokenValues.sid])
 
   useEffect(() => {
-    if(surveyPaymentStatuses?.length === 0){
+    // if(surveyPaymentStatuses?.length === 0){
  setisLoading(true);
     dispatch(LaunchedSurveysStatusApi())
       .then((res) => {
@@ -97,7 +97,7 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
           }
         }
       });
-    }
+    // }
    
   }, []);
 
@@ -266,11 +266,16 @@ if(surveyPaymentStatuses){
                                   },
                                 }}
                               >
-                                {options.map((option) => (
-                                  <MenuItem key={option} onClick={() => handleClose(option, item)}>
+
+                                {options.map((option) => {
+                                  return(
+                                     <MenuItem key={option} onClick={() => handleClose(option, item)}>
                                     {option}
-                                  </MenuItem>
-                                ))}
+                                  </MenuItem> 
+                                  )
+                                }
+                                
+                                )}
                               </Menu>
                             </td>
                           </tr>

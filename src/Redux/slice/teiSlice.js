@@ -9,7 +9,7 @@ export const overAllTeiSurveyReportApi = createAsyncThunk('survey/overAllTeiSurv
     const res = await axiosPrivate.get('api/TEISurveyReport/GetOverAllTEISurveyReport',{
         params: { surveyId  }
     });
-    return res.data;
+    return res?.data;
   } catch (error) {
     const message = error.response?.data?.alertMessage || error.message || error.toString();
     return thunkAPI.rejectWithValue(message);

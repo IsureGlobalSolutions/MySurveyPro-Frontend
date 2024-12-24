@@ -220,9 +220,7 @@ const surveySlice = createSlice({
     updatePaymentStatus: (state, action) => {
       state.paymentStatus = action.payload;
     },
-    updateSurveyPaymentStatuses: (state, action) => {
-      state.surveyPaymentStatuses = action.payload;
-    }
+   
     
   },
   
