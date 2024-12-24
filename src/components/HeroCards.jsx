@@ -18,7 +18,8 @@ const HeroCards = () => {
 
 
   useEffect(()=>{
-    if(selectedDashboardValues?.survey?.id && paymentStatus[selectedDashboardValues?.survey?.id].paymentStatus===true){
+    
+    if(selectedDashboardValues?.survey?.id && paymentStatus[selectedDashboardValues?.survey?.id]?.paymentStatus===true){
          dispatch(getTotalNumberOfRespondent(selectedDashboardValues?.survey?.id))
     }
    

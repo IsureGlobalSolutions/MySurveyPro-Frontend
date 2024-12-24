@@ -48,7 +48,7 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
   }, [tokenValues.sid])
 
   useEffect(() => {
-    if(surveyPaymentStatuses?.length === 0){
+    // if(surveyPaymentStatuses?.length === 0){
  setisLoading(true);
     dispatch(LaunchedSurveysStatusApi())
       .then((res) => {
@@ -95,7 +95,7 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
           }
         }
       });
-    }
+    // }
    
   }, []);
 

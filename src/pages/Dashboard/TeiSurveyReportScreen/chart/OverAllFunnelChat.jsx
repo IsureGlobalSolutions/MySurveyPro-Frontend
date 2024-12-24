@@ -12,6 +12,7 @@ const [reportValues, setreportValues] = useState()
 const [isLoading, setisLoading] = useState(false)
 const chartRef = useRef(null); 
 const{overAllTEISurveyReport}=useSelector((state)=>state.teiSurvey)
+console.log("🚀 ~ OverAllFunnelChat ~ overAllTEISurveyReport:", overAllTEISurveyReport)
 
 
   const chartValues = FunnelChartData(reportValues);
@@ -53,7 +54,7 @@ useEffect(() => {
     
   
    
-}, [overAllTEISurveyReport])
+}, [overAllTEISurveyReport?.overallTEIResults?.length])
 
 
 

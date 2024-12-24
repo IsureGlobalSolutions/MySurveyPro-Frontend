@@ -9,16 +9,18 @@ import { overAllTeiSurveyReportApi } from '../../../Redux/slice/teiSlice'
 
 const index = () => {
       const { selectedDashboardValues, DashboardStateHandler } = Navbarvalue()
+
       const dispatch = useDispatch();
 useEffect(() => { 
   if(selectedDashboardValues?.survey?.id){
    dispatch(overAllTeiSurveyReportApi(selectedDashboardValues?.survey?.id))
   }
-}, [selectedDashboardValues]) 
+}, [selectedDashboardValues,dispatch]) 
   return (
    <>
    <HeroCards/>
    <div className="row">
+
     <div className="col-md-6"> <OverAllFunnelChat/></div>
     <div className="col-md-6"><OverAllRadialChat/></div>
    

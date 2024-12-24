@@ -1,4 +1,5 @@
-export const RadialBarChart = ( reportValues ) => 
+export const RadialBarChart = ( reportValues=[] ) => 
+    
     (
         {
             "annotations": {},
@@ -125,9 +126,7 @@ export const RadialBarChart = ( reportValues ) =>
                 }
             },
             "markers": {},
-            "series":reportValues|| [
-                99
-            ],
+            "series": [reportValues],
             "states": {
                 "hover": {
                     "filter": {}
