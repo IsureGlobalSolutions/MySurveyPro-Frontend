@@ -183,7 +183,17 @@ export const GetUserDetail= createAsyncThunk('Survey/GetUserDetail', async (user
     return thunkAPI.rejectWithValue(message);
   }
 });
+export const Signinwithgoogle= createAsyncThunk('Survey/Signinwithgoogle', async (Idtoken, thunkAPI) => {
+  try {
+    const res = await axiosPrivate.post(`api/Authentication/GoogleLogin` ,  { IdToken: Idtoken });
+    return res.data;
 
+  } catch (error) {
+    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    toast.error(message);
+    return thunkAPI.rejectWithValue(message);
+  }
+});
 const initialState = {
   isLoading: false,
   userData: {},

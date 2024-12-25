@@ -1,19 +1,17 @@
 import React, { useEffect, useLayoutEffect, useState  } from 'react'
 import infographicImage from '../../assets/login-and-signup/login-infographic.png';
 import SurveyLogo from '../../assets/svgs/logoWithTitle.svg?react';
-import googleIcon from '../../assets/login-and-signup/google-icon.png'
-import facebookIcon from '../../assets/login-and-signup/facebook-icon.png';
-import appleIcon from '../../assets/login-and-signup/apple-icon.png';
 import './login.css'
 import { useForm } from 'react-hook-form';
 import InputField from '../../components/mySurveyProInput/InputField'
 import WebsiteButton from '../../components/mySurveyProWebsiteBtn/WebsiteButtton';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signInUser, updateAccessToken } from '../../Redux/slice/authSlice';
-
+import { signInUser, Signinwithgoogle, updateAccessToken } from '../../Redux/slice/authSlice';
+import { GoogleLogin } from '@react-oauth/google';
 import toast from 'react-hot-toast';
 import { store } from '../../Redux/store';
+import { jwtDecode } from 'jwt-decode';
 const LoginScreen = () => {  
   const { register, handleSubmit, formState: { errors } } = useForm();
   const {isLoading,userData} =useSelector((state)=>state.user)
@@ -26,9 +24,6 @@ useLayoutEffect(() => {
   }
 
 }, [])
-
-
-  
     const onSubmit=(data)=>{
 
 try {
@@ -38,7 +33,6 @@ try {
 .then((res)=>{
 if(res?.payload.isSuccess===true){
   console.log(res?.payload);
-  
   store.dispatch(updateAccessToken(res?.payload))
   toast.success('Login Successfully!')
   navigate('/startsurvey')
@@ -50,6 +44,24 @@ if(res?.payload.isSuccess===true){
 
 
     }
+    const handleSuccess = (response) => {
+      console.log("🚀 ~ handleSuccess ~ response:", response)
+        const idToken = response.credential; 
+        const decodedToken = jwtDecode(idToken);
+        console.log('Decoded Token:', decodedToken);    
+      console.log('ID Token:', idToken);  
+     dispatch(Signinwithgoogle(idToken)).then((res) => {
+      if (res.payload.isSuccess) { 
+        toast.success("Login successful!"); 
+        store.dispatch(updateAccessToken(res?.payload))
+        navigate('/startsurvey')
+      }
+    
+    })
+  }
+    const handleError = () => {
+      console.error('Login Failed');
+    };
   return (
 
     <>
@@ -65,7 +77,7 @@ if(res?.payload.isSuccess===true){
                 {/* <div className=""></div> */}
                 
                 </div> 
-               <div className="login-content col-md-6">
+               <div className="login-content col-md-6 d-flex justify-c0ntent-center flex-column">
 
                 <p className='welcome-text text-center'>Welcome Back!</p>
                 <p className="account-creation-suggestion text-center">New to MySurveyPro? <span onClick={()=>navigate('/signup')}>Create an account</span></p>
@@ -113,22 +125,37 @@ if(res?.payload.isSuccess===true){
             
                <p className="signin-border text-center">____________ Or sign up with ____________</p>
 <div className="mt-3">
-     <div className="socail-login ">
-                  <img style={{width:'20px',margin:'0px 5px'}} src={googleIcon} alt="" /> 
-                  <div className="">   <p className='text-center'>Continue With Google</p></div>
-                
-                </div>
-                <div className="socail-login">
+<div className="social-login d-flex alogn-items-center justify-content-center">
+  <GoogleLogin
+    onSuccess={handleSuccess}
+    onError={handleError}
+    text="Continue with Google"
+    shape="rectangular"
+    width="190%"
+    useOneTap
+    render={(renderProps) => (
+      <button
+        className="custom-google-button"
+        onClick={renderProps.onClick}
+        disabled={renderProps.disabled}
+      >
+        Continue with Google
+      </button>
+    )}
+  />
+</div>
+
+                {/* <div className="socail-login">
                 <img style={{width:'20px',margin:'0px 5px'}} src={facebookIcon} alt="" /> 
                     <div className="">  <p className='text-center'>Continue With Facebook</p></div>
 
                   
-                </div>
-                <div className="socail-login">
+                </div> */}
+                {/* <div className="socail-login">
                 <img style={{width:'20px',margin:'0px 5px'}} src={appleIcon} alt="" /> 
                     <div className=""> <p className='text-center'>Continue With Apple</p></div>
                    
-                </div>
+                </div> */}
 </div>
                
                </div>
@@ -140,3 +167,7 @@ if(res?.payload.isSuccess===true){
 }
 
 export default LoginScreen
+
+
+
+
