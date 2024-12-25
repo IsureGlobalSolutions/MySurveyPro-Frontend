@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import SurveyTable from '../../../components/table/SurveyTable';
+import DropdownButton from '../../../components/mySurveyProWebsiteBtn/DropdownButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { getListOfCoumnProperty } from '../../../Redux/slice/surveySlice';
+import { Navbarvalue } from '../../../context/NavbarValuesContext';
 
-const data = [
-  {
+const data = {
     recipientTEIResults: [
       {
         teiProperties: {
@@ -116,19 +119,43 @@ const data = [
         ],
       },
     ],
-  },
-];
+  }
+
 
 const DimensionsAsRowsComponent = () => {
   const [isLoading, setisLoading] = useState(false);
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
+  const { selectedDashboardValues } = Navbarvalue()
+  const [departmentList, setdepartmentList] = useState([])
+  const {listOfDepartments}=useSelector((state)=>state.survey)
 
+const dispatch = useDispatch()
+
+
+  useEffect(() => { 
+    if (selectedDashboardValues?.survey?.id) {
+      if(listOfDepartments?.length>0){
+           dispatch(getListOfCoumnProperty({surveyId:selectedDashboardValues?.survey?.id,columnProperty:"department"}))
+      .then((res)=>{
+        console.log('department',res?.payload);
+        setdepartmentList(res?.payload)
+        
+      })
+      }
+      else{
+          setdepartmentList(listOfDepartments)
+      }
+ 
+     
+  }
+  
+  }, [])
   useEffect(() => {
     // Generate dynamic columns
     const generatedColumns = [
       { width: 300, label: 'Dimension', dataKey: 'Dimension' },
-      ...data[0].recipientTEIResults.map((recipient) => ({
+      ...data?.recipientTEIResults.map((recipient) => ({
         width: 120,
         label: recipient.teiProperties.RecipientName,
         dataKey: recipient.teiProperties.RecipientName.replace(/\s+/g, ''), // Remove spaces for dataKey
@@ -138,13 +165,13 @@ const DimensionsAsRowsComponent = () => {
     setColumns(generatedColumns);
 
     // Generate dynamic rows
-    const allDimensions = data[0].recipientTEIResults[0].teiDimensionResult.map(
+    const allDimensions = data.recipientTEIResults[0].teiDimensionResult.map(
       (dimension) => dimension.teiDimension.Text
     );
 
     const generatedRows = allDimensions.map((dimensionText) => {
       const row = { Dimension: dimensionText };
-      data[0].recipientTEIResults.forEach((recipient) => {
+      data.recipientTEIResults.forEach((recipient) => {
         const matchingDimension = recipient.teiDimensionResult.find(
           (dim) => dim.teiDimension.Text === dimensionText
         );
@@ -157,7 +184,7 @@ const DimensionsAsRowsComponent = () => {
 
     // Add "Average" row
     const averageRow = { Dimension: 'Average' };
-    data[0].recipientTEIResults.forEach((recipient) => {
+    data.recipientTEIResults.forEach((recipient) => {
       averageRow[recipient.teiProperties.RecipientName.replace(/\s+/g, '')] =
         recipient.teiProperties.AverageResult;
     });
@@ -166,16 +193,21 @@ const DimensionsAsRowsComponent = () => {
     setRows(generatedRows);
   }, []);
 
+
+  const handleSelectDepartment=(data)=>{
+
+  }
   return (
     <>
       <div className="row m-0 p-0 justify-content-between mt-4">
         <div className="deparment-table-data col-md-12 p-0">
-          <div className="mx-3 d-flex justify-content-between bg-white shadow">
-            <div className="d-flex align-items-center px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
+          <div className="mx-3 py-1 row justify-content-between bg-white shadow">
+            <div className="col-md-5">
+                 <div className="d-flex align-items-center px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
               <div>
                 <p className="ps-2 py-2 fs-6 fw-bold m-0">Dimensions vs Recipients Report</p>
               </div>
-              <div className="d-flex align-items-center">
+              {/* <div className="d-flex align-items-center">
                 <OverlayTrigger
                   placement="bottom"
                   overlay={<Tooltip id="button-tooltip-2">Download report file</Tooltip>}
@@ -184,8 +216,17 @@ const DimensionsAsRowsComponent = () => {
                     Download
                   </small>
                 </OverlayTrigger>
-              </div>
+              </div> */}
             </div>
+            </div>
+            <div className="col-md-3 col-sm-4">
+                          {departmentList?.length>0? 
+ <DropdownButton items={departmentList} listKeyName={'columnValue'} onSelect={handleSelectDepartment} selectionName={departmentList[0]?.columnValue}/>
+ :''
+}
+            </div>
+         
+
           </div>
           <SurveyTable columns={columns} data={rows} isLoading={isLoading} />
         </div>

@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import Chart from 'react-apexcharts';
 import Loader from '../../../../components/plugins/Loader';
 import { FunnelChartData } from '../../../../components/cartsComponents/FunnelChartData';
+import DropdownButton from '../../../../components/mySurveyProWebsiteBtn/DropdownButton';
+import { getListOfCoumnProperty } from '../../../../Redux/slice/surveySlice';
+import { Navbarvalue } from '../../../../context/NavbarValuesContext';
 
 const data = [
     {
@@ -127,9 +130,30 @@ const dispatch =useDispatch();
 const [isLoading, setisLoading] = useState(false)
 const chartRef = useRef(null); 
 const [reportValues, setreportValues] = useState()
+const { selectedDashboardValues } = Navbarvalue()
+const {listOfDepartments}=useSelector((state)=>state.survey)
 
+const [departmentList, setdepartmentList] = useState([])
 
+useEffect(() => { 
 
+    if (selectedDashboardValues?.survey?.id) {
+        if(listOfDepartments?.length>0){
+             dispatch(getListOfCoumnProperty({surveyId:selectedDashboardValues?.survey?.id,columnProperty:"department"}))
+        .then((res)=>{
+          console.log('department',res?.payload);
+          setdepartmentList(res?.payload)
+          
+        })
+        }
+        else{
+            setdepartmentList(listOfDepartments)
+        }
+   
+       
+    }
+  
+  }, [])
     
  // Prepare chart data
  const prepareChartData = (data) => {
@@ -143,11 +167,15 @@ const [reportValues, setreportValues] = useState()
       data: transformedData,
     };
   };
-  const datafinal = prepareChartData(data)
-  console.log("🚀 ~ TeiUserDimensionForSingleDepartmentChart ~ datafinal:", datafinal)
+
 
   // Generate chart values
   const chartValues = FunnelChartData(prepareChartData(data));
+
+  
+  const handleSelectDepartment=(data)=>{
+
+  }
   return (
     <>
      <div className="age-card rounded-3 border p-3 shadow bg-white">
@@ -158,7 +186,10 @@ const [reportValues, setreportValues] = useState()
         </div>
         <div className="d-flex align-items-center">
           
- 
+        {departmentList?.length>0? 
+ <DropdownButton items={departmentList} listKeyName={'columnValue'} onSelect={handleSelectDepartment} selectionName={departmentList[0]?.columnValue}/>
+ :''
+}
     </div>
     </div>
     <hr  className='m-1'/>

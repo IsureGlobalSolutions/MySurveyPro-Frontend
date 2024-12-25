@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import Chart from 'react-apexcharts';
 import Loader from '../../../../components/plugins/Loader';
 import { SingleBarChartData } from '../../../../components/cartsComponents/SingleBarChartData';
+import { getListOfCoumnProperty } from '../../../../Redux/slice/surveySlice';
+import { Navbarvalue } from '../../../../context/NavbarValuesContext';
+import DropdownButton from '../../../../components/mySurveyProWebsiteBtn/DropdownButton';
 
 const data = [
     {
@@ -27,12 +30,33 @@ const TeiDimensionForAllDepartmentChart = () => {
 const dispatch =useDispatch();
 const [isLoading, setisLoading] = useState(false)
 const [overAllScore, setoverAllScore] = useState(0)
-console.log("🚀 ~ OverAllRadialChat ~ overAllScore:", overAllScore)
-const chartRef = useRef(null); 
+const chartRef = useRef(null);
+const { selectedDashboardValues } = Navbarvalue()
+const [departmentList, setdepartmentList] = useState([])
+const {listOfDepartments}=useSelector((state)=>state.survey)
+
+
 // const{overAllTEISurveyReport}=useSelector((state)=>state.teiSurvey)
 
 
-    
+useEffect(() => { 
+  if (selectedDashboardValues?.survey?.id) {
+    if(listOfDepartments?.length>0){
+         dispatch(getListOfCoumnProperty({surveyId:selectedDashboardValues?.survey?.id,columnProperty:"department"}))
+    .then((res)=>{
+      console.log('department',res?.payload);
+      setdepartmentList(res?.payload)
+      
+    })
+    }
+    else{
+        setdepartmentList(listOfDepartments)
+    }
+
+   
+}
+
+}, [])
 
 
 const chartData = data[0].dimensionTeamAverages.map((dimension) => {
@@ -45,8 +69,13 @@ const chartData = data[0].dimensionTeamAverages.map((dimension) => {
     };
   });
   
-  console.log('chart data',chartData);
+
    let chartValues = SingleBarChartData(chartData);
+
+   
+  const handleSelectDepartment=(data)=>{
+
+  }
   return (
     <>
      <div className="age-card rounded-3 border p-3 shadow bg-white">
@@ -56,7 +85,13 @@ const chartData = data[0].dimensionTeamAverages.map((dimension) => {
             
         </div>
         <div className="d-flex align-items-center">
-          
+        
+                  {departmentList?.length>0? 
+ <DropdownButton items={departmentList} listKeyName={'columnValue'} onSelect={handleSelectDepartment} selectionName={departmentList[0]?.columnValue}/>
+ :''
+}
+         
+  
  
     </div>
     </div>

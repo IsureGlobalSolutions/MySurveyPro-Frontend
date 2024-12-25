@@ -207,6 +207,7 @@ const initialState = {
   getTotalNumberOfRespondentValue:{},
   getOverAllDepartmentReportValue:{},
   listOfAllFilesData:[],
+  listOfDepartments:[],
   surveyPaymentStatuses:[],
   message: '',
   paymentStatus:{},
@@ -292,6 +293,7 @@ const surveySlice = createSlice({
       .addCase(getListOfCoumnProperty.fulfilled, (state, action) => {
         state.isLoading = false;
         state.message = action.payload.message;
+        state.listOfDepartments = action.payload;
         state.error = null;
       })
       .addCase(getListOfCoumnProperty.rejected, (state, action) => {

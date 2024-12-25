@@ -176,12 +176,14 @@ dispatch(userSingleDimensionForSingleDepartmentReportApi(
     <>
       <div className="row m-0 p-0 justify-content-between mt-3">
         <div className="deparment-table-data col-md-12 p-0">
-          <div className="mx-3 d-flex justify-content-between bg-white shadow">
-            <div className="d-flex align-items-center px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
+          <div className="mx-3 py-1 row justify-content-between bg-white shadow">
+            <div className="col-md-5">
+
+               <div className="d-flex align-items-center px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
               <div>
                 <p className="ps-2 py-2 fs-6 fw-bold m-0">Department Questions Report</p>
               </div>
-              <div className="d-flex align-items-center">
+              {/* <div className="d-flex align-items-center">
                 <OverlayTrigger
                   placement="bottom"
                   overlay={<Tooltip id="button-tooltip-2">Download report file</Tooltip>}
@@ -190,9 +192,11 @@ dispatch(userSingleDimensionForSingleDepartmentReportApi(
                     Download
                   </small>
                 </OverlayTrigger>
-              </div>
+              </div> */}
             </div>
-
+            </div>
+            <div className="col-md-5 d-flex gap-2">
+              
 {departmentList?.length>0? 
  <DropdownButton items={departmentList} listKeyName={'columnValue'} onSelect={handleSelectDepartment} selectionName={departmentList[0]?.columnValue}/>
  :''
@@ -202,6 +206,9 @@ dispatch(userSingleDimensionForSingleDepartmentReportApi(
            <DropdownButton items={listOfDimensions} listKeyName={'dimension'} onSelect={handleSelectDimension} selectionName={listOfDimensions[0]?.dimension}/>
            :''
          }  
+            </div>
+           
+
            
           </div>
           <SurveyTable columns={columns?.length>0 ?

@@ -11,6 +11,7 @@ import UserDimensionsDataForAllDeparments from './UserDimensionsDataForAllDeparm
 import DimensionsAsRowsComponent from './DimensionsAsRowsComponent'
 import TeiDimensionForAllDepartmentChart from './chart/TeiDimensionForAllDepartmentChart'
 import TeiUserDimensionForSingleDepartmentChart from './chart/TeiUserDimensionForSingleDepartmentChart'
+import { getListOfCoumnProperty } from '../../../Redux/slice/surveySlice'
 
 const index = () => {
       const { selectedDashboardValues, DashboardStateHandler } = Navbarvalue()
@@ -19,6 +20,7 @@ const index = () => {
 useEffect(() => { 
   if(selectedDashboardValues?.survey?.id){
    dispatch(overAllTeiSurveyReportApi(selectedDashboardValues?.survey?.id))
+    dispatch(getListOfCoumnProperty({surveyId:selectedDashboardValues?.survey?.id,columnProperty:"department"}))
   }
 }, [selectedDashboardValues,dispatch]) 
   return (

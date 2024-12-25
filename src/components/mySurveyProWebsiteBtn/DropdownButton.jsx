@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './Dropdown.css';
 import { FaCaretDown } from "react-icons/fa";
 
-const DropdownButton = ({ items, onSelect, listKeyName ,selectionName}) => {
+const DropdownButton = ({ items, onSelect, listKeyName ,selectionName,...props}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(` ${selectionName? selectionName:'Select an option'}`);
   const dropdownRef = useRef(null);
@@ -29,7 +29,7 @@ const DropdownButton = ({ items, onSelect, listKeyName ,selectionName}) => {
   }, []);
 
   return (
-    <div ref={dropdownRef} className='custom-dropdown-container ' type="button" >
+    <div ref={dropdownRef} className='custom-dropdown-container w-100 ' type="button" {...props}>
       <div className='d-flex justify-content-between align-items-center select-survey gap-2 py-2' onClick={toggleDropdown}>
         <div className='textdropdown'>{selectedItem}</div>
         <div><FaCaretDown /></div>
