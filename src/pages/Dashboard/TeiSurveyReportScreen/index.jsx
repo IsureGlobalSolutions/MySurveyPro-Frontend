@@ -30,6 +30,7 @@ useEffect(() => {
    
     
    </div>
+   
    <DepartmentAndDimensionTable/>
 
    <UserDimensionsDataForAllDeparments/>

@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import SurveyTable from '../../../components/table/SurveyTable';
+import { useDispatch, useSelector } from 'react-redux';
+import { use } from 'react';
+import { TeiDimensionListApi } from '../../../Redux/slice/teiSlice';
+import { Navbarvalue } from '../../../context/NavbarValuesContext';
+import { getListOfCoumnProperty } from '../../../Redux/slice/surveySlice';
+import DropdownButton from '../../../components/mySurveyProWebsiteBtn/DropdownButton';
 
 const data = [
   {
@@ -68,8 +74,27 @@ const data = [
 
 const DepartmentAndDimensionTable = () => {
   const [isLoading, setisLoading] = useState(false);
+  const dispatch = useDispatch();
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
+  const [departmentList, setdepartmentList] = useState([])
+  const { paymentStatus } = useSelector((state) => state.survey)
+  const { selectedDashboardValues } = Navbarvalue()
+  const {listOfDimensions}=useSelector((state)=>state.teiSurvey)
+  console.log("🚀 ~ DepartmentAndDimensionTable ~ listOfDimensions:", listOfDimensions)
+useEffect(() => { 
+  if (selectedDashboardValues?.survey?.id && paymentStatus[selectedDashboardValues?.survey?.id].paymentStatus===true) {
+      dispatch(TeiDimensionListApi(selectedDashboardValues?.survey?.id))
+      dispatch(getListOfCoumnProperty({surveyId:selectedDashboardValues?.survey?.id,columnProperty:"department"}))
+      .then((res)=>{
+        console.log('department',res?.payload);
+        setdepartmentList(res?.payload)
+        
+      })
+  }
+
+}, [])
+
 
   useEffect(() => {
     // Generate columns dynamically
@@ -103,6 +128,16 @@ const DepartmentAndDimensionTable = () => {
     setRows(generatedRows);
   }, []);
 
+
+
+  const handleSelectDepartment=(data)=>{
+console.log('department selection',data);
+
+  }
+  const handleSelectDimension=(data)=>{
+console.log('dimension selection',data);
+
+  }
   return (
     <>
       <div className="row m-0 p-0 justify-content-between">
@@ -123,6 +158,9 @@ const DepartmentAndDimensionTable = () => {
                 </OverlayTrigger>
               </div>
             </div>
+
+            <DropdownButton items={departmentList} listKeyName={'columnValue'} onSelect={handleSelectDepartment} initialValue={departmentList[0]?.columnValue}/>
+            <DropdownButton items={listOfDimensions} listKeyName={'dimension'} onSelect={handleSelectDimension} initialValue={listOfDimensions[0]?.dimension}/>
           </div>
           <SurveyTable columns={columns} data={rows} isLoading={isLoading} />
         </div>
