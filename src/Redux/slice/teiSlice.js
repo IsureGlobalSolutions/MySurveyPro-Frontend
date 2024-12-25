@@ -4,6 +4,8 @@ import { instance, axiosPrivate } from '../../axios/axios';
 import toast from 'react-hot-toast';
 import { PURGE } from 'redux-persist';
 
+
+
 export const overAllTeiSurveyReportApi = createAsyncThunk('survey/overAllTeiSurveyReportApi', async (surveyId, thunkAPI) => {
   try {
     const res = await axiosPrivate.get('api/TEISurveyReport/GetOverAllTEISurveyReport',{
@@ -15,6 +17,8 @@ export const overAllTeiSurveyReportApi = createAsyncThunk('survey/overAllTeiSurv
     return thunkAPI.rejectWithValue(message);
   }
 });
+
+
 export const TeiDimensionListApi = createAsyncThunk('survey/TeiDimensionListApi', async (surveyId, thunkAPI) => {
   try {
     const res = await axiosPrivate.get('api/Survey/GetDimensionsBySurveyId',{
@@ -26,10 +30,24 @@ export const TeiDimensionListApi = createAsyncThunk('survey/TeiDimensionListApi'
     return thunkAPI.rejectWithValue(message);
   }
 });
-export const userSingleDimensionForSingleDepartmentReportApi = createAsyncThunk('survey/userSingleDimensionForSingleDepartmentReportApi', async ({surveyId,dimensionId,columnValue}, thunkAPI) => {
+
+
+export const userSingleDimensionForSingleDepartmentReportApi = createAsyncThunk('survey/userSingleDimensionForSingleDepartmentReportApi', async ({surveyId,dimensionId,columnProperty}, thunkAPI) => {
   try {
     const res = await axiosPrivate.get('api/TEISurveyReport/GetDepartmentDimensionQuestionsTEISurveyReport',{
-        params: { surveyId,dimensionId,columnValue  }
+        params: { surveyId,dimensionId,columnProperty }
+    });
+    return res?.data;
+  } catch (error) {
+    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+export const getDepartmentDimensionsTEISurveyReportApi = createAsyncThunk('survey/getDepartmentDimensionsTEISurveyReportApi', async ({surveyId,dimensionId,columnProperty}, thunkAPI) => {
+  try {
+    const res = await axiosPrivate.get('api/TEISurveyReport/GetDepartmentDimensionsTEISurveyReport',{
+        params: { surveyId,dimensionId,columnProperty  }
     });
     return res?.data;
   } catch (error) {

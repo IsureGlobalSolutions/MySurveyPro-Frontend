@@ -1,220 +1,117 @@
-
-import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Chart from 'react-apexcharts';
 import Loader from '../../../../components/plugins/Loader';
 import { FunnelChartData } from '../../../../components/cartsComponents/FunnelChartData';
 import DropdownButton from '../../../../components/mySurveyProWebsiteBtn/DropdownButton';
 import { getListOfCoumnProperty } from '../../../../Redux/slice/surveySlice';
 import { Navbarvalue } from '../../../../context/NavbarValuesContext';
+import { getDepartmentDimensionsTEISurveyReportApi } from '../../../../Redux/slice/teiSlice';
 
-const data = [
-    {
-      recipientTEIResults: [
-        {
-          teiProperties: {
-            RecipientId: '1',
-            RecipientName: 'Aisha Arif',
-            TeamsName: 'QA',
-            AverageResult: '82.5',
-          },
-          teiDimensionResult: [
-            {
-              teiDimension: {
-                Id: '1',
-                Text: 'MISSION DRIVEN',
-                TeamsRating: '16',
-                TEIReferenceScore: '20',
-                Result: '80.0',
-              },
-            },
-            {
-              teiDimension: {
-                Id: '2',
-                Text: 'ROLE CLARITY',
-                TeamsRating: '21',
-                TEIReferenceScore: '25',
-                Result: '84.0',
-              },
-            },
-            {
-              teiDimension: {
-                Id: '3',
-                Text: 'LEADERSHIP',
-                TeamsRating: '18',
-                TEIReferenceScore: '20',
-                Result: '90.0',
-              },
-            },
-            {
-              teiDimension: {
-                Id: '4',
-                Text: 'SOLIDARITY',
-                TeamsRating: '21',
-                TEIReferenceScore: '25',
-                Result: '84.0',
-              },
-            },
-            {
-              teiDimension: {
-                Id: '5',
-                Text: 'FEEL GOOD CLIMATE',
-                TeamsRating: '20',
-                TEIReferenceScore: '25',
-                Result: '80.0',
-              },
-            },
-          ],
-        },
-        {
-          teiProperties: {
-            RecipientId: '2',
-            RecipientName: 'John Doe',
-            TeamsName: 'DevOps',
-            AverageResult: '85.0',
-          },
-          teiDimensionResult: [
-            {
-              teiDimension: {
-                Id: '1',
-                Text: 'MISSION DRIVEN',
-                TeamsRating: '18',
-                TEIReferenceScore: '20',
-                Result: '90.0',
-              },
-            },
-            {
-              teiDimension: {
-                Id: '2',
-                Text: 'ROLE CLARITY',
-                TeamsRating: '20',
-                TEIReferenceScore: '25',
-                Result: '80.0',
-              },
-            },
-            {
-              teiDimension: {
-                Id: '3',
-                Text: 'LEADERSHIP',
-                TeamsRating: '17',
-                TEIReferenceScore: '20',
-                Result: '85.0',
-              },
-            },
-            {
-              teiDimension: {
-                Id: '4',
-                Text: 'SOLIDARITY',
-                TeamsRating: '23',
-                TEIReferenceScore: '25',
-                Result: '92.0',
-              },
-            },
-            {
-              teiDimension: {
-                Id: '5',
-                Text: 'FEEL GOOD CLIMATE',
-                TeamsRating: '19',
-                TEIReferenceScore: '25',
-                Result: '76.0',
-              },
-            },
-          ],
-        },
-      ],
-    },
-  ];
-  
 const TeiUserDimensionForSingleDepartmentChart = () => {
-const dispatch =useDispatch();
-const [isLoading, setisLoading] = useState(false)
-const chartRef = useRef(null); 
-const [reportValues, setreportValues] = useState()
-const { selectedDashboardValues } = Navbarvalue()
-const {listOfDepartments}=useSelector((state)=>state.survey)
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+  const chartRef = useRef(null);
+  const [reportValues, setReportValues] = useState(null);
+  const [departmentList, setDepartmentList] = useState([]);
+  const [selectedDepartment, setSelectedDepartment] = useState(null);
 
-const [departmentList, setdepartmentList] = useState([])
+  const { selectedDashboardValues } = Navbarvalue();
+  const { listOfDepartments } = useSelector((state) => state.survey);
 
-useEffect(() => { 
-
+  // Fetch department list on component mount
+  useEffect(() => {
     if (selectedDashboardValues?.survey?.id) {
-        if(listOfDepartments?.length>0){
-             dispatch(getListOfCoumnProperty({surveyId:selectedDashboardValues?.survey?.id,columnProperty:"department"}))
-        .then((res)=>{
-          console.log('department',res?.payload);
-          setdepartmentList(res?.payload)
-          
+      dispatch(
+        getListOfCoumnProperty({
+          surveyId: selectedDashboardValues?.survey?.id,
+          columnProperty: 'department',
         })
-        }
-        else{
-            setdepartmentList(listOfDepartments)
-        }
-   
-       
+      )
+        .then((res) => {
+          const departments = res?.payload || [];
+          setDepartmentList(departments);
+          if (departments.length > 0) {
+            setSelectedDepartment(departments[0]?.columnValue); // Default to the first department
+          }
+        })
+        .catch((error) => console.error('Failed to fetch departments:', error));
     }
-  
-  }, [])
-    
- // Prepare chart data
- const prepareChartData = (data) => {
-    const transformedData = data[0].recipientTEIResults.map((recipient) => ({
-      y: recipient.teiProperties.AverageResult, 
-      x: recipient.teiProperties.RecipientName, 
-    }));
+  }, [dispatch, selectedDashboardValues]);
 
-    return {
-      name: "Funnel",
-      data: transformedData,
-    };
+  // Fetch data for the selected department
+  useEffect(() => {
+    if (selectedDepartment) {
+      fetchDepartmentData(selectedDepartment);
+    }
+  }, [selectedDepartment]);
+
+  const fetchDepartmentData = (department) => {
+    setIsLoading(true);
+    dispatch(
+      getDepartmentDimensionsTEISurveyReportApi({
+        surveyId: selectedDashboardValues?.survey?.id,
+        columnProperty: department,
+      })
+    )
+      .then((res) => {
+        setResponseDataInTable(res?.payload || {});
+      })
+      .catch((error) => console.error('Failed to fetch department data:', error))
+      .finally(() => setIsLoading(false));
   };
 
+  const handleSelectDepartment = (data) => {
+    setSelectedDepartment(data?.columnValue); // Update the selected department
+  };
+
+  // Prepare chart data
+  const setResponseDataInTable = (data) => {
+    if (data?.recipientTEIResults?.length > 0) {
+      const transformedData = data.recipientTEIResults.map((recipient) => ({
+        y: recipient.teiProperties.AverageResult,
+        x: recipient.teiProperties.RecipientName,
+      }));
+      setReportValues({ name: 'Funnel', data: transformedData });
+    } else {
+      setReportValues(null); // Reset chart data if no data is available
+    }
+  };
 
   // Generate chart values
-  const chartValues = FunnelChartData(prepareChartData(data));
+  const chartValues = FunnelChartData(reportValues);
 
-  
-  const handleSelectDepartment=(data)=>{
-
-  }
   return (
-    <>
-     <div className="age-card rounded-3 border p-3 shadow bg-white">
- <div className="d-flex justify-content-between">
+    <div className="age-card rounded-3 border p-3 shadow bg-white">
+      <div className="d-flex justify-content-between">
         <div className="title d-flex align-items-center m-0">
-            <div className=""><p className='m-0 pb-3'>Team Dimension Average Score</p></div>
-            
+          <p className="m-0 pb-3">Team Dimension Average Score</p>
         </div>
         <div className="d-flex align-items-center">
-          
-        {departmentList?.length>0? 
- <DropdownButton items={departmentList} listKeyName={'columnValue'} onSelect={handleSelectDepartment} selectionName={departmentList[0]?.columnValue}/>
- :''
-}
+          {departmentList?.length > 0 && (
+            <DropdownButton
+              items={departmentList}
+              listKeyName={'columnValue'}
+              onSelect={handleSelectDepartment}
+              selectionName={selectedDepartment || departmentList[0]?.columnValue}
+            />
+          )}
+        </div>
+      </div>
+      <hr className="m-1" />
+      <div className="" ref={chartRef}>
+        {isLoading ? (
+          <div className="loader-div d-flex justify-content-center align-items-center h-100">
+            <Loader />
+          </div>
+        ) : reportValues ? (
+          <Chart options={chartValues} series={chartValues?.series} type="bar" height={350} />
+        ) : (
+          <div className="text-center py-3">No data available. Please select a department.</div>
+        )}
+      </div>
     </div>
-    </div>
-    <hr  className='m-1'/>
-    <div className="" ref={chartRef} >
-    {
-             isLoading?  
-             <div className="loader-div d-flex justify-content-center align-items-center h-100">
-              <Loader/>
-               </div> 
-               :
-         <Chart 
-            options={chartValues}
-            series={chartValues?.series}
-            type="bar"
-            height={350}
-            // height='320'
+  );
+};
 
-           
-          /> 
-    }
-    </div>
-     
-    </div>
-    </>
-  )
-}
-
-export default TeiUserDimensionForSingleDepartmentChart
+export default TeiUserDimensionForSingleDepartmentChart;

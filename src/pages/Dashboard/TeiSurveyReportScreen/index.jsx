@@ -4,7 +4,7 @@ import HeroCards from '../../../components/HeroCards'
 import OverAllRadialChat from './chart/OverAllRadialChat'
 import OverAllFunnelChat from './chart/OverAllFunnelChat'
 import { use } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { overAllTeiSurveyReportApi } from '../../../Redux/slice/teiSlice'
 import DepartmentAndDimensionTable from './DepartmentAndDimensionTable'
 import UserDimensionsDataForAllDeparments from './UserDimensionsDataForAllDeparments'
@@ -12,10 +12,11 @@ import DimensionsAsRowsComponent from './DimensionsAsRowsComponent'
 import TeiDimensionForAllDepartmentChart from './chart/TeiDimensionForAllDepartmentChart'
 import TeiUserDimensionForSingleDepartmentChart from './chart/TeiUserDimensionForSingleDepartmentChart'
 import { getListOfCoumnProperty } from '../../../Redux/slice/surveySlice'
-
+  
 const index = () => {
       const { selectedDashboardValues, DashboardStateHandler } = Navbarvalue()
-
+      const {listOfDepartments}=useSelector((state)=>state.survey)
+      
       const dispatch = useDispatch();
 useEffect(() => { 
   if(selectedDashboardValues?.survey?.id){
@@ -33,13 +34,21 @@ useEffect(() => {
    
     
    </div>
-   
-   <DepartmentAndDimensionTable/>
+   {listOfDepartments?.length>0 &&
+   (
+    <>
+     <DepartmentAndDimensionTable/>
 
    <UserDimensionsDataForAllDeparments/>
    <TeiDimensionForAllDepartmentChart/>
    <DimensionsAsRowsComponent/>
    <TeiUserDimensionForSingleDepartmentChart/>
+    </>
+   )
+  
+   
+   }
+  
    </>
   )
 }

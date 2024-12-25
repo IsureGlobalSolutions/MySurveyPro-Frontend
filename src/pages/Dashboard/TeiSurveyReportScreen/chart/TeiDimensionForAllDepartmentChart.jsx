@@ -7,9 +7,9 @@ import { SingleBarChartData } from '../../../../components/cartsComponents/Singl
 import { getListOfCoumnProperty } from '../../../../Redux/slice/surveySlice';
 import { Navbarvalue } from '../../../../context/NavbarValuesContext';
 import DropdownButton from '../../../../components/mySurveyProWebsiteBtn/DropdownButton';
+import { getDepartmentDimensionsTEISurveyReportApi } from '../../../../Redux/slice/teiSlice';
 
-const data = [
-    {
+const data = {
       dimensionTeamAverages: [
         { MissonDriven: 76 },
         { RoleClarity: 81 },
@@ -23,8 +23,8 @@ const data = [
         { Infrastructure: 75 },
       ],
       overallTeamAverage: "78.0",
-    },
-  ];
+    }
+  
   
 const TeiDimensionForAllDepartmentChart = () => {
 const dispatch =useDispatch();
@@ -57,9 +57,36 @@ useEffect(() => {
 }
 
 }, [])
+  useEffect(()=>{
+ 
+    setisLoading(true)
+    dispatch(getDepartmentDimensionsTEISurveyReportApi(
+      {surveyId:selectedDashboardValues?.survey?.id,
+        columnProperty:departmentList[0]?.columnValue
+  
+      }))
+      .then((res)=>{
+  setResponseDataInTable(res?.payload)
+      })
 
+  
+  },[])
 
-const chartData = data[0].dimensionTeamAverages.map((dimension) => {
+    const handleSelectDepartment=(data)=>{
+      setisLoading(true)
+dispatch(getDepartmentDimensionsTEISurveyReportApi(
+  {surveyId:selectedDashboardValues?.survey?.id,
+    columnProperty:data?.columnValue
+
+  }))
+  .then((res)=>{
+    setResponseDataInTable(res?.payload)
+        })
+
+  }
+  const setResponseDataInTable=(data)=>{
+    setisLoading(true)
+    const chartData = data?.dimensionTeamAverages.map((dimension) => {
     
     const [key, value] = Object.entries(dimension)[0];
     
@@ -68,14 +95,17 @@ const chartData = data[0].dimensionTeamAverages.map((dimension) => {
       y: value, // Use the value directly as the score
     };
   });
+  setoverAllScore(chartData)
+  setisLoading(false)
+  }
+
+
   
 
-   let chartValues = SingleBarChartData(chartData);
+   let chartValues = SingleBarChartData(overAllScore);
 
    
-  const handleSelectDepartment=(data)=>{
 
-  }
   return (
     <>
      <div className="age-card rounded-3 border p-3 shadow bg-white">
