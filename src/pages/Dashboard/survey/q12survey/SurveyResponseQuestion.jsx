@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import WebsiteButton from '../../../../components/mySurveyProWebsiteBtn/WebsiteButtton';
 import img2 from '../../../../assets/Q12survey/Q12cardimage1.png';
-import './Q12survey.css';
+import './qsurvey.css';
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import MobileStepper from "@mui/material/MobileStepper";
@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSurveyById, surveyresponse } from '../../../../Redux/slice/authSlice';
 import toast from 'react-hot-toast';
 import Loader from '../../../../components/plugins/Loader';
-import Q12survey from './Q12survey';
+import Q12survey from './Q12survey.jsx';
 import img1 from '../../../../assets/Q12survey/stepperimage.png';
 import { jwtDecode } from "jwt-decode";
 import { useParams } from 'react-router-dom';

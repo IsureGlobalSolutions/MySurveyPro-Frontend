@@ -1,5 +1,5 @@
 import React from 'react'
-import './Q12survey.css'
+import './qsurvey.css'
 import img1 from '../../../../assets/Q12survey/congradulation.png'
 const Congratulationsurvey = () => {
   return (
