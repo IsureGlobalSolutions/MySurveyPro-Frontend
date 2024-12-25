@@ -6,11 +6,11 @@ import InputField from '../../../components/mySurveyProInput/InputField'
 import { useForm } from 'react-hook-form';
 import { useSelector , useDispatch } from 'react-redux';
 import { jwtDecode } from "jwt-decode";
-import { resetPasswordApi } from '../../../Redux/slice/auth';
+import { resetPasswordApi } from '../../../Redux/slice/authSlice';
 import { Code } from '@mui/icons-material';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { updateAccessToken } from '../../../Redux/slice/auth'; 
+import { updateAccessToken } from '../../../Redux/slice/authSlice'; 
 import {store} from '../../../Redux/store';
 
 

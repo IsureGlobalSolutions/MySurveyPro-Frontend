@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import toast from 'react-hot-toast';
-import { forgotPasswordApi } from '../../Redux/slice/auth';
+import { forgotPasswordApi } from '../../Redux/slice/authSlice';
 import { FRONTEND_URL } from '../../consts/environments';
 
 const ForgotPassword = () => {  
