@@ -182,7 +182,7 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
      
       :
       
-      (launchSurveyData?.length > 0 && !startSurvey) || (surveyPaymentStatuses[0]?.surveyLaunchStatus && !startSurvey)? 
+      (launchSurveyData?.length > 0 && !startSurvey) || (Array.isArray(surveyPaymentStatuses) && surveyPaymentStatuses[0]?.surveyLaunchStatus && !startSurvey)? 
       
       (
         <>
