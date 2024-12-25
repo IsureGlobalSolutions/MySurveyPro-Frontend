@@ -21,10 +21,8 @@ const Index = () => {
   const [surveyId, setsurveyId] = useState();
   const [selectedFilesArray, setselectedFileName] = useState([])
     const { selectedDashboardValues, DashboardStateHandler } = Navbarvalue()
-    console.log("🚀 ~ Index ~ selectedDashboardValues:", selectedDashboardValues)
   
-const [isLoading, setisLoading] = useState(false)
-const dispatch = useDispatch()
+
 
   const getSurveyIdHandle = (data) => {
     setsurveyId(data);

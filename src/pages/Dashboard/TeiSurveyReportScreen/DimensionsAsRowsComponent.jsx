@@ -138,7 +138,10 @@ const DimensionsAsRowsComponent = () => {
     setColumns(generatedColumns);
 
     // Generate dynamic rows
-    const allDimensions = data[0].recipientTEIResults[0].teiDimensionResult.map((dimension) => dimension.teiDimension.Text);
+    const allDimensions = data[0].recipientTEIResults[0].teiDimensionResult.map(
+      (dimension) => dimension.teiDimension.Text
+    );
+
     const generatedRows = allDimensions.map((dimensionText) => {
       const row = { Dimension: dimensionText };
       data[0].recipientTEIResults.forEach((recipient) => {
@@ -151,6 +154,15 @@ const DimensionsAsRowsComponent = () => {
       });
       return row;
     });
+
+    // Add "Average" row
+    const averageRow = { Dimension: 'Average' };
+    data[0].recipientTEIResults.forEach((recipient) => {
+      averageRow[recipient.teiProperties.RecipientName.replace(/\s+/g, '')] =
+        recipient.teiProperties.AverageResult;
+    });
+    generatedRows.push(averageRow);
+
     setRows(generatedRows);
   }, []);
 

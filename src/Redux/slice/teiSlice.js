@@ -26,10 +26,10 @@ export const TeiDimensionListApi = createAsyncThunk('survey/TeiDimensionListApi'
     return thunkAPI.rejectWithValue(message);
   }
 });
-export const userSingleDimensionForSingleDepartmentReportApi = createAsyncThunk('survey/TeiDimensionListApi', async (surveyId, thunkAPI) => {
+export const userSingleDimensionForSingleDepartmentReportApi = createAsyncThunk('survey/userSingleDimensionForSingleDepartmentReportApi', async ({surveyId,dimensionId,columnValue}, thunkAPI) => {
   try {
-    const res = await axiosPrivate.get('api/TEISurveyReport/GetDepartmentTEISurveyReport',{
-        params: { surveyId  }
+    const res = await axiosPrivate.get('api/TEISurveyReport/GetDepartmentDimensionQuestionsTEISurveyReport',{
+        params: { surveyId,dimensionId,columnValue  }
     });
     return res?.data;
   } catch (error) {
@@ -43,6 +43,7 @@ const initialState = {
   message: '',
   overAllTEISurveyReport: {},
   listOfDimensions:[],
+  userSingleDimensionForSingleDepartmentReportList:[],
   error: null,
 };
 
@@ -85,6 +86,22 @@ const surveySlice = createSlice({
         state.error = null;
       })
       .addCase(TeiDimensionListApi.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload || action.error.message;
+      })
+
+
+
+      .addCase(userSingleDimensionForSingleDepartmentReportApi.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(userSingleDimensionForSingleDepartmentReportApi.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+        state.userSingleDimensionForSingleDepartmentReportList = action.payload;
+        state.error = null;
+      })
+      .addCase(userSingleDimensionForSingleDepartmentReportApi.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload || action.error.message;
       })

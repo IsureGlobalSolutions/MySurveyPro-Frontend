@@ -3,7 +3,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import SurveyTable from '../../../components/table/SurveyTable';
 import { useDispatch, useSelector } from 'react-redux';
 import { use } from 'react';
-import { TeiDimensionListApi } from '../../../Redux/slice/teiSlice';
+import { TeiDimensionListApi, userSingleDimensionForSingleDepartmentReportApi } from '../../../Redux/slice/teiSlice';
 import { Navbarvalue } from '../../../context/NavbarValuesContext';
 import { getListOfCoumnProperty } from '../../../Redux/slice/surveySlice';
 import DropdownButton from '../../../components/mySurveyProWebsiteBtn/DropdownButton';
@@ -80,10 +80,10 @@ const DepartmentAndDimensionTable = () => {
   const [departmentList, setdepartmentList] = useState([])
   const { paymentStatus } = useSelector((state) => state.survey)
   const { selectedDashboardValues } = Navbarvalue()
-  const {listOfDimensions}=useSelector((state)=>state.teiSurvey)
-  console.log("🚀 ~ DepartmentAndDimensionTable ~ listOfDimensions:", listOfDimensions)
-useEffect(() => { 
-  if (selectedDashboardValues?.survey?.id && paymentStatus[selectedDashboardValues?.survey?.id].paymentStatus===true) {
+  const {listOfDimensions,userSingleDimensionForSingleDepartmentReportList}=useSelector((state)=>state.teiSurvey)
+
+  useEffect(() => { 
+  if (selectedDashboardValues?.survey?.id) {
       dispatch(TeiDimensionListApi(selectedDashboardValues?.survey?.id))
       dispatch(getListOfCoumnProperty({surveyId:selectedDashboardValues?.survey?.id,columnProperty:"department"}))
       .then((res)=>{
@@ -94,11 +94,33 @@ useEffect(() => {
   }
 
 }, [])
+useEffect(()=>{
+if(listOfDimensions?.length>0 && departmentList?.length>0){
+
+  dispatch(userSingleDimensionForSingleDepartmentReportApi(
+    {surveyId:selectedDashboardValues?.survey?.id,
+      dimensionId:listOfDimensions[0]?.id,
+      columnValue:departmentList[0]?.columnValue
+
+    }))
+    .then((res)=>{
+setResponseDataInTable(res?.payload)
+    })
+}
+
+},[listOfDimensions?.length ,departmentList?.length])
+
+useEffect(()=>{
+  if(userSingleDimensionForSingleDepartmentReportList.length>0){
+    setResponseDataInTable(userSingleDimensionForSingleDepartmentReportList)
+  }
+},[userSingleDimensionForSingleDepartmentReportList])
 
 
-  useEffect(() => {
-    // Generate columns dynamically
-    const generatedColumns = [
+
+const setResponseDataInTable=(data)=>{
+  if(data?.length>0){
+       const generatedColumns = [
       { width: 300, label: 'Recipient Name', dataKey: 'RecipientName' },
        ...data[0]?.teiDimensionResult[0]?.questionResultDto?.map((q, index) => ({
         width: 200,
@@ -109,8 +131,9 @@ useEffect(() => {
       { width: 120, label: 'TEI Reference Score', dataKey: 'TEIReferenceScore', numeric: true },
       { width: 120, label: 'Result', dataKey: 'Result', numeric: true },
      
-    ];
+    ]
     setColumns(generatedColumns);
+
 
     // Generate rows dynamically
     const generatedRows = data?.map((item) => {
@@ -124,23 +147,34 @@ useEffect(() => {
         baseRow[`Question${index + 1}`] = Object.values(q.choicesResult)[0];
       });
       return baseRow;
-    });
+    })
     setRows(generatedRows);
-  }, []);
-
-
+  }
+ 
+}
 
   const handleSelectDepartment=(data)=>{
 console.log('department selection',data);
+dispatch(userSingleDimensionForSingleDepartmentReportApi(
+  {surveyId:selectedDashboardValues?.survey?.id,
+    dimensionId:listOfDimensions[0]?.id,
+    columnValue:data?.columnValue
+
+  }))
 
   }
   const handleSelectDimension=(data)=>{
-console.log('dimension selection',data);
 
+    dispatch(userSingleDimensionForSingleDepartmentReportApi(
+      {surveyId:selectedDashboardValues?.survey?.id,
+        dimensionId:data?.id,
+        columnValue:departmentList[0]?.columnValue
+  
+      }))
   }
   return (
     <>
-      <div className="row m-0 p-0 justify-content-between">
+      <div className="row m-0 p-0 justify-content-between mt-3">
         <div className="deparment-table-data col-md-12 p-0">
           <div className="mx-3 d-flex justify-content-between bg-white shadow">
             <div className="d-flex align-items-center px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
@@ -159,10 +193,39 @@ console.log('dimension selection',data);
               </div>
             </div>
 
-            <DropdownButton items={departmentList} listKeyName={'columnValue'} onSelect={handleSelectDepartment} initialValue={departmentList[0]?.columnValue}/>
-            <DropdownButton items={listOfDimensions} listKeyName={'dimension'} onSelect={handleSelectDimension} initialValue={listOfDimensions[0]?.dimension}/>
+{departmentList?.length>0? 
+ <DropdownButton items={departmentList} listKeyName={'columnValue'} onSelect={handleSelectDepartment} selectionName={departmentList[0]?.columnValue}/>
+ :''
+}
+         {
+          listOfDimensions?.length>0?
+           <DropdownButton items={listOfDimensions} listKeyName={'dimension'} onSelect={handleSelectDimension} selectionName={listOfDimensions[0]?.dimension}/>
+           :''
+         }  
+           
           </div>
-          <SurveyTable columns={columns} data={rows} isLoading={isLoading} />
+          <SurveyTable columns={columns?.length>0 ?
+              columns
+              :
+              [
+                { width: 300, label: 'Name', dataKey: 'RecipientName' },
+                { width: 120, label: 'Question1', dataKey: 'choicesResult', numeric: true },
+                { width: 120, label: 'Question2', dataKey: 'choicesResult', numeric: true },
+                { width: 120, label: 'Question3', dataKey: 'choicesResult', numeric: true },
+                { width: 120, label: 'QA Team rating', dataKey: 'TeamsRating', numeric: true },
+                { width: 120, label: 'TEI Refernce Score', dataKey: 'TEIReferenceScore', numeric: true },
+                { width: 120, label: 'Result', dataKey: 'Result', numeric: true },
+              ]
+
+            } data={rows?.length>0 ?
+              rows :
+              [
+                {  RecipientName: 0, choicesResult: 0, choicesResult: 0, choicesResult: 0, TeamsRating: 0, TEIReferenceScore: 0, Result: 0 },
+                {  RecipientName: 0, choicesResult: 0, choicesResult: 0, choicesResult: 0, TeamsRating: 0, TEIReferenceScore: 0, Result: 0 },
+
+              ]
+
+            } isLoading={isLoading} />
         </div>
       </div>
     </>

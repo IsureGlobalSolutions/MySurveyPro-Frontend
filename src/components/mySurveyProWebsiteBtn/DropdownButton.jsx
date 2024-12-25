@@ -30,7 +30,7 @@ const DropdownButton = ({ items, onSelect, listKeyName ,selectionName}) => {
 
   return (
     <div ref={dropdownRef} className='custom-dropdown-container ' type="button" >
-      <div className='d-flex justify-content-between align-items-center select-survey gap-2 py-3' onClick={toggleDropdown}>
+      <div className='d-flex justify-content-between align-items-center select-survey gap-2 py-2' onClick={toggleDropdown}>
         <div className='textdropdown'>{selectedItem}</div>
         <div><FaCaretDown /></div>
       </div>

@@ -10,6 +10,7 @@ import DepartmentAndDimensionTable from './DepartmentAndDimensionTable'
 import UserDimensionsDataForAllDeparments from './UserDimensionsDataForAllDeparments'
 import DimensionsAsRowsComponent from './DimensionsAsRowsComponent'
 import TeiDimensionForAllDepartmentChart from './chart/TeiDimensionForAllDepartmentChart'
+import TeiUserDimensionForSingleDepartmentChart from './chart/TeiUserDimensionForSingleDepartmentChart'
 
 const index = () => {
       const { selectedDashboardValues, DashboardStateHandler } = Navbarvalue()
@@ -36,6 +37,7 @@ useEffect(() => {
    <UserDimensionsDataForAllDeparments/>
    <TeiDimensionForAllDepartmentChart/>
    <DimensionsAsRowsComponent/>
+   <TeiUserDimensionForSingleDepartmentChart/>
    </>
   )
 }

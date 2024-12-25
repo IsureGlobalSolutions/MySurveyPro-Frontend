@@ -155,7 +155,7 @@ toast.error('data not Found')
 
                         </div>
 
- <DropdownButton items={listOfGender} listKeyName={'columnValue'} onSelect={handleSelect} initialValue={'male'}/>
+ <DropdownButton items={listOfGender} listKeyName={'columnValue'} onSelect={handleSelect} selectionName={'male'}/>
                     </div>
 
                     <SurveyTable
