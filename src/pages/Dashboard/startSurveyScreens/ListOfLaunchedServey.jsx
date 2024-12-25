@@ -33,6 +33,7 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
 
   const { surveyPaymentStatuses } = useSelector((state) => state.survey);
 
+
   const { userData } = useSelector((state) => state.user)
 
   const tokenValues = jwtDecode(userData?.accessToken)
@@ -182,7 +183,7 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
      
       :
       
-      (launchSurveyData?.length > 0 && !startSurvey) ? 
+      (launchSurveyData?.length > 0 && !startSurvey) || (Array.isArray(surveyPaymentStatuses) && (surveyPaymentStatuses[0]?.surveyLaunchStatus )&& !startSurvey)? 
       
       (
         <>
