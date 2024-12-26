@@ -11,7 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Navbarvalue } from '../../../context/NavbarValuesContext';
 import { jwtDecode } from 'jwt-decode';
-import { GetUserDetail } from '../../../Redux/slice/authSlice';
+import { GetUserDetail, setSelectedSurveyId } from '../../../Redux/slice/authSlice';
 import { store } from '../../../Redux/store';
 
 import Analyze from '../../../assets/svgs/Analyze Icon.svg'
@@ -163,6 +163,7 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
 
   const handleClose = (option, data) => {
      DashboardStateHandler('survey', { id: data?.surveyId, name: data?.surveyName }); 
+      store.dispatch(setSelectedSurveyId(data?.surveyId))
     if (option === 'Analyze results') {
       StapperHandler(6); 
       startSurveyHandler(true); 
