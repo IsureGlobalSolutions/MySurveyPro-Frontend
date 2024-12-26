@@ -93,3 +93,7 @@
   .btn-outline-danger:hover{
     color: red;
   }
+  .website-button:disabled {
+    background-color: #e4844c; /* Light gray for disabled state */
+    cursor: not-allowed;
+  }
