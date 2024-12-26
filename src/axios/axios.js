@@ -83,8 +83,7 @@ const setupAxiosInterceptors = (refreshTokenFunction) => {
         }
       }
 
-      console.error('API response error:', error.response);
-      console.error('Error config:', error.config);
+  
 
       return Promise.reject(error);
     }

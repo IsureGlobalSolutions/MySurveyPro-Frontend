@@ -35,7 +35,7 @@
 
 /* Define styles for the login content container */
 .login-content {
-    padding: 40px 60px;
+    padding: 90px 60px;
     box-sizing: border-box;
 }
 
@@ -116,7 +116,7 @@
     border: 1px solid var(--color-midnightblue);
     padding: 11px 37px;
     border-radius: 10px;
-    width: 100%;
+    /* width: 100%; */
     margin: 10px 0px;
     display: flex;
     justify-content: center; /* Center content inside button */
@@ -126,3 +126,37 @@
 .socail-login p {
     margin: 0px;
 }
+.socail-login:hover{
+    border-radius: 8px;
+    user-select: none;
+    cursor: pointer;
+    background-color: #d77418;
+    /* padding: 0 5px;  */
+
+}
+.custom-google-button {
+   
+    /* color: white; */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%; /* Adjust the width as needed */
+  }
+  
+  .custom-google-button:hover {
+    background-color: #e7601c;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .custom-google-button:disabled {
+    background-color: #ad1414;
+    cursor: not-allowed;
+  }
+  
+  
