@@ -13,12 +13,13 @@
     const Q12survey = ({stepUPSendValue , sendIdParent}) => {
         const dispatch =useDispatch();
         const { register , handleSubmit , formState: { errors } } = useForm();
-         const params = useParams();
+         const { userId, surveyId } = useParams();
+
           const onSubmit = async (data) => {
             const id = data.userid;
             try {
-             dispatch(getstaffid({surveyId:1,employeeId:id,userId:params?.id}))
-            .then((res)=>{
+              dispatch(getstaffid({surveyId:surveyId,employeeId:id, userId}))
+              .then((res)=>{
               if(res.payload.isSuccess===true){
                 toast.success(res.payload.alertMessage)
                 stepUPSendValue(0);

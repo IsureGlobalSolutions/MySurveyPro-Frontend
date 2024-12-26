@@ -11,14 +11,15 @@
     import toast from 'react-hot-toast';
     import { useDispatch, useSelector } from 'react-redux';
     const TEISurvey = ({stepUPSendValue , sendIdParent}) => {
-      const surveyId= useSelector((state)=>state.user.selectedSurveyId)
+      // const surveyId= useSelector((state)=>state.user.selectedSurveyId)
         const dispatch =useDispatch();
         const { register , handleSubmit , formState: { errors } } = useForm();
+        const { userId, surveyId } = useParams();
          const params = useParams();
           const onSubmit = async (data) => {
             const id = data.userid;
             try {
-             dispatch(getstaffid({surveyId:surveyId,employeeId:id,userId:params?.id}))
+             dispatch(getstaffid({surveyId:surveyId,employeeId:id, userId}))
             .then((res)=>{
               if(res.payload.isSuccess===true){
                 toast.success(res.payload.alertMessage)

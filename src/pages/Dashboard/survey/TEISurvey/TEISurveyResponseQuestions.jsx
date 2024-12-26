@@ -21,27 +21,28 @@ import { useParams } from 'react-router-dom';
 import TEISurvey from './TEISurvey';
 import TEICongratulation from './TEICongratulation';
 const TEISurveyResponseQuestions = () => {
-    const TEISurveyId = useSelector((state) => state.user.selectedSurveyId);
+    // const surveyId = useSelector((state) => state.user.selectedSurveyId);
+
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
     const [staffid, setstaffid] = useState('');
     const {userData} =useSelector((state)=>state.user)
-    const {id}=useParams();
     const [isLoading, setisLoading] = useState(false)
-  const userid = id;
+      const { userId, surveyId } = useParams();
+  console.log(userId, surveyId, 'params');
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(111);
     const [selectchoiseid, setselectchoiseid] = useState([]);
 
     useEffect(() => {
-        fetchSurveyData(TEISurveyId);
+        fetchSurveyData(surveyId);
         loadProgress();
         clearProgress();
     }, [dispatch]);
 
-    const fetchSurveyData = async (TEISurveyId) => {
+    const fetchSurveyData = async (surveyId) => {
         try {
-            const res = await dispatch(getSurveyById(TEISurveyId));
+            const res = await dispatch(getSurveyById(surveyId));
             setData(res?.payload);
         } catch (error) {
             toast.error(error.message);
@@ -91,7 +92,7 @@ const TEISurveyResponseQuestions = () => {
                 questionId: question.questionId,
                 choiceId: selectchoiseid[question.questionId],
                 recipientId: Number(staffid),
-                userId: userid,
+                userId,
                 surveyId: question.surveyId, // Assuming surveyId is part of the question object
             }));
     

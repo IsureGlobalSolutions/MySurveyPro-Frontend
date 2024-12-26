@@ -163,13 +163,13 @@ const config = [
   component:TEITemplate
 },
 {
-  path: '/q12survey/:id*',
+  path: '/q12survey/:userId/:surveyId*',
   loginRequired:false,
   layout: PublicLayout,
   component:Survey
 },
 {
-  path: '/TeamEffectivenessSurvey/:id*',
+  path: '/TeamEffectivenessSurvey/:userId/:surveyId*',
   loginRequired:false,
   layout: PublicLayout,
   component:TEISurveyTemplate
