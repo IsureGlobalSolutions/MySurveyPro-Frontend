@@ -13,8 +13,9 @@ import { Link } from "react-router-dom";
 import InputField from '../../components/mySurveyProInput/InputField';
 import WebsiteButton from '../../components/mySurveyProWebsiteBtn/WebsiteButtton';
 import { useDispatch, useSelector } from 'react-redux';
-import { signUpUser } from '../../Redux/slice/authSlice';
+import { Signinwithgoogle, signUpUser, updateAccessToken } from '../../Redux/slice/authSlice';
 import toast from 'react-hot-toast';
+import { GoogleLogin } from '@react-oauth/google';
 
 const SignupScreen = () => {
   const navigate = useNavigate();
@@ -42,7 +43,25 @@ const onSubmit = async (data) => {
     toast.error('An error occurred. Please try again.');
   }
 };
+const handleSuccess = (response) => {
+  console.log("🚀 ~ handleSuccess ~ response:", response)
+    const idToken = response.credential; 
+    const decodedToken = jwtDecode(idToken);
+    console.log('Decoded Token:', decodedToken);    
+  console.log('ID Token:', idToken);  
+ dispatch(Signinwithgoogle((idToken)))
+ .then((res) => {
+  if (res.payload.isSuccess) { 
+    toast.success("Login successful!"); 
+    store.dispatch(updateAccessToken(res?.payload))
+    navigate('/startsurvey')
+  }
 
+})
+}
+const handleError = () => {
+  console.error('Login Failed');
+};
   return (
     <div className="signup-main-container">
       <div className="card-signup">
@@ -138,17 +157,32 @@ const onSubmit = async (data) => {
               </div>
             </form>
 
-            <p className="signin-border text-center">____________ Or sign up with ____________</p>
-            <div className="mt-3 social-signup">
-              <div className="social-logo">
-                <Gooogle style={{ cursor: 'pointer' }} />
-              </div>
-              <div className="social-logo">
+            <p className="signin-border text-center">____________ Or sign in with ____________</p>
+            <div className="social-login d-flex alignn-items-center justify-content-center">
+  <GoogleLogin
+    onSuccess={handleSuccess}
+    onError={handleError}
+    text="Continue with Google"
+    shape="rectangular"
+    width="190%"
+    useOneTap
+    render={(renderProps) => (
+      <button
+        className="custom-google-button"
+        onClick={renderProps.onClick}
+        disabled={renderProps.disabled}
+      >
+        Continue with Google
+      </button>
+    )}
+  />
+
+              {/* <div className="social-logo">
                 <Facebook style={{ cursor: 'pointer' }} />
               </div>
               <div className="social-logo">
                 <Apple style={{ cursor: 'pointer' }} />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

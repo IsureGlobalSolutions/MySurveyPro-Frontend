@@ -123,9 +123,9 @@ if(res?.payload.isSuccess===true){
                 </form>
               
             
-               <p className="signin-border text-center">____________ Or sign up with ____________</p>
+               <p className="signin-border text-center">____________ Or sign in with ____________</p>
 <div className="mt-3">
-<div className="social-login d-flex alogn-items-center justify-content-center">
+<div className="social-login d-flex alignn-items-center justify-content-center">
   <GoogleLogin
     onSuccess={handleSuccess}
     onError={handleError}
