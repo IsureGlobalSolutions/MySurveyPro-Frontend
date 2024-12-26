@@ -1,76 +1,84 @@
 // MyContextProvider.js
-import React, { useContext, useState } from 'react';
-
-
-import { createContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 const MyContext = createContext();
 
 export const Navbarvalue = () => {
-    return useContext(MyContext);
-  };
+  return useContext(MyContext);
+};
 
 const NavbarValuesContext = ({ children }) => {
-  const [topNavValue, setTopNavValue] = useState(null);
-  const [DashboardNavValues, setDashboardNavValues] = useState(1)
-  const [startSurveyStepper, setstartSurveyStepper] = useState(1)
-    const [startSurvey, setstartSurvey] = useState(false)
-  const [selectedDashboardValues, setSelectedDashboardValues] = useState({
-    department:'All',
-    grade:'All',
-    gender:'male',
-    survey:{id:'', name:''}
-  })
+  // Initial state definitions
+  const initialSelectedDashboardValues = {
+    department: 'All',
+    grade: 'All',
+    gender: 'male',
+    survey: { id: '', name: '' },
+  };
 
-//main website topnavbar values 
+  const [topNavValue, setTopNavValue] = useState(null);
+  const [DashboardNavValues, setDashboardNavValues] = useState(1);
+  const [startSurveyStepper, setstartSurveyStepper] = useState(1);
+  const [startSurvey, setstartSurvey] = useState(false);
+  const [selectedDashboardValues, setSelectedDashboardValues] = useState(initialSelectedDashboardValues);
+
+  // Main website top navbar values
   const updateTopNavValues = (topNavValue) => {
     setTopNavValue(topNavValue);
   };
-//dashbaord sidebar values 
+
+  // Dashboard sidebar values
   const updateDashbaordNavValues = (DashboardNavValues) => {
     setDashboardNavValues(DashboardNavValues);
   };
 
-//dashboard start survey tab values
+  // Dashboard start survey tab values
   const StapperHandler = (value) => {
     setstartSurveyStepper(value);
   };
-//start survey check value
+
+  // Start survey check value
   const startSurveyHandler = (value) => {
     setstartSurvey(value);
   };
 
-
-  //dashboard selected department value
-  const DashboardStateHandler = (state,value) => {
-      // Check if the state is a valid key in selectedDashboardValues
-      if (selectedDashboardValues.hasOwnProperty(state)) {
-        // Update the specific key with the new value
-        setSelectedDashboardValues((prevState) => ({
-          ...prevState,
-          [state]: value
-        }));
-      } else {
-        console.error(`Invalid state key: ${state}`);
-      }
+  // Dashboard selected department value
+  const DashboardStateHandler = (state, value) => {
+    if (selectedDashboardValues.hasOwnProperty(state)) {
+      setSelectedDashboardValues((prevState) => ({
+        ...prevState,
+        [state]: value,
+      }));
+    } else {
+      console.error(`Invalid state key: ${state}`);
+    }
   };
 
+  // Reset all context values to initial states
+  const resetContext = () => {
+    setTopNavValue(null);
+    setDashboardNavValues(1);
+    setstartSurveyStepper(1);
+    setstartSurvey(false);
+    setSelectedDashboardValues(initialSelectedDashboardValues);
+  };
 
   return (
-    <MyContext.Provider value={{ 
-      topNavValue,
-     updateTopNavValues,
-     DashboardNavValues,
-     updateDashbaordNavValues ,
-     startSurveyStepper,
-     StapperHandler,
-     selectedDashboardValues,
-     DashboardStateHandler,
-     startSurvey,
-     startSurveyHandler
-   
-
-     }}>
+    <MyContext.Provider
+      value={{
+        topNavValue,
+        updateTopNavValues,
+        DashboardNavValues,
+        updateDashbaordNavValues,
+        startSurveyStepper,
+        StapperHandler,
+        selectedDashboardValues,
+        DashboardStateHandler,
+        startSurvey,
+        startSurveyHandler,
+        resetContext, // Expose the reset function
+      }}
+    >
       {children}
     </MyContext.Provider>
   );

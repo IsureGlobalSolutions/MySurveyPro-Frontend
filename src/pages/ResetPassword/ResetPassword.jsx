@@ -13,7 +13,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import toast from 'react-hot-toast';
-import { resetForgetPasswordApi } from '../../Redux/slice/auth';
+import { resetForgetPasswordApi } from '../../Redux/slice/authSlice';
 const RestPassword = () => {  
   const { register, handleSubmit,watch, formState: { errors } } = useForm();
   const dispatch = useDispatch();

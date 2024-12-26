@@ -33,20 +33,21 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
 
   const { surveyPaymentStatuses } = useSelector((state) => state.survey);
 
+
   const { userData } = useSelector((state) => state.user)
 
   const tokenValues = jwtDecode(userData?.accessToken)
 
 
   useEffect(() => {
-    if (tokenValues.sid) {
+    if (tokenValues?.sid) {
 
 
       dispatch(GetUserDetail(tokenValues?.sid))
     }
    
 
-  }, [tokenValues.sid])
+  }, [tokenValues?.sid])
 
   useEffect(() => {
     // if(surveyPaymentStatuses?.length === 0){
@@ -54,7 +55,6 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
     dispatch(LaunchedSurveysStatusApi())
       .then((res) => {
         if (res?.payload) {
-          console.log(res?.payload);
           
        
         
@@ -63,7 +63,8 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
             const launch = []; 
   
             res.payload.forEach((element) => {
-              // Add payment status object to the paymentStatusUpdates object
+              
+              
               paymentStatusUpdates[element?.surveyId] = {
                 paymentStatus: element?.surveyPaymentStatus,
               };
@@ -130,7 +131,7 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
       }
     });
 
-    // Dispatch the collected payment status updates to the store
+   
     store.dispatch(updatePaymentStatus(paymentStatusUpdates));
 
     
@@ -142,7 +143,7 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
   }
 
 
-  }, [surveyPaymentStatuses[0]?.surveyLaunchStatus]);
+  }, [surveyPaymentStatuses?.length]);
   
 
   const handleChangeRowsPerPage = (event) => {
@@ -182,7 +183,7 @@ const [launchSurveyData, setlaunchSurveyData] = useState([])
      
       :
       
-      (launchSurveyData?.length > 0 && !startSurvey) || (surveyPaymentStatuses[0]?.surveyLaunchStatus && !startSurvey)? 
+      (launchSurveyData?.length > 0 && !startSurvey) || (Array.isArray(surveyPaymentStatuses) && (surveyPaymentStatuses[0]?.surveyLaunchStatus )&& !startSurvey)? 
       
       (
         <>

@@ -1,7 +1,7 @@
 
     
     import React from 'react';
-    import './Q12survey.css';
+    import './qsurvey.css';
     import img1 from '../../../../assets/Q12survey/Q12surveystepperimg.png';
     import InputField from '../../../../components/mySurveyProInput/InputField';
     import { useForm } from 'react-hook-form';

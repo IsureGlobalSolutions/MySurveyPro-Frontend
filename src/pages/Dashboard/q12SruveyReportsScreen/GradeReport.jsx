@@ -171,7 +171,7 @@ showSelectedValues(selectedDashboardValues?.grade)
         </div> 
 
        
-         <DropdownButton items={listofGrades} onSelect={handleSelect} initialValue={'All'}/>
+         <DropdownButton items={listofGrades} listKeyName={'columnValue'} onSelect={handleSelect} selectionName={'All'}/>
             </div>
         
          <SurveyTable

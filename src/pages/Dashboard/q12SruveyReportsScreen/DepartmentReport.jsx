@@ -188,7 +188,7 @@ showSelectedValues(selectedDashboardValues?.department)
 
            
 
-            <DropdownButton items={listOfDepartment} onSelect={handleSelect} initialValue={'All'}/>
+            <DropdownButton items={listOfDepartment} listKeyName={'columnValue'} onSelect={handleSelect} selectionName={'All'}/>
           </div>
 
           <SurveyTable

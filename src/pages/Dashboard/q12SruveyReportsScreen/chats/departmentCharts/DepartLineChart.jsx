@@ -125,7 +125,7 @@ SetReportValueHandler(getAllReportData,data?.name)
         </div>
         <div className="d-flex align-items-center w-100 justify-content-end">
     
-    <DropdownButton items={listOfResponseReport} onSelect={handleSelect} initialValue='Actively Engaged'/>
+    <DropdownButton items={listOfResponseReport} listKeyName={'name'} onSelect={handleSelect} selectionName='Actively Engaged'/>
  
     </div>
     </div>

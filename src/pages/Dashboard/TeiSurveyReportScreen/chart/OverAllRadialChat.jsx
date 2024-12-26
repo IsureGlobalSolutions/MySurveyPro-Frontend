@@ -9,7 +9,6 @@ const OverAllRadialChat = () => {
 const dispatch =useDispatch();
 const [isLoading, setisLoading] = useState(false)
 const [overAllScore, setoverAllScore] = useState(0)
-console.log("🚀 ~ OverAllRadialChat ~ overAllScore:", overAllScore)
 const chartRef = useRef(null); 
 const{overAllTEISurveyReport}=useSelector((state)=>state.teiSurvey)
 

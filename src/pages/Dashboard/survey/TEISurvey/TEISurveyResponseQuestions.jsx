@@ -26,7 +26,8 @@ const TEISurveyResponseQuestions = () => {
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
     const [staffid, setstaffid] = useState('');
-    const {isLoading,userData} =useSelector((state)=>state.user)
+    const {userData} =useSelector((state)=>state.user)
+    const [isLoading, setisLoading] = useState(false)
       const { userId, surveyId } = useParams();
   console.log(userId, surveyId, 'params');
     const theme = useTheme();
@@ -79,8 +80,6 @@ const TEISurveyResponseQuestions = () => {
         const allAnswered = currentDimension.questions.every(
             (question) => selectchoiseid[question.questionId] !== undefined
         );
-        console.log("🚀 ~ handleNext ~ allAnswered:", allAnswered)
-    
         if (!allAnswered) {
             toast.error("Please answer all questions before proceeding.");
             return;
@@ -88,6 +87,7 @@ const TEISurveyResponseQuestions = () => {
     
         try {
             // Prepare API request data for all questions in the current dimension
+            setisLoading(true)
             const responses = currentDimension.questions.map((question) => ({
                 questionId: question.questionId,
                 choiceId: selectchoiseid[question.questionId],
@@ -106,15 +106,18 @@ const TEISurveyResponseQuestions = () => {
             if (activeStep < data.dimensions.length - 1) {
                 // Move to the next dimension
                 setActiveStep((prevActiveStep) => prevActiveStep + 1);
+                setisLoading(false)
             } else {
                 // Final dimension - handle end of survey logic
                 console.log("etyeyeyu");
                 setActiveStep(data.dimensions.length);
                 clearProgress();
+                setisLoading(false)
                 // Move to the summary or finish screen
             }
         } catch (error) {
             toast.error(error.message || "An error occurred. Please try again.");
+            setisLoading(false)
         }
     };
     const handleBack = () => {
@@ -256,8 +259,9 @@ const TEISurveyResponseQuestions = () => {
                             <WebsiteButton
                               size="small"
                               onClick={handleNext}
+                              disabled={isLoading}
                             >
-                              Next
+                              {isLoading? 'Please Wait':'Next'}
                               {theme.direction === "rtl" ? (
                                 <KeyboardArrowLeft />
                               ) : (

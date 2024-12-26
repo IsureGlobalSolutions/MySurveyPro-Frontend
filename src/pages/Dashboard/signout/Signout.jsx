@@ -11,12 +11,15 @@ import { updatePaymentStatus } from '../../../Redux/slice/teiSlice';
 import { updateSurveyPaymentStatuses } from '../../../Redux/slice/surveySlice';
 import { persistor } from '../../../Redux/store';
 import { useNavigate } from 'react-router-dom';
+import { Navbarvalue } from '../../../context/NavbarValuesContext';
 
 
 const Signout =()=> {
   const {isLoading,userData} =useSelector((state)=>state.user)
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { resetContext } = Navbarvalue();
+
   const handleSubmit=()=>{
     try {
     dispatch(signout())
@@ -25,10 +28,7 @@ const Signout =()=> {
     if(res?.payload.isSuccess===true){
       toast.success(res?.payload.alertMessage)
       navigate('/login')
-      // let emptyPyamentStatus = {};
-      // let emptySurveyPaymentStatuses = [];
-      // store.dispatch(updatePaymentStatus(emptyPyamentStatus));
-      // store.dispatch(updateSurveyPaymentStatuses(emptySurveyPaymentStatuses));
+  resetContext()
       persistor.purge()
  
     }
