@@ -133,7 +133,7 @@ export const getSurveyById = createAsyncThunk('Survey/getSurveyById', async (sur
 
 export const surveyresponse = createAsyncThunk('Survey/surveyresponse', async ( data, thunkAPI) => {
   try {
-    const res = await axiosPrivate.post('api/SurveyResponse/AddSurveyResponse' , [data]);
+    const res = await instance.post('api/SurveyResponse/AddSurveyResponse' , [data]);
     return res.data;
 
   } catch (error) {
@@ -144,7 +144,7 @@ export const surveyresponse = createAsyncThunk('Survey/surveyresponse', async ( 
 });
 export const getstaffid = createAsyncThunk('Survey/getstaffid', async ({surveyId,employeeId,userId}, thunkAPI) => {
   try {
-    const res = await axiosPrivate.get(`api/Recipient/VerifyRecipient`,{
+    const res = await instance.get(`api/Recipient/VerifyRecipient`,{
     params:{surveyId,employeeId,userId}
     } );
     return res.data;

@@ -20,27 +20,27 @@ import { jwtDecode } from "jwt-decode";
 import { useParams } from 'react-router-dom';
 
 const SurveyResponseQuestion = () => {
-    const Q12SurveyId = useSelector((state) => state.user.selectedSurveyId);
+    // const surveyId = useSelector((state) => state.user.selectedSurveyId);
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
     const [staffid, setstaffid] = useState('');
     const {isLoading,userData} =useSelector((state)=>state.user)
-    const {id}=useParams();
- 
-  const userid = id;
+    const { userId, surveyId } = useParams();
+    // console.log(userId, surveyId, 'params');
+//   const userid = id;
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(111);
     const [selectchoiseid, setselectchoiseid] = useState([]);
 
     useEffect(() => {
-        fetchSurveyData(Q12SurveyId);
+        fetchSurveyData(surveyId);
         loadProgress();
         clearProgress();
     }, [dispatch]);
 
-    const fetchSurveyData = async (Q12SurveyId) => {
+    const fetchSurveyData = async (surveyId) => {
         try {
-            const res = await dispatch(getSurveyById(Q12SurveyId));
+            const res = await dispatch(getSurveyById(surveyId));
             setData(res?.payload.questions);
         } catch (error) {
             toast.error(error.message);
@@ -83,7 +83,7 @@ const SurveyResponseQuestion = () => {
             const recipientId= Number(staffid)
             if (choiceId) {
                 try {
-                    const requestData = { choiceId, recipientId: recipientId , userId: userid , surveyId:Q12SurveyId , questionId };
+                    const requestData = { choiceId, recipientId: recipientId , userId , surveyId:surveyId , questionId };
                     await dispatch(surveyresponse(requestData));
                     saveProgress();
                 } catch (error) {
@@ -97,7 +97,7 @@ const SurveyResponseQuestion = () => {
             const recipientId= Number(staffid)
             if (choiceId) {
                 try {
-                    const requestData = { choiceId, recipientId: recipientId , userId: userid , surveyId:Q12SurveyId, questionId };
+                    const requestData = { choiceId, recipientId: recipientId , userId , surveyId:Q12SurveyId, questionId };
                     await dispatch(surveyresponse(requestData));
                     saveProgress();
                     clearProgress();
