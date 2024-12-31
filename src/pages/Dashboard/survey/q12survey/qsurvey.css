@@ -151,7 +151,10 @@ color: #151D48;
     text-align: center;
     /* padding: 5px; */
 }
-
+.previewquestion{
+    margin: 20px ;
+    padding: 20px ;
+}
 @media (max-width: 600px) {
     .backgroundcolor h1{
         font-size: 40px;
@@ -159,4 +162,14 @@ color: #151D48;
         .backgroundcolor h2{
             font-size: 40px;
         }
+        .previewquestion{
+            margin: 0px !important;
+            padding: 0px !important;
+        }
+        .text-start h1 {
+            font-size: 15px;
+        }
+        .text-start p{
+            font-size: 15px;
+}
 }

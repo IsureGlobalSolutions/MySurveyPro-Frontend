@@ -1,0 +1,19 @@
+@media (max-width: 576px) {
+    .vsgraph {
+      width: 24px;
+      height: 24px;
+      padding: 1px;
+    }
+    .vsgraph-design{
+        width: 24px;
+        height: 24px;
+        padding:20px;
+        margin-left: 0px;
+        
+    }
+  
+    td img {
+      margin: 0.25rem;
+    }
+  }
+  

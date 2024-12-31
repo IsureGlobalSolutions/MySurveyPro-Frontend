@@ -38,9 +38,9 @@ const Index = () => {
   return (
     <>
       <div className="px-2">
-      
- 
+    
   <Stepper
+    className="stepper-container"
           steps={[
             { label: "Select Survey" },
             { label: "Upload File" },
@@ -57,7 +57,6 @@ const Index = () => {
           }}
         />
 
-        {/* Step Content Rendering */}
         {startSurveyStepper === 1 ? (
       
           <Surveylist setstepper={StapperHandler} sendIdToParent={getSurveyIdHandle} />

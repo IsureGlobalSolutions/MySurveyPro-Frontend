@@ -4,6 +4,8 @@
     align-items: center;
     padding: 20px 10px;
     background-color: white;
+    user-select: none;
+
 }
 .profile-section{
    display: flex;
@@ -43,14 +45,17 @@
   object-fit: cover;
 }
 @media (max-width:950px) {
-  .screen-title{
-    display: none;
-  }
+ 
   .profile-section{
     gap: 20px;
   }
   .topnav-search{
     display: none;
+  }
+}
+@media (max-width:800px) {
+  .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.css-u06erh-MuiPaper-root {
+    width: 150%;
   }
 }
 
@@ -146,4 +151,39 @@
         background: #fff;
         color: #000; }
       
+ @media (max-width:700px) {
+  .screen-title p{
+    font-size: 20px !important;
+  }
+  
+ }
+
+
  
+@media (max-width: 768px) {
+  .custom-dropdown .dropdown-menu.active {
+    margin: 0px -20px -20px -70px !important ;
+  }
+  .profile-info {
+    display: none; /* Hide profile info on smaller screens */
+  }
+
+  .topnav-profile {
+    justify-content: center; /* Center align items for smaller screens */
+  }
+
+  .dropdown-menu {
+    width: 100%; /* Full width dropdown for small screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+  }
+
+  .dropdown-link {
+    gap: 1rem;
+  }
+}

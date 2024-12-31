@@ -275,7 +275,7 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
             <div className="col-md-11">
               <div className="">
                 <div className="title d-flex justify-content-between px-2">
-                  <p className="fw-bold fs-3">Surveys File List</p>
+                  <p className="fs-3">Surveys File List</p>
                   <WebsiteButton className="m-0" onClick={handleAddFile}
                   >
                     Add new file
@@ -292,14 +292,14 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
                           style={{ backgroundColor: "#00003A" }}
                         >
                           <th
-                            className="p-4"
+                            className="p-4 text-semobold"
                             
                           >
                             File Name
                           </th>
 
                           <th
-                            className="p-4"
+                            className="p-4 text-semobold"
                             
                           >
                             Actions
@@ -345,7 +345,7 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
                                           />
                                         </div>
                                         <div
-                                          className="px-4"
+                                          className="px-4 text-semobold"
                                           // onClick={() => handleClick(item)}
                                         >
                                           {item.fileName}

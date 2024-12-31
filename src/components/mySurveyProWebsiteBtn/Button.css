@@ -57,31 +57,28 @@
     box-sizing: border-box;
   }
   @media (max-width:768px) {
-    
+    .file-show-name {
+      font-size: 15px !important;
+      padding: 20px 10px !important;
+    }
     .website-button {
    
-      padding: var(--padding-8xs) var(--padding-xs);
+      padding: 2px 4px  0px 10px !important;
       background-color: var(--color-darkorange);
       border-radius: var(--br-81xl);
-     
-    
-   
       line-height: 21.8px;
       font-size: 12px;
       font-weight: 500;
     }
 
     .outliner-button {
-      padding: var(--padding-8xs) var(--padding-xs);
+      padding: 2px 4px  0px 10px !important;
       border-radius: var(--br-81xl);
-     
-    
-   
       line-height: 21.8px;
       font-size: 12px;
       font-weight: 500;
     }
   }
-
+  
   
   

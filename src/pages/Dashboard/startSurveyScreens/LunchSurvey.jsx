@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { LaunchedSurveysStatusApi, LaunchSurveyApi } from '../../../Redux/slice/surveySlice'
 import toast from 'react-hot-toast'
 import { useState } from 'react'
+import './startsurvey.css'
 const LunchSurvey = ({setstepper,selectedFilesArray,surveyId}) => {
   const [isLoading, setisLoading] = useState(false)
   const dispatch = useDispatch();

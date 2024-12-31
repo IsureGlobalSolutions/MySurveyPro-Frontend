@@ -77,10 +77,10 @@ const handlePreviewCheckboxClick =(content)=>{
 
   return (
     <div className="surveylist-section m-4 p-4">
-      <div className="m-4">
+      <div className="m-2">
         <h1>Survey templates</h1>
       </div>
-      <div className="d-flex justify-content-start flex-wrap gap-5 mb-4 p-4">
+      <div className="d-flex justify-content-start flex-wrap gap-4">
         {surveyListData?.length > 0
           ? surveyListData?.map((content, index) => (
               <div
@@ -91,6 +91,7 @@ const handlePreviewCheckboxClick =(content)=>{
                   type="button"
                   src={content.img}
                   className="card-img"
+                  style={{borderRadius:"20px"}}
                   alt={content.title}
                 />
                 <div className="card-body">
@@ -100,10 +101,10 @@ const handlePreviewCheckboxClick =(content)=>{
                       {content.text}
                     </p>
                   </div>
-                  <div className="d-flex justify-content-end mb-2 gap-2">
+                  <div className="d-flex flex-column flex-md-row justify-content-center mb-2 gap-2 align-items-center">
                     <Link to={content.id} className="sidbar-item-link">
                       <WebsiteButton
-                        style={{ padding: "2px 10px", fontSize: "14px" }}
+                        style={{ padding: "2px 10px", fontSize: "13px" }}
                         onClick={() => handlePreviewCheckboxClick(content)}
                       >
                         {content.buttonviewsurvey}

@@ -270,3 +270,69 @@ textarea.form-contro:active {
     color: #151D48;
     /* text-transform: capitalize;  */
 }
+.mui-button-resp{
+    background-color: #d3d3d3 !important;
+    justify-content: space-evenly;
+}
+@media (max-width:500px){
+    .Q12-section{
+        margin: 40px 0px 40px 0px  !important;;
+        padding: 0 !important;;
+    }
+    .text{
+        padding: 2px 0px 0px 0px  !important;
+        margin: 0 0px 0px 0px 0px !important;;
+    }
+    .text h1 {
+     
+        font-size: 15px;
+    }
+    .tableheader {
+        margin-top: -120px !important;
+    }
+    .dimension-text{
+        font-size: 10px !important;
+    }
+    .form-check-input-TEI {
+        width: 12px; 
+        height: 12px; 
+    }
+    .line-width{
+        height: 50% !important;
+    }
+    .Question-options {
+        gap: 1px !important
+    }
+    .question-text{
+        margin: 3px 20px 0px 10px !important;
+        padding: 2px !important;
+    }
+    .some-class h3 {
+        font-size: 5px !important;
+      }
+      .mui-button-resp{
+        flex-direction: row !important;
+        justify-content: space-between!important;
+      }
+      .css-rh92k-MuiPaper-root-MuiMobileStepper-root {
+        font-size: 10px !important;
+        margin: 3px !important;
+      }
+      .css-1knaqv7-MuiButtonBase-root-MuiButton-root {
+        padding: 0px  !important;
+        margin: 0px !important;
+        font-size: 10px !important;
+        max-width: none !important;
+        
+      }
+}
+@media (max-width:600px) {
+    .tableheader {
+        margin-top: -150px !important;
+    }
+}
+@media (max-width:450px) {
+    .tableheader {
+        margin-top: -110px !important;
+    }
+}

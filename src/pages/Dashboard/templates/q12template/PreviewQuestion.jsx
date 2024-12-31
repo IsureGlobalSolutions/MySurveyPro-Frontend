@@ -83,11 +83,11 @@ const PreviewQuestion = () => {
                     <img type="button" src={img1} className="card-img img-fluid mb-3" />
                     <div className='container'>
                       <div className='row'>
-                        <div className='col-12 p-5'>
+                        <div className='col-12 previewquestion'>
                            <div className='row'>
                     <div className='col-12 col-md-7 surveyQuestion'>
                         <div className='text-start gap-3'>
-                            <Box className="ms-5" sx={{ maxWidth: 900 }}>
+                            <Box className="" sx={{ maxWidth: 900 }}>
                                 <Box>
                                     <Paper
                                         square
