@@ -44,8 +44,17 @@ color: #5D5D5D;
             flex-direction: column;
             justify-content: space-between;
         }
-        
-        
+        .e_heading p{
+          font-size: 39px;
+        }
+        .effortless_meeting p {
+          font-size: 29px;
+        }
+        .effortless_description {
+          font-weight: 400;
+          font-size: 21px;
+          line-height: 47px;
+        }
     
     
 }

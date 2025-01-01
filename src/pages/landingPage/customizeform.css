@@ -36,23 +36,23 @@ position: relative;
 .custm-description{
     font-weight: 300;
     color: white;
-    font-size: 23px;
-    line-height: 28px;
+    font-size: 20px;
+    line-height: 35px;
 }
 @media (max-width:750px){
     .custm-heading{
         max-width: 80%;
         color: white;
         font-weight: 700;
-        font-size: 30px;
-        line-height: 50px;
+        font-size: 20px;
+        line-height: 30px;
     }
     .custm-description{
         width: 70%;
         font-weight: 300;
         color: white;
-        font-size: 15px;
-        line-height: 25px;
+        font-size: 16px;
+        line-height: 20px;
     }
     
 }
@@ -61,15 +61,20 @@ position: relative;
         max-width: 100%;
         color: white;
         font-weight: 700;
-        font-size: 25px;
-        line-height: 50px;
+        font-size: 15px;
+        line-height: 35px;
     }
     .custm-description{
-        width: 70%;
+        width: 100%;
         font-weight: 300;
         color: white;
         font-size: 15px;
         line-height: 20px;
     }
     
+}
+@media (max-width:1000px) {
+    .custm-heading {
+        font-size: 30px;
+    }
 }

@@ -79,7 +79,7 @@ const LandingPage = () => {
     <div className="my-survey-pro  mt-0 pt-0">
      <div className='topherosection  conatiner ps-4'>
 <div className='d-flex  hero-section '>
-     <div className='col-lg-6  col-md-5'>
+     <div className='col-lg-6  col-md-5 col-12'>
    <div className='left-herosection d-flex flex-column gap-3'>
    <h1>Transform the way
 you measure human
@@ -95,33 +95,38 @@ team performance and engagement?</span>
 <div>
 <div className="work-eff w-100">
       <div className="work-eff-content ">
-      <section className="trust-section d-flex  ">
-  <div className="text-content col-lg-4 col-md-6 mt-2 ">
+      <section className="trust-section d-flex flex-column flex-md-row align-items-center">
+  <div className="text-content col-lg-4 col-md-6 text-center text-md-start mt-2">
     <h3>We earn trust by working efficiently</h3>
   </div>
-  <div className="stats col-lg-8 col-md-6 row text-center mt-4">
-    <div className="col-12 col-md-4 d-flex flex-column align-items-center">
-      <div className="stat-item">
-        <span className="number display-4">{count}+</span>
-        <span className="label">Subscriptions</span>
-      </div>
-    </div>
-    {/* <div className="divider d-none d-md-block col-md-1"></div> */}
-    <div className="col-12 col-md-4 d-flex flex-column align-items-center mt-3 mt-md-0">
-      <div className="stat-item">
-        <span className="number display-4">{countone}+</span>
-        <span className="label" style={{ whiteSpace: "nowrap" }}>Daily Order</span>
-      </div>
-    </div>
-    {/* <div className="divider d-none d-md-block col-md-1"></div> */}
-    <div className="col-12 col-md-4 d-flex flex-column align-items-center mt-3 mt-md-0">
-      <div className="stat-item">
-        <span className="number display-4">{counttwo}+</span>
-        <span className="label" style={{ whiteSpace: "nowrap" }}>Current Survey</span>
-      </div>
+  <div className="stats row justify-content-center text-center mt-4">
+  {/* Stat 1 */}
+  <div className="col-12 col-md-4 d-flex flex-column align-items-center mb-3 mb-md-0">
+    <div className="stat-item">
+      <span className="number display-4 fw-bold">{count}+</span>
+      <span className="label mt-2">Subscriptions</span>
     </div>
   </div>
+
+  {/* Stat 2 */}
+  <div className="col-12 col-md-4 d-flex flex-column align-items-center mb-3 mb-md-0">
+    <div className="stat-item">
+      <span className="number display-4 fw-bold">{countone}+</span>
+      <span className="label mt-2" style={{ whiteSpace: "nowrap" }}>Daily Orders</span>
+    </div>
+  </div>
+
+  {/* Stat 3 */}
+  <div className="col-12 col-md-4 d-flex flex-column align-items-center">
+    <div className="stat-item">
+      <span className="number display-4 fw-bold">{counttwo}+</span>
+      <span className="label mt-2" style={{ whiteSpace: "nowrap" }}>Current Surveys</span>
+    </div>
+  </div>
+</div>
+
 </section>
+
 
     
       </div>
@@ -143,25 +148,27 @@ team performance and engagement?</span>
   
       </section>  */}
         </div> 
-       <div className='col-lg-6 ms-5 mt-4 '>
-       <div className="contain ">
-      <div className="video-container">
-        <video 
-          className="video-fluid" 
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        >
-          <source src={brandVideo}  />
-          Your browser does not support the video tag.
-        </video>
-      </div>
+        <div className=" col-lg-6 mt-4 d-flex justify-content-center ">
+  <div className="contain w-100 px-3 px-lg-0">
+    <div className="video-container position-relative" style={{ overflow: "hidden", borderRadius: "8px" }}>
+      <video 
+        className="video-fluid w-100" 
+        autoPlay 
+        loop 
+        muted 
+        playsInline
+        style={{ maxHeight: "100%", objectFit: "cover" }}
+      >
+        <source src={brandVideo} />
+        Your browser does not support the video tag.
+      </video>
     </div>
-       </div> 
+  </div>
+</div>
+
   </div>
      </div>
-     <div className="container  my-5">
+     <div className="container  ">
       <img src={brandList} className="img-fluid" alt="no Image of brands" />
      </div>
      
