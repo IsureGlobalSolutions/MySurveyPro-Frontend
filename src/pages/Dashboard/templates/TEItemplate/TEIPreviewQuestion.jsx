@@ -111,13 +111,14 @@ const TEIPreviewQuestion = () => {
                                 className="custom-img"
                               />
                               <span
-                                className="ms-2 me-2"
+                                className="ms-2 me-2 dimension-text"
                                 style={{ fontSize: "18px", color: "white" }}
                               >
                                 {" "}
                                 {data.dimensions[activeStep].dimensionId}
                               </span>
                               <span
+                              className="dimension-text"
                                 style={{ fontSize: "18px", color: "white" }}
                               >
                                 {" "}
@@ -129,13 +130,14 @@ const TEIPreviewQuestion = () => {
                             (question, index) => (
                               <div className="p-2 pt-1 pb-1" key={index}>
                                 <div className="Question-section mt-1">
-                                  <div className="question-question-nmber p-2 ps-3">
+                                  <div className="question-question-nmber p-2 ps-3 dimension-text">
                                     Question {index + 1}
                                   </div>
                                   <div className="m-3 d-flex question-text gap-2">
-                                    <span>{index + 1}</span>
+                                    <span className="dimension-text">{index + 1}</span>
                                     <span>
                                       <span
+                                      className="line-width"
                                         style={{
                                           border: "none",
                                           borderLeft: "3px solid #f97300",
@@ -146,9 +148,9 @@ const TEIPreviewQuestion = () => {
                                         }}
                                       />
                                     </span>
-                                    <h3>{question.questionText}</h3>
+                                    <h3 className="dimension-text">{question.questionText}</h3>
                                   </div>
-                                  <div className="Question-options d-flex gap-5 p-2 mt-0 pt-0">
+                                  <div className="Question-options d-flex flex-wrap gap-5 p-2 mt-0 pt-0">
                                     {question.choices.map((choice) => (
                                       <Paper
                                         key={choice.choiceId}
@@ -165,7 +167,7 @@ const TEIPreviewQuestion = () => {
                                           className="form-check-input-TEI mt-1"
                                           id={`choice${choice.choiceId}`}
                                         />
-                                        <span className="ms-2 TEIcheckmark">
+                                        <span className="ms-2 TEIcheckmark dimension-text">
                                           {choice.text}
                                         </span>
                                       </Paper>
@@ -177,45 +179,49 @@ const TEIPreviewQuestion = () => {
                           )}
                         </div>
                         {/* )} */}
-                        <MobileStepper
-                          variant="text"
-                          steps={data.dimensions.length}
-                          position="static"
-                          activeStep={activeStep}
-                          style={{backgroundColor:"#d3d3d3" ,  justifyContent:"space-evenly"}}
-                          nextButton={
-                            <WebsiteButton
-                              size="small"
-                              onClick={handleNext}
-                              disabled={
-                                activeStep === data.dimensions.length - 1
-                              }
-                            >
-                              Next
-                              {theme.direction === "rtl" ? (
-                                <KeyboardArrowLeft />
-                              ) : (
-                                <KeyboardArrowRight />
-                              )}
-                            </WebsiteButton>
-                          }
-                          backButton={
-                            <WebsiteButton>
-                              <Button
-                                size="small"
-                                onClick={handleBack}
-                                disabled={activeStep === 0}
-                              >
-                                {theme.direction === "rtl" ? (
-                                  <KeyboardArrowRight />
-                                ) : (
-                                  <KeyboardArrowLeft />
-                                )}
-                                Back
-                              </Button>
-                            </WebsiteButton>
-                          }
-                        />
+                        <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-12 col-md-8 col-lg-6 mui-button-resp">
+          <MobileStepper
+            variant="text"
+            steps={data.dimensions.length}
+            position="static"
+            activeStep={activeStep}
+            style={{ backgroundColor: "#d3d3d3" }}
+            nextButton={
+              <WebsiteButton
+                size="small"
+                onClick={handleNext}
+                disabled={activeStep === data.dimensions.length - 1}
+              >
+                Next
+                {theme.direction === "rtl" ? (
+                  <KeyboardArrowLeft />
+                ) : (
+                  <KeyboardArrowRight />
+                )}
+              </WebsiteButton>
+            }
+            backButton={
+              <WebsiteButton>
+                <Button
+                  size="small"
+                  onClick={handleBack}
+                  disabled={activeStep === 0}
+                >
+                  {theme.direction === "rtl" ? (
+                    <KeyboardArrowRight />
+                  ) : (
+                    <KeyboardArrowLeft />
+                  )}
+                  Back
+                </Button>
+              </WebsiteButton>
+            }
+          />
+        </div>
+      </div>
+    </div>
                       </div>
                     </div>
                   </div>

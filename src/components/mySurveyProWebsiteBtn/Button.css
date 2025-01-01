@@ -57,31 +57,52 @@
     box-sizing: border-box;
   }
   @media (max-width:768px) {
-    
+    .file-show-name {
+      font-size: 15px !important;
+      padding: 20px 10px !important;
+    }
     .website-button {
-   
-      padding: var(--padding-8xs) var(--padding-xs);
+      padding: 2px 4px  0px 10px !important;
       background-color: var(--color-darkorange);
       border-radius: var(--br-81xl);
-     
-    
-   
       line-height: 21.8px;
       font-size: 12px;
       font-weight: 500;
     }
 
     .outliner-button {
-      padding: var(--padding-8xs) var(--padding-xs);
+      padding: 2px 4px  0px 10px !important;
       border-radius: var(--br-81xl);
-     
-    
-   
       line-height: 21.8px;
       font-size: 12px;
       font-weight: 500;
     }
   }
-
+  @media (max-width:768px) {
+    
+    .website-button {
+      padding: 10px !important; /* Add horizontal padding for better spacing */
+      background-color: var(--color-darkorange); /* Use your defined variable */
+      border-radius: var(--br-81xl); /* Consistent border-radius */
+      border: none; /* Remove default border */
+      font-size: 15px; /* Maintain readability */
+      font-weight: 500; /* Medium font weight */
+      line-height: 1.5; /* Adjust line height for text alignment */
+      color: #ffffff; /* Accessible text color */
+      text-align: center; /* Center align text */
+      text-decoration: none; /* Remove underline if it's a link */
+      cursor: pointer; /* Pointer cursor for buttons */
+      display: inline-block; /* Prevent extra margin from surrounding elements */
+      transition: background-color 0.3s ease, transform 0.2s ease; /* Add hover effect */
+    }
+    .outliner-button {
+      padding: 2px 4px  0px 10px !important;
+      border-radius: var(--br-81xl);
+      line-height: 21.8px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+  
   
   

@@ -12,7 +12,7 @@ const Q12template = ({  stepUPSendValue}) => {
   return (
     <div className='Q12-section m-5 d-flex justify-content-center align-items-center p-5'>
       <div className='container'>
-        <div className='stepper row p-5'>
+        <div className='stepper row '>
           <div className='col-md-4 p-5 mt-3'>
             <div className='text'>
               <h1>Preview</h1>

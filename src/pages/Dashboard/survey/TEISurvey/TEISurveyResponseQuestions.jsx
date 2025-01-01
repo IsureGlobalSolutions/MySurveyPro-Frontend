@@ -205,6 +205,7 @@ const TEISurveyResponseQuestions = () => {
                                     <span>{index + 1}</span>
                                     <span>
                                       <span
+                                      className='line-width'
                                         style={{
                                           border: "none",
                                           borderLeft: "3px solid #f97300",
@@ -217,7 +218,7 @@ const TEISurveyResponseQuestions = () => {
                                     </span>
                                     <h3>{question.questionText}</h3>
                                   </div>
-                                  <div className="Question-options d-flex gap-5 p-2 mt-0 pt-0">
+                                  <div className="Question-options d-flex flex-wrap gap-5 p-2 mt-0 pt-0">
   {question.choices.map((choice) => (
     <Paper
       key={choice.choiceId}

@@ -22,20 +22,29 @@
 justify-content: space-around;
 }
 .graph .text {
-    font-size: 60.02px;
-    font-weight: 700;
+    font-size: 50.02px;
+    font-weight: 900;
     line-height: 70px;
-    letter-spacing: -2px;  
+    letter-spacing: 2px;  
       color: #5D5D5D;
 
 }
-.solution-content{
-    width: 60%;
-}
-.solution-content .text {
-font-weight: 400;
-font-size: 23.45px;
-line-height: 39.81px;
-color: #5D5D5D;
 
+.solution-content .text {
+  font-weight: 400;
+  font-size: 25.45px;
+  line-height: 45.81px;
+  color: #5D5D5D;
+}
+@media (max-width:1000px) {
+  .graph .text {
+    font-size: 42.02px;
+  }
+  .solution-content .text {
+    font-size: 20.45px;
+    line-height: 35.81px;
+  }
+  .container, .container-sm {
+    max-width: 940px;
+}
 }

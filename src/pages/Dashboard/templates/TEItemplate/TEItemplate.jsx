@@ -1,8 +1,6 @@
 import React from 'react';
 import './TEItemplate.css';
 import img1 from '../../../../assets/Q12survey/Q12surveystepperimg.png';
-// import InputField from '../../../components/mySurveyProInput/InputField';
-// import { useForm } from 'react-hook-form';
 import WebsiteButton from '../../../../components/mySurveyProWebsiteBtn/WebsiteButtton';
 import { useNavigate } from 'react-router-dom';
 const TEItemplate = ({  stepUPSendValue}) => {
@@ -12,7 +10,7 @@ const TEItemplate = ({  stepUPSendValue}) => {
   return (
     <div className='Q12-section m-5 d-flex justify-content-center align-items-center p-5'>
       <div className='container'>
-        <div className='stepper row p-5'>
+        <div className='stepper row '>
           <div className='col-md-4 p-5 mt-3'>
             <div className='text'>
               <h1>Preview team effectiveness survey</h1>

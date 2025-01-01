@@ -1,5 +1,5 @@
 .sidebartitle h1{
-font-size: 29px;
+font-size: 20px;
 font-weight: 600;
 line-height: 45px;
 text-align: left;
@@ -18,8 +18,15 @@ font-size: 18px;
 font-weight: 600;
 line-height: 32px;
 text-align: left;
-color:#737791 ;
+color:#252529 ;
 }
+.verticlenavbar h1{
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: left;
+  color:#252529 ;
+  }
 .icon-fill{
 fill: #979797;
 }
@@ -52,6 +59,13 @@ color: #FFFFFF;
     transition: opacity 0.3s;
     opacity: 1;
 }
+.verticlenavbar li p {
+  
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .container p{
     margin: 0px;
 }
@@ -73,6 +87,19 @@ color: #FFFFFF;
     fill: white;
     
 } */
+.sidebarinner.collapsed .verticlenavbar li h1 {
+  width: 70%; 
+  height: 57%; 
+  overflow: hidden;
+  white-space: nowrap;
+  border: 2px solid #F97300; 
+  border-radius: 70%; 
+  margin: 1px;
+  padding: 0px 2px 0px 0px;
+  display: flex;
+  background-color: #F97300;
+  color: #fff;
+}
 
 .sidebarinner.collapsed .verticlenavbar li p {
     opacity: 0;
@@ -122,18 +149,23 @@ color: #FFFFFF;
        
   }
   @media (max-width: 1100px) {
+    .active-sidebar {
+      padding: 5px 0px 1px 0;
+    }
     .cross-icon {
         display: none;
     }
     .container.collapsed {
-        margin-top: 65px;
+        margin-top: 20px;
     }
 }
+
 .Mysurveypro{
     display: inline-block;
     padding: 0 20px; /* Default padding */
     transition: all 0.3s ease;
-    font-size: 15px;
+    font-size: 19px;
+    font-weight: 700;
   }
 
   .Mysurveypro:hover {
@@ -144,4 +176,27 @@ color: #FFFFFF;
     padding: 0 20px; /* Ensures the padding doesn't change */
  
   }
+  .text-small{
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .text-small.collapsed {
+    font-size: 10px;
+    font-weight: 600;
+    width: 100px; /* Adjust width to control text wrapping */
+    white-space: normal; /* Allows text to wrap */
+    word-break: break-word; /* Ensures words break if necessary */
+    text-align: center; /* Centers the text */
+    line-height: 1.2; /* Adjust line height for better spacing */
+  }
   
+  .card-plan{
+     padding: 0 5px 0 5px;    
+  }
+  .text-small-paragraph.collapsed{
+    /* display: none; */
+    font-size: 10px;
+  }
+  .card-width{
+    width: 46px;
+  }

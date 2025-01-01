@@ -16,7 +16,6 @@ import Paper from "@mui/material/Paper";
 import { LiaEditSolid } from "react-icons/lia";
 import "./startsurvey.css";
 import Uniquefiledata from "./Uniquefiledata";
-
 import Loader from "../../../components/plugins/Loader";
 import EditUploadFile from "./EditUploadFile";
 import toast from "react-hot-toast";
@@ -44,7 +43,6 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
   const [Editshow, setEditshow] = useState(false);
   const [addnewfile, setaddnewfile] = useState(false)
   const [Uniquefilename, setUniquefilename] = useState();
-  const [filenameupdate, setfilenameupdate] = useState(null);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -78,14 +76,11 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
     setaddnewfile(data);
   };
   const handleCheckboxClick = (item) => {
-  
+  console.log("🚀 ~ handleCheckboxClick ~ item:", item)
     if (selectedFiles.includes(item)) {
-      // If already selected, remove it
       setselectedFiles(selectedFiles.filter((selected) => selected !== item));
     } else {
-      // If not selected, add it
       setselectedFiles([...selectedFiles, item])
-      //send data to parent component
       sendSelectedFilesToParent([...selectedFiles, item]) 
     }
   };
@@ -115,33 +110,23 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
     setUniquefilename(uniqueFileName);
     setEditshow(true);
     setFilename(filename);
+    
   };
   const handleAddFile =(data) => {
     setaddnewfile(data);
   }
-  useEffect(() => {
-    if (filenameupdate) {
-      try {
-        dispatch(VeiwUniqueFileName(filenameupdate)).then((response) => {
-          if (response?.payload) {
-            setVeiwdata(response.payload);
-          } else {
-            toast.error("The file is empty or cannot be viewed.");
-          }
-        });
-      } catch (error) {
-        toast.error("An error occurred while fetching the file data.");
-      } finally {
-        setVeiwloading(false);
-      }
-    }
-  }, [filenameupdate]);
+  
 
   const handleViewFile = (item) => {
     setVeiwloading(true);
     setFilename(item.fileName);
     setViewshow(true);
-    setfilenameupdate(item.uniqueFileName);
+    dispatch(VeiwUniqueFileName(item.uniqueFileName)).then((response) => {
+      if (response?.payload) {
+        setVeiwdata(response.payload);
+        setVeiwloading(false);
+      }
+    })
   };
   const handledelete = (item) => {
     setShow(true);
@@ -290,7 +275,7 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
             <div className="col-md-11">
               <div className="">
                 <div className="title d-flex justify-content-between px-2">
-                  <p className="fw-bold fs-3">Surveys File List</p>
+                  <p className="fs-3">Surveys File List</p>
                   <WebsiteButton className="m-0" onClick={handleAddFile}
                   >
                     Add new file
@@ -307,14 +292,14 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
                           style={{ backgroundColor: "#00003A" }}
                         >
                           <th
-                            className="p-4"
+                            className="p-4 text-semobold"
                             
                           >
                             File Name
                           </th>
 
                           <th
-                            className="p-4"
+                            className="p-4 text-semobold"
                             
                           >
                             Actions
@@ -360,7 +345,7 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
                                           />
                                         </div>
                                         <div
-                                          className="px-4"
+                                          className="px-4 text-semobold"
                                           // onClick={() => handleClick(item)}
                                         >
                                           {item.fileName}
@@ -420,16 +405,17 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
                 </div>
               </div>
               <div className="d-flex justify-content-end mt-2">
-                <WebsiteButton
-                  type="button"
-                  onClick={() => {
-                    if (selectedFiles != null) {
-                      setstepper(4);
-                    }
-                  }}
-                >
-                  Next
-                </WebsiteButton>
+              <WebsiteButton
+  type="button"
+  onClick={() => {
+    if (selectedFiles.length > 0) {
+      setstepper(4);
+    }
+  }}
+  disabled={selectedFiles.length === 0} 
+>
+  Next
+</WebsiteButton>
               </div>
             </div>
           </div>

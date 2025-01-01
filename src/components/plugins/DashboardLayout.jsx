@@ -16,7 +16,7 @@ const dispatch = useDispatch()
                 <div className={`${collapsed ? ' collapsedsidebar' : 'sidebar '}`}>
                     <Sidebar collapsed={collapsed} setcollapsed={setcollapsed} />
                 </div>
-                <div className={` w-100 ${collapsed ? ' collapse-content-screen' : 'sidbar-content-screen '}`} style={{ backgroundColor: '#F5F5F5' }}>
+                <div className={`collapse-content ${collapsed ? 'collapse-content-screen' : 'sidbar-content-screen'}`} style={{ backgroundColor: '#F5F5F5' }}>
 
                     <Topnavbar />
 

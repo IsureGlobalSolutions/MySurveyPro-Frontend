@@ -55,8 +55,9 @@ const DepartmentAndDimensionTable = () => {
         columnProperty,
       })
     )
+    
       .then((res) => {
-        setResponseDataInTable(res?.payload || []);
+        setResponseDataInTable(res?.payload?.data || []);
       })
       .finally(() => setIsLoading(false));
   };
