@@ -55,6 +55,7 @@ const DepartmentAndDimensionTable = () => {
         columnProperty,
       })
     )
+    
       .then((res) => {
         setResponseDataInTable(res?.payload?.data || []);
       })
