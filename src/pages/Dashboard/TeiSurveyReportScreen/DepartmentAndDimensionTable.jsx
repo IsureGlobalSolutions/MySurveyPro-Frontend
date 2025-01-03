@@ -5,7 +5,6 @@ import { TeiDimensionListApi, userSingleDimensionForSingleDepartmentReportApi } 
 import { Navbarvalue } from '../../../context/NavbarValuesContext';
 import { getListOfCoumnProperty } from '../../../Redux/slice/surveySlice';
 import DropdownButton from '../../../components/mySurveyProWebsiteBtn/DropdownButton';
-
 const DepartmentAndDimensionTable = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
@@ -15,7 +14,7 @@ const DepartmentAndDimensionTable = () => {
   const { selectedDashboardValues } = Navbarvalue();
   const { listOfDimensions, userSingleDimensionForSingleDepartmentReportList } = useSelector((state) => state.teiSurvey);
 
-  // Selected options for department and dimension
+  const [totalpages , settotalpages]=useState();
   const [selectedOption, setSelectedOption] = useState({
     dimensionId: null,
     columnProperty: null,
@@ -27,6 +26,7 @@ const DepartmentAndDimensionTable = () => {
       dispatch(TeiDimensionListApi(selectedDashboardValues?.survey?.id));
       dispatch(getListOfCoumnProperty({ surveyId: selectedDashboardValues?.survey?.id, columnProperty: 'department' }))
         .then((res) => {
+          console.log(res , "resppppppppp");
           setDepartmentList(res?.payload || []);
         });
     }
@@ -46,18 +46,26 @@ const DepartmentAndDimensionTable = () => {
   }, [listOfDimensions, departmentList]);
 
   // Fetch data based on selected options
-  const fetchData = (dimensionId, columnProperty) => {
+  const fetchData = (
+    dimensionId, 
+    columnProperty,
+    newRowsPerPage, 
+    currentPage
+  ) => {
     setIsLoading(true);
     dispatch(
       userSingleDimensionForSingleDepartmentReportApi({
         surveyId: selectedDashboardValues?.survey?.id,
         dimensionId,
         columnProperty,
+        pageSize: newRowsPerPage,
+        pageNumber:currentPage,
       })
     )
-    
       .then((res) => {
+        settotalpages(res?.payload.pagination.totalPages || [])
         setResponseDataInTable(res?.payload?.data || []);
+        
       })
       .finally(() => setIsLoading(false));
   };
@@ -108,6 +116,7 @@ const DepartmentAndDimensionTable = () => {
     }
   };
 
+  
   return (
     <>
       <div className="row m-0 p-0 justify-content-between mt-3">
@@ -137,7 +146,9 @@ const DepartmentAndDimensionTable = () => {
               )}
             </div>
           </div>
-          <SurveyTable columns={columns} data={rows} isLoading={isLoading} />
+          <SurveyTable columns={columns} data={rows} isLoading={isLoading}  dimensionId={selectedOption.dimensionId}
+  columnProperty={selectedOption.columnProperty}   fetchData={fetchData} totalpages={totalpages}
+/>
         </div>
       </div>
     </>

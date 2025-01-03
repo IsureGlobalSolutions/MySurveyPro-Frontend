@@ -10,10 +10,16 @@ const UserDimensionsDataForAllDepartments = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
+ 
   const [departmentList, setDepartmentList] = useState([]);
-
+  const [paginationData, setpaginationData] = useState({ newRowsPerPage:10,
+    currentPage: 1
+})
   const { selectedDashboardValues } = Navbarvalue();
-  const { listOfDepartments } = useSelector((state) => state.survey);
+  const { listOfDepartments } = useSelector((state) => state.survey); 
+  const [selectedDepartment, setselectedDepartment] = useState('')
+  const [totalpages , settotalpages]=useState();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,10 +28,12 @@ const UserDimensionsDataForAllDepartments = () => {
       setIsLoading(true);
       if (listOfDepartments?.length > 0) {
         setDepartmentList(listOfDepartments);
+        setselectedDepartment(listOfDepartments[0]?.columnValue)
       } else {
         dispatch(getListOfCoumnProperty({ surveyId: selectedDashboardValues?.survey?.id, columnProperty: 'department' }))
           .then((res) => {
             setDepartmentList(res?.payload || []);
+            setselectedDepartment(res?.payload[0]?.columnValue)
           })
           .finally(() => setIsLoading(false));
       }
@@ -35,27 +43,60 @@ const UserDimensionsDataForAllDepartments = () => {
   useEffect(() => {
     // Fetch data for the first department in the list
     if (departmentList?.length > 0 && selectedDashboardValues?.survey?.id) {
-      fetchDepartmentData(departmentList[0]?.columnValue);
+      fetchData(departmentList[0]?.columnValue,paginationData?.newRowsPerPage,paginationData?.currentPage);
     }
   }, [departmentList]);
 
-  const fetchDepartmentData = (department) => {
+
+
+  const handleSelectDepartment = (data) => {
+    fetchData(data?.columnValue,paginationData?.newRowsPerPage,paginationData?.currentPage);
+    setselectedDepartment(data?.columnValue)
+  };
+
+const getPaginationDataHandler=(...params)=>{
+
+setpaginationData((prev)=>({
+  ...prev,
+  newRowsPerPage:params[2],
+     currentPage: params[3]
+}))
+
+fetchData(selectedDepartment,params[2],params[3])
+
+}
+
+
+  const fetchData = (    
+     department,
+     newRowsPerPage, 
+     currentPage, 
+
+
+  ) => {
+
+    console.log("🚀 ~ UserDimensionsDataForAllDepartments ~ currentPage:", currentPage)
+    console.log("🚀 ~ UserDimensionsDataForAllDepartments ~ newRowsPerPage:", newRowsPerPage)
     setIsLoading(true);
     dispatch(
       getDepartmentDimensionsTEISurveyReportApi({
         surveyId: selectedDashboardValues?.survey?.id,
-        columnProperty: department,
+        columnProperty:department,
+        pageSize: newRowsPerPage,
+        pageNumber:currentPage,
       })
     )
       .then((res) => {
+
         setResponseDataInTable(res?.payload || {});
+        settotalpages(res?.payload.pagination.totalPages || []);
+
+
       })
       .finally(() => setIsLoading(false));
   };
 
-  const handleSelectDepartment = (data) => {
-    fetchDepartmentData(data?.columnValue);
-  };
+
 
   const setResponseDataInTable = (data) => {
     // Generate dynamic columns
@@ -109,7 +150,7 @@ const UserDimensionsDataForAllDepartments = () => {
           </div>
         </div>
         {rows?.length > 0 ? (
-          <SurveyTable columns={columns} data={rows} isLoading={isLoading} />
+          <SurveyTable columns={columns} data={rows} isLoading={isLoading}    fetchData={getPaginationDataHandler} totalpages={totalpages} />
         ) : (
           <div className="text-center py-3">No data available. Please select a department.</div>
         )}

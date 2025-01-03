@@ -1,14 +1,17 @@
 // SurveyTable.js
-import React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { TableVirtuoso } from 'react-virtuoso';
-import Loader from '../plugins/Loader'
+import React, { useEffect, useState } from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { TableVirtuoso } from "react-virtuoso";
+import Loader from "../plugins/Loader";
+import { Pagination, TablePagination } from "@mui/material";
+import './selecttable.css'
+
 const VirtuosoTableComponents = {
   Scroller: React.forwardRef((props, ref) => (
     <TableContainer component={Paper} {...props} ref={ref} />
@@ -16,7 +19,7 @@ const VirtuosoTableComponents = {
   Table: (props) => (
     <Table
       {...props}
-      sx={{ borderCollapse: 'separate', tableLayout: 'fixed' }}
+      sx={{ borderCollapse: "separate", tableLayout: "fixed" }}
     />
   ),
   TableHead: React.forwardRef((props, ref) => (
@@ -35,11 +38,11 @@ function fixedHeaderContent(columns) {
         <TableCell
           key={column.dataKey}
           variant="head"
-          align={column.numeric ? 'right' : 'left'}
+          align={column.numeric ? "right" : "left"}
           style={{ width: column.width }}
           sx={{
-            backgroundColor: 'background.paper',
-            fontWeight: 'bold', // Make the column headers bold
+            backgroundColor: "background.paper",
+            fontWeight: "bold", // Make the column headers bold
           }}
         >
           {column.label}
@@ -55,10 +58,9 @@ function rowContent(columns, _index, row) {
       {columns.map((column) => (
         <TableCell
           key={column.dataKey}
-          align={column.numeric ? 'right' : 'left'}
+          align={column.numeric ? "right" : "left"}
           sx={{
-            color:'#7a7a7a',
-           
+            color: "#7a7a7a",
           }}
         >
           {row[column.dataKey]}
@@ -68,35 +70,66 @@ function rowContent(columns, _index, row) {
   );
 }
 
-const SurveyTable = ({ columns, data,isLoading }) => {
-  return (
-<>
-<div className="pb-3 px-3">
+const SurveyTable = ({
+  columns,
+  data,
+  isLoading,
+  dimensionId,
+  columnProperty,
+  fetchData,
+  totalpages,
+}) => {
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
 
- <Paper style={{ height: 350, width: '100%', margin:'0px 0px 20px 0px', borderRadius:'0px'}}>
-  {
-    isLoading?  
-    <div className="loader-div d-flex justify-content-center align-items-center h-100">
-     <Loader/>
-      </div> 
-   
-    :
-  <TableVirtuoso
-      
-        data={data}
-        components={VirtuosoTableComponents}
-        fixedHeaderContent={() => fixedHeaderContent(columns)}
-        itemContent={(index, row) => rowContent(columns, index, row)}
-      />   
-  }
-        
-   
-     
-    </Paper>  
-</div>
-     
-</>
-    
+  const handleChangeRowsPerPage = (event) => {
+    const newRowsPerPage = event.target.value;
+    setRowsPerPage(newRowsPerPage);
+    if (newRowsPerPage == "10") {
+      setCurrentPage(1);
+      fetchData(dimensionId, columnProperty, newRowsPerPage, 1);
+    } else {
+      fetchData(dimensionId, columnProperty, newRowsPerPage, currentPage);
+    }
+  };
+
+  const handleChange = (event, value) => {
+    setCurrentPage(value);
+    fetchData(dimensionId, columnProperty, rowsPerPage, value);
+  };
+  return (
+    <>
+      <div className="pb-3 px-3">
+        <Paper style={{ height: 350, width: "100%", borderRadius: "0px" }}>
+          {isLoading ? (
+            <div className="loader-div d-flex justify-content-center align-items-center h-100">
+              <Loader />
+            </div>
+          ) : (
+            <TableVirtuoso
+              data={data}
+              components={VirtuosoTableComponents}
+              fixedHeaderContent={() => fixedHeaderContent(columns)}
+              itemContent={(index, row) => rowContent(columns, index, row)}
+            />
+          )}
+        </Paper>
+        <Paper className="d-flex justify-content-center">
+          <TablePagination
+            rowsPerPageOptions={[5, 10]}
+            component="div"
+            count={data?.length}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+          <Pagination
+            count={totalpages}
+            page={currentPage}
+            onChange={handleChange}
+          />
+        </Paper>
+      </div>
+    </>
   );
 };
 

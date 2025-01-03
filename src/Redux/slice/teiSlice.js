@@ -32,10 +32,10 @@ export const TeiDimensionListApi = createAsyncThunk('survey/TeiDimensionListApi'
 });
 
 
-export const userSingleDimensionForSingleDepartmentReportApi = createAsyncThunk('survey/userSingleDimensionForSingleDepartmentReportApi', async ({surveyId,dimensionId,columnProperty}, thunkAPI) => {
+export const userSingleDimensionForSingleDepartmentReportApi = createAsyncThunk('survey/userSingleDimensionForSingleDepartmentReportApi', async ({surveyId,dimensionId,columnProperty ,pageSize , pageNumber}, thunkAPI) => {
   try {
     const res = await axiosPrivate.get('api/TEISurveyReport/GetDepartmentDimensionQuestionsTEISurveyReport',{
-        params: { surveyId,dimensionId,columnProperty }
+        params: { surveyId,dimensionId,columnProperty, pageSize , pageNumber }
     });
     return res?.data;
   } catch (error) {
@@ -44,10 +44,10 @@ export const userSingleDimensionForSingleDepartmentReportApi = createAsyncThunk(
   }
 });
 
-export const getDepartmentDimensionsTEISurveyReportApi = createAsyncThunk('survey/getDepartmentDimensionsTEISurveyReportApi', async ({surveyId,dimensionId,columnProperty}, thunkAPI) => {
+export const getDepartmentDimensionsTEISurveyReportApi = createAsyncThunk('survey/getDepartmentDimensionsTEISurveyReportApi', async ({surveyId,dimensionId,columnProperty,pageSize,pageNumber}, thunkAPI) => {
   try {
     const res = await axiosPrivate.get('api/TEISurveyReport/GetDepartmentDimensionsTEISurveyReport',{
-        params: { surveyId,dimensionId,columnProperty  }
+        params: { surveyId,dimensionId,columnProperty, pageSize,pageNumber }
     });
     return res?.data;
   } catch (error) {
