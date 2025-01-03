@@ -28,9 +28,9 @@ useEffect(() => {
    <>
    <HeroCards/>
    <div className="row m-0 p-0">
-
+  <div className="col-md-6"><OverAllRadialChat/></div>
     <div className="col-md-6"> <OverAllFunnelChat/></div>
-    <div className="col-md-6"><OverAllRadialChat/></div>
+  
    
     
    </div>

@@ -9,21 +9,7 @@ import { Navbarvalue } from '../../../../context/NavbarValuesContext';
 import DropdownButton from '../../../../components/mySurveyProWebsiteBtn/DropdownButton';
 import { getDepartmentDimensionsTEISurveyReportApi } from '../../../../Redux/slice/teiSlice';
 
-const data = {
-      dimensionTeamAverages: [
-        { MissonDriven: 76 },
-        { RoleClarity: 81 },
-        { Leadership: 82 },
-        { Solidarity: 80 },
-        { FeelGoodClimate: 83 },
-        { Collaboration: 75 },
-        { WowrdingOutLoud: 77 },
-        { TensionProcessing: 71 },
-        { TeamMuscle: 78 },
-        { Infrastructure: 75 },
-      ],
-      overallTeamAverage: "78.0",
-    }
+
   
   
 const TeiDimensionForAllDepartmentChart = () => {

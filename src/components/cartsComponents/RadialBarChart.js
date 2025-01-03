@@ -1,7 +1,8 @@
-export const RadialBarChart = ( reportValues=[] ) => 
+export const RadialBarChart = ( reportValues=[] ,color) => 
     
-    (
+    ( 
         {
+           
             "annotations": {},
             "chart": {
                 "animations": {
@@ -89,9 +90,7 @@ export const RadialBarChart = ( reportValues=[] ) =>
                     }
                 }
             },
-            "colors": [
-                "#147806"
-            ],
+            "colors": [color?color:"#045f03" ],
             "dataLabels": {
                 "style": {
                     "fontWeight": 700
