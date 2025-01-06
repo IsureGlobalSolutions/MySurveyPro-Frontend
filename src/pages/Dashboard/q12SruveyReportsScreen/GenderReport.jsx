@@ -138,7 +138,7 @@ toast.error('data not Found')
         <>
             <div className=" m-0 p-0 justify-content-between">
                 <div className="deparment-table-data  p-0" >
-                    <div className="mx-3 d-flex justify-content-between bg-white  shadow">
+                    <div className="mx-3 py-1 d-flex justify-content-between bg-white  shadow">
 
                         <div className="d-flex align-items-center  px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
                             <div className="">
@@ -154,8 +154,10 @@ toast.error('data not Found')
     </div>
 
                         </div>
+                        <div className="col-md-3 col-sm-4">
+                           <DropdownButton items={listOfGender} listKeyName={'columnValue'} onSelect={handleSelect} selectionName={'male'}/>
 
- <DropdownButton items={listOfGender} listKeyName={'columnValue'} onSelect={handleSelect} selectionName={'male'}/>
+                        </div>
                     </div>
 
                     <SurveyTable

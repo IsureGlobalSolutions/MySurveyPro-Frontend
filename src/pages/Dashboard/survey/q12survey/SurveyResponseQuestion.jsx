@@ -97,7 +97,7 @@ const SurveyResponseQuestion = () => {
             const recipientId= Number(staffid)
             if (choiceId) {
                 try {
-                    const requestData = { choiceId, recipientId: recipientId , userId , surveyId:Q12SurveyId, questionId };
+                    const requestData = { choiceId, recipientId: recipientId , userId , surveyId:surveyId, questionId };
                     await dispatch(surveyresponse(requestData));
                     saveProgress();
                     clearProgress();
