@@ -12,8 +12,19 @@ const [overAllScore, setoverAllScore] = useState(0)
 const chartRef = useRef(null); 
 const{overAllTEISurveyReport}=useSelector((state)=>state.teiSurvey)
 
+const getColor = () => {
+  if (overAllTEISurveyReport?.overallScore >= 90) return "#045f03"; // Dark green
+  if (overAllTEISurveyReport?.overallScore >= 80) return "#62c109"; // Light green
+  if (overAllTEISurveyReport?.overallScore >= 70) return "#8cc409"; // Yellow-green
+  if (overAllTEISurveyReport?.overallScore >= 60) return "#d8dc07"; // Yellow
+  if (overAllTEISurveyReport?.overallScore >= 50) return "#dc9207"; // Orange
+  if (overAllTEISurveyReport?.overallScoreore >= 40) return "#dc7207"; // Dark orange
+  if (overAllTEISurveyReport?.overallScore < 40) return "#FF0000"; // Red
+  return "#FF0000"; // Default to red for undefined scores
+};
+const color = getColor();
 
-     let chartValues = RadialBarChart(overAllTEISurveyReport?.overallScore);
+     let chartValues = RadialBarChart(overAllTEISurveyReport?.overallScore, color);
 
   return (
     <>

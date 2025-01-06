@@ -72,7 +72,23 @@ const TeiUserDimensionForSingleDepartmentChart = () => {
         y: recipient.teiProperties.AverageResult,
         x: recipient.teiProperties.RecipientName,
       }));
-      setReportValues({ name: 'Funnel', data: transformedData });
+
+
+     // Create an array of colors based on AverageResult values
+    const colors = data.recipientTEIResults.map((recipient) => {
+      const value = recipient.teiProperties.AverageResult;
+      if (value >= 90) return "#045f03"; 
+      if (value <= 90 && value>=80) return "#62c109"; 
+      if (value <= 80 && value>=70) return "#8cc409"; 
+      if (value <= 70 && value>=60) return "#d8dc07"; 
+      if (value <= 60 && value>=50) return "#dc9207"; 
+      if (value <= 50 && value>=40) return "#dc7207"; 
+      if (value <= 40) return "#FFFF00"; // Yellow
+      return "#FF0000"; // Red
+    });
+
+    // Update state with both data and colors
+    setReportValues({ name: 'Funnel', data: transformedData, colors });
     } else {
       setReportValues(null); // Reset chart data if no data is available
     }

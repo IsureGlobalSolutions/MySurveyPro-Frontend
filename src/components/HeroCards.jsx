@@ -31,7 +31,7 @@ const HeroCards = () => {
     <div className="border shadow py-3 px-2 my-3 mx-2 rounded-3 bg-white">
       <div className="row m-0">
         {/* Total Surveys Card */}
-        <div className="col-12 col-sm-6 col-md-3 mb-3">
+        <div className="col-12 col-sm-6 col-md-3 ">
           <div className="total-survey-card">
             <div className="d-flex py-2 px-2 justify-content-center gap-3 flex-column flex-md-row">
               <div className="total-suvrvey-content d-flex flex-column justify-content-center">
@@ -58,7 +58,7 @@ const HeroCards = () => {
         </div>
 
         {/* Complete Survey Card */}
-        <div className="col-12 col-sm-6 col-md-3 mb-3">
+        <div className="col-12 col-sm-6 col-md-3 ">
           <div className="response-card">
             <div className="d-flex py-2 px-2 justify-content-center gap-3 flex-column flex-md-row">
               <div className="total-suvrvey-content d-flex flex-column justify-content-center">
@@ -85,7 +85,7 @@ const HeroCards = () => {
         </div>
 
         {/* Not Yet Started Card */}
-        <div className="col-12 col-sm-6 col-md-3 mb-3">
+        <div className="col-12 col-sm-6 col-md-3">
           <div className="not-response-card">
             <div className="d-flex py-2 px-2 justify-content-center gap-3 flex-column flex-md-row">
               <div className="total-suvrvey-content d-flex flex-column justify-content-center">
@@ -112,7 +112,7 @@ const HeroCards = () => {
         </div>
 
         {/* In Progress Card */}
-        <div className="col-12 col-sm-6 col-md-3 mb-3">
+        <div className="col-12 col-sm-6 col-md-3">
           <div className="pending-card">
             <div className="d-flex py-2 px-2 justify-content-center gap-3 flex-column flex-md-row">
               <div className="total-suvrvey-content d-flex flex-column justify-content-center">
