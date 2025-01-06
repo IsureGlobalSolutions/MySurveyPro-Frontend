@@ -43,7 +43,9 @@ const UserDimensionsDataForAllDepartments = () => {
   useEffect(() => {
     // Fetch data for the first department in the list
     if (departmentList?.length > 0 && selectedDashboardValues?.survey?.id) {
-      fetchData(departmentList[0]?.columnValue,paginationData?.newRowsPerPage,paginationData?.currentPage);
+      fetchData(departmentList[0]?.columnValue,
+        paginationData?.newRowsPerPage,
+        paginationData?.currentPage);
     }
   }, [departmentList]);
 
