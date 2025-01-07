@@ -27,7 +27,7 @@ const sidbarHighligherHandler=(id)=>{
       <header className="top-nav-container">
         
         <div className="pt-2 ">
-        <Link to={'/'} className={`main-ite ${highlighter==='09'? 'item-highlighted':''}`} id="09" onClick={()=>highlighterHandler('09')}>  <Logo width={90}/>  </Link>
+        <Link to={'/'} className={`main-ite ${highlighter==='09'? 'item-highlighted':''}`} id="09" onClick={()=>highlighterHandler('09')}>  <Logo className="logo-style"/>  </Link>
         </div>
         <nav className="navigation">
           <nav className="product-links-container ">

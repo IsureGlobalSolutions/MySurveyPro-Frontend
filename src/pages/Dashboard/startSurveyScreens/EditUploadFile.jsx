@@ -13,6 +13,7 @@ import csvFile from '../../../assets/downloadable-files/RecipientsDetail.csv'
 import { selectClasses } from '@mui/material';
 import Tooltip from '../../../components/Tooltip/Tooltip';
 import { getAllSurveyFiles } from '../../../Redux/slice/surveySlice';
+import { Navbarvalue } from '../../../context/NavbarValuesContext';
 
 const downloadText = 'Upload the file containing the required data for all individuals to whom the survey will be launched'
 const EditUploadFile = ({ getUploadFile  , Uniquefilename , handleCloseEditdata , surveyId}) => {
@@ -24,6 +25,7 @@ const fileInputRef = useRef(null);
   const {isLaoding}=useSelector((state)=>state.user)
 const navigate = useNavigate()
 
+const { selectedDashboardValues, DashboardStateHandler } = Navbarvalue();
 
 const handleClickChangePicture = () => {
   fileInputRef.current.click(); // Simulate click on hidden file input
@@ -37,7 +39,7 @@ const handleClickChangePicture = () => {
     },
   });
   const uploadFileHandler = async () => {
-    if (paymentStatus === 'paid') {
+    if (  paymentStatus[selectedDashboardValues?.survey?.id]?.paymentStatus === true) {
       if (uploadedFiles.length > 0) {
         const formdata = new FormData();
         formdata.append('file', uploadedFiles[0]);

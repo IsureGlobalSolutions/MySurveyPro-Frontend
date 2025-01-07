@@ -16,7 +16,7 @@ const SurvySolution = () => {
         <div className="hover-container">
           <img src={conversationGraph} className="img-fluid rounded shadow" alt="Conversation Graph" />
         </div>
-      </div>
+      </div> 
     </div>
 
     {/* Solution Content Section */}
