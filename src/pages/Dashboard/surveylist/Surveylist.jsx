@@ -12,8 +12,12 @@ import { store } from "../../../Redux/store";
 import { Navbarvalue } from "../../../context/NavbarValuesContext";
 
 const Surveylist = ({ setstepper, sendIdToParent }) => {
-    const { startSurveyHandler } = Navbarvalue();
-  
+    const {
+      StapperHandler,
+      DashboardStateHandler,
+      startSurvey,
+      startSurveyHandler,
+    } = Navbarvalue();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [surveyListData, setsurveyListData] = useState([]);
@@ -21,6 +25,10 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
   const handleSurveyCheckboxClick = (content) => {
   if (content.title === "TEI" || content.title=== "Q12"){
     startSurveyHandler(true);
+    DashboardStateHandler("survey", {
+      id: content.id,
+      name: content.title,
+    });
     store.dispatch(setSelectedSurveyId(content.id))
     } else {
       console.error("Unknown survey type");

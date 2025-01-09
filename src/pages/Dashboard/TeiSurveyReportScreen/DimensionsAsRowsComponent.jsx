@@ -12,6 +12,7 @@ const DimensionsAsRowsComponent = () => {
   const [rows, setRows] = useState([]);
   const [departmentList, setDepartmentList] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState(null); // Track the selected department
+  // const [totalpages , settotalpages]=useState();
 
   const { selectedDashboardValues } = Navbarvalue();
   const { listOfDepartments } = useSelector((state) => state.survey);
@@ -37,27 +38,38 @@ const DimensionsAsRowsComponent = () => {
         .catch((error) => console.error('Failed to fetch departments:', error));
     }
   }, [dispatch, selectedDashboardValues]);
-
-  // Fetch data for the selected department
+const fetchData = (
+  dimensionId , 
+  columnProperty, newRowsPerPage , currentPage
+)=>{
+  console.log("🚀 ~ DimensionsAsRowsComponent ~ columnProperty:", columnProperty)
+  console.log("🚀 ~ DimensionsAsRowsComponent ~ dimensionId:", dimensionId)
+  console.log("🚀 ~ DimensionsAsRowsComponent ~ currentPage:", currentPage)
+  console.log("🚀 ~ DimensionsAsRowsComponent ~ newRowsPerPage:", newRowsPerPage)
+  if (selectedDepartment) {
+    setIsLoading(true);
+    dispatch(
+      getDepartmentDimensionsTEISurveyReportApi({
+        surveyId: selectedDashboardValues?.survey?.id,
+        columnProperty: selectedDepartment,
+        pageSize: newRowsPerPage,
+        pageNumber:currentPage,
+      })
+    )
+      .then((res) => {
+        setResponseDataInTable(res?.payload || {});
+        // settotalpages(res?.payload.pagination.totalPages || []);
+      })
+      .catch((error) => console.error('Failed to fetch department data:', error))
+      .finally(() => setIsLoading(false));
+  }
+}
   useEffect(() => {
-    if (selectedDepartment) {
-      setIsLoading(true);
-      dispatch(
-        getDepartmentDimensionsTEISurveyReportApi({
-          surveyId: selectedDashboardValues?.survey?.id,
-          columnProperty: selectedDepartment,
-        })
-      )
-        .then((res) => {
-          setResponseDataInTable(res?.payload || {});
-        })
-        .catch((error) => console.error('Failed to fetch department data:', error))
-        .finally(() => setIsLoading(false));
-    }
+    fetchData();
   }, [dispatch, selectedDashboardValues, selectedDepartment]);
 
   const handleSelectDepartment = (data) => {
-    setSelectedDepartment(data?.columnValue); // Update selected department
+    setSelectedDepartment(data?.columnValue); 
   };
 
   const setResponseDataInTable = (data) => {
@@ -129,7 +141,10 @@ const DimensionsAsRowsComponent = () => {
               )}
             </div>
           </div>
-          <SurveyTable columns={columns} data={rows} isLoading={isLoading} />
+          <SurveyTable columns={columns} data={rows} isLoading={isLoading}  
+           fetchData={fetchData} 
+          //  totalpages={totalpages}
+            />
         </div>
       </div>
     </>

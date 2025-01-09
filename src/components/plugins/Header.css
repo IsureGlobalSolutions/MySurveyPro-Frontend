@@ -231,7 +231,9 @@
   width: 100%; /* Expand the line on hover */
 }
 
-
+.logo-style{
+  width:80px;
+}
 @media screen and (max-width: 1250px) {
   .navigation {
     display: none;
@@ -241,11 +243,18 @@
   }
   .sidbar-icon-container{
     display: block;
-    margin-top: 40px;
-    font-size: 40px;
+    margin-top: 3px;
+    font-size: 19px;
     color: var(--color-chocolate);
   }
 
+}
+@media screen and (max-width:800px) {
+  .logo-style{
+    width:60px;
+  }
+
+  
 }
 @media screen and (max-width: 450px) {
   .product-links-container {

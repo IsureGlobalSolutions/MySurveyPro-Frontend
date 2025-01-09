@@ -1,0 +1,33 @@
+.css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+    background-color: rgba(226, 95, 29, 0.662) !important;
+}
+.css-wjh20t-MuiPagination-ul {
+    padding: 10px;
+    justify-content: center;
+}
+.css-levciy-MuiTablePagination-displayedRows {
+    display: none;
+}
+.css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar .MuiTablePagination-actions {
+
+    display: none;
+
+}
+.MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.MuiTablePagination-toolbar.css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar {
+    padding: 10px;
+}
+.css-6hp17o-MuiList-root-MuiMenu-list {
+border: 1px solid  rgba(226, 95, 29, 0.662);
+border-radius: 5px;
+padding: 0px;
+}
+.css-10by3a5-MuiButtonBase-root-MuiMenuItem-root-MuiTablePagination-menuItem.Mui-selected{
+background-color: rgba(226, 95, 29, 0.662) !important;
+}
+.css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon {
+fill: rgba(226, 95, 29, 0.662)!important;
+}
+.css-pdct74-MuiTablePagination-selectLabel {
+    font-weight: 600;
+    font-family: var(--font-lato)
+}

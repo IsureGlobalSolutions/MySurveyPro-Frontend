@@ -1,20 +1,19 @@
 .choose_title p{
     font-weight: 700;
-    font-size: 60px;
+    font-size: 50px;
     line-height: 90px;
     color: #32012F;
-    
     }
     .choose_title span{
         color:  #05467E;
         font-weight: 700;
-        font-size: 60px;
+        font-size: 50px;
         line-height: 60px;
     }
     
     .effortless_survey h3{
         font-weight: 800;
-        font-size: 60px;
+        font-size: 50px;
         line-height: 90px;
         color: #32012F;
     }
@@ -27,7 +26,7 @@
         
     .seamless_sharing h3{
         font-weight: 800;
-        font-size: 60px;
+        font-size: 50px;
         line-height: 90px;
         color: #32012F;
     }
@@ -40,8 +39,8 @@
         
     .automated_data h3{
         font-weight: 800;
-        font-size: 60px;
-        line-height: 90px;
+        font-size: 50px;
+        line-height: 68px;
         color: #32012F;
     }
     .automated_data p{
@@ -53,8 +52,8 @@
         
     .cost_effective h3{
         font-weight: 800;
-        font-size: 60px;
-        line-height: 90px;
+        font-size: 50px;
+        line-height: 68px;
         color: #32012F;
     }
     .cost_effective p{
@@ -72,6 +71,44 @@
         .cost_effective{
             margin-top: -50px;
         }
+        @media (max-width:1000px) {
+            .choose_title p {
+                font-size: 30px;
+            }
+            .choose_title span{
+                font-size: 30px;
+            }
+            .effortless_survey h3{
+                font-size: 30px;
+                line-height: 60px;
+            }
+            .effortless_survey p {
+                font-size: 20px;
+            }
+            .seamless_sharing h3 {
+                font-size: 30px;
+                line-height: 60px;
+            }
+            .seamless_sharing p {
+                font-size: 20px;
+            }
+            .automated_data h3 {
+                font-size: 30px;
+                line-height: 60px;
+            }
+            .automated_data p {
+                font-size: 20px;
+
+            }
+            .cost_effective h3 {
+                font-size: 30px;
+                line-height: 60px;
+            }
+            .cost_effective p {
+                font-size: 20px;
+            }
+        }
+
        @media (max-width:786px) {
         .seamless_sharing{
             margin-top: 50px;

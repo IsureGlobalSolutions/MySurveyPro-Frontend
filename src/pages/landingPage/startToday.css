@@ -12,7 +12,7 @@
   }
 .startToday_heading p{
     font-weight: 700;
-    font-size: 51px;
+    font-size: 50px;
     line-height: 65px;
     color: #32012F;
     
@@ -25,7 +25,7 @@
     }
     .startToday_description p{
         font-weight: normal;
-        font-size: 36.92px;
+        font-size: 30px;
         line-height: 42.6px;
         color: #5D5D5D;
         }
@@ -34,15 +34,15 @@
             justify-content: space-between;
         }
         .st_text{
-            width: 40%;
+            
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
         .st_text h1{
             font-weight: 800;
-            font-size: 37.4px;
-            line-height: 53.39px;
+            font-size: 32.4px;
+            line-height: 47.39px;
             color: black;
         }
         .st_text p{
@@ -51,13 +51,50 @@
             line-height: 38.34px;
             color: #5D5D5D;
             }
+            @media (max-width:1000px) {
+                .startToday_content{
+                    padding-top: 2px !important;
+                }
+                .startToday_description p{
+                    font-size: 25px;
+                }
+                .st_text h1 {
+                 font-size: 25px;
+                 line-height: 32.6px;
+                }
+                .startToday_heading p{
+                    font-weight: 700;
+                    font-size: 40px;
+                }
+                .startToday_heading span{
+                    color:  #05467E;
+                    font-weight: 700;
+                    font-size: 40px;
+                }
+            }
             @media (max-width: 768px) {
+                .st_text p {
+                    font-size: 20px;
+                }
                 .startToday_content {
                     flex-direction: row;
                     justify-content: space-between;
                     text-align: left;
                 }
-            
+                .startToday_description p{
+                    font-size: 20px;
+                    line-height: 32.6px;
+
+                }
+                .startToday_heading p{
+                    font-weight: 700;
+                    font-size: 30px;
+                }
+                .startToday_heading span{
+                    color:  #05467E;
+                    font-weight: 700;
+                    font-size: 30px;
+                }
                 .st_text {
                     margin-right: 20px;
                     text-align: left;
