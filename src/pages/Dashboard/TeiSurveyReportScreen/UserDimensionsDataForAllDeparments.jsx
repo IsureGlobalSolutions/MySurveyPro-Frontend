@@ -18,7 +18,7 @@ const UserDimensionsDataForAllDepartments = () => {
   const { selectedDashboardValues } = Navbarvalue();
   const { listOfDepartments } = useSelector((state) => state.survey); 
   const [selectedDepartment, setselectedDepartment] = useState('')
-  const [totalpages , settotalpages]=useState();
+  // const [totalpages , settotalpages]=useState();
 
   const dispatch = useDispatch();
 
@@ -91,7 +91,7 @@ fetchData(selectedDepartment,params[2],params[3])
       .then((res) => {
 
         setResponseDataInTable(res?.payload || {});
-        settotalpages(res?.payload.pagination.totalPages || []);
+        // settotalpages(res?.payload.pagination.totalPages || []);
 
 
       })
@@ -152,7 +152,10 @@ fetchData(selectedDepartment,params[2],params[3])
           </div>
         </div>
         {rows?.length > 0 ? (
-          <SurveyTable columns={columns} data={rows} isLoading={isLoading}    fetchData={getPaginationDataHandler} totalpages={totalpages} />
+          <SurveyTable columns={columns} data={rows} isLoading={isLoading}   
+           fetchData={getPaginationDataHandler}
+            // totalpages={totalpages}
+             />
         ) : (
           <div className="text-center py-3">No data available. Please select a department.</div>
         )}

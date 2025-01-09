@@ -105,7 +105,7 @@ font-weight: 400;
 .topherosection{
   width: 100%;
   padding: 30px;
-  background-color: rgb(57 190 201 / 7%);;
+  background-color: #EBF9F8;
 }
 .hero-banner {
   background: rgba(16, 173, 186, 0.0741);
@@ -123,9 +123,7 @@ font-weight: 400;
   color: var(--color-midnightblue);
   font-family: var(--font-lato);
 }
-.work-eff{
-  /* padding-top: 15px; */
-}
+
 .trust-section {
     display: flex;
     justify-content: space-between;
@@ -227,7 +225,7 @@ font-weight: 400;
   cursor: pointer;
 }
 .left-herosection{
-  margin-top: 60px;
+  margin-top: 40px;
 }
 .left-herosection h1{
   font-size: 65px;
@@ -273,7 +271,7 @@ color: rgba(93, 93, 93, 1);
 }
 .video-fluid {
   width: 80%; 
-  height: 70vh; 
+  /* height: 70vh;  */
   object-fit: cover; 
   border: none; 
   outline: none; 
@@ -281,7 +279,7 @@ color: rgba(93, 93, 93, 1);
 
 .video-container {
   display: flex;
-  justify-content: end;
+  justify-content: center;
   align-items: end;
 }
 
@@ -344,7 +342,7 @@ color: rgba(93, 93, 93, 1);
     color: rgba(50, 1, 47, 1);
   }
   .video-fluid {
-    height: 57vh;
+    height: 40vh;
   }
 }
 
@@ -359,7 +357,7 @@ color: rgba(93, 93, 93, 1);
     color: rgba(50, 1, 47, 1);
   }
   .video-fluid {
-    height: 46vh!important;
+    height: 32vh!important;
   }
 }
 @media screen and (max-width: 800px) {
@@ -499,7 +497,7 @@ color: rgba(93, 93, 93, 1);
     padding: 0px !important;
   }
   .hero-section {
-    margin: 30px;
+    margin: 0px 0px 0px 20px !important;
   }
 }
 @media (max-width:800px) {

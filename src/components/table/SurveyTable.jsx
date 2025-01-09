@@ -114,7 +114,7 @@ const SurveyTable = ({
             />
           )}
         </Paper>
-        <Paper className="d-flex justify-content-center">
+        {/* <Paper className="d-flex justify-content-center">
           <TablePagination
             rowsPerPageOptions={[5, 10]}
             component="div"
@@ -127,7 +127,7 @@ const SurveyTable = ({
             page={currentPage}
             onChange={handleChange}
           />
-        </Paper>
+        </Paper> */}
       </div>
     </>
   );

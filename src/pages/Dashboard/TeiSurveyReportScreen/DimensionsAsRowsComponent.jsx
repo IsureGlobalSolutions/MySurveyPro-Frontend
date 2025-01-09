@@ -12,7 +12,7 @@ const DimensionsAsRowsComponent = () => {
   const [rows, setRows] = useState([]);
   const [departmentList, setDepartmentList] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState(null); // Track the selected department
-  const [totalpages , settotalpages]=useState();
+  // const [totalpages , settotalpages]=useState();
 
   const { selectedDashboardValues } = Navbarvalue();
   const { listOfDepartments } = useSelector((state) => state.survey);
@@ -58,7 +58,7 @@ const fetchData = (
     )
       .then((res) => {
         setResponseDataInTable(res?.payload || {});
-        settotalpages(res?.payload.pagination.totalPages || []);
+        // settotalpages(res?.payload.pagination.totalPages || []);
       })
       .catch((error) => console.error('Failed to fetch department data:', error))
       .finally(() => setIsLoading(false));
@@ -141,7 +141,10 @@ const fetchData = (
               )}
             </div>
           </div>
-          <SurveyTable columns={columns} data={rows} isLoading={isLoading}   fetchData={fetchData} totalpages={totalpages} />
+          <SurveyTable columns={columns} data={rows} isLoading={isLoading}  
+           fetchData={fetchData} 
+          //  totalpages={totalpages}
+            />
         </div>
       </div>
     </>

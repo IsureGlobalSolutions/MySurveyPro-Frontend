@@ -14,7 +14,7 @@ const DepartmentAndDimensionTable = () => {
   const { selectedDashboardValues } = Navbarvalue();
   const { listOfDimensions, userSingleDimensionForSingleDepartmentReportList } = useSelector((state) => state.teiSurvey);
 
-  const [totalpages , settotalpages]=useState();
+  // const [totalpages , settotalpages]=useState();
   const [selectedOption, setSelectedOption] = useState({
     dimensionId: null,
     columnProperty: null,
@@ -63,7 +63,7 @@ const DepartmentAndDimensionTable = () => {
       })
     )
       .then((res) => {
-        settotalpages(res?.payload.pagination.totalPages || [])
+        // settotalpages(res?.payload.pagination.totalPages || [])
         setResponseDataInTable(res?.payload?.data || []);
         
       })
@@ -98,6 +98,7 @@ const DepartmentAndDimensionTable = () => {
       setColumns(generatedColumns);
 
       const generatedRows = data.map((item) => {
+        console.log("🚀 ~ generatedRows ~ item:", item)
         const baseRow = {
           RecipientName: item?.teiProperties?.RecipientName,
           TeamsRating: item?.teiDimensionResult[0]?.teiDimension?.TeamsRating,
@@ -147,7 +148,9 @@ const DepartmentAndDimensionTable = () => {
             </div>
           </div>
           <SurveyTable columns={columns} data={rows} isLoading={isLoading}  dimensionId={selectedOption.dimensionId}
-  columnProperty={selectedOption.columnProperty}   fetchData={fetchData} totalpages={totalpages}
+  columnProperty={selectedOption.columnProperty} 
+    fetchData={fetchData} 
+    // totalpages={totalpages}
 />
         </div>
       </div>
