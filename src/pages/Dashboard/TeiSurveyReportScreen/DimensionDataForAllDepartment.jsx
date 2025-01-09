@@ -6,53 +6,50 @@ import { Navbarvalue } from '../../../context/NavbarValuesContext';
 import { getListOfCoumnProperty } from '../../../Redux/slice/surveySlice';
 import DropdownButton from '../../../components/mySurveyProWebsiteBtn/DropdownButton';
 
-const DepartmentAndDimensionTable = () => {
+const DimensionDataForAllDepartment = () => {
+
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
-  const [departmentList, setDepartmentList] = useState([]);
   const { selectedDashboardValues } = Navbarvalue();
   const { listOfDimensions, userSingleDimensionForSingleDepartmentReportList } = useSelector((state) => state.teiSurvey);
 
   // Selected options for department and dimension
   const [selectedOption, setSelectedOption] = useState({
     dimensionId: null,
-    columnProperty: null,
+   
   });
 
   // Fetch dimensions and department list
   useEffect(() => {
     if (selectedDashboardValues?.survey?.id) {
       dispatch(TeiDimensionListApi(selectedDashboardValues?.survey?.id));
-      dispatch(getListOfCoumnProperty({ surveyId: selectedDashboardValues?.survey?.id, columnProperty: 'department' }))
-        .then((res) => {
-          setDepartmentList(res?.payload || []);
-        });
+     
     }
   }, [dispatch, selectedDashboardValues]);
 
   // Set default selected option when data loads
   useEffect(() => {
-    if (listOfDimensions?.length > 0 && departmentList?.length > 0) {
+    if (listOfDimensions?.length > 0) {
       const defaultDimensionId = listOfDimensions[0]?.id;
-      const defaultColumnProperty = departmentList[0]?.columnValue;
+     
 
-      setSelectedOption({ dimensionId: defaultDimensionId, columnProperty: defaultColumnProperty });
+      setSelectedOption({ dimensionId: defaultDimensionId });
 
       // Fetch initial data
-      fetchData(defaultDimensionId, defaultColumnProperty);
+      fetchData(defaultDimensionId);
     }
-  }, [listOfDimensions, departmentList]);
+  }, [listOfDimensions]);
 
   // Fetch data based on selected options
-  const fetchData = (dimensionId, columnProperty) => {
+  const fetchData = (dimensionId) => {
     setIsLoading(true);
     dispatch(
       userSingleDimensionForSingleDepartmentReportApi({
         surveyId: selectedDashboardValues?.survey?.id,
         dimensionId,
-        columnProperty,
+       
       })
     )
     
@@ -62,51 +59,57 @@ const DepartmentAndDimensionTable = () => {
       .finally(() => setIsLoading(false));
   };
 
-  const handleSelectDepartment = (data) => {
-    const updatedColumnProperty = data?.columnValue;
-    setSelectedOption((prev) => ({ ...prev, columnProperty: updatedColumnProperty }));
-    fetchData(selectedOption.dimensionId, updatedColumnProperty);
-  };
+  
 
   const handleSelectDimension = (data) => {
     const updatedDimensionId = data?.id;
     setSelectedOption((prev) => ({ ...prev, dimensionId: updatedDimensionId }));
-    fetchData(updatedDimensionId, selectedOption.columnProperty);
+    fetchData(updatedDimensionId);
   };
 
   const setResponseDataInTable = (data) => {
     if (data?.length > 0) {
       const generatedColumns = [
         { width: 300, label: 'Recipient Name', dataKey: 'RecipientName' },
-        ...(data[0]?.teiDimensionResult[0]?.questionResultDto || []).map((q, index) => ({
-          width: 200,
-          label: q.question.Text,
-          dataKey: `Question${index + 1}`,
-        })),
-        { width: 120, label: 'Team Rating', dataKey: 'TeamsRating', numeric: true },
-        { width: 120, label: 'TEI Reference Score', dataKey: 'TEIReferenceScore', numeric: true },
-        { width: 120, label: 'Result', dataKey: 'Result', numeric: true },
+        { width: 120, label: 'Department', dataKey: 'TeamName', numeric: true },
+        
+        { width: 120, label: 'Average Result %', dataKey: 'ResultPercentage', numeric: true },
       ];
       setColumns(generatedColumns);
-
+  
+      // Generate rows dynamically
       const generatedRows = data.map((item) => {
-        const baseRow = {
+        return {
           RecipientName: item?.teiProperties?.RecipientName,
-          TeamsRating: item?.teiDimensionResult[0]?.teiDimension?.TeamsRating,
-          TEIReferenceScore: item?.teiDimensionResult[0]?.teiDimension?.TEIReferenceScore,
-          Result: item?.teiDimensionResult[0]?.teiDimension?.Result,
+          TeamName: item?.teiProperties?.TeamsName,
+     
+          ResultPercentage:item?.teiProperties?.AverageResult,
         };
-        item?.teiDimensionResult[0]?.questionResultDto.forEach((q, index) => {
-          baseRow[`Question${index + 1}`] = Object.values(q.choicesResult)[0];
-        });
-        return baseRow;
       });
+  
+      // Calculate the final row (sum and average percentage)
+      const totalSum = data.reduce((sum, item) => {
+        const value = parseFloat(item?.teiProperties?.AverageResult) || 0; 
+        return sum + value;
+      }, 0); 
+      const averagePercentage = (totalSum / data.length).toFixed(2);
+  
+      const summaryRow = {
+        RecipientName: 'Summary (All Departments)',
+        TeamName: 'N/A',
 
+        ResultPercentage: averagePercentage, 
+      };
+  
+      // Add summary row to the generated rows
+      generatedRows.push(summaryRow);
+  
       setRows(generatedRows);
     } else {
       setRows([]);
     }
   };
+  
 
   return (
     <>
@@ -115,18 +118,11 @@ const DepartmentAndDimensionTable = () => {
           <div className="mx-3 py-1 row justify-content-between bg-white shadow">
             <div className="col-md-5">
               <div className="d-flex align-items-center px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
-                <p className="ps-2 py-2 fs-6 fw-bold m-0">Department report for a dimension</p>
+                <p className="ps-2 py-2 fs-6 fw-bold m-0">Dimension report for all department</p>
               </div>
             </div>
-            <div className="col-md-5 d-flex gap-2">
-              {departmentList?.length > 0 && (
-                <DropdownButton
-                  items={departmentList}
-                  listKeyName={'columnValue'}
-                  onSelect={handleSelectDepartment}
-                  selectionName={selectedOption.columnProperty || departmentList[0]?.columnValue}
-                />
-              )}
+            <div className="col-md-3 col-sm-4 d-flex gap-2">
+         
               {listOfDimensions?.length > 0 && (
                 <DropdownButton
                   items={listOfDimensions}
@@ -144,4 +140,4 @@ const DepartmentAndDimensionTable = () => {
   );
 };
 
-export default DepartmentAndDimensionTable;
+export default DimensionDataForAllDepartment;
