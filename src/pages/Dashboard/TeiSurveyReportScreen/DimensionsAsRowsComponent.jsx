@@ -97,8 +97,8 @@ const fetchData = (
           const matchingDimension = recipient.teiDimensionResult.find(
             (dim) => dim.teiDimension.Text === dimensionText
           );
-          row[recipient.teiProperties.RecipientName.replace(/\s+/g, '')] = matchingDimension
-            ? matchingDimension.teiDimension.Result
+          row[recipient.teiProperties.RecipientName.replace(/\s+/g, '')] =`${matchingDimension}%` 
+            ? `${matchingDimension.teiDimension.Result}%`
             : null;
         });
         return row;
@@ -107,8 +107,8 @@ const fetchData = (
       // Add "Average" row
       const averageRow = { Dimension: 'Average' };
       data.recipientTEIResults.forEach((recipient) => {
-        averageRow[recipient.teiProperties.RecipientName.replace(/\s+/g, '')] =
-          recipient.teiProperties.AverageResult;
+        averageRow[recipient.teiProperties.RecipientName.replace(/\s+/g, '')] =`${recipient.teiProperties.AverageResult}%`
+        
       });
       generatedRows.push(averageRow);
 

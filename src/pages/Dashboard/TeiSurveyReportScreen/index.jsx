@@ -39,10 +39,11 @@ useEffect(() => {
    (
     <>
     <DimensionDataForAllDepartment/>
+     <TeiDimensionForAllDepartmentChart/>
      <DepartmentAndDimensionTable/>
-
+  
    <UserDimensionsDataForAllDeparments/>
-   <TeiDimensionForAllDepartmentChart/>
+
    <DimensionsAsRowsComponent/>
    <TeiUserDimensionForSingleDepartmentChart/>
     </>

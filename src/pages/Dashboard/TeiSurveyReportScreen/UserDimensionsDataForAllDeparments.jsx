@@ -5,6 +5,7 @@ import DropdownButton from '../../../components/mySurveyProWebsiteBtn/DropdownBu
 import { getListOfCoumnProperty } from '../../../Redux/slice/surveySlice';
 import { Navbarvalue } from '../../../context/NavbarValuesContext';
 import { getDepartmentDimensionsTEISurveyReportApi } from '../../../Redux/slice/teiSlice';
+import { object } from 'prop-types';
 
 const UserDimensionsDataForAllDepartments = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -77,8 +78,7 @@ fetchData(selectedDepartment,params[2],params[3])
 
   ) => {
 
-    console.log("🚀 ~ UserDimensionsDataForAllDepartments ~ currentPage:", currentPage)
-    console.log("🚀 ~ UserDimensionsDataForAllDepartments ~ newRowsPerPage:", newRowsPerPage)
+
     setIsLoading(true);
     dispatch(
       getDepartmentDimensionsTEISurveyReportApi({
@@ -91,6 +91,8 @@ fetchData(selectedDepartment,params[2],params[3])
       .then((res) => {
 
         setResponseDataInTable(res?.payload || {});
+        console.log('users dimension data',res?.payload);
+        
         // settotalpages(res?.payload.pagination.totalPages || []);
 
 
@@ -118,13 +120,36 @@ fetchData(selectedDepartment,params[2],params[3])
     const generatedRows = (data?.recipientTEIResults || []).map((recipient) => {
       const baseRow = {
         RecipientName: recipient.teiProperties.RecipientName,
-        AverageResult: recipient.teiProperties.AverageResult,
+        AverageResult: `${recipient.teiProperties.AverageResult}%`,
       };
       recipient.teiDimensionResult.forEach((dimension) => {
-        baseRow[dimension.teiDimension.Text.replace(/\s+/g, '')] = dimension.teiDimension.Result;
+        baseRow[dimension.teiDimension.Text.replace(/\s+/g, '')] =`${dimension.teiDimension.Result}%` ;
       });
       return baseRow;
     });
+
+ // Generate the summary row
+
+
+   const totalSum = data?.dimensionTeamAverages?.reduce((sum, item) => {
+   
+    const value = parseFloat(Object.values(item)[0]) || 0; // Extract the value from the object and parse as number
+    return sum + value;
+  }, 0);  
+  console.log("🚀 ~ totalSum ~ totalSum:", totalSum)
+  const averagePercentage = (totalSum /  data?.dimensionTeamAverages?.length).toFixed(2);
+   const summaryRow = { 
+    RecipientName: 'Average',
+    AverageResult:`${averagePercentage}%`
+  };
+  (data?.dimensionTeamAverages || []).forEach((average) => {
+   const [key, value] = Object.entries(average)[0]; 
+   summaryRow[key.replace(/\s+/g, '')] =`${value}%` ; 
+  });
+
+ // Add summary row to the generated rows
+ generatedRows.push(summaryRow);
+     
 
     setRows(generatedRows);
   };

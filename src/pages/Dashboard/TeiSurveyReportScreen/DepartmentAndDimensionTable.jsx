@@ -98,12 +98,12 @@ const DepartmentAndDimensionTable = () => {
       setColumns(generatedColumns);
 
       const generatedRows = data.map((item) => {
-        console.log("🚀 ~ generatedRows ~ item:", item)
+       
         const baseRow = {
           RecipientName: item?.teiProperties?.RecipientName,
           TeamsRating: item?.teiDimensionResult[0]?.teiDimension?.TeamsRating,
           TEIReferenceScore: item?.teiDimensionResult[0]?.teiDimension?.TEIReferenceScore,
-          Result: item?.teiDimensionResult[0]?.teiDimension?.Result,
+          Result:`${item?.teiDimensionResult[0]?.teiDimension?.Result}%` ,
         };
         item?.teiDimensionResult[0]?.questionResultDto.forEach((q, index) => {
           baseRow[`Question${index + 1}`] = Object.values(q.choicesResult)[0];

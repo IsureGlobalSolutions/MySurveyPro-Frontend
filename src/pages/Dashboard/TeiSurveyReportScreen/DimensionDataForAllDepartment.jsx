@@ -83,7 +83,7 @@ const DimensionDataForAllDepartment = () => {
           RecipientName: item?.teiProperties?.RecipientName,
           TeamName: item?.teiProperties?.TeamsName,
      
-          ResultPercentage:item?.teiProperties?.AverageResult,
+          ResultPercentage:`${item?.teiProperties?.AverageResult}%`,
         };
       });
   
@@ -98,7 +98,7 @@ const DimensionDataForAllDepartment = () => {
         RecipientName: 'Summary (All Departments)',
         TeamName: 'N/A',
 
-        ResultPercentage: averagePercentage, 
+        ResultPercentage:`${averagePercentage}%` , 
       };
   
       // Add summary row to the generated rows
