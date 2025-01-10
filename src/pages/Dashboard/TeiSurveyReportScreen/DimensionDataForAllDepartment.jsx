@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import SurveyTable from '../../../components/table/SurveyTable';
 import { useDispatch, useSelector } from 'react-redux';
-import { TeiDimensionListApi, userSingleDimensionForSingleDepartmentReportApi } from '../../../Redux/slice/teiSlice';
+import { TeiDimensionListApi, userSingleDimensionForAllDepartmentReportApi } from '../../../Redux/slice/teiSlice';
 import { Navbarvalue } from '../../../context/NavbarValuesContext';
-import { getListOfCoumnProperty } from '../../../Redux/slice/surveySlice';
 import DropdownButton from '../../../components/mySurveyProWebsiteBtn/DropdownButton';
 
 const DimensionDataForAllDepartment = () => {
@@ -13,7 +12,7 @@ const DimensionDataForAllDepartment = () => {
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
   const { selectedDashboardValues } = Navbarvalue();
-  const { listOfDimensions, userSingleDimensionForSingleDepartmentReportList } = useSelector((state) => state.teiSurvey);
+  const { listOfDimensions } = useSelector((state) => state.teiSurvey);
 
   // Selected options for department and dimension
   const [selectedOption, setSelectedOption] = useState({
@@ -46,7 +45,7 @@ const DimensionDataForAllDepartment = () => {
   const fetchData = (dimensionId) => {
     setIsLoading(true);
     dispatch(
-      userSingleDimensionForSingleDepartmentReportApi({
+      userSingleDimensionForAllDepartmentReportApi({
         surveyId: selectedDashboardValues?.survey?.id,
         dimensionId,
        

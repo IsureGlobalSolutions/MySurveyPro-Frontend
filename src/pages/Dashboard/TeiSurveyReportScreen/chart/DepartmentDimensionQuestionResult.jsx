@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Chart from 'react-apexcharts';
@@ -9,10 +8,7 @@ import { Navbarvalue } from '../../../../context/NavbarValuesContext';
 import DropdownButton from '../../../../components/mySurveyProWebsiteBtn/DropdownButton';
 import { getDepartmentDimensionsTEISurveyReportApi } from '../../../../Redux/slice/teiSlice';
 
-
-  
-  
-const TeiDimensionForAllDepartmentChart = () => {
+const DepartmentDimensionQuestionResult = () => {
 const dispatch =useDispatch();
 const [isLoading, setisLoading] = useState(false)
 const [overAllScore, setoverAllScore] = useState(0)
@@ -20,68 +16,31 @@ const chartRef = useRef(null);
 const { selectedDashboardValues } = Navbarvalue()
 const [departmentList, setdepartmentList] = useState([])
 const {listOfDepartments}=useSelector((state)=>state.survey)
+  const { listOfDimensions, userSingleDimensionForSingleDepartmentReportList } = useSelector((state) => state.teiSurvey);
 
 
-// const{overAllTEISurveyReport}=useSelector((state)=>state.teiSurvey)
 
-
-useEffect(() => { 
-  if (selectedDashboardValues?.survey?.id) {
-    if(listOfDepartments?.length>0){
-         dispatch(getListOfCoumnProperty({surveyId:selectedDashboardValues?.survey?.id,columnProperty:"department"}))
-    .then((res)=>{
-      console.log('department',res?.payload);
-      setdepartmentList(res?.payload)
-      
-    })
-    }
-    else{
-        setdepartmentList(listOfDepartments)
-    }
-
-   
-}
-
-}, [])
   useEffect(()=>{
- console.log('check dapartment value',departmentList[0]?.columnValue );
  
-    setisLoading(true)
-    dispatch(getDepartmentDimensionsTEISurveyReportApi(
-      {surveyId:selectedDashboardValues?.survey?.id,
-        columnProperty:departmentList[0]?.columnValue
-  
-      }))
-      .then((res)=>{
-        console.log('check chart values',res?.payload);
-        
-  setResponseDataInTable(res?.payload)
-      })
+   if(userSingleDimensionForSingleDepartmentReportList?.data?.length>0){
+ setResponseDataInTable(userSingleDimensionForSingleDepartmentReportList?.data)
+   }
+ 
+    
 
   
-  },[])
+  },[userSingleDimensionForSingleDepartmentReportList])
 
-    const handleSelectDepartment=(data)=>{
-      setisLoading(true)
-dispatch(getDepartmentDimensionsTEISurveyReportApi(
-  {surveyId:selectedDashboardValues?.survey?.id,
-    columnProperty:data?.columnValue
 
-  }))
-  .then((res)=>{
-    setResponseDataInTable(res?.payload)
-        })
-
-  }
   const setResponseDataInTable=(data)=>{
     setisLoading(true)
-    const chartData = data?.dimensionTeamAverages.map((dimension) => {
+    const chartData = data?.map((item) => {
     
-    const [key, value] = Object.entries(dimension)[0];
+    // const [key, value] = Object.entries(dimension)[0];
     
     return {
-      x: key.replace(/([A-Z])/g, ' $1').replace(/\s+/g, ' ').trim(), // Format key into readable labels
-      y: value, // Use the value directly as the score
+      x: item?.teiProperties?.RecipientName,
+      y: item?.teiDimensionResult[0]?.teiDimension?.Result
     };
   });
   setoverAllScore(chartData)
@@ -100,10 +59,10 @@ dispatch(getDepartmentDimensionsTEISurveyReportApi(
      <div className="age-card rounded-3 border p-3 shadow bg-white">
  <div className="d-flex justify-content-between">
         <div className="title d-flex align-items-center m-0">
-            <div className=""><p className='m-0 pb-3'>Team's TEI Dimension Score</p></div>
+            <div className=""><p className='m-0 pb-3'>Department report for a dimension Chart</p></div>
             
         </div>
-        <div className="d-flex align-items-center">
+        {/* <div className="d-flex align-items-center">
         
                   {departmentList?.length>0? 
  <DropdownButton items={departmentList} listKeyName={'columnValue'} onSelect={handleSelectDepartment} selectionName={departmentList[0]?.columnValue}/>
@@ -112,7 +71,7 @@ dispatch(getDepartmentDimensionsTEISurveyReportApi(
          
   
  
-    </div>
+    </div> */}
     </div>
     <hr  className='m-1'/>
     <div className="" ref={chartRef} >
@@ -139,4 +98,4 @@ dispatch(getDepartmentDimensionsTEISurveyReportApi(
   )
 }
 
-export default TeiDimensionForAllDepartmentChart
+export default DepartmentDimensionQuestionResult
