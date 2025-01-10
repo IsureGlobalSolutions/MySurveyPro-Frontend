@@ -13,6 +13,7 @@ import StartTodaySection from "./StartTodaySection";
 import WhyChooseUs from "./WhyChooseUs";
 import Community from "./Community";
 import brandVideo from "../../assets/landingpagevedio/Web Video.webm";
+import WebsiteButton from "../../components/mySurveyProWebsiteBtn/WebsiteButtton";
 const LandingPage = () => {
   const [count, setCount] = useState(0);
   const [countone, setcountone] = useState(0);
@@ -90,9 +91,12 @@ const LandingPage = () => {
           engagement?
         </span>
         <div>
-          <button type="button" className="startbutton mt-2">
-            Lets Get started
-          </button>
+         
+          <WebsiteButton type='button'  className="startbutton mt-2"
+        to="/login"
+        >
+            Lets Get Started
+            </WebsiteButton> 
         </div>
         <div>
           <div className="work-eff w-100">

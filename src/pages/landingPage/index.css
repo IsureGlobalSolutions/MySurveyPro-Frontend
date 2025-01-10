@@ -259,7 +259,8 @@ color: rgba(93, 93, 93, 1);
   background-color:rgba(5, 70, 126, 1) ;
   font-family: var(--font-lato);
   cursor: pointer;
-  padding: 8px;
+  padding: 5px 20px 5px 20px;
+  letter-spacing: 0.05em;
   color: #ffff;
 }
 .startbutton:hover{

@@ -19,7 +19,7 @@ const CustomizeFormSection = () => {
                       platform makes building forms simple, fast, and flexible to meet your needs.
                       </p>
                       <div className="my-3">
-                         <WebsiteButton type='button' className='bg-white' style={{color:'black'}}>
+                         <WebsiteButton type='button' to="/login"  className="startbutton mt-2">
                         Let's Get Started
                       </WebsiteButton>
                       </div>
