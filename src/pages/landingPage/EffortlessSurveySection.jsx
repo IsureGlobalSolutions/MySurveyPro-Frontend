@@ -13,7 +13,7 @@ const EffortlessSurveySection = () => {
         </div>
         <div className="effortless_meeting mb-3">
            <p className='my-3'>Wasting time creating surveys from scratch?</p>
-           <WebsiteButton type='button' style={{backgroundColor:' #05467E'}}>
+           <WebsiteButton type='button' to="/login" className="startbutton mt-2" >
             Lets Get Started
             </WebsiteButton> 
 

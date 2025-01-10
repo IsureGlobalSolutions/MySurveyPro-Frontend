@@ -20,7 +20,7 @@ const StartTodaySection = () => {
           <h1>Experience The Future of Surveys with MySurveyPro</h1>
           <p>Sign up now and take the first step towards a more connected and productive workforce.</p>
           <div className="mb-4">
-            <WebsiteButton type='button' className='mt-3' style={{ backgroundColor: '#05467E' }}>
+            <WebsiteButton type='button' to="/signup" className='startbutton ps-3 pe-4 mt-3'>
               Sign Up
             </WebsiteButton>
           </div>

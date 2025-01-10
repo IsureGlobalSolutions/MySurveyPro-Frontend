@@ -35,13 +35,10 @@ const sidbarHighligherHandler=(id)=>{
             <Link to={'/templates'} className={`main-item ${highlighter==='02'? 'item-highlighted':''}`} id="02"onClick={()=>highlighterHandler('02')}>Templates</Link>
              <Link to={'/enterprise'} className={`main-item ${highlighter==='04'? 'item-highlighted':''}`} id="04"onClick={()=>highlighterHandler('04')}>Enterprise</Link>
             <Link to={'/resources'} className={`main-item ${highlighter==='05'? 'item-highlighted':''}`} id="05"onClick={()=>highlighterHandler('05')}>Resources</Link>
-            <Link to={'/guidance'} className={`main-ite ${highlighter==='06'? 'item-highlighted':''}`} id="06"onClick={()=>highlighterHandler('06')}>
-            <div className="how-to-use ms-4">
-            <button type="button"   className={`btn ${highlighter==='06'? 'btn-outline-secondary':''}`} onClick={()=>navigate('/guidance')}>How to use</button>
-            {/* <div className="guidance" ></div> */}
-
-</div>
-</Link>
+            <Link to={'/guidance'}   style={{textDecoration:"none",marginTop:"-6px"}} className={`main-ite ${highlighter==='06'? 'item-highlighted':''}`} id="06"onClick={()=>highlighterHandler('06')}>
+            <button type="button"   className={` ${highlighter === '06' ? 'custom-button-text  p-2 ps-3 pe-3' : 'custom-button p-2 ps-3 pe-3'} `}
+             onClick={()=>navigate('/guidance')}>How to use</button>
+            </Link>
 
           </nav>
         </nav>

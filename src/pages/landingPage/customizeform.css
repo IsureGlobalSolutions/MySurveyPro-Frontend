@@ -2,18 +2,16 @@
     background-image: url('../../assets/landingPage/formsectionimage.png');
     height: 598px;
     width: 100%;
-
     background-size:cover;
     background-position:center;
     background-repeat: no-repeat;
-position: relative;
+    position: relative;
 }
 .customize-form-shade-image{
     position: absolute;
     background-image: url("../../assets/landingPage/fromsectionshade.png");
     width: 100%;
-    height: 100%;
-    
+    height: 100%; 
     background-size:cover;
     background-position:center;
     background-repeat: no-repeat;
@@ -24,7 +22,6 @@ position: relative;
     justify-content: center;
     width: 100%;
     height: inherit;
-
 }
 .custm-heading{
     max-width: 60%;

@@ -103,7 +103,8 @@
   padding: var(--padding-7xs) 0 0;
 }
 .signup {
-  height: 38px;
+  height: 35px;
+  font-size: 22px;
   position: relative;
   line-height: 150%;
   text-transform: capitalize;
@@ -132,8 +133,22 @@
   border-radius: var(--br-81xl);
   background-color: var(--color-darkorange);
   flex-direction: row;
-  padding: 0 var(--padding-9xl);
+  padding: 0 var(--padding-2xl);
   color: var(--color-white);
+  border: 1px solid #f97300;
+  user-select: none;
+
+
+}
+.signup-button-container:hover{
+  flex: 0.441;
+  border-radius: var(--br-81xl);
+  border: 1px solid #f97300;
+  background-color:white;
+  flex-direction: row;
+  padding: 0 var(--padding-2xl);
+  color: rgb(17, 16, 16);
+  user-select: none;
 }
 .auth-links-container,
 .signup-button-container,
@@ -141,6 +156,8 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  user-select: none;
+
 }
 .auth-links-container {
   align-self: stretch;
@@ -265,3 +282,56 @@
   }
 }
 
+.custom-button{
+  display: flex;
+  flex: 0.441;
+  border-radius: var(--br-81xl);
+  border: 1px solid #f97300;
+  background-color: #ffffff;
+  flex-direction: row;
+  padding: 0 var(--padding-2xl); 
+  color: rgb(17, 16, 16);
+  user-select: none;
+  font-size: 16px; 
+  transition: all 0.3s ease;
+  text-decoration: none !important;
+
+}
+.custom-button-text{
+  background-color: #f97300; 
+  display: flex;
+  flex: 0.441;
+  border-radius: var(--br-81xl);
+  border: 1px solid #f97300;
+  flex-direction: row;
+  padding: 0 var(--padding-2xl); 
+  color: #ffffff;
+  user-select: none;
+  font-size: 16px; 
+  transition: all 0.3s ease;
+  text-decoration: none !important;
+}
+.custom-button:hover {
+  background-color: #f97300; 
+  display: flex;
+  flex: 0.441;
+  border-radius: var(--br-81xl);
+  border: 1px solid #f97300;
+  flex-direction: row;
+  padding: 0 var(--padding-6xl); 
+  color: rgb(240, 240, 240);
+  user-select: none;
+  font-size: 16px; 
+  transition: all 0.3s ease;
+  text-decoration: none !important;
+}
+
+.custom-button.btn-outline-secondary {
+  border-color: #f97300; 
+  color: #f97300;
+}
+
+.custom-button.btn-outline-secondary:hover {
+  background-color: #f97300;
+  color: white;
+}
