@@ -9,28 +9,26 @@ import WebsiteButton from '../../components/mySurveyProWebsiteBtn/WebsiteButtton
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { contactus } from '../../Redux/slice/authSlice';
+import toast from 'react-hot-toast';
 
 const ContactUs = ({ className = "" }) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 const dispatch =useDispatch()
-  // Handle form submission
   const onSubmit =(data) => {
-    console.log("Form submission triggered");
-
     console.log("🚀 ~ onSubmit ~ data1:", data)
     
     try {
       const contactData = {...data}; 
       dispatch(contactus(contactData)) 
         .then((res) => {
+          console.log("🚀 ~ .then ~ res:", res)
           if (res.payload) {
-            alert('Your message has been sent successfully!');
+            toast.success(res.payload.alertMessage)
             reset();
           }
         })
         .catch((error) => {
-          alert('There was an error submitting the form.');
-          console.error('Error:', error);
+          toast.error(res.error)
         });
     } catch (error) {
       console.error('There was an error submitting the form:', error);
@@ -108,22 +106,37 @@ const dispatch =useDispatch()
               </div>
 
               <div className="input-space">
-                <InputField
-                  type="number"
-                  name="phone"
-                  register={register}
-                  errors={errors}
-                  placeholder="Phone Number"
-                  {...register('phone', { required: 'Phone number is required' })}
-                />
-              </div>
+  <InputField
+    type="number"
+    name="phone"
+    register={register}
+    errors={errors}
+    placeholder="Phone Number"
+    {...register('phone', {
+      required: 'Phone number is required',
+      pattern: {
+        value: /^[0-9]{11}$/, // This pattern matches exactly 11 digits
+        message: 'Phone number must be 11 digits long',
+      },
+    })}
+  />
+</div>
 
-              <div className="input-space">
+
+              {/* <div className="input-space">
                 <textarea
                   className="contact-message"
                   placeholder="Message"
                   rows={5}
-                  {...register('message', { required: 'Message is required' })}
+                  {...register('message')}
+                />
+              </div> */}
+              <div className="input-space">
+                <textarea
+                  className="contact-message"
+                  placeholder="Message (Optional)"
+                  rows={5}
+                  {...register('message')} // No validation required here
                 />
               </div>
 
