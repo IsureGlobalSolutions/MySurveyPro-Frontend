@@ -116,7 +116,7 @@ if(res?.payload.isSuccess===true){
    <p className="forget-pass-text text-end " onClick={()=>{navigate('/forgotpassword')}}>Forget Password?</p>
 
                <div className="login-button">
-                <WebsiteButton className='w-100' type='submit'  onClick={()=>{} } disabled={isLoading}>
+                <WebsiteButton className='w-100' type='submit'   onClick={()=>{} } disabled={isLoading}>
                     {isLoading? "Loading...":'Login'}
                 </WebsiteButton>
                </div>

@@ -28,7 +28,7 @@ export const signInUser = createAsyncThunk('authentication/signInUser', async (d
 export const contactus = createAsyncThunk('authentication/contactus', async (data, thunkAPI) => {
   console.log("🚀 ~ contactus ~ data:", data)
   try {
-    const res = await axios.post('api/Authentication/AddContactUs', data);
+    const res = await axiosPrivate.post('api/Authentication/AddContactUs', data);
     return res.data;
   } catch (error) {
     const message = error.response?.data?.alertMessage || error.message || error.toString();
