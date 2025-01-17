@@ -142,7 +142,7 @@ const LandingPage = () => {
     </div>
 
     {/* Video Section */}
-    <div className="col-lg-6 pt-4 col-md-7 mt-4 d-flex justify-content-center d-none d-lg-block d-md-block">
+    <div className="col-lg-6  col-md-7 d-flex justify-content-center d-none d-lg-block d-md-block">
       <div className="contain w-100 px-3 px-lg-0">
         <div
           className="video-container position-relative"

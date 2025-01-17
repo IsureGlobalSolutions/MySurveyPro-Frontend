@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 import Loader from "../../../../components/plugins/Loader";
 import img1 from "../../../../assets/Q12survey/c2.png";
 import "./TEItemplate.css";
-import PreveiwCongratulationsurvey from "../q12template/PreveiwCongratulationsurvey";
+import PreveiwCongratulationsurvey from "../mp12template/PreveiwCongratulationsurvey";
 import TEItemplate from "./TEItemplate";
 import img3 from "../../../../assets/Q12survey/Figon_Component.png";
 const TEIPreviewQuestion = () => {

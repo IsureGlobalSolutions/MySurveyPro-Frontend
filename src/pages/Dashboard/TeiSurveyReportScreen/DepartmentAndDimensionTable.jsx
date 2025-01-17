@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import SurveyTable from '../../../components/table/SurveyTable';
 import { useDispatch, useSelector } from 'react-redux';
-import { TeiDimensionListApi, userSingleDimensionForSingleDepartmentReportApi } from '../../../Redux/slice/teiSlice';
+import { DownLoadDepartmentQuestionReportApi, TeiDimensionListApi, userSingleDimensionForSingleDepartmentReportApi } from '../../../Redux/slice/teiSlice';
 import { Navbarvalue } from '../../../context/NavbarValuesContext';
 import { getListOfCoumnProperty } from '../../../Redux/slice/surveySlice';
 import DropdownButton from '../../../components/mySurveyProWebsiteBtn/DropdownButton';
+import Tooltip from '../../../components/Tooltip/Tooltip';
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 const DepartmentAndDimensionTable = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
@@ -18,6 +21,7 @@ const DepartmentAndDimensionTable = () => {
   const [selectedOption, setSelectedOption] = useState({
     dimensionId: null,
     columnProperty: null,
+    dimension:null
   });
 
   // Fetch dimensions and department list
@@ -26,7 +30,7 @@ const DepartmentAndDimensionTable = () => {
       dispatch(TeiDimensionListApi(selectedDashboardValues?.survey?.id));
       dispatch(getListOfCoumnProperty({ surveyId: selectedDashboardValues?.survey?.id, columnProperty: 'department' }))
         .then((res) => {
-          console.log(res , "resppppppppp");
+
           setDepartmentList(res?.payload || []);
         });
     }
@@ -37,8 +41,12 @@ const DepartmentAndDimensionTable = () => {
     if (listOfDimensions?.length > 0 && departmentList?.length > 0) {
       const defaultDimensionId = listOfDimensions[0]?.id;
       const defaultColumnProperty = departmentList[0]?.columnValue;
+      const defaultDimension = listOfDimensions[0]?.dimension
 
-      setSelectedOption({ dimensionId: defaultDimensionId, columnProperty: defaultColumnProperty });
+      setSelectedOption({ dimensionId: defaultDimensionId,
+         columnProperty: defaultColumnProperty, 
+        dimension:defaultDimension
+        });
 
       // Fetch initial data
       fetchData(defaultDimensionId, defaultColumnProperty);
@@ -47,9 +55,9 @@ const DepartmentAndDimensionTable = () => {
 
   // Fetch data based on selected options
   const fetchData = (
-    dimensionId, 
+    dimensionId,
     columnProperty,
-    newRowsPerPage, 
+    newRowsPerPage,
     currentPage
   ) => {
     setIsLoading(true);
@@ -59,13 +67,13 @@ const DepartmentAndDimensionTable = () => {
         dimensionId,
         columnProperty,
         pageSize: newRowsPerPage,
-        pageNumber:currentPage,
+        pageNumber: currentPage,
       })
     )
       .then((res) => {
         // settotalpages(res?.payload.pagination.totalPages || [])
         setResponseDataInTable(res?.payload?.data || []);
-        
+
       })
       .finally(() => setIsLoading(false));
   };
@@ -78,7 +86,7 @@ const DepartmentAndDimensionTable = () => {
 
   const handleSelectDimension = (data) => {
     const updatedDimensionId = data?.id;
-    setSelectedOption((prev) => ({ ...prev, dimensionId: updatedDimensionId }));
+    setSelectedOption((prev) => ({ ...prev, dimensionId: updatedDimensionId,dimension:data?.dimension }));
     fetchData(updatedDimensionId, selectedOption.columnProperty);
   };
 
@@ -98,12 +106,12 @@ const DepartmentAndDimensionTable = () => {
       setColumns(generatedColumns);
 
       const generatedRows = data.map((item) => {
-       
+
         const baseRow = {
           RecipientName: item?.teiProperties?.RecipientName,
           TeamsRating: item?.teiDimensionResult[0]?.teiDimension?.TeamsRating,
           TEIReferenceScore: item?.teiDimensionResult[0]?.teiDimension?.TEIReferenceScore,
-          Result:`${item?.teiDimensionResult[0]?.teiDimension?.Result}%` ,
+          Result: `${item?.teiDimensionResult[0]?.teiDimension?.Result}%`,
         };
         item?.teiDimensionResult[0]?.questionResultDto.forEach((q, index) => {
           baseRow[`Question${index + 1}`] = Object.values(q.choicesResult)[0];
@@ -117,15 +125,63 @@ const DepartmentAndDimensionTable = () => {
     }
   };
 
+  const downloadTableReport = () => {
+    if (rows?.length > 0 && columns?.length > 0) {
+      // Transform rows to match table display structure
+      const formattedData = rows.map((row) => {
+        const rowData = {};
+        columns.forEach((col) => {
+          rowData[col.label] = row[col.dataKey] || ''; // Use column label as key
+        });
+        return rowData;
+      });
+  
+      // Create a new worksheet
+      const worksheet = XLSX.utils.json_to_sheet(formattedData);
+  
+      // Calculate column widths dynamically
+      const columnWidths = columns.map((col) => {
+        const maxWidth = formattedData.reduce(
+          (max, row) => Math.max(max, (row[col.label]?.toString()?.length || 0)),
+          col.label.length // Include header length as a minimum width
+        );
+        return { wch: maxWidth + 2 }; // Add padding for better readability
+      });
+  
+      // Assign column widths
+      worksheet['!cols'] = columnWidths;
+  
+      // Create a new workbook and append the worksheet
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Dimensions vs Recipients Report');
+  
+      // Convert workbook to binary array and trigger download
+      const excelData = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+      saveAs(
+        new Blob([excelData], {
+          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        }),
+        `Department(${selectedOption?.columnProperty}) report for a dimension(${selectedOption?.dimension}).xlsx` // File name
+      );
+    } else {
+      console.error('No data available for download');
+    }
+  };
   
   return (
     <>
       <div className="row m-0 p-0 justify-content-between mt-3">
         <div className="deparment-table-data col-md-12 p-0">
           <div className="mx-3 py-1 row justify-content-between bg-white shadow">
-            <div className="col-md-5">
+            <div className="col-md-5 d-flex">
               <div className="d-flex align-items-center px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
                 <p className="ps-2 py-2 fs-6 fw-bold m-0">Department report for a dimension</p>
+              </div>
+              <div className="d-flex align-items-center">
+
+                <Tooltip text={'Download report file'} style={{ width: '200px' }}>
+                  <small className='ps-1 py-2  fw-bold m-0 ' style={{ color: 'orange', cursor: 'pointer' }} onClick={downloadTableReport}>Download</small>
+                </Tooltip>
               </div>
             </div>
             <div className="col-md-5 d-flex gap-2">
@@ -147,11 +203,12 @@ const DepartmentAndDimensionTable = () => {
               )}
             </div>
           </div>
-          <SurveyTable columns={columns} data={rows} isLoading={isLoading}  dimensionId={selectedOption.dimensionId}
-  columnProperty={selectedOption.columnProperty} 
-    fetchData={fetchData} 
-    // totalpages={totalpages}
-/>
+          <SurveyTable columns={columns} data={rows} isLoading={isLoading}
+            dimensionId={selectedOption.dimensionId}
+            columnProperty={selectedOption.columnProperty}
+            fetchData={fetchData}
+          // totalpages={totalpages}
+          />
         </div>
       </div>
     </>

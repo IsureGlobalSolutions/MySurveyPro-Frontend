@@ -22,9 +22,6 @@ const [departmentList, setdepartmentList] = useState([])
 const {listOfDepartments}=useSelector((state)=>state.survey)
 
 
-// const{overAllTEISurveyReport}=useSelector((state)=>state.teiSurvey)
-
-
 useEffect(() => { 
   if (selectedDashboardValues?.survey?.id) {
     if(listOfDepartments?.length>0){

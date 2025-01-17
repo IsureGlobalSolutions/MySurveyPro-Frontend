@@ -1,0 +1,243 @@
+.Q12-section {
+    height: 80vh;
+    border-radius: 20px;
+    background-image: url("../../../../assets/Q12survey/Q12image.png");
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+}
+.congratulations{
+    border-radius: 20px;
+    background-image: url("../../../../assets/Q12survey/celebration.png");
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+}
+/* Default style for checkbox */
+/* Style for the checkbox */
+/* Style for the checkbox */
+/* Style for the checkbox */
+
+.form-check-input {
+    position: relative;
+    width: 20px; /* Size of the checkbox */
+    height: 20px; /* Size of the checkbox */
+    border-radius: 4px;
+    border: none !important; 
+    background-color: #F97300; /* Background color for the checkbox */
+    cursor: pointer; /* Pointer cursor on hover */
+    appearance: none; /* Remove default checkbox appearance */
+    outline: none; /* Remove outline on focus */
+    box-shadow: none !important; 
+    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8) !important;
+    /* Remove any default box-shadow */
+}
+
+/* Style when checkbox is checked */
+.form-check-input:checked {
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5); 
+    background-color: #F97300; /* Maintain background color when checked */
+    border: 2px solid #F97300; /* Border color when checked */
+}
+
+/* Add checkmark when checkbox is checked */
+.form-check-input:checked::before {
+    content: "	\2713"; 
+    position: absolute;
+    left: 50%; /* Center horizontally */
+    top: 43%; /* Center vertically */
+    transform: translate(-50%, -50%); /* Center the checkmark */
+    font-size: 16px; 
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+      text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+    width: 90%; 
+    height: 90%; 
+    border-radius: 4px;
+    background-color: transparent; /* No background color */
+    /* Shadow for the checkmark */
+    margin: 0; /* Remove any extra margin */
+    padding: 0; /* Remove any extra padding */
+    overflow: hidden; /* Ensure shadow does not extend outside */
+}
+
+/* Prevent default box-shadow on focus */
+.form-check-input:focus {
+    /* border-color: #F97300;  */
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .2); 
+    box-shadow: none; /* Remove default focus shadow */
+}
+
+/* Optional: Style for the label text */
+.checkmark {
+    margin-top: 1px; /* Space between checkbox and text */
+    line-height: 25px; 
+    font-size: 18px;
+font-weight: 500;
+line-height: 22.8px;
+text-align: left;
+color: #151D48;
+    /* Align text with checkbox */
+}
+
+.form-check-input:checked[type=checkbox] {
+    --bs-form-check-bg-image: none; /* Remove any background image */
+}
+
+.mysurveypro-input-field{
+    border-radius: 10px;
+    border: 1px solid #B7BBBE;
+    padding: 18px 13px 18px 13px;
+    width: 100%;
+}
+.mysurveypro-input-field::placeholder{
+  color: #C5C5C5;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19.2px; 
+   
+}
+.backgroundcolor{
+    background-color: #ffff;
+}
+.backgroundcolor h1{
+font-size: 70px;
+font-weight: 700;
+line-height: 84px;
+text-align: left;
+color: #00E096;
+}
+.backgroundcolor h2{
+font-size: 48px;
+font-weight: 700;
+line-height: 57.6px;
+text-align: left;
+color: #000000;
+}
+.css-1knaqv7-MuiButtonBase-root-MuiButton-root{
+    color: #ffff !important;
+}
+.css-1knaqv7-MuiButtonBase-root-MuiButton-root.Mui-disabled {
+    color: rgba(0, 0, 0, 0.26) !important;
+}
+.stepper{
+gap: 0px;
+border-radius: 20px;
+background-color: #ffff;
+box-shadow: 0px 4px 13.8px 0px #00000026;
+}
+.text-start h1{
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 35px;
+    text-align: left;
+    color: #151D48;
+}
+.text-start p{
+font-size: 20px;
+font-weight: 600;
+line-height: 30px;
+text-align: left;
+color: #151D48;
+
+}
+.stepper-section{
+    background-color: #ffff;
+    /* border-radius: 20px; */
+    border: 1px solid;
+}
+.steppercard{
+    border-radius: 20px  ;
+    border: 1px solid #D9D9D9;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    /* padding: 5px; */
+}
+.previewquestion{
+    margin: 20px ;
+    padding: 20px ;
+}
+@media (max-width:500px){
+    .Q12-section{
+        margin: 40px 0px 40px 0px  !important;;
+        padding: 0 !important;;
+    }
+    .text{
+        padding: 2px 0px 0px 0px  !important;
+        margin: 0 0px 0px 0px 0px !important;;
+    }
+    .text h1 {
+     
+        font-size: 15px;
+    }
+    .tableheader {
+        margin-top: -120px !important;
+    }
+    .dimension-text{
+        font-size: 10px !important;
+    }
+    .form-check-input-TEI {
+        width: 12px; 
+        height: 12px; 
+    }
+    .line-width{
+        height: 50% !important;
+    }
+    .Question-options {
+        gap: 1px !important
+    }
+    .question-text{
+        margin: 3px 20px 0px 10px !important;
+        padding: 2px !important;
+    }
+    .some-class h3 {
+        font-size: 5px !important;
+      }
+      .mui-button-resp{
+        flex-direction: row !important;
+        justify-content: space-between!important;
+      }
+      .css-rh92k-MuiPaper-root-MuiMobileStepper-root {
+        font-size: 10px !important;
+        margin: 3px !important;
+      }
+      .css-1knaqv7-MuiButtonBase-root-MuiButton-root {
+        padding: 0px  !important;
+        margin: 0px !important;
+        font-size: 10px !important;
+        max-width: none !important;
+        
+      }
+}
+@media (max-width:600px) {
+    .tableheader {
+        margin-top: -150px !important;
+    }
+    .previewquestion{
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+    .backgroundcolor h1 {
+        font-size: 25px;
+    }
+    .backgroundcolor h2 {
+        font-size: 25px;
+    }
+    .surveyQuestion h1{
+        font-size: 15px !important;
+    }
+    .surveyQuestion p{
+        font-size: 15px !important;
+}
+}
+@media (max-width:450px) {
+    .tableheader {
+        margin-top: -110px !important;
+    }
+}
+

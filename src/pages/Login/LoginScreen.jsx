@@ -45,7 +45,6 @@ if(res?.payload.isSuccess===true){
 
     }
     const handleSuccess = (response) => {
-      console.log("🚀 ~ handleSuccess ~ response:", response)
         const idToken = response.credential; 
         const decodedToken = jwtDecode(idToken);
         console.log('Decoded Token:', decodedToken);    
@@ -145,17 +144,7 @@ if(res?.payload.isSuccess===true){
   />
 </div>
 
-                {/* <div className="socail-login">
-                <img style={{width:'20px',margin:'0px 5px'}} src={facebookIcon} alt="" /> 
-                    <div className="">  <p className='text-center'>Continue With Facebook</p></div>
-
-                  
-                </div> */}
-                {/* <div className="socail-login">
-                <img style={{width:'20px',margin:'0px 5px'}} src={appleIcon} alt="" /> 
-                    <div className=""> <p className='text-center'>Continue With Apple</p></div>
-                   
-                </div> */}
+   
 </div>
                
                </div>

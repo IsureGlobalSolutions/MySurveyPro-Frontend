@@ -64,7 +64,7 @@ const Pricing = () => {
                       </span>
                     </div>
                     <div className="d-flex justify-content-start mb-3">
-                      <h1>$10</h1>
+                      <h1>$5</h1>
                       <span className="m-3">per Survey</span>
                     </div>
                     <div className="d-flex price-line mb-3"></div>

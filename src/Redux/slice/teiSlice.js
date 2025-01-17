@@ -67,6 +67,51 @@ export const getDepartmentDimensionsTEISurveyReportApi = createAsyncThunk('surve
   }
 });
 
+export const DownLoadDepartmentQuestionReportApi = createAsyncThunk('survey/DownLoadDepartmentQuestionReportApi', async ({ReportProperty,data}, thunkAPI) => {
+  try {
+    const res = await axiosPrivate.post('api/ReportFileDownload/ExportTeiSurveyReport',data,{
+        params: {ReportProperty}
+    });
+    return res?.data;
+  } catch (error) {
+    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+export const DimensionsvsRecipientsReportApi = createAsyncThunk('survey/DimensionsvsRecipientsReport', async ({ReportProperty,data}, thunkAPI) => {
+  try {
+    const res = await axiosPrivate.post('api/ReportFileDownload/ExportTeiSurveyReport',data,{
+        params: {ReportProperty}
+    });
+    return res?.data;
+  } catch (error) {
+    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+export const DepartmentalDimensionReportApi = createAsyncThunk('survey/DepartmentalDimensionReport', async ({ReportProperty,data}, thunkAPI) => {
+  try {
+    const res = await axiosPrivate.post('api/TEISurveyReport/GetDepartmentDimensionsTEISurveyReport',data,{
+        params: {ReportProperty}
+    });
+    return res?.data;
+  } catch (error) {
+    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+export const DepartmentalDimensionAverageReportApi = createAsyncThunk('survey/DepartmentalDimensionAverageReport', async (data, thunkAPI) => {
+  try {
+    const res = await axiosPrivate.post('api/ReportFileDownload/ExportTeiDepartmentAverageReport',data,{ responseType: 'blob' });
+    return res?.data;
+  } catch (error) {
+    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 const initialState = {
   isLoading: false,
   message: '',

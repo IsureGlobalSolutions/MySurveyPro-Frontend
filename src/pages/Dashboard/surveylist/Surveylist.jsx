@@ -54,7 +54,7 @@ const handlePreviewCheckboxClick =(content)=>{
   useEffect(() => {
     if (surveysList?.length > 0) {
       const formattedData = surveysList?.map((element) => {
-        if (element.name === "Q12") {
+        if (element.name === "MP12") {
           return {
             img: q12image,
             title: element.name,
@@ -62,7 +62,7 @@ const handlePreviewCheckboxClick =(content)=>{
             text: "Start your survey by clicking the 'View Survey'",
             buttonviewsurvey: "View Survey",
             buttonusersurvey: "Use Survey",
-            PreviewSurveylink:"/q12template",
+            PreviewSurveylink:"/mp12template",
             // Surveylink: "/q12survey",
           };
         } else if (element.name === "TEI") {

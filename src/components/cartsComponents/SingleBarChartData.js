@@ -13,7 +13,7 @@ export const SingleBarChartData = ( data=[] ) =>
                 "id": "9JSOZ",
                 "stackOnlyBar": true,
                 "toolbar": {
-                    "show": false
+                    "show": true,
                 },
                 "type": "bar",
                 "width": 520,

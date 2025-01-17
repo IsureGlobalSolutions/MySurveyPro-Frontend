@@ -6,12 +6,13 @@ import { getListOfCoumnProperty } from '../../../Redux/slice/surveySlice';
 import { Navbarvalue } from '../../../context/NavbarValuesContext';
 import { getDepartmentDimensionsTEISurveyReportApi } from '../../../Redux/slice/teiSlice';
 import { object } from 'prop-types';
-
+import Tooltip from '../../../components/Tooltip/Tooltip';
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 const UserDimensionsDataForAllDepartments = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
- 
   const [departmentList, setDepartmentList] = useState([]);
   const [paginationData, setpaginationData] = useState({ newRowsPerPage:10,
     currentPage: 1
@@ -136,7 +137,6 @@ fetchData(selectedDepartment,params[2],params[3])
     const value = parseFloat(Object.values(item)[0]) || 0; // Extract the value from the object and parse as number
     return sum + value;
   }, 0);  
-  console.log("🚀 ~ totalSum ~ totalSum:", totalSum)
   const averagePercentage = (totalSum /  data?.dimensionTeamAverages?.length).toFixed(2);
    const summaryRow = { 
     RecipientName: 'Average',
@@ -153,15 +153,64 @@ fetchData(selectedDepartment,params[2],params[3])
 
     setRows(generatedRows);
   };
-
+  const downloadTableReport = () => {
+    if (rows?.length > 0 && columns?.length > 0) {
+      // Transform rows to match table display structure
+      const formattedData = rows.map((row) => {
+        const rowData = {};
+        columns.forEach((col) => {
+          rowData[col.label] = row[col.dataKey] || ''; // Use column label as key
+        });
+        return rowData;
+      });
+  
+      // Create a new worksheet
+      const worksheet = XLSX.utils.json_to_sheet(formattedData);
+  
+      // Calculate column widths dynamically
+      const columnWidths = columns.map((col) => {
+        const maxWidth = formattedData.reduce(
+          (max, row) => Math.max(max, (row[col.label]?.toString()?.length || 0)),
+          col.label.length // Include header length as a minimum width
+        );
+        return { wch: maxWidth + 2 }; // Add padding for better readability
+      });
+  
+      // Assign column widths
+      worksheet['!cols'] = columnWidths;
+  
+      // Create a new workbook and append the worksheet
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Dimensions vs Recipients Report');
+  
+      // Convert workbook to binary array and trigger download
+      const excelData = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+      saveAs(
+        new Blob([excelData], {
+          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        }),
+        `Dimensions(${selectedDepartment}) For All Department Report` // File name
+      );
+    } else {
+      console.error('No data available for download');
+    }
+  };
+  
+  
   return (
     <div className="row m-0 p-0 justify-content-between mt-4">
       <div className="deparment-table-data col-md-12 p-0">
         <div className="mx-3 py-1 row justify-content-between bg-white shadow">
-          <div className="col-md-5">
+          <div className="col-md-5 d-flex">
             <div className="d-flex align-items-center px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
               <p className="ps-2 py-2 fs-6 fw-bold m-0">User Dimensions For All Department Report</p>
             </div>
+            <div className="d-flex align-items-center">
+
+<Tooltip text={'Download report file'} style={{ width: '200px' }}>
+  <small className='ps-1 py-2  fw-bold m-0 ' style={{ color: 'orange', cursor: 'pointer' }} onClick={downloadTableReport}>Download</small>
+</Tooltip>
+</div>
           </div>
           <div className="col-md-3 col-sm-4">
             {departmentList?.length > 0 ? (

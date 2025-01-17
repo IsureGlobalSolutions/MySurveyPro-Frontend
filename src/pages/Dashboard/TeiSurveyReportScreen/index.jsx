@@ -14,48 +14,47 @@ import TeiUserDimensionForSingleDepartmentChart from './chart/TeiUserDimensionFo
 import { getListOfCoumnProperty } from '../../../Redux/slice/surveySlice'
 import DimensionDataForAllDepartment from './DimensionDataForAllDepartment'
 import DepartmentDimensionQuestionResult from './chart/DepartmentDimensionQuestionResult'
-  
-const index = () => {
-      const { selectedDashboardValues, DashboardStateHandler } = Navbarvalue()
-      const {listOfDepartments}=useSelector((state)=>state.survey)
-      
-      const dispatch = useDispatch();
-useEffect(() => { 
-  if(selectedDashboardValues?.survey?.id){
-   dispatch(overAllTeiSurveyReportApi(selectedDashboardValues?.survey?.id))
-    dispatch(getListOfCoumnProperty({surveyId:selectedDashboardValues?.survey?.id,columnProperty:"department"}))
-  }
-}, [selectedDashboardValues,dispatch]) 
-  return (
-   <>
-   <HeroCards/>
-   <div className="row m-0 p-0">
-  <div className="col-md-6"><OverAllRadialChat/></div>
-    <div className="col-md-6"> <OverAllFunnelChat/></div>
-  
-   
-    
-   </div>
-   {listOfDepartments?.length>0 &&
-   (
-    <>
-    <DimensionDataForAllDepartment/>
-    
-     <DepartmentAndDimensionTable/>
-  <DepartmentDimensionQuestionResult/>
-   <DimensionsAsRowsComponent/>
-    <TeiDimensionForAllDepartmentChart/>
-   <UserDimensionsDataForAllDeparments/>
 
-  
-   <TeiUserDimensionForSingleDepartmentChart/>
+const index = () => {
+  const { selectedDashboardValues, DashboardStateHandler } = Navbarvalue()
+  const { listOfDepartments } = useSelector((state) => state.survey)
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (selectedDashboardValues?.survey?.id) {
+      dispatch(overAllTeiSurveyReportApi(selectedDashboardValues?.survey?.id))
+      dispatch(getListOfCoumnProperty({ surveyId: selectedDashboardValues?.survey?.id, columnProperty: "department" }))
+    }
+  }, [selectedDashboardValues, dispatch])
+  return (
+    <>
+      <HeroCards />
+      <div className="row m-0 p-0">
+        <div className="col-md-6"><OverAllRadialChat /></div>
+        <div className="col-md-6"> <OverAllFunnelChat /></div>
+
+
+      </div>
+      {listOfDepartments?.length > 0 &&
+        (
+          <>
+            <DimensionDataForAllDepartment />
+
+            <DepartmentAndDimensionTable />
+            <DepartmentDimensionQuestionResult />
+            <DimensionsAsRowsComponent />
+            <TeiDimensionForAllDepartmentChart />
+            <UserDimensionsDataForAllDeparments />
+
+
+            <TeiUserDimensionForSingleDepartmentChart />
+          </>
+        )
+
+
+      }
+
     </>
-   )
-  
-   
-   }
-  
-   </>
   )
 }
 

@@ -12,7 +12,7 @@ export const donutChartData = ( reportValues = {}) =>
         "id": "XqUpw",
         "stackOnlyBar": true,
         "toolbar": {
-            "show": false
+            "show": true,
         },
         "type": "donut",
         "width": 492,

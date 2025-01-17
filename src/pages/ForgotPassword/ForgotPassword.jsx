@@ -9,12 +9,13 @@ import './forgetpassword.css'
 import { useForm } from 'react-hook-form';
 import InputField from '../../components/mySurveyProInput/InputField'
 import WebsiteButton from '../../components/mySurveyProWebsiteBtn/WebsiteButtton';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import toast from 'react-hot-toast';
 import { forgotPasswordApi } from '../../Redux/slice/authSlice';
 import { FRONTEND_URL } from '../../consts/environments';
+console.log("🚀 ~ FRONTEND_URL:", FRONTEND_URL)
 
 const ForgotPassword = () => {  
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -29,11 +30,16 @@ const ForgotPassword = () => {
 const finalData = {...data, clientBaseURL:`${FRONTEND_URL}/resetpassword/`}
   dispatch(forgotPasswordApi(finalData))
 .then((res)=>{
+  
 if(res?.payload.isSuccess===true){
   toast.success(res?.payload?.alertMessage)
   
  setisLoading(false)
  navigate('/login')
+}else {
+  // Show API error message if present
+  toast.error(res?.payload?.alertMessage || 'Something went wront, Please try again!');
+  setisLoading(false)
 }
 })
 
@@ -47,7 +53,7 @@ if(res?.payload.isSuccess===true){
             <div className="forgot-card-body row">
                <div className="visuals-forgot col-md-6">
                <div className="forgot-logo">
-               <SurveyLogo/>
+               <Link to={'/'}>  <SurveyLogo/></Link>
                </div> <img className='info-image img-fluid' src={infographicImage}   alt="" />
                 {/* <div className=""></div> */}
                 
