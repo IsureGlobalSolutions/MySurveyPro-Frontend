@@ -37,7 +37,7 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
     setstepper(2);
   };
 const handlePreviewCheckboxClick =(content)=>{
-  if (content.title === "TEI" || content.title=== "MT12"){
+  if (content.title === "TEI" || content.title=== "MP12"){
     store.dispatch(setSelectedSurveyId(content.id))
     navigate(content.PreviewSurveylink); 
     } else {
