@@ -25,7 +25,7 @@ const Profile = () => {
     const {isLoading,userData} =useSelector((state)=>state.user)
 
   const decodedToken = jwtDecode(userData.accessToken);
-  const userid = decodedToken.sid;
+  const userid = decodedToken.sid || decodedToken?.nameid;
   const fileInputRef = useRef(null);
     const onSubmit = (data) => {
       const values = Object.values(data)
