@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setPath } from "./Redux/slice/pathSlice";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 function App() {
 
@@ -35,7 +36,7 @@ function App() {
   return (
     <>
       <GoogleOAuthProvider clientId="1035198617356-07e0vkaahbhrjn1e88mq71havfsacjm0.apps.googleusercontent.com">
-    <ErrorBoundary fallback={<><p>error</p></>}>
+    <ErrorBoundary fallback={<><PageNotFound/></>}>
         <Suspense fallback={<div style={{height:'100vh'
           ,display:'flex',
            justifyContent:'center',

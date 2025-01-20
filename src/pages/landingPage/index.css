@@ -342,9 +342,7 @@ color: rgba(93, 93, 93, 1);
     text-decoration-skip-ink: none;
     color: rgba(50, 1, 47, 1);
   }
-  .video-fluid {
-    height: 40vh;
-  }
+
 }
 
 @media screen and (max-width: 1000px) {
@@ -357,9 +355,7 @@ color: rgba(93, 93, 93, 1);
     text-decoration-skip-ink: none;
     color: rgba(50, 1, 47, 1);
   }
-  .video-fluid {
-    height: 32vh!important;
-  }
+ 
 }
 @media screen and (max-width: 800px) {
   .left-herosection h1 {

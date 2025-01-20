@@ -79,7 +79,7 @@ const LandingPage = () => {
   return (
     <div className="my-survey-pro  mt-0 pt-0">
     <div className="topherosection ps-4">
-  <div className="d-flex align-items-center flex-lg-row hero-section">
+  <div className="d-flex  flex-lg-row hero-section">
     <div className="col-lg-6 col-md-5 hero-text-section">
       <div className="left-herosection d-flex flex-column  gap-3">
         <h1>Transform the way you measure human capital success with </h1>
