@@ -57,7 +57,7 @@ export const paymentSurvey = createAsyncThunk('survey/CreateSurveyChargeAsync', 
 });
 export const checkPaymentStatus = createAsyncThunk('survey/CheckSubscriptionPaymentStatus', async ({userId,surveyId}, thunkAPI) => {
   try {
-    const res = await axiosPrivate.post(`api/Survey/CheckSubscriptionPaymentStatus`, {userId,surveyId});
+    const res = await instance.post(`api/Survey/CheckSubscriptionPaymentStatus`, {userId,surveyId});
     return res.data;
   } catch (error) {
     const message = error.response?.data?.alertMessage || error.message || error.toString();

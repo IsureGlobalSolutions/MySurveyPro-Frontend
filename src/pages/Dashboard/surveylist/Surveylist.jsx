@@ -23,7 +23,7 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
   const [surveyListData, setsurveyListData] = useState([]);
   const { surveysList } = useSelector((state) => state.survey);
   const handleSurveyCheckboxClick = (content) => {
-  if (content.title === "TEI" || content.title=== "Q12"){
+  if (content.title === "TEI" || content.title=== "MP12"){
     startSurveyHandler(true);
     DashboardStateHandler("survey", {
       id: content.id,
@@ -37,7 +37,7 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
     setstepper(2);
   };
 const handlePreviewCheckboxClick =(content)=>{
-  if (content.title === "TEI" || content.title=== "Q12"){
+  if (content.title === "TEI" || content.title=== "MT12"){
     store.dispatch(setSelectedSurveyId(content.id))
     navigate(content.PreviewSurveylink); 
     } else {
