@@ -1,4 +1,4 @@
-export const SingleBarChartData = ( data=[] ) => 
+export const SingleBarChartData = ( data=[],colors=[] ) => 
     
     (
         {
@@ -21,6 +21,7 @@ export const SingleBarChartData = ( data=[] ) =>
                     "allowMouseWheelZoom": true
                 }
             },
+            colors:[colors.length>0? colors:[]],
             "plotOptions": {
                 "line": {
                     "isSlopeChart": false,

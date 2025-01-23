@@ -11,6 +11,7 @@ import { setSelectedSurveyId } from "../../../Redux/slice/authSlice";
 import { store } from "../../../Redux/store";
 import { Navbarvalue } from "../../../context/NavbarValuesContext";
 
+import { IoMdAddCircle } from "react-icons/io";
 const Surveylist = ({ setstepper, sendIdToParent }) => {
     const {
       StapperHandler,
@@ -50,6 +51,9 @@ const handlePreviewCheckboxClick =(content)=>{
   useEffect(() => {
     ListOfSuveysHandler();
   }, []);
+  const cutomeSurevyHandler = () => {
+    navigate("/customsurvey");
+  }
 
   useEffect(() => {
     if (surveysList?.length > 0) {
@@ -132,8 +136,25 @@ const handlePreviewCheckboxClick =(content)=>{
               </div>
             ))
           : "No Data"}
+         
       </div>
-    </div>
+ <div className="m-2">
+        <h1>Customize Survey</h1>
+        
+      </div>
+      <div className="d-flex justify-content-start flex-wrap gap-4">
+
+        <div className="card-new-customize-survey cursor-pointer" onClick={cutomeSurevyHandler} >
+            
+           <IoMdAddCircle style={{fontSize:'90px'}} />
+          
+    
+        </div>
+      </div>
+
+   
+
+</div>
   );
 };
 

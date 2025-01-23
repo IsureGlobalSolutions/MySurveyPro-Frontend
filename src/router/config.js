@@ -30,7 +30,10 @@ const Template=lazy(()=>import("../pages/Dashboard/templates/mp12template/Previe
 const Paymentsuccess=lazy(()=>import ("../pages/Pricing/Success.jsx"))
 const Guidance =lazy(()=>import("../pages/Guidance/guidance.jsx"))
 const TEITemplate = lazy(()=>import("../pages/Dashboard/templates/TEItemplate/TEIPreviewQuestion.jsx"))
+const CustomSurvey = lazy(()=>import("../pages/Dashboard/survey/CustomeSurvey/SurveyCreatorWidget.jsx"))
 const Congratulation=lazy((import("../pages/Dashboard/survey/TEISurvey/TEICongratulation.jsx")))
+
+
 const config = [
   {
     
@@ -148,6 +151,12 @@ const config = [
   loginRequired:true,
   layout: DashboardLayout,
   component:Surveylist
+},
+{
+  path: '/customsurvey',
+  loginRequired:true,
+  layout: DashboardLayout,
+  component:CustomSurvey,
 },
 
 {

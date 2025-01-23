@@ -9,7 +9,6 @@ import { FunnelChartData } from '../../../../components/cartsComponents/FunnelCh
 const OverAllFunnelChat = () => {
   const dispatch = useDispatch();
   const [reportValues, setreportValues] = useState()
-  console.log("🚀 ~ OverAllFunnelChat ~ reportValues:", reportValues)
   const [isLoading, setisLoading] = useState(false)
   const chartRef = useRef(null);
   const { overAllTEISurveyReport } = useSelector((state) => state.teiSurvey)

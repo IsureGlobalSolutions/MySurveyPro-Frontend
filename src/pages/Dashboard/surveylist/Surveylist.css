@@ -75,6 +75,22 @@ text-align: left;
             color: #F97300;
           }
 
+
+  .card-new-customize-survey{
+    border-radius: 20px  ;
+    border: 1px solid #D9D9D9;
+    background-color: #fff;
+    display: flex;
+    width: 300px;
+    height: 250px;
+   justify-content: center;
+    align-items: center;
+    text-align: center;
+    }
+    .card-new-customize-survey:hover {
+    border-color: #F97300;
+  }
+
 @media screen and  (max-width : 1200px) {
   .surveylist-section h1{
     font-size: 20px;
