@@ -84,11 +84,11 @@ const handlePreviewCheckboxClick =(content)=>{
   }, [surveysList]);
 
   return (
-    <div className="surveylist-section m-4 p-4">
-      <div className="m-2">
+    <div className="surveylist-section m-4 p-4 pt-2 pb-5">
+      <div className="m-2 ps-3">
         <h1>Survey templates</h1>
       </div>
-      <div className="d-flex justify-content-start flex-wrap gap-4">
+      <div className="d-flex  flex-wrap gap-5 mt-4 ms-4">
         {surveyListData?.length > 0
           ? surveyListData?.map((content, index) => (
               <div
@@ -102,17 +102,17 @@ const handlePreviewCheckboxClick =(content)=>{
                   style={{borderRadius:"20px"}}
                   alt={content.title}
                 />
-                <div className="card-body">
+                <div className="card-body mb-2">
                   <h5 className="card-title m-3">{content.title}</h5>
                   <div className="ms-3 d-flex justify-content-center col-lg-11 col-9 mb-3">
                     <p className="titletext d-flex justify-content-start flex-column">
                       {content.text}
                     </p>
                   </div>
-                  <div className="d-flex flex-column flex-md-row justify-content-center mb-2 gap-2 align-items-center">
+                  <div className="d-flex  flex-md-row justify-content-between ms-3 me-3 mb-2 gap-2 align-items-center">
                     <Link to={content.id} className="sidbar-item-link">
                       <WebsiteButton
-                        style={{ padding: "2px 10px", fontSize: "13px" }}
+                        className="templatebutton"
                         onClick={() => handlePreviewCheckboxClick(content)}
                       >
                         {content.buttonviewsurvey}
@@ -121,7 +121,7 @@ const handlePreviewCheckboxClick =(content)=>{
                     <Link to={content.id} className="sidbar-item-link">
                       {" "}
                       <WebsiteButton
-                        style={{ padding: "2px 10px", fontSize: "14px" }}
+                        className="templatebutton"
                         onClick={() => handleSurveyCheckboxClick(content)}
                       >
                         {content.buttonusersurvey}

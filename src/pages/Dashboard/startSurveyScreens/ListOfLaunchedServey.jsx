@@ -21,7 +21,7 @@ import {
   setSelectedSurveyId,
 } from "../../../Redux/slice/authSlice";
 import { store } from "../../../Redux/store";
-
+import { PiPlusBold } from "react-icons/pi";
 import Analyze from "../../../assets/svgs/Analyze Icon.svg";
 import Surveyurl from "../../../assets/svgs/Url Icon2.svg";
 import Tooltip from "../../../components/Tooltip/Tooltip";
@@ -181,30 +181,33 @@ const ListOfLaunchedServey = () => {
           !startSurvey) ? (
         <>
           <div className="top-section my-5 mx-2 d-flex justify-content-between">
-            <h2 className="ps-3">Welcome</h2>
+            <h2 className="ps-3 welcome">Welcome</h2>
             <WebsiteButton
-              className="me-3"
-              style={{ padding: "3px 10px", fontSize: "14px" }}
+              className="me-3 mt-1"
+              style={{ padding: "2px 10px", fontSize: "15px" }}
               onClick={() => {
                 startSurveyHandler(true);
               }}
             >
-              Create New Survey
+             <PiPlusBold className="me-1  mt-0 pt-0  plusicon" />  
+             <span className="mt-4 mt-4">
+             Create New Survey
+             </span>
             </WebsiteButton>
           </div>
-          <div className="table-responsive m-4 ">
+          <div className="table-responsive m-4  bg-red ">
             <Paper sx={{ width: "100%" }}>
-              <table className="table table-borderless">
-                <thead>
+              <table className="table table-borderless ">
+                <thead className="p-4">
                   <tr
                     className="fw-semobold shadow-lg "
                     style={{ backgroundColor: "#00003A" }}
                   >
-                    <th className="py-4 ">Survey Status</th>
-                    <th className="py-4 ">Survey title</th>
-                    <th className="py-4 ">Selected files</th>
-                    <th className="py-4 ">Responses</th>
-                    <th className="py-4 ">Actions</th>
+                    <th className="py-4 text-list ps-4">Survey Status</th>
+                    <th className="py-4 text-list">Survey title</th>
+                    <th className="py-4 text-list">Selected files</th>
+                    <th className="py-4 text-list">Responses</th>
+                    <th className="py-4 text-list">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -231,11 +234,11 @@ const ListOfLaunchedServey = () => {
                             style={{ borderBottom: "1px solid #D9D5EC" }}
                             className="shadow-sm rounded-4 fw-semibold"
                           >
-                            <td className="pt-3">
-                              <div className="d-flex">
+                            <td className="pt-2 ps-4">
+                              <div className="d-flex ms-1">
                                 <p
-                                  className="p-1"
-                                  style={{ backgroundColor: "green" }}
+                                  className="p-2"
+                                  style={{ backgroundColor: "#F97300" , color:"white" , borderRadius:"8px"}}
                                 >
                                   {item.surveyLaunchStatus === true
                                     ? "Active"
@@ -243,18 +246,18 @@ const ListOfLaunchedServey = () => {
                                 </p>
                               </div>
                             </td>
-                            <td className="pt-3">{item?.surveyName}</td>
-                            <td className="pt-3">
+                            <td className="pt-3 text-listitem">{item?.surveyName}</td>
+                            <td className="pt-3 text-listitem">
                               {item.fileNames?.map((data, index) => (
                                 <p key={index}>{data}</p>
                               ))}
                             </td>
-                            <td className="pt-3">
+                            <td className="pt-3 text-listitem">
                               {responseData?.totalRespondents || 0}/
                               {responseData?.totalReceiver || 0} respondent
                             </td>
 
-                            <td>
+                            <td className="pt-3">
                               <Tooltip
                                 text={"Analyse results"}
                                 style={{ width: "140px" }}

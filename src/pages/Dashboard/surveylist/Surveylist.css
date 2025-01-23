@@ -74,10 +74,26 @@ text-align: left;
         .watchsectioncard:hover .card-title  {
             color: #F97300;
           }
-
-@media screen and  (max-width : 1200px) {
+          .templatebutton{
+            padding: 2px 10px;
+            font-Size: 15px;
+          }
+@media screen and  (max-width : 1300px) {
   .surveylist-section h1{
     font-size: 20px;
   }
+  .surveylist-section {
+    margin: 0px !important;
+  }
+  .templatebutton{
+    padding: 2px 6px !important;
+    font-Size: 11px !important;
+  }
+  .titletext {
+    font-size: 16px;
+}
+.card-title {
+  font-size: 25px;
 }
 
+}

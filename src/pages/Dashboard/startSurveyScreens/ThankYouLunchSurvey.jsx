@@ -24,7 +24,7 @@ const ThankYouLunchSurvey = ({ setstepper, surveyId }) => {
 
   const [surveytext, setsurveytext] = useState("");
   console.log("🚀 ~ ThankYouLunchSurvey ~ surveytext:", surveytext);
-  const q12text = `${FRONTEND_URL}/q12survey/${id}/${surveyId}`;
+  const q12text = `${FRONTEND_URL}/MP12survey/${id}/${surveyId}`;
   const TEItext = `${FRONTEND_URL}/TeamEffectivenessSurvey/${id}/${surveyId}`;
 
   const copyToClipboard = () => {
