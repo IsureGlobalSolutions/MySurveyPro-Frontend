@@ -93,15 +93,15 @@ const handleInputChange = (e) => {
 };
   return (
     <div>
-        <div className="profile container mt-4" >
-        <div className="m-5 mb-0">
-        <div className="">
+        <div className="profile container mt-5 mb-5" >
+        <div className="m-5 mb-0 containe">
+        <div className="ms-3">
           <h1>Profile Settings</h1>
         </div>
         <div className="row d-flex flex-wrap flex-column flex-lg-row ">
           <div className="col-md-6 col-10 mx-auto m-5 p-2 ">
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
-              <div className="mb-4 mb-md-0">
+              <div className="mb-4 ms-2 mb-md-0">
               
 
 
@@ -144,10 +144,10 @@ profileAvatar
           </div>
         </div>
       </div>
-      <div className='ms-5 mb-4 '>
+      <div className='ms-5 mb-4'>
       <form onSubmit={handleSubmit(onSubmit )}   className="g-4 " >
-    	<div className='row g-4'>
-    	<div className='col-md-6 '>
+    	<div className='row g-4 container'>
+    	<div className='col-md-4'>
      	<label htmlFor="validationCustom01" className="form-label">firstName</label>
       	<InputField
         	type="text"
@@ -160,7 +160,7 @@ profileAvatar
           // {...register('firstName')}
         	/>
      	</div>
-     	<div className='col-md-6'>
+     	<div className='col-md-4'>
      	<label htmlFor="validationCustom01" className="form-label">Last name</label>
       	<InputField
         	type="text"
@@ -175,7 +175,7 @@ profileAvatar
         	/>
 	
      	</div>
-       <div className='col-md-6'>
+       <div className='col-md-4'>
      	<label htmlFor="validationCustom01" className="form-label">email</label>
       	<InputField
         	type="text"
@@ -190,7 +190,7 @@ profileAvatar
         	/>
 	
      	</div>
-       <div className='col-md-6'>
+       <div className='col-md-4'>
      	<label htmlFor="validationCustom01" className="form-label">Phone Number</label>
       	<InputField
         	type="text"
@@ -205,7 +205,7 @@ profileAvatar
         	/>
 	
      	</div>
-       <div className='col-md-6'>
+       <div className='col-md-4'>
      	<label htmlFor="validationCustom01" className="form-label">Address</label>
       	<InputField
         	type="text"
@@ -220,7 +220,7 @@ profileAvatar
         	/>
 	
      	</div>
-       <div className='col-md-6'>
+       <div className='col-md-4'>
      	<label htmlFor="validationCustom01" className="form-label">Country</label>
       	<InputField
         	type="text"
@@ -237,8 +237,8 @@ profileAvatar
      	</div>
     	</div>
           	
-     	<div className="signup-button col-md-2 mt-5">
-                	<WebsiteButton className='w-100' type="submit" onClick={()=>{}}  disabled={isLoading}>
+     	<div className="signup-button col-md-2 ms-3 mt-5">
+                	<WebsiteButton className='w-100 save-text' type="submit" onClick={()=>{}}  disabled={isLoading}>
                    	{isLoading? 'loading...':'Save Changes'}
                 	</WebsiteButton>
               	</div>

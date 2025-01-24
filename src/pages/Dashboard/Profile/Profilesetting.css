@@ -26,6 +26,19 @@ border: 3px solid #ECECEC
       width: 40vw; /* Larger relative width for smaller screens */
       height: 40vw;
     }
+    .signup-button{
+      width: 50%;
+    }
+    .save-text{
+      font-size: 13px !important;
+      
+    }
+  }
+  @media (max-width: 960px) {
+    
+    .save-text{
+      font-size: 16px;
+    }
   }
   
   @media (max-width: 576px) {

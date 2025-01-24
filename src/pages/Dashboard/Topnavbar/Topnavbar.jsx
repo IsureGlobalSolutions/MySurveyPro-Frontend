@@ -27,7 +27,7 @@ const {Profiledata} =useSelector((state)=>state.user)
    <>
    <div className="topnavbar-main-container">
     <div className="screen-name d-flex align-items-center">
-      <div className="screen-title">  <p className="fs-3 fw-bold m-0" >Dashboard</p></div>
+      <div className="screen-title">  <p className="fs-3 fw-bold m-0 ms-3" >Dashboard</p></div>
     
     </div>
     <div className="profile-section">

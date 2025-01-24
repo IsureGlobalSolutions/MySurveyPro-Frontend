@@ -38,7 +38,7 @@ else{
             <img className='img-fluid' src={LunchServey} alt="" />
             <div className="d-flex justify-content-center">
                 <WebsiteButton type='button' disabled={isLoading} onClick={launchSurvey}>
-                {isLoading? 'please Wait':'Lunch Survey'}
+                {isLoading? 'please Wait':'Launch Survey'}
             </WebsiteButton>
             </div>
            
