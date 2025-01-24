@@ -3,7 +3,6 @@
     border: 0;
     padding: var(--padding-3xs) var(--padding-27xl);
     background-color: var(--color-darkorange);
-    
     border-radius: var(--br-81xl);
     overflow: hidden;
     display: flex;
@@ -81,7 +80,7 @@
   @media (max-width:768px) {
     
     .website-button {
-      padding: 10px !important; /* Add horizontal padding for better spacing */
+      padding: 10px !important; 
       background-color: var(--color-darkorange); /* Use your defined variable */
       border-radius: var(--br-81xl); /* Consistent border-radius */
       border: none; /* Remove default border */
@@ -108,3 +107,22 @@
     text-decoration: none; /* Remove underline */
   }
   
+  .custom-website-button {
+    cursor: pointer;
+    border: 0;
+    padding: var(--padding-3xs) var(--padding-27xl);
+    background-color: #4BA3FA;
+    border-radius: var(--br-81xl);
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    white-space: nowrap;
+    /* width: 100%; */
+    color: #FFFFFF;
+    user-select: none;
+    line-height: 28.8px;
+    font-size: 18px;
+    font-weight: 600;
+  }

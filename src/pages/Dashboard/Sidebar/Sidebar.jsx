@@ -1,17 +1,12 @@
-import { useState, useEffect } from 'react';
+import {  useEffect } from 'react';
 import './Sidebar.css';
-import Dashboardicon from '../../../assets/dashboredsvg/dashboard.svg?react'
 import Surveyicon from '../../../assets/dashboredsvg/surveyicon.svg?react'
-import Surveylist from '../../../assets/dashboredsvg/Surveylist.svg?react'
-
-import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross1 } from "react-icons/rx";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Navbarvalue } from '../../../context/NavbarValuesContext';
-import WebsiteButton from '../../../components/mySurveyProWebsiteBtn/WebsiteButtton';
-import { Padding } from '@mui/icons-material';
 import PaymentPlan from '../../../assets/Dashboredpng/paymentPlan.png'
+import CustomeButton from '../../../components/mySurveyProWebsiteBtn/CustomeButton';
 const Sidebar = ({ collapsed, setcollapsed }) => {
     const dispatch = useDispatch()
     const { DashboardNavValues, updateDashbaordNavValues, startSurveyHandler, StapperHandler } = Navbarvalue()
@@ -124,8 +119,9 @@ const Sidebar = ({ collapsed, setcollapsed }) => {
 
                             <li className='my-3'> <small className={`text-small-paragraph ${collapsed ? 'collapsed' : ''}`}>Use advanced question types</small></li>
                             <div className="d-flex justify-content-center">
-                                <WebsiteButton className='py-1 px-2 mb-2' onClick={()=>navigate('/pricing')}> 
-                                    <small>Plans</small></WebsiteButton>
+                                <CustomeButton className='py-1 px-2 mb-2' onClick={()=>navigate('/pricing')}> 
+                                <small>Plans</small>
+                                </CustomeButton>
                             </div>
                         </div>
 
