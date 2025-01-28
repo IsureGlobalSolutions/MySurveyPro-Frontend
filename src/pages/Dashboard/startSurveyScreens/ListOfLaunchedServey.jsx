@@ -1,5 +1,5 @@
 import { Paper, TablePagination } from "@mui/material";
-import React, { lazy, useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Loader from "../../../components/plugins/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import './Listoflaunchscreen.css';
@@ -8,12 +8,8 @@ import {
   LaunchedSurveysStatusApi,
   updatePaymentStatus,
 } from "../../../Redux/slice/surveySlice";
-import WebsiteButton from "../../../components/mySurveyProWebsiteBtn/WebsiteButtton";
 import NewSurvey from "../startSurveyScreens/index";
-import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Navbarvalue } from "../../../context/NavbarValuesContext";
 import { jwtDecode } from "jwt-decode";
 import {
@@ -25,6 +21,7 @@ import { PiPlusBold } from "react-icons/pi";
 import Analyze from "../../../assets/svgs/Analyze Icon.svg";
 import Surveyurl from "../../../assets/svgs/Url Icon2.svg";
 import Tooltip from "../../../components/Tooltip/Tooltip";
+import CustomeButton from "../../../components/mySurveyProWebsiteBtn/CustomeButton";
 
 const ITEM_HEIGHT = 48;
 
@@ -182,7 +179,7 @@ const ListOfLaunchedServey = () => {
         <>
           <div className="top-section my-5 mx-2 d-flex justify-content-between">
             <h2 className="ps-3 welcome">Welcome</h2>
-            <WebsiteButton
+            <CustomeButton
               className="me-3 mt-1"
               style={{ padding: "2px 10px", fontSize: "15px" }}
               onClick={() => {
@@ -193,7 +190,7 @@ const ListOfLaunchedServey = () => {
              <span className="mt-4 mt-4">
              Create New Survey
              </span>
-            </WebsiteButton>
+             </CustomeButton>
           </div>
           <div className="table-responsive m-4  bg-red ">
             <Paper sx={{ width: "100%" }}>
@@ -246,13 +243,13 @@ const ListOfLaunchedServey = () => {
                                 </p>
                               </div>
                             </td>
-                            <td className="pt-3 text-listitem">{item?.surveyName}</td>
-                            <td className="pt-3 text-listitem">
+                            <td className="pt-3 ms-2 text-listitem">{item?.surveyName}</td>
+                            <td className="pt-3  ms-2 text-listitem">
                               {item.fileNames?.map((data, index) => (
                                 <p key={index}>{data}</p>
                               ))}
                             </td>
-                            <td className="pt-3 text-listitem">
+                            <td className="pt-3 text-listitem  ms-2">
                               {responseData?.totalRespondents || 0}/
                               {responseData?.totalReceiver || 0} respondent
                             </td>

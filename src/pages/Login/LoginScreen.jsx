@@ -14,8 +14,10 @@ import { store } from '../../Redux/store';
 import { jwtDecode } from 'jwt-decode';
 const LoginScreen = () => {  
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const {isLoading,userData} =useSelector((state)=>state.user)
+  const {userData} =useSelector((state)=>state.user)
   const dispatch = useDispatch();
+   const [isLoading, setisLoading] = useState(false)
+   console.log("🚀 ~ LoginScreen ~ isLoading:", isLoading)
   const navigate = useNavigate()
 
 useLayoutEffect(() => {
@@ -25,7 +27,7 @@ useLayoutEffect(() => {
 
 }, [])
     const onSubmit=(data)=>{
-
+setisLoading(true)
 try {
   const finalData = {...data,rememberMe:true}
 
@@ -33,13 +35,18 @@ try {
 .then((res)=>{
 if(res?.payload.isSuccess===true){
   console.log(res?.payload);
+setisLoading(false)
   store.dispatch(updateAccessToken(res?.payload))
   toast.success('Login Successfully!')
   navigate('/startsurvey')
+}else{
+  toast.error(res?.payload);
+  setisLoading(false);
 }
 })
 } catch (error) {
   toast.error(error)
+  setisLoading(false)
 }
 
 
@@ -47,11 +54,11 @@ if(res?.payload.isSuccess===true){
     const handleSuccess = (response) => {
         const idToken = response.credential; 
         const decodedToken = jwtDecode(idToken);
-        console.log('Decoded Token:', decodedToken);    
-      console.log('ID Token:', idToken);  
+     setisLoading(true)
      dispatch(Signinwithgoogle(idToken)).then((res) => {
       if (res.payload.isSuccess) { 
         toast.success("Login successful!"); 
+        setisLoading(false)
         store.dispatch(updateAccessToken(res?.payload))
         navigate('/startsurvey')
       }
@@ -60,6 +67,7 @@ if(res?.payload.isSuccess===true){
   }
     const handleError = () => {
       console.error('Login Failed');
+      setisLoading(false)
     };
   return (
 
@@ -69,12 +77,8 @@ if(res?.payload.isSuccess===true){
             <div className="login-card-body row">
                <div className="visuals-login col-md-6">
                <div className="login-logo">
-                {/* <img className='img-fluid ' src={surveyLogo} alt="" /> */}
                 <Link to={'/'}>  <SurveyLogo/></Link>
-              
-                </div> <img className='info-image img-fluid' src={infographicImage}   alt="" />
-                {/* <div className=""></div> */}
-                
+                </div> <img className='info-image img-fluid' src={infographicImage}   alt="" />                
                 </div> 
                <div className="login-content col-md-6 d-flex justify-c0ntent-center flex-column">
 

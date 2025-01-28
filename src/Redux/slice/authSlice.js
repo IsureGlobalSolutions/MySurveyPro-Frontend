@@ -21,7 +21,6 @@ export const signInUser = createAsyncThunk('authentication/signInUser', async (d
     return res.data;
   } catch (error) {
     const message = error.response?.data?.alertMessage || error.message || error.toString();
-    toast.error(message);
     return thunkAPI.rejectWithValue(message);
   }
 });
