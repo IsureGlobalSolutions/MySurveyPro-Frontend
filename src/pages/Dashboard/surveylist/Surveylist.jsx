@@ -10,41 +10,43 @@ import { Stepper } from "react-form-stepper";
 import { setSelectedSurveyId } from "../../../Redux/slice/authSlice";
 import { store } from "../../../Redux/store";
 import { Navbarvalue } from "../../../context/NavbarValuesContext";
-
-import { IoMdAddCircle } from "react-icons/io";
+import { FiPlusCircle } from "react-icons/fi";
+// import { IoMdAddCircle } from "react-icons/io";
+import Customizeicon from "../../../assets/svgs/gridicons_create.svg?react"
+import Customizeediticon from "../../../assets/svgs/Group 7 - Copy.svg?react"
 const Surveylist = ({ setstepper, sendIdToParent }) => {
-    const {
-      StapperHandler,
-      DashboardStateHandler,
-      startSurvey,
-      startSurveyHandler,
-    } = Navbarvalue();
+  const {
+    StapperHandler,
+    DashboardStateHandler,
+    startSurvey,
+    startSurveyHandler,
+  } = Navbarvalue();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [surveyListData, setsurveyListData] = useState([]);
   const { surveysList } = useSelector((state) => state.survey);
   const handleSurveyCheckboxClick = (content) => {
-  if (content.title === "TEI" || content.title=== "MP12"){
-    startSurveyHandler(true);
-    DashboardStateHandler("survey", {
-      id: content.id,
-      name: content.title,
-    });
-    store.dispatch(setSelectedSurveyId(content.id))
+    if (content.title === "TEI" || content.title === "MP12") {
+      startSurveyHandler(true);
+      DashboardStateHandler("survey", {
+        id: content.id,
+        name: content.title,
+      });
+      store.dispatch(setSelectedSurveyId(content.id));
     } else {
       console.error("Unknown survey type");
     }
     sendIdToParent(content.id);
     setstepper(2);
   };
-const handlePreviewCheckboxClick =(content)=>{
-  if (content.title === "TEI" || content.title=== "MP12"){
-    store.dispatch(setSelectedSurveyId(content.id))
-    navigate(content.PreviewSurveylink); 
+  const handlePreviewCheckboxClick = (content) => {
+    if (content.title === "TEI" || content.title === "MP12") {
+      store.dispatch(setSelectedSurveyId(content.id));
+      navigate(content.PreviewSurveylink);
     } else {
       console.error("Unknown survey type");
     }
-}
+  };
   const ListOfSuveysHandler = async () => {
     dispatch(getAllSurveyList()).then((res) => {});
   };
@@ -53,7 +55,7 @@ const handlePreviewCheckboxClick =(content)=>{
   }, []);
   const cutomeSurevyHandler = () => {
     navigate("/customsurvey");
-  }
+  };
 
   useEffect(() => {
     if (surveysList?.length > 0) {
@@ -62,18 +64,18 @@ const handlePreviewCheckboxClick =(content)=>{
           return {
             img: q12image,
             title: element.name,
-            id: element.id, 
+            id: element.id,
             text: "Start your survey by clicking the 'View Survey'",
             buttonviewsurvey: "View Survey",
             buttonusersurvey: "Use Survey",
-            PreviewSurveylink:"/mp12template",
+            PreviewSurveylink: "/mp12template",
             // Surveylink: "/q12survey",
           };
         } else if (element.name === "TEI") {
           return {
             img: form360img,
             title: element.name,
-            id: element.id, 
+            id: element.id,
             text: "Start your survey by clicking the 'View Survey'",
             buttonviewsurvey: "View Survey",
             buttonusersurvey: "Use Survey",
@@ -81,80 +83,123 @@ const handlePreviewCheckboxClick =(content)=>{
             // Surveylink:"/TEIsurvey",
           };
         }
-        return null; 
+        return null;
       });
       setsurveyListData(formattedData.filter(Boolean)); // Remove null entries
     }
   }, [surveysList]);
 
+
   return (
-    <div className="surveylist-section m-4 p-4 pt-2 pb-5">
-      <div className="m-2 ps-3">
-        <h1>Survey templates</h1>
-      </div>
-      <div className="d-flex  flex-wrap gap-5 mt-4 ms-4">
-        {surveyListData?.length > 0
-          ? surveyListData?.map((content, index) => (
-              <div
-                className="watchsectioncard col-sm-6 col-md-6 col-lg-3 d-flex flex-column align-items-start"
-                key={index}
-              >
-                <img
-                  type="button"
-                  src={content.img}
-                  className="card-img"
-                  style={{borderRadius:"20px"}}
-                  alt={content.title}
-                />
-                <div className="card-body mb-2">
-                  <h5 className="card-title m-3">{content.title}</h5>
-                  <div className="ms-3 d-flex justify-content-center col-lg-11 col-9 mb-3">
-                    <p className="titletext d-flex justify-content-start flex-column">
-                      {content.text}
-                    </p>
-                  </div>
-                  <div className="d-flex  flex-md-row justify-content-between ms-3 me-3 mb-2 gap-2 align-items-center">
-                    <Link to={content.id} className="sidbar-item-link">
-                      <WebsiteButton
-                        className="templatebutton"
-                        onClick={() => handlePreviewCheckboxClick(content)}
-                      >
-                        {content.buttonviewsurvey}
-                      </WebsiteButton>
-                    </Link>
-                    <Link to={content.id} className="sidbar-item-link">
-                      {" "}
-                      <WebsiteButton
-                        className="templatebutton"
-                        onClick={() => handleSurveyCheckboxClick(content)}
-                      >
-                        {content.buttonusersurvey}
-                      </WebsiteButton>
-                    </Link>
+    <>
+      <div className="surveylist-section m-4 p-4 pt-2 pb-5">
+        <div className="m-2 ps-3">
+          <h1>Survey templates</h1>
+        </div>
+        <div className="d-flex  flex-wrap gap-5 mt-4 ms-4">
+          {surveyListData?.length > 0
+            ? surveyListData?.map((content, index) => (
+                <div
+                  className="watchsectioncard col-sm-6 col-md-6 col-lg-3 d-flex flex-column align-items-start"
+                  key={index}
+                >
+                  <img
+                    type="button"
+                    src={content.img}
+                    className="card-img"
+                    style={{ borderRadius: "20px" }}
+                    alt={content.title}
+                  />
+                  <div className="card-body mb-2">
+                    <h5 className="card-title m-3">{content.title}</h5>
+                    <div className="ms-3 d-flex justify-content-center col-lg-11 col-9 mb-3">
+                      <p className="titletext d-flex justify-content-start flex-column">
+                        {content.text}
+                      </p>
+                    </div>
+                    <div className="d-flex  flex-md-row justify-content-between ms-3 me-3 mb-2 gap-2 align-items-center">
+                      <Link to={content.id} className="sidbar-item-link">
+                        <WebsiteButton
+                          className="templatebutton"
+                          onClick={() => handlePreviewCheckboxClick(content)}
+                        >
+                          {content.buttonviewsurvey}
+                        </WebsiteButton>
+                      </Link>
+                      <Link to={content.id} className="sidbar-item-link">
+                        {" "}
+                        <WebsiteButton
+                          className="templatebutton"
+                          onClick={() => handleSurveyCheckboxClick(content)}
+                        >
+                          {content.buttonusersurvey}
+                        </WebsiteButton>
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
-          : "No Data"}
-         
-      </div>
- <div className="m-2">
-        <h1>Customize Survey</h1>
-        
-      </div>
-      <div className="d-flex justify-content-start flex-wrap gap-4">
-
-        <div className="card-new-customize-survey cursor-pointer" onClick={cutomeSurevyHandler} >
-            
-           <IoMdAddCircle style={{fontSize:'90px'}} />
-          
-    
+              ))
+            : "No Data"}
         </div>
+        
+      </div >
+      <div className="surveylist-section m-4 p-4 pt-2 pb-5">
+  <div className="m-2 ps-3 text-center">
+    <h1>Customize Survey</h1>
+  </div>
+  <div className="d-flex flex-wrap justify-content-start mt-4">
+  <div className="watchsectioncard col-sm-6 col-md-4 col-lg-3 d-flex flex-column align-items-center ms-4 mb-4">
+    <div className="card-body mb-2 text-center">
+      <div className="d-flex justify-content-center">
+        <Customizeicon />
+        <h5 className="custom-card-title m-3 ms-1">Start from scratch</h5>
       </div>
+      <hr className="custom-line mt-0" />
+      <div className="ms-3 col-lg-11 col-9 mb-3">
+        <p className="custom-titletext d-flex justify-content-center m-4">
+          Begin with a blank page, or copy and paste a survey you’ve written.
+        </p>
+      </div>
+      <div className="d-flex flex-md-row justify-content-center ms-3 me-3 mb-2 gap-2 align-items-center">
+        <WebsiteButton
+          className="mt-1 templatebutton"
+          onClick={cutomeSurevyHandler}
+        >
+          <FiPlusCircle className="Fiplus" />
+          <span className="ms-2">click here</span>
+        </WebsiteButton>
+      </div>
+    </div>
+  </div>
 
-   
+  <div className="watchsectioncard col-sm-6 col-md-4 col-lg-3 d-flex flex-column align-items-center ms-4 mb-4">
+    <div className="card-body mb-2 text-center">
+      <div className="d-flex justify-content-center">
+        <Customizeediticon />
+        <h5 className="custom-card-title m-3 ms-1">Edit Survey Form</h5>
+      </div>
+      <hr className="custom-line mt-0" />
+      <div className="ms-3 col-lg-11 col-9 mb-3">
+        <p className="custom-titletext d-flex justify-content-center m-4">
+          Begin with a blank page, or copy and paste a survey you’ve written.
+        </p>
+      </div>
+      <div className="d-flex flex-md-row justify-content-center ms-3 me-3 mb-2 gap-2 align-items-center">
+        <WebsiteButton
+          className="mt-1 templatebutton"
+          // onClick={cutomeSurevyHandler}
+        >
+          <FiPlusCircle className="Fiplus" />
+          <span className="ms-2">click here</span>
+        </WebsiteButton>
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>
+
+    </>
   );
 };
 
