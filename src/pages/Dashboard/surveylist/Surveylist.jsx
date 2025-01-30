@@ -47,7 +47,7 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-  if (listOfCustomSurvey?.length > 0) {
+  if (listOfCustomSurvey) {
 setcustomSurveyList(listOfCustomSurvey)  }
 }, [listOfCustomSurvey]);
 
@@ -271,7 +271,11 @@ customSurveyList?.map((item, index) => {
           <span className="ms-2">view</span>
         </WebsiteButton>
         <div className="d-flex justify-content-end">
-<RiDeleteBin5Fill className="delete-icon fs-4 "style={{color:`${isLoading? 'grey':'red'}`, cursor:'pointer'}} onClick={()=>deleteCustomSurvey(item?.id)} />
+<RiDeleteBin5Fill 
+className="delete-icon fs-4 "
+style={{color:`${isLoading? 'grey':'red'}`, cursor:'pointer'}} 
+onClick={()=>deleteCustomSurvey(item?.id)} 
+/>
         </div>
       </div>
     </div>
@@ -280,7 +284,7 @@ customSurveyList?.map((item, index) => {
 
 
 })
-:''}
+:[]}
 
 </div>
 
