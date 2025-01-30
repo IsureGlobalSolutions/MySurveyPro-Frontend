@@ -13,11 +13,15 @@ import { Navbarvalue } from "../../../context/NavbarValuesContext";
 import { FiPlusCircle } from "react-icons/fi";
 // import { IoMdAddCircle } from "react-icons/io";
 import Customizeicon from "../../../assets/svgs/gridicons_create.svg?react"
-import Customizeediticon from "../../../assets/svgs/Group 7 - Copy.svg?react"
 import { deleteCustomSurveyApi, getCustomSurveyByIdApi, ListOfCustomSurveyApi } from "../../../Redux/slice/customSurveySlice";
-import { RiDeleteBin5Fill } from "react-icons/ri";
 import toast from "react-hot-toast";
 import PreviewModalOfCustomSurvey from "../survey/CustomeSurvey/PreviewModalOfCustomSurvey";
+import { MdDeleteForever, MdErrorOutline } from "react-icons/md";
+import { Modal } from "react-bootstrap";
+import { HiMiniViewfinderCircle } from "react-icons/hi2";
+import { LiaEditSolid } from "react-icons/lia";
+import { GrFormView } from "react-icons/gr";
+import { MdOutlinePlaylistAddCheck } from "react-icons/md";
 const Surveylist = ({ setstepper, sendIdToParent }) => {
   const {
     StapperHandler,
@@ -33,6 +37,9 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
   const [isLoading, setisLoading] = useState(false)
   const [openModal, setopenModal] = useState(false)
   const { listOfCustomSurvey } = useSelector((state) => state.customSurvey);
+  const [show, setShow] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
+  const [deletedata, setdeletedata] = useState();
 
 
 
@@ -120,7 +127,8 @@ setcustomSurveyList(listOfCustomSurvey)  }
     }
   }, [surveysList]);
 
-const deleteCustomSurvey = (id) => {  
+const deleteCustomSurvey = () => { 
+  const id = deletedata;
   setisLoading(true)
   if(isLoading){
     return
@@ -130,9 +138,8 @@ dispatch(deleteCustomSurveyApi(id))
   if(res?.payload?.isSuccess){
     toast.success(res?.payload?.alertMessage)
     dispatch(ListOfCustomSurveyApi())
-    
       setisLoading(false)
-    
+      setShow(false);
   }
   else{
     toast.error(res?.payload)
@@ -163,8 +170,52 @@ const openModalHandler = (id) => {
  
  }) 
 }
+const handledelete = (item) => {
+  console.log("🚀 ~ handledelete ~ item:", item)
+  setShow(true);
+  setPopupMessage("Are you want to delete this survey ");
+  setdeletedata(item.id);
+};
+
+const handleClosedata = () => {
+  setShow(false);
+};
   return (
     <>
+    <Modal show={show} onHide={handleClosedata} centered>
+        <Modal.Body style={{ position: "relative", margin: "10px" }}>
+          <button
+            type="button"
+            className="btn-close"
+            aria-label="Close"
+            style={{ position: "absolute", top: "0", right: "0" }}
+            onClick={handleClosedata}
+          ></button>
+          <div className="d-flex justify-content-center align-items-center flex-column gap-3">
+            <div className="mt-2">
+              <MdErrorOutline style={{ color: "#dc3545", fontSize: "40px" }} />
+            </div>
+            <div severity="success ps-4" style={{ fontSize: "20px" }}>
+              {popupMessage}
+            </div>
+          </div>
+          <div
+            style={{
+              textAlign: "center",
+              marginTop: "30px",
+              marginBottom: "10px",
+            }}
+          >
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={deleteCustomSurvey}
+            >
+              Delete
+            </button>
+          </div>
+        </Modal.Body>
+      </Modal>
       <div className="surveylist-section m-4 p-4 pt-2 pb-5">
         <div className="m-2 ps-3">
           <h1>Survey templates</h1>
@@ -253,7 +304,7 @@ customSurveyList?.map((item, index) => {
     <div className="watchsectioncard col-sm-6 col-md-4 col-lg-3 d-flex flex-column align-items-center ms-4 mb-4" key={index}>
     <div className="card-body mb-2 text-center">
       <div className="d-flex justify-content-center">
-        <Customizeediticon onClick={()=>editCustomSurvey(item?.id)} style={{cursor:'pointer'}}/>
+        {/* <Customizeediticon  style={{cursor:'pointer'}}/> */}
         <h5 className="custom-card-title m-3 ms-1">{item?.surveyName}</h5>
       </div>
       <hr className="custom-line mt-0" />
@@ -263,20 +314,46 @@ customSurveyList?.map((item, index) => {
         </p>
       </div>
       <div className="d-flex flex-md-row justify-content-center ms-3 me-3 mb-2 gap-2 align-items-center">
-        <WebsiteButton
-          className="mt-1 templatebutton"
-          onClick={()=>openModalHandler(item?.id)}
-        >
-          <FiPlusCircle className="Fiplus" />
-          <span className="ms-2">view</span>
-        </WebsiteButton>
-        <div className="d-flex justify-content-end">
-<RiDeleteBin5Fill 
-className="delete-icon fs-4 "
-style={{color:`${isLoading? 'grey':'red'}`, cursor:'pointer'}} 
-onClick={()=>deleteCustomSurvey(item?.id)} 
-/>
-        </div>
+        
+        <button
+                                        className="btn btn-sm btn-outline-danger col-xs-12 rounded-2"
+                                        type="button"
+                                        onClick={() => handledelete(item)}
+                                      >
+                                        <MdDeleteForever
+                                          style={{ color: "#f97300" }}
+                                          size={20}
+                                        />
+                                      </button>
+                                      <button
+                                        className="btn btn-sm btn-outline-warning col-xs-12 ms-1 rounded-1"
+                                        title="View"
+                                        onClick={()=>openModalHandler(item?.id)}
+                                        >
+                                        <GrFormView
+                                          style={{ color: "#f97300" }}
+                                          size={20}
+                                        />
+                                      </button>
+                                      <button
+                                        className="btn btn-sm btn-outline-warning col-xs-12 ms-1 rounded-1"
+                                        title="View"
+                                        onClick={()=>editCustomSurvey(item?.id)}                                      >
+                                        <HiMiniViewfinderCircle 
+                                          style={{ color: "#f97300" }}
+                                          size={20}
+                                        />
+                                      </button>
+                                      <button
+                                        className="btn btn-sm btn-outline-warning col-xs-12 ms-1 rounded-1"
+                                        title="View"
+                                        // Use Survey                      
+                                        >
+                                        <MdOutlinePlaylistAddCheck 
+                                          style={{ color: "#f97300" }}
+                                          size={20}
+                                        />
+                                      </button>
       </div>
     </div>
   </div>
