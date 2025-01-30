@@ -154,7 +154,7 @@ const editCustomSurvey = (id) => {
 }
 
 const openModalHandler = (id) => {
-  setopenModal(true)
+  setopenModal(!openModal)
   dispatch(getCustomSurveyByIdApi(id))
  .then((res) => {
   const parsedData = JSON.parse(res?.payload?.surveyJsonData)
