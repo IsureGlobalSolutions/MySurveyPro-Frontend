@@ -54,7 +54,7 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-  if (listOfCustomSurvey?.length > 0) {
+  if (listOfCustomSurvey) {
 setcustomSurveyList(listOfCustomSurvey)  }
 }, [listOfCustomSurvey]);
 
@@ -361,7 +361,7 @@ customSurveyList?.map((item, index) => {
 
 
 })
-:''}
+:[]}
 
 </div>
 
