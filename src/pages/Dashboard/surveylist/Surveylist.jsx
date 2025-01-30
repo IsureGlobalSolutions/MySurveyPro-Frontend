@@ -17,6 +17,7 @@ import Customizeediticon from "../../../assets/svgs/Group 7 - Copy.svg?react"
 import { deleteCustomSurveyApi, getCustomSurveyByIdApi, ListOfCustomSurveyApi } from "../../../Redux/slice/customSurveySlice";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import toast from "react-hot-toast";
+import PreviewModalOfCustomSurvey from "../survey/CustomeSurvey/PreviewModalOfCustomSurvey";
 const Surveylist = ({ setstepper, sendIdToParent }) => {
   const {
     StapperHandler,
@@ -30,6 +31,7 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
   const [customSurveyList, setcustomSurveyList] = useState([])
   const { surveysList } = useSelector((state) => state.survey);
   const [isLoading, setisLoading] = useState(false)
+  const [openModal, setopenModal] = useState(false)
   const { listOfCustomSurvey } = useSelector((state) => state.customSurvey);
 
 
@@ -150,6 +152,17 @@ const editCustomSurvey = (id) => {
   navigate('/customsurvey');
  })
 }
+
+const openModalHandler = (id) => {
+  setopenModal(true)
+  dispatch(getCustomSurveyByIdApi(id))
+ .then((res) => {
+  const parsedData = JSON.parse(res?.payload?.surveyJsonData)
+  window.localStorage.setItem("updata-survey-id", res?.payload?.id);
+  window.localStorage.setItem("survey-json", parsedData);
+ 
+ }) 
+}
   return (
     <>
       <div className="surveylist-section m-4 p-4 pt-2 pb-5">
@@ -252,10 +265,10 @@ customSurveyList?.map((item, index) => {
       <div className="d-flex flex-md-row justify-content-center ms-3 me-3 mb-2 gap-2 align-items-center">
         <WebsiteButton
           className="mt-1 templatebutton"
-          // onClick={cutomeSurevyHandler}
+          onClick={()=>openModalHandler(item?.id)}
         >
           <FiPlusCircle className="Fiplus" />
-          <span className="ms-2">click here</span>
+          <span className="ms-2">view</span>
         </WebsiteButton>
         <div className="d-flex justify-content-end">
 <RiDeleteBin5Fill className="delete-icon fs-4 "style={{color:`${isLoading? 'grey':'red'}`, cursor:'pointer'}} onClick={()=>deleteCustomSurvey(item?.id)} />
@@ -272,7 +285,11 @@ customSurveyList?.map((item, index) => {
 </div>
 
 </div>
-
+{
+  openModal?
+  <PreviewModalOfCustomSurvey Viewshow={openModal} handleCloseViewdata={openModalHandler}/>
+  :''
+}
     </>
   );
 };

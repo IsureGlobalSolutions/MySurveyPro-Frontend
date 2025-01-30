@@ -76,7 +76,6 @@ const Filedata = ({ setstepper, surveyId,sendSelectedFilesToParent }) => {
     setaddnewfile(data);
   };
   const handleCheckboxClick = (item) => {
-  console.log("🚀 ~ handleCheckboxClick ~ item:", item)
     if (selectedFiles.includes(item)) {
       setselectedFiles(selectedFiles.filter((selected) => selected !== item));
     } else {
