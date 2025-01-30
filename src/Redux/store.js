@@ -5,13 +5,14 @@ import authReducer from './slice/authSlice';
 import pathReducer from './slice/pathSlice';
 import surveyReducer from './slice/surveySlice';
 import teiReducer from './slice/teiSlice';
+import customSurveyReducer from './slice/customSurveySlice';
 import { FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 
 // Configuration for persisting the Redux state
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['user', 'survey', 'path', 'teiSurvey'], // Specify which reducers to persist
+  whitelist: ['user', 'survey', 'path', 'teiSurvey' ,'customSurvey'], // Specify which reducers to persist
 };
 
 // Combine your reducers
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   path: pathReducer,
   survey: surveyReducer,
   teiSurvey: teiReducer,
+  customSurvey: customSurveyReducer,
 });
 
 // Persist the combined reducer

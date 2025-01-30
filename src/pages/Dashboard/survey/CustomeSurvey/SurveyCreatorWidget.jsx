@@ -4,11 +4,22 @@ import "survey-core/defaultV2.min.css";
 import "survey-creator-core/survey-creator-core.min.css";
 import WebsiteButton from "../../../../components/mySurveyProWebsiteBtn/WebsiteButtton";
 import { IoArrowBackOutline } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Loader from "../../../../components/plugins/Loader";
+import {  addUpdateCustomSurveyApi } from "../../../../Redux/slice/customSurveySlice";
+import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 const  SurveyCreatorWidget=()=> {
   const [creator, setCreator] = useState(null);
+  const selectedSurveyId = window.localStorage.getItem("selectedSurveyId");
+ 
+  const [isLoading, setisLoading] = useState(false)
+  const dispatch = useDispatch();
 const navigate = useNavigate();
+
+
+
+
   useEffect(() => {
     const initializeCreator = async () => {
       const creatorOptions = {
@@ -46,6 +57,7 @@ const navigate = useNavigate();
       // Save survey JSON to localStorage
       creatorInstance.saveSurveyFunc = (saveNo, callback) => {
         window.localStorage.setItem("survey-json", creatorInstance.text);
+    
         callback(saveNo, true);
       };
 
@@ -67,12 +79,50 @@ const navigate = useNavigate();
     )
   }
 
+
+    const saveSurveyInServer = async () => {
+      setisLoading(true)
+    if (!creator) {
+      isLoading(false)
+      return ;
+    }
+    const surveyName = JSON.parse(creator?.text)
+    const surveyJson = JSON.stringify(creator?.text)
+const updateSurveyId = window.localStorage.getItem("updata-survey-id")
+dispatch(addUpdateCustomSurveyApi({
+  id:updateSurveyId?updateSurveyId:null,
+  surveyName: surveyName.title || 'Untitled Survey',
+  surveyJsonData: surveyJson
+}))
+.then((res)=>{
+ 
+  
+  if(res?.payload?.isSuccess === true){
+   toast.success(res?.payload?.alertMessage)
+   window.localStorage.setItem("survey-json", '');
+    window.localStorage.setItem("updata-survey-id", '');
+   navigate('/startsurvey')
+    setisLoading(false)
+
+  }
+  else{
+    toast.error(res?.payload)
+    setisLoading(false)
+  }
+})
+
+  }
+  const moveBackHandler=()=>{
+    navigate('/startsurvey')
+    window.localStorage.setItem("survey-json", '');
+    window.localStorage.setItem("updata-survey-id", '');
+  }
   return (
     <div className="h-100">
 <div className="d-flex my-3 ms-3">
   <div className="back-move d-flex align-items-center gap-1">
-    <div className="icon-body p-2 rounded-circle d-flex align-items-center justify-content-center bg-white border shadow">
-        <IoArrowBackOutline  style={{fontSize:'25px'}} onClick={()=>navigate('/startsurvey')}/>
+    <div className="icon-body p-2 rounded-circle d-flex align-items-center justify-content-center bg-white border shadow" style={{cursor:'pointer'}}>
+        <IoArrowBackOutline  style={{fontSize:'25px'}} onClick={moveBackHandler}/>
     </div>
   <div className="">
      <p className="m-0 fs-5">Back</p>
@@ -85,11 +135,9 @@ const navigate = useNavigate();
       <div className="d-flex gap-3 justify-content-end py-3 me-2">
         <WebsiteButton
           
-          onClick={() => {
-            creator.saveSurvey();
-          }}
+          onClick={saveSurveyInServer}
         >
-          Save Survey
+         {isLoading?'Loading...':'Save Survey'}
         </WebsiteButton>
         <WebsiteButton
          

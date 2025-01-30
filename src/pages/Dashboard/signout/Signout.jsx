@@ -28,6 +28,8 @@ const Signout =()=> {
     if(res?.payload.isSuccess===true){
       toast.success(res?.payload.alertMessage)
       navigate('/login')
+      window.localStorage.setItem("survey-json", '');
+      window.localStorage.setItem("updata-survey-id", '');
   resetContext()
       persistor.purge()
  

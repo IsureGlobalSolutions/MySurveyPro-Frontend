@@ -50,6 +50,8 @@ const Sidebar = ({ collapsed, setcollapsed }) => {
         StapperHandler(1)
         startSurveyHandler(false)
         navigate('/startsurvey')
+        window.localStorage.setItem("survey-json", '');
+        window.localStorage.setItem("updata-survey-id", '');
         
 
     }
@@ -60,22 +62,7 @@ const Sidebar = ({ collapsed, setcollapsed }) => {
                     <span className="cross-icon" onClick={handleclosesidebar}>
                         <RxCross1 size={30} />
                     </span>
-                ) : (
-                    <>
-       {/* <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}> */}
-  {/* Hamburger Icon in the first row */}
-  {/* <span
-    onClick={handleHamburgerClick}
-    style={{ position: 'absolute', right: '10px', cursor: 'pointer' }}
-  >
-    <GiHamburgerMenu size={25} />
-  </span> */}
-
-  {/* Text in the second row */}
-  
-{/* </div> */}
-                    </>
-                )}
+                ) : ""}
                                                 {/* <Surveyicon className="icon-fill" /> */}
                                                {/* <div className={`mysurvey-logo ${collapsed ? 'collapsed ' : ' ' }`}>
                                                <h1
@@ -102,7 +89,7 @@ const Sidebar = ({ collapsed, setcollapsed }) => {
                         <li
                             onClick={() => handleButtonClick(1)}
                         >
-                            <Link className='d-flex sidbar-item-link justify-content-start gap-3 sidbar-text' to={'/startsurvey'}>
+                            <Link className='d-flex sidbar-item-link justify-content-start gap-3 sidbar-text' to={'/startsurvey'} onClick={moveToHome}>
                                 <Surveyicon className="icon-fill" />
                                 <p>Start Survey</p>
 

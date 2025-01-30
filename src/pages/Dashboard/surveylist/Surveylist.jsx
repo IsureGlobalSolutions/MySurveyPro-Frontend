@@ -14,6 +14,9 @@ import { FiPlusCircle } from "react-icons/fi";
 // import { IoMdAddCircle } from "react-icons/io";
 import Customizeicon from "../../../assets/svgs/gridicons_create.svg?react"
 import Customizeediticon from "../../../assets/svgs/Group 7 - Copy.svg?react"
+import { deleteCustomSurveyApi, getCustomSurveyByIdApi, ListOfCustomSurveyApi } from "../../../Redux/slice/customSurveySlice";
+import { RiDeleteBin5Fill } from "react-icons/ri";
+import toast from "react-hot-toast";
 const Surveylist = ({ setstepper, sendIdToParent }) => {
   const {
     StapperHandler,
@@ -24,7 +27,28 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [surveyListData, setsurveyListData] = useState([]);
+  const [customSurveyList, setcustomSurveyList] = useState([])
   const { surveysList } = useSelector((state) => state.survey);
+  const [isLoading, setisLoading] = useState(false)
+  const { listOfCustomSurvey } = useSelector((state) => state.customSurvey);
+
+
+
+useEffect(() => {
+  setisLoading(true)
+  dispatch(ListOfCustomSurveyApi())
+  .then((res) => {
+    setisLoading(false)
+  })
+  
+   
+}, []);
+
+useEffect(() => {
+  if (listOfCustomSurvey?.length > 0) {
+setcustomSurveyList(listOfCustomSurvey)  }
+}, [listOfCustomSurvey]);
+
   const handleSurveyCheckboxClick = (content) => {
     if (content.title === "TEI" || content.title === "MP12") {
       startSurveyHandler(true);
@@ -39,6 +63,7 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
     sendIdToParent(content.id);
     setstepper(2);
   };
+
   const handlePreviewCheckboxClick = (content) => {
     if (content.title === "TEI" || content.title === "MP12") {
       store.dispatch(setSelectedSurveyId(content.id));
@@ -47,14 +72,18 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
       console.error("Unknown survey type");
     }
   };
+
   const ListOfSuveysHandler = async () => {
     dispatch(getAllSurveyList()).then((res) => {});
   };
   useEffect(() => {
     ListOfSuveysHandler();
   }, []);
+
   const cutomeSurevyHandler = () => {
-    navigate("/customsurvey");
+
+    window.localStorage.setItem("survey-json", ''); 
+       navigate("/customsurvey");
   };
 
   useEffect(() => {
@@ -89,7 +118,38 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
     }
   }, [surveysList]);
 
+const deleteCustomSurvey = (id) => {  
+  setisLoading(true)
+  if(isLoading){
+    return
+  }
+dispatch(deleteCustomSurveyApi(id))
+.then((res) => { 
+  if(res?.payload?.isSuccess){
+    toast.success(res?.payload?.alertMessage)
+    dispatch(ListOfCustomSurveyApi())
+    
+      setisLoading(false)
+    
+  }
+  else{
+    toast.error(res?.payload)
+    setisLoading(false)
+  }
+} )
+}
 
+const editCustomSurvey = (id) => {
+
+  
+ dispatch(getCustomSurveyByIdApi(id))
+ .then((res) => {
+  const parsedData = JSON.parse(res?.payload?.surveyJsonData)
+  window.localStorage.setItem("updata-survey-id", res?.payload?.id);
+  window.localStorage.setItem("survey-json", parsedData);
+  navigate('/customsurvey');
+ })
+}
   return (
     <>
       <div className="surveylist-section m-4 p-4 pt-2 pb-5">
@@ -172,11 +232,16 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
     </div>
   </div>
 
-  <div className="watchsectioncard col-sm-6 col-md-4 col-lg-3 d-flex flex-column align-items-center ms-4 mb-4">
+
+{customSurveyList?.length > 0 ? 
+
+customSurveyList?.map((item, index) => {
+  return(<>
+    <div className="watchsectioncard col-sm-6 col-md-4 col-lg-3 d-flex flex-column align-items-center ms-4 mb-4" key={index}>
     <div className="card-body mb-2 text-center">
       <div className="d-flex justify-content-center">
-        <Customizeediticon />
-        <h5 className="custom-card-title m-3 ms-1">Edit Survey Form</h5>
+        <Customizeediticon onClick={()=>editCustomSurvey(item?.id)} style={{cursor:'pointer'}}/>
+        <h5 className="custom-card-title m-3 ms-1">{item?.surveyName}</h5>
       </div>
       <hr className="custom-line mt-0" />
       <div className="ms-3 col-lg-11 col-9 mb-3">
@@ -192,9 +257,18 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
           <FiPlusCircle className="Fiplus" />
           <span className="ms-2">click here</span>
         </WebsiteButton>
+        <div className="d-flex justify-content-end">
+<RiDeleteBin5Fill className="delete-icon fs-4 "style={{color:`${isLoading? 'grey':'red'}`, cursor:'pointer'}} onClick={()=>deleteCustomSurvey(item?.id)} />
+        </div>
       </div>
     </div>
   </div>
+  </>)
+
+
+})
+:''}
+
 </div>
 
 </div>
