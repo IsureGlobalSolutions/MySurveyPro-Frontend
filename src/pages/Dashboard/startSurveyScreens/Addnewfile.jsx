@@ -11,13 +11,12 @@ import { saveAs } from 'file-saver';
 import xlsxFile from '../../../assets/downloadable-files/RecipientsDetail.xlsx';
 import csvFile from '../../../assets/downloadable-files/RecipientsDetail.csv';
 import Tooltip from '../../../components/Tooltip/Tooltip';
-import { getAllSurveyFiles } from '../../../Redux/slice/surveySlice';
 import Loader from '../../../components/plugins/Loader';
 
 const csvText = 'Download template file to fill in required data. After filling out, upload it';
 const downloadText = 'Upload the file containing the required data for all individuals to whom the survey will be launched';
 
-const Addnewfile = ({ setstepper, getUploadFile, closeModal, getFile}) => {
+const Addnewfile = ({  getUploadFile, closeModal, getFile}) => {
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
   const surveyId = useSelector((state) => state.user.selectedSurveyId);
@@ -25,39 +24,16 @@ const Addnewfile = ({ setstepper, getUploadFile, closeModal, getFile}) => {
   const [isLoadingStart, setisLoadingStart] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [toggleSelector, settoggleSelector] = useState(false);
-  const { paymentStatus } = useSelector((state) => state.survey);
-  const { listOfAllFilesData } = useSelector((state) => state.user);
   const navigate = useNavigate();
-
   const handleClickChangePicture = () => {
-    fileInputRef.current.click(); // Simulate click on hidden file input
+    fileInputRef.current.click(); 
   };
-
-  useEffect(() => {
-    if (surveyId) {
-      setisLoadingStart(true);
-      dispatch(getAllSurveyFiles(surveyId))
-        .then((res) => {
-          if (res?.payload?.length > 0) {
-            setstepper(3);
-            setisLoadingStart(false);
-          }
-        })
-        .finally(() => {
-          setisLoadingStart(false);
-        });
-    }
-  }, [surveyId]);
- 
-
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: (acceptedFiles) => {
       setUploadedFiles(acceptedFiles);
       getUploadFile(acceptedFiles);
     },
   });
-
-
   const uploadFileHandler = async () => {
     if (uploadedFiles.length > 0) {
       setisLoading(true);
@@ -93,8 +69,6 @@ const Addnewfile = ({ setstepper, getUploadFile, closeModal, getFile}) => {
         });
     }
   };
-  
-
   return (
     <>
       {isLoadingStart ? (

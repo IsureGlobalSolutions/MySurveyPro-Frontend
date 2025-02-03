@@ -11,7 +11,7 @@ import { setSelectedSurveyId } from "../../../Redux/slice/authSlice";
 import { store } from "../../../Redux/store";
 import { Navbarvalue } from "../../../context/NavbarValuesContext";
 import { FiPlusCircle } from "react-icons/fi";
-// import { IoMdAddCircle } from "react-icons/io";
+import { FaRegEdit } from "react-icons/fa";
 import Customizeicon from "../../../assets/svgs/gridicons_create.svg?react"
 import { deleteCustomSurveyApi, getCustomSurveyByIdApi, ListOfCustomSurveyApi } from "../../../Redux/slice/customSurveySlice";
 import toast from "react-hot-toast";
@@ -20,7 +20,7 @@ import { MdDeleteForever, MdErrorOutline } from "react-icons/md";
 import { Modal } from "react-bootstrap";
 import { HiMiniViewfinderCircle } from "react-icons/hi2";
 import { LiaEditSolid } from "react-icons/lia";
-import { GrFormView } from "react-icons/gr";
+// import { GrFormView } from "react-icons/gr";
 import { MdOutlinePlaylistAddCheck } from "react-icons/md";
 const Surveylist = ({ setstepper, sendIdToParent }) => {
   const {
@@ -40,46 +40,41 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
   const [show, setShow] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
   const [deletedata, setdeletedata] = useState();
-
-
-
 useEffect(() => {
   setisLoading(true)
   dispatch(ListOfCustomSurveyApi())
   .then((res) => {
     setisLoading(false)
   })
-  
-   
 }, []);
-
 useEffect(() => {
   if (listOfCustomSurvey) {
 setcustomSurveyList(listOfCustomSurvey)  }
 }, [listOfCustomSurvey]);
-
   const handleSurveyCheckboxClick = (content) => {
-    if (content.title === "TEI" || content.title === "MP12") {
       startSurveyHandler(true);
       DashboardStateHandler("survey", {
         id: content.id,
         name: content.title,
       });
       store.dispatch(setSelectedSurveyId(content.id));
-    } else {
-      console.error("Unknown survey type");
-    }
     sendIdToParent(content.id);
     setstepper(2);
   };
+const handleCustomCheckboxClick =(item) => {
+    startSurveyHandler(true);
+    DashboardStateHandler("customsurvey", {
+      id: item.id,
+      name: item.surveyName,
+    });
+    store.dispatch(setSelectedSurveyId(item.id));
+  sendIdToParent(item.id);
+  setstepper(2);
+}
 
   const handlePreviewCheckboxClick = (content) => {
-    if (content.title === "TEI" || content.title === "MP12") {
       store.dispatch(setSelectedSurveyId(content.id));
       navigate(content.PreviewSurveylink);
-    } else {
-      console.error("Unknown survey type");
-    }
   };
 
   const ListOfSuveysHandler = async () => {
@@ -242,7 +237,9 @@ const handleClosedata = () => {
                       </p>
                     </div>
                     <div className="d-flex  flex-md-row justify-content-between ms-3 me-3 mb-2 gap-2 align-items-center">
-                      <Link to={content.id} className="sidbar-item-link">
+                      <Link 
+                      to={content.id}
+                       className="sidbar-item-link">
                         <WebsiteButton
                           className="templatebutton"
                           onClick={() => handlePreviewCheckboxClick(content)}
@@ -250,7 +247,10 @@ const handleClosedata = () => {
                           {content.buttonviewsurvey}
                         </WebsiteButton>
                       </Link>
-                      <Link to={content.id} className="sidbar-item-link">
+                      <Link
+                      //  to={content.id}
+                        
+                        className="sidbar-item-link">
                         {" "}
                         <WebsiteButton
                           className="templatebutton"
@@ -330,21 +330,21 @@ customSurveyList?.map((item, index) => {
                                         title="View"
                                         onClick={()=>openModalHandler(item?.id)}
                                         >
-                                        <GrFormView
+                                        <HiMiniViewfinderCircle
                                           style={{ color: "#f97300" }}
                                           size={20}
                                         />
                                       </button>
                                       <button
                                         className="btn btn-sm btn-outline-warning col-xs-12 ms-1 rounded-1"
-                                        title="View"
+                                        title="Edit"
                                         onClick={()=>editCustomSurvey(item?.id)}                                      >
-                                        <HiMiniViewfinderCircle 
+                                        <FaRegEdit
                                           style={{ color: "#f97300" }}
                                           size={20}
                                         />
                                       </button>
-                                      <button
+                                      {/* <button
                                         className="btn btn-sm btn-outline-warning col-xs-12 ms-1 rounded-1"
                                         title="View"
                                         // Use Survey                      
@@ -353,7 +353,20 @@ customSurveyList?.map((item, index) => {
                                           style={{ color: "#f97300" }}
                                           size={20}
                                         />
-                                      </button>
+                                      </button> */}
+                                      <Link 
+                                      // to={item.id} 
+                                      className="sidbar-item-link">
+                        {" "}
+                        <WebsiteButton
+                          className="templatebutton"
+                          title="use survey"
+                          onClick={() => handleCustomCheckboxClick(item)}
+                        >
+                          use survey
+                          {/* {content.buttonusersurvey} */}
+                        </WebsiteButton>
+                      </Link>
       </div>
     </div>
   </div>

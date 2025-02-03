@@ -32,17 +32,13 @@ const Guidance =lazy(()=>import("../pages/Guidance/guidance.jsx"))
 const TEITemplate = lazy(()=>import("../pages/Dashboard/templates/TEItemplate/TEIPreviewQuestion.jsx"))
 const CustomSurvey = lazy(()=>import("../pages/Dashboard/survey/CustomeSurvey/SurveyCreatorWidget.jsx"))
 const Congratulation=lazy((import("../pages/Dashboard/survey/TEISurvey/TEICongratulation.jsx")))
-
-
 const config = [
   {
-    
   path: '/',
   loginRequired: false,
   layout: PublicLayout,
   component: LandingPage
 },
-
 {
   path: '/login',
   loginRequired: false,
