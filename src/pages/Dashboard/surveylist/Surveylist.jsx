@@ -66,10 +66,7 @@ setcustomSurveyList(listOfCustomSurvey)  }
     setstepper(2);
   };
 const handleCustomCheckboxClick =(item) => {
-    dispatch(getCustomSurveyByIdApi(item.id))
-  .then((res) => {
-    console.log("🚀 ~ .then ~ res:", res)
-})
+ 
     startSurveyHandler(true);
     DashboardStateHandler("customsurvey", {
       id: item.id,

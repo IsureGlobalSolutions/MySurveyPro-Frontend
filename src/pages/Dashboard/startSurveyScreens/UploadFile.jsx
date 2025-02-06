@@ -67,7 +67,13 @@ useEffect(()=>{
           setisLoading(true)
       const formdata = new FormData()
       formdata.append('file', uploadedFiles[0])
-      formdata.append('surveyId',surveyId)
+      if (surveyId === 1 || surveyId === 2) {
+        formdata.append('surveyId', surveyId);
+      } else {
+        const customSurveyId=surveyId;
+        formdata.append('customsurveyid', customSurveyId);
+      }
+      
      dispatch(uploadFileOfEmployeesData(formdata))
         .then((res) => {
           if(res?.payload?.isSuccess===true){

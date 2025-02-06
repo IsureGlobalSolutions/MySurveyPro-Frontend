@@ -13,12 +13,19 @@ const LunchSurvey = ({setstepper,selectedFilesArray,surveyId}) => {
   const launchSurvey= ()=>{
     setisLoading(true)
     if(selectedFilesArray.length>0 && surveyId){
-    dispatch(LaunchSurveyApi({surveyId, uniqueFileNames:selectedFilesArray})).then((res)=>{
+      let params = { uniqueFileNames: selectedFilesArray };
+
+      if (surveyId === 1 || surveyId === 2) {
+        params.surveyId = surveyId;
+      } else {
+        params.customSurveyId = surveyId;
+      }
+    dispatch(LaunchSurveyApi(params)).then((res)=>{
 if(res?.payload?.isSuccess===true){
   toast.success(res?.payload?.alertMessage)
   setstepper(5)
   setisLoading(false)
-  dispatch(LaunchedSurveysStatusApi())
+  // dispatch(LaunchedSurveysStatusApi())
 }
 else{
   toast.error("some thing went wrong please try agian!")

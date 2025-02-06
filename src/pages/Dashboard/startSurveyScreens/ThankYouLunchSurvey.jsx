@@ -26,7 +26,7 @@ const ThankYouLunchSurvey = ({ setstepper, surveyId }) => {
   console.log("🚀 ~ ThankYouLunchSurvey ~ surveytext:", surveytext);
   const q12text = `${FRONTEND_URL}/MP12survey/${id}/${surveyId}`;
   const TEItext = `${FRONTEND_URL}/TeamEffectivenessSurvey/${id}/${surveyId}`;
-
+  const Customsurveytext = `${FRONTEND_URL}/CustomSurvey/${id}/${surveyId}`;
   const copyToClipboard = () => {
     if (surveyId === 2) {
       navigator.clipboard.writeText(TEItext).then(
@@ -37,8 +37,17 @@ const ThankYouLunchSurvey = ({ setstepper, surveyId }) => {
           console.error("Could not copy text: ", err);
         }
       );
-    } else {
+    } else if (surveyId === 1) {
       navigator.clipboard.writeText(q12text).then(
+        () => {
+          setAbbrTitle("copied!");
+        },
+        (err) => {
+          console.error("Could not copy text: ", err);
+        }
+      );
+    } else {
+      navigator.clipboard.writeText(Customsurveytext).then(
         () => {
           setAbbrTitle("copied!");
         },
@@ -48,6 +57,7 @@ const ThankYouLunchSurvey = ({ setstepper, surveyId }) => {
       );
     }
   };
+  
 
   return (
     <>
@@ -59,11 +69,13 @@ const ThankYouLunchSurvey = ({ setstepper, surveyId }) => {
           <p className="m-0 text-muted fs-4 fw-bold">Survey Link : </p>
         </div>
         <div className="copylink-container">
-      <p className="copylink-text">
-        {surveyId === 2 || selectedDashboardValues?.survey?.name === "TEI"
-          ? TEItext
-          : q12text}
-      </p>
+        <p className="copylink-text">
+  {surveyId === 2
+    ? TEItext
+    : surveyId === 1
+      ? q12text
+      : Customsurveytext}
+</p>
       <Tooltip text={abbrTitle} style={{width:"150px"}}>
         <IoIosCopy className="copy-icon" onClick={copyToClipboard} />
       </Tooltip>

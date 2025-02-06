@@ -139,10 +139,32 @@ export const getSurveyById = createAsyncThunk('Survey/getSurveyById', async (sur
     return thunkAPI.rejectWithValue(message);
   }
 });
+export const GetCustomSurveyJson = createAsyncThunk('Survey/GetCustomSurveyJson', async (surveyid, thunkAPI) => {
+  try {
+    const res = await instance.get('api/Survey/GetCustomSurveyJson', {
+      params: {id: surveyid }
+    });    return  res.data;
 
+  } catch (error) {
+    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    toast.error(message);
+    return thunkAPI.rejectWithValue(message);
+  }
+});
 export const surveyresponse = createAsyncThunk('Survey/surveyresponse', async ( data, thunkAPI) => {
   try {
     const res = await instance.post('api/SurveyResponse/AddSurveyResponse' , [data]);
+    return res.data;
+
+  } catch (error) {
+    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    toast.error(message);
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+export const customsurveyresponse = createAsyncThunk('Survey/customsurveyresponse', async ( data, thunkAPI) => {
+  try {
+    const res = await instance.post('api/SurveyResponse/SaveSurveyResponseJson' , [data]);
     return res.data;
 
   } catch (error) {
@@ -221,7 +243,6 @@ const authSlice = createSlice({
       state.userData = action.payload;
     },
     setSelectedSurveyId: (state, action) => {
-      
       state.selectedSurveyId = action.payload;
       console.log("Setting surveysId:", state.surveysId);
     },

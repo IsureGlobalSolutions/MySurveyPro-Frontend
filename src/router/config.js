@@ -32,7 +32,7 @@ const Guidance =lazy(()=>import("../pages/Guidance/guidance.jsx"))
 const TEITemplate = lazy(()=>import("../pages/Dashboard/templates/TEItemplate/TEIPreviewQuestion.jsx"))
 const CustomSurvey = lazy(()=>import("../pages/Dashboard/survey/CustomeSurvey/SurveyCreatorWidget.jsx"))
 const Congratulation=lazy((import("../pages/Dashboard/survey/TEISurvey/TEICongratulation.jsx")))
-const Getcustomsurvey=lazy(()=>import("../pages/Dashboard/survey/CustomeSurvey/SurveyRunner.jsx"))
+const Getcustomsurvey=lazy(()=>import("../pages/Dashboard/survey/CustomeSurvey/CustomSurveyResponse.jsx"))
 const config = [
   {
   path: '/',
@@ -179,6 +179,12 @@ const config = [
   loginRequired:false,
   layout: PublicLayout,
   component:Survey
+},
+{
+  path: '/CustomSurvey/:userId/:surveyId*',
+  loginRequired:false,
+  layout: PublicLayout,
+  component:Getcustomsurvey
 },
 {
   path: '/TeamEffectivenessSurvey/:userId/:surveyId*',
