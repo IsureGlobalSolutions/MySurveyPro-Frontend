@@ -1,8 +1,6 @@
 import React from 'react';
 import './mp12template.css';
 import img1 from '../../../../assets/Q12survey/Q12surveystepperimg.png';
-// import InputField from '../../../components/mySurveyProInput/InputField';
-// import { useForm } from 'react-hook-form';
 import WebsiteButton from '../../../../components/mySurveyProWebsiteBtn/WebsiteButtton';
 import { useNavigate } from 'react-router-dom';
 const MP12template = ({  stepUPSendValue}) => {
@@ -15,7 +13,7 @@ const MP12template = ({  stepUPSendValue}) => {
         <div className='stepper row '>
           <div className='col-md-4 p-5 mt-3'>
             <div className='text'>
-              <h1>Preview</h1>
+              <h1>Preview MP12 Survey</h1>
               <p>Please enter user id</p>
             </div>
             <div  className="g-4 mt-4 " >
