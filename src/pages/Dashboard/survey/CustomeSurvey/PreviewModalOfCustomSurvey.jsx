@@ -5,16 +5,14 @@ import { Model } from "survey-core";
 import { Modal } from 'react-bootstrap'
 import Loader from '../../../../components/plugins/Loader'
 
-const PreviewModalOfCustomSurvey = ({Viewshow,handleCloseViewdata}) => {
+const PreviewModalOfCustomSurvey = ({Viewshow, handleCloseViewdata , surveyJson}) => {
       const [survey, setSurvey] = useState(null);
+
     useEffect(() => {
    
-        const storedJson = window.localStorage.getItem("survey-json");
-        if (storedJson) {
-          const surveyJson = JSON.parse(storedJson);
+        if (surveyJson) {
           const surveyModel = new Model(surveyJson);
-    
-         
+          console.log("🚀 ~ useEffect ~ surveyModel:", surveyModel)
           const storedThemeJson = window.localStorage.getItem("survey-theme-json");
           if (storedThemeJson) {
             try {
@@ -25,13 +23,18 @@ const PreviewModalOfCustomSurvey = ({Viewshow,handleCloseViewdata}) => {
               console.error("Error parsing theme JSON from localStorage:", error);
             }
           }
-    
+          surveyModel.onAfterRenderPage.add((sender, options) => {
+            const actionButtons = options.htmlElement.querySelectorAll(".sv-action");
+            actionButtons.forEach((btn) => {
+              btn.style.display = "none";
+            });
+          });
           setSurvey(surveyModel);
           console.log("Loaded survey JSON from localStorage:", surveyJson);
         } else {
           console.error("No survey JSON found in localStorage.");
         }
-      }, []);
+      }, [surveyJson]);
     
   return (
     <Modal
@@ -56,7 +59,7 @@ const PreviewModalOfCustomSurvey = ({Viewshow,handleCloseViewdata}) => {
 
     <Modal.Body>
         <div className="my-2">
-              {  !survey?   <div>No survey data available to launch.</div>
+              {  !survey?   <div className="d-flex justify-content-center"><Loader/></div>
   
 :  
   <Survey model={survey}  />

@@ -22,6 +22,7 @@ import { HiMiniViewfinderCircle } from "react-icons/hi2";
 import { LiaEditSolid } from "react-icons/lia";
 // import { GrFormView } from "react-icons/gr";
 import { MdOutlinePlaylistAddCheck } from "react-icons/md";
+import SurveyRunner from "../survey/CustomeSurvey/SurveyRunner";
 const Surveylist = ({ setstepper, sendIdToParent }) => {
   const {
     StapperHandler,
@@ -40,6 +41,9 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
   const [show, setShow] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
   const [deletedata, setdeletedata] = useState();
+  const [customdata, setcustomdata] = useState();
+  const [surveyJson, setSurveyJson] = useState(null);
+
 useEffect(() => {
   setisLoading(true)
   dispatch(ListOfCustomSurveyApi())
@@ -62,6 +66,10 @@ setcustomSurveyList(listOfCustomSurvey)  }
     setstepper(2);
   };
 const handleCustomCheckboxClick =(item) => {
+    dispatch(getCustomSurveyByIdApi(item.id))
+  .then((res) => {
+    console.log("🚀 ~ .then ~ res:", res)
+})
     startSurveyHandler(true);
     DashboardStateHandler("customsurvey", {
       id: item.id,
@@ -144,8 +152,6 @@ dispatch(deleteCustomSurveyApi(id))
 }
 
 const editCustomSurvey = (id) => {
-
-  
  dispatch(getCustomSurveyByIdApi(id))
  .then((res) => {
   const parsedData = JSON.parse(res?.payload?.surveyJsonData)
@@ -159,11 +165,13 @@ const openModalHandler = (id) => {
   setopenModal(!openModal)
   dispatch(getCustomSurveyByIdApi(id))
  .then((res) => {
+  console.log("🚀 ~ .then ~ res:", res)
   const parsedData = JSON.parse(res?.payload?.surveyJsonData)
   window.localStorage.setItem("updata-survey-id", res?.payload?.id);
-  window.localStorage.setItem("survey-json", parsedData);
- 
- }) 
+  window.localStorage.setItem("survey-json", JSON.stringify(parsedData));
+  setSurveyJson(parsedData);
+
+}) 
 }
 const handledelete = (item) => {
   console.log("🚀 ~ handledelete ~ item:", item)
@@ -355,7 +363,7 @@ customSurveyList?.map((item, index) => {
                                         />
                                       </button> */}
                                       <Link 
-                                      // to={item.id} 
+                                      // to="/Getcustomsurvey" 
                                       className="sidbar-item-link">
                         {" "}
                         <WebsiteButton
@@ -379,9 +387,10 @@ customSurveyList?.map((item, index) => {
 </div>
 
 </div>
+{/* <SurveyRunner customdata={customdata} /> */}
 {
   openModal?
-  <PreviewModalOfCustomSurvey Viewshow={openModal} handleCloseViewdata={openModalHandler}/>
+  <PreviewModalOfCustomSurvey Viewshow={openModal} handleCloseViewdata={openModalHandler}  surveyJson={surveyJson}/>
   :''
 }
     </>
