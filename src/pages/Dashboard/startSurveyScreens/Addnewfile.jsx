@@ -39,8 +39,12 @@ const Addnewfile = ({  getUploadFile, closeModal, getFile}) => {
       setisLoading(true);
       const formdata = new FormData();
       formdata.append('file', uploadedFiles[0]);
-      formdata.append('surveyId', surveyId);
-      dispatch(uploadFileOfEmployeesData(formdata))
+      if (surveyId === 1 || surveyId === 2) {
+        formdata.append('surveyId', surveyId);
+      } else {
+        const customSurveyId=surveyId;
+        formdata.append('customsurveyid', customSurveyId);
+      }      dispatch(uploadFileOfEmployeesData(formdata))
         .then(async (res) => {
           if (res?.payload?.isSuccess === true) {
             toast.success(res?.payload?.alertMessage);

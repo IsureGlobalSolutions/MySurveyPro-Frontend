@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Survey } from "survey-react-ui";
 import "survey-core/defaultV2.min.css";
 import { Model } from "survey-core";
+import { useParams } from "react-router-dom";
 
-export default function SurveyRunner({ onComplete , customdata}) {
+export default function SurveyRunner({ onComplete , customdata , data}) {
   const [survey, setSurvey] = useState(null);
+  const {  surveyId } = useParams();
 
   useEffect(() => {
-   
-    const storedJson = window.localStorage.getItem("survey-json");
+    const storedJson = data;
+    console.log("🚀 ~ useEffect ~ storedJson:", storedJson)
     if (storedJson) {
       const surveyJson = JSON.parse(storedJson);
       const surveyModel = new Model(surveyJson);
@@ -37,8 +39,14 @@ export default function SurveyRunner({ onComplete , customdata}) {
   }, [customdata]);
 
   const handleComplete = (survey) => {
-    console.log("User responses:", survey.data);
-    onComplete(survey.data); // Send responses to parent or backend
+    console.log("🚀 ~ handleComplete ~ survey:", survey.data)
+    const surveyPayload ={
+      surveyId: surveyId,
+      surveyResponseJsonData: survey.data,
+    }
+    dispatch(customsurveyresponse(surveyPayload));
+    onComplete(survey.data); 
+
   };
 
   if (!survey) { 
