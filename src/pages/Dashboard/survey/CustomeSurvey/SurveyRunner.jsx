@@ -3,10 +3,13 @@ import { Survey } from "survey-react-ui";
 import "survey-core/defaultV2.min.css";
 import { Model } from "survey-core";
 import { useParams } from "react-router-dom";
+import { customsurveyresponse } from "../../../../Redux/slice/authSlice";
+import { useDispatch } from "react-redux";
 
 export default function SurveyRunner({ onComplete , customdata , data}) {
   const [survey, setSurvey] = useState(null);
   const {  surveyId } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const storedJson = data;
@@ -36,17 +39,27 @@ export default function SurveyRunner({ onComplete , customdata , data}) {
     } else {
       console.error("No survey JSON found in localStorage.");
     }
-  }, [customdata]);
+  }, [customdata,  ]);
 
-  const handleComplete = (survey) => {
-    console.log("🚀 ~ handleComplete ~ survey:", survey.data)
-    const surveyPayload ={
-      surveyId: surveyId,
-      surveyResponseJsonData: survey.data,
+  const handleComplete = (surveyInstance) => {
+    console.log("🚀 ~ handleComplete ~ surveyInstance:", surveyInstance.data)
+    if (!surveyInstance.data || Object.keys(surveyInstance.data).length === 0) {
+      toast.error("Please fill all fields");
+      return; 
     }
-    dispatch(customsurveyresponse(surveyPayload));
-    onComplete(survey.data); 
-
+    const surveyPayload = {
+      surveyId: surveyId,
+      surveyResponseJsonData: JSON.stringify(surveyInstance.data),
+    };
+    console.log("🚀 ~ handleComplete ~ surveyPayload:", surveyPayload);
+    dispatch(customsurveyresponse(surveyPayload))
+      .then((res) => {
+        console.log("🚀 ~ .then ~ res:", res)
+        if (res.payload && res.payload.success) {
+          toast.success(res.payload.alertMessage);
+          onComplete(surveyInstance.data);
+        } 
+  })
   };
 
   if (!survey) { 
