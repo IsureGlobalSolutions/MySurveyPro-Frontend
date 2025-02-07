@@ -1,10 +1,11 @@
 .Q12-section {
     height: 80vh;
     border-radius: 20px;
-    background-image: url("../../../../assets/Q12survey/Q12image.png");
+    background-image: url("../../../../assets/Q12survey/backkdark..png");
     background-size: cover; 
     background-position: center center; 
     background-repeat: no-repeat; 
+    user-select: none;
 }
 .congratulations{
     border-radius: 20px;
@@ -13,10 +14,7 @@
     background-position: center center; 
     background-repeat: no-repeat; 
 }
-/* Default style for checkbox */
-/* Style for the checkbox */
-/* Style for the checkbox */
-/* Style for the checkbox */
+
 
 .form-check-input {
     position: relative;

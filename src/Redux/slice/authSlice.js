@@ -164,9 +164,8 @@ export const surveyresponse = createAsyncThunk('Survey/surveyresponse', async ( 
 });
 export const customsurveyresponse = createAsyncThunk('Survey/customsurveyresponse', async ( data, thunkAPI) => {
   try {
-    const res = await instance.post('api/SurveyResponse/SaveSurveyResponseJson' , [data]);
+    const res = await instance.post('api/SurveyResponse/SaveSurveyResponseJson' , data);
     return res.data;
-
   } catch (error) {
     const message = error.response?.data?.alertMessage || error.message || error.toString();
     toast.error(message);

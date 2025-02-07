@@ -1,7 +1,7 @@
 
 import React from 'react';
 import '../q12survey/qsurvey.css';
-import img1 from '../../../../assets/Q12survey/Q12surveystepperimg.png';
+import img1 from '../../../../assets/Q12survey/g1.png';
 import InputField from '../../../../components/mySurveyProInput/InputField';
 import { useForm } from 'react-hook-form';
 import WebsiteButton from '../../../../components/mySurveyProWebsiteBtn/WebsiteButtton';
@@ -35,12 +35,12 @@ const CustomSurvey = ({stepUPSendValue , sendIdParent}) => {
     <div className='Q12-section m-5 d-flex justify-content-center align-items-center p-5'>
       <div className='container'>
         <div className='stepper row p-5'>
-          <div className='col-md-4 p-5 mt-3'>
+          <div className='col-md-6 p-5 mt-4'>
             <div className='text'>
               <h1>Custom Survey</h1>
               <p>Please enter user id</p>
             </div>
-            <div  className="g-4 mt-4 " >
+            <div  className="g-4 mt-4 col-md-10 " >
             <div  className='mb-4'>
             <InputField
         type="text"
@@ -54,14 +54,14 @@ const CustomSurvey = ({stepUPSendValue , sendIdParent}) => {
         />
        
             </div>
-            <div className=" col-md-12 t-4">
-              <WebsiteButton className='w-100' type='button' onClick={handleSubmit(onSubmit)}  >
+            <div className=" col-md-5 t-4">
+              <WebsiteButton className='w-100' type='button' onClick={handleSubmit(onSubmit)}  style={{ backgroundColor: "#14A48B" }} >
               Next
               </WebsiteButton>
               </div>
             </div>
           </div>
-          <div className='col-md-8  mt-4 d-flex justify-content-end'>
+          <div className='col-md-6  mt-4 d-flex justify-content-end'>
             <img src={img1} alt='image' className='img-fluid' />
           </div>
         </div>

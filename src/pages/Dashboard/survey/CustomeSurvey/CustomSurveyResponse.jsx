@@ -25,8 +25,11 @@ import CustomSurvey from './CustomSurvey.jsx';
 const CustomSurveyResponse = () => {
     // const surveyId = useSelector((state) => state.user.selectedSurveyId);
     const dispatch = useDispatch();
-    const [data, setData] = useState([]);
-    const [staffid, setstaffid] = useState('');
+    const [data, setData] = useState({
+        surveyId: "",
+        surveyResponseJsonData: ""
+      });   
+       const [staffid, setstaffid] = useState('');
     // const {isLoading,userData} =useSelector((state)=>state.user)
     const { userId, surveyId } = useParams();
     console.log( userId, 'params');
@@ -247,7 +250,7 @@ const CustomSurveyResponse = () => {
                 //         </div>
                 //     </div>
                 // </div>
-                <SurveyRunner data={data}/>
+                <SurveyRunner data={data} setData={setData}/>
             )}
         </>
     );

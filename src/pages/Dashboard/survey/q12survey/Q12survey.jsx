@@ -38,7 +38,7 @@
             <div className='stepper row p-5'>
               <div className='col-md-4 p-5 mt-3'>
                 <div className='text'>
-                  <h1>Q12 Survey</h1>
+                  <h1>MP12 Survey</h1>
                   <p>Please enter user id</p>
                 </div>
                 <div  className="g-4 mt-4 " >
