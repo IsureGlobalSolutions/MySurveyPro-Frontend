@@ -92,7 +92,7 @@ const handleCustomCheckboxClick =(item) => {
   const cutomeSurevyHandler = () => {
 
     window.localStorage.setItem("survey-json", ''); 
-       navigate("/customsurvey");
+       navigate("/addcustomsurvey");
   };
 
   useEffect(() => {
@@ -154,8 +154,8 @@ const editCustomSurvey = (id) => {
   const parsedData = JSON.parse(res?.payload?.surveyJsonData)
   window.localStorage.setItem("updata-survey-id", res?.payload?.id);
   window.localStorage.setItem("survey-json", parsedData);
-  navigate('/customsurvey');
- })
+  navigate(`/customsurvey/${res?.payload?.id}`);
+})
 }
 
 const openModalHandler = (id) => {
