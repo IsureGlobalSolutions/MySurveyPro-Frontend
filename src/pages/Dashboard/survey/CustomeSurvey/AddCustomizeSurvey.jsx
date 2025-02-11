@@ -6,16 +6,15 @@ import WebsiteButton from "../../../../components/mySurveyProWebsiteBtn/WebsiteB
 import { IoArrowBackOutline } from "react-icons/io5";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Loader from "../../../../components/plugins/Loader";
-import {  addUpdateCustomSurveyApi, getCustomSurveyByIdApi } from "../../../../Redux/slice/customSurveySlice";
+import {  addUpdateCustomSurveyApi } from "../../../../Redux/slice/customSurveySlice";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
-const  SurveyCreatorWidget=()=> {
+const  AddCustomizeSurvey =()=> {
   const [creator, setCreator] = useState(null);
   const selectedSurveyId = window.localStorage.getItem("selectedSurveyId");
   const [isLoading, setisLoading] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {id} =useParams();
 
 
 
@@ -27,15 +26,14 @@ const  SurveyCreatorWidget=()=> {
         isAutoSave: true,
         showThemeTab: true, 
       };
+       
       const creatorInstance = new SurveyCreator(creatorOptions);
-      dispatch(getCustomSurveyByIdApi(id)).then((res)=>{ 
-        console.log(res.payload, "resp data");
-        const localStorageJson =res?.payload?.surveyJsonData;
-        const savedThemeJson = res?.payload?.surveyThemeJsonData;
+      const localStorageJson = window.localStorage.getItem("survey-json");
       if (localStorageJson) {
         creatorInstance.JSON = JSON.parse(localStorageJson);
-        console.log(creatorInstance.JSON , "creatorInstance.JSON");
       }
+
+      const savedThemeJson = window.localStorage.getItem("survey-theme-json");
       if (savedThemeJson) {
         try {
           const savedTheme = JSON.parse(savedThemeJson);
@@ -45,19 +43,24 @@ const  SurveyCreatorWidget=()=> {
           console.error("Error parsing theme JSON from localStorage:", error);
         }
       }
+
       creatorInstance.saveThemeFunc = (saveNo, callback) => {
         window.localStorage.setItem("survey-theme-json", JSON.stringify(creatorInstance.theme));
         callback(saveNo, true);
       };
+
+      // Save survey JSON to localStorage
       creatorInstance.saveSurveyFunc = (saveNo, callback) => {
-        window.localStorage.setItem("survey-jsonkffkfdfgjknfdngdjmfjm", creatorInstance.text);
+        window.localStorage.setItem("survey-json", creatorInstance.text);
+    
         callback(saveNo, true);
       };
+
       setCreator(creatorInstance);
-    })
     };
+
     initializeCreator();
-  }, [id]);
+  }, []);
 
   if (!creator) {
 
@@ -146,4 +149,4 @@ dispatch(addUpdateCustomSurveyApi({
     </div>
   );
 }
-export default SurveyCreatorWidget;
+export default AddCustomizeSurvey;

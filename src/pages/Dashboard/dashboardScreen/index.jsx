@@ -70,7 +70,6 @@ const index = () => {
   //get over all survey report data
   useEffect(() => {
     if (selectedDashboardValues?.survey?.id && paymentStatus[selectedDashboardValues?.survey?.id].paymentStatus===true) {
-
       setisLoading(true)
       dispatch(getOverAllSurveyReport({ surveyId: selectedDashboardValues?.survey?.id }))
         .then((res) => {
@@ -78,8 +77,6 @@ const index = () => {
           setsurveyOverAllData(res?.payload)
         })
     }
-
-
   }, [paymentStatus, selectedDashboardValues?.survey?.id,])
 
 

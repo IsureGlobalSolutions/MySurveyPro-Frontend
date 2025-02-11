@@ -98,20 +98,17 @@ const ListOfLaunchedServey = () => {
 
   useEffect(() => {
     if (surveyPaymentStatuses?.length > 0) {
+      console.log("🚀 ~ useEffect ~ surveyPaymentStatuses:", surveyPaymentStatuses)
       setisLoading(true);
       const paymentStatusUpdates = {};
       const launch = [];
-
       surveyPaymentStatuses.forEach((element) => {
-        // Add payment status object to the paymentStatusUpdates object
         paymentStatusUpdates[element?.surveyId] = {
           paymentStatus: element?.surveyPaymentStatus,
         };
 
         if (element?.surveyLaunchStatus) {
           launch.push(element);
-
-          // Fetch total number of respondents
           dispatch(getTotalNumberOfRespondent(element?.surveyId)).then(
             (res) => {
               setresponsesData((prevState) => ({
@@ -138,7 +135,7 @@ const ListOfLaunchedServey = () => {
   const handleChangeRowsPerPage = (event) => {
     const newRowsPerPage = +event.target.value;
     setRowsPerPage(newRowsPerPage);
-    setPage(0); // Reset to the first page when rows per page changes
+    setPage(0); 
   };
 
   const handleChangePage = (event, newPage) => {
@@ -223,8 +220,10 @@ const ListOfLaunchedServey = () => {
                   ) : (
                     <>
                       {launchSurveyData?.map((item, index) => {
+                        console.log("🚀 ~ {launchSurveyData?.map ~ launchSurveyData:", launchSurveyData)
                         const responseData =
                           responsesData[item?.surveyId]?.response || {};
+                          console.log("🚀 ~ {launchSurveyData?.map ~ responsedata:", launchSurveyData)
                         return (
                           <tr
                             key={index}
