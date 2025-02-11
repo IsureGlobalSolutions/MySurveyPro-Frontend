@@ -191,7 +191,7 @@ const handleClosedata = () => {
             style={{ position: "absolute", top: "0", right: "0" }}
             onClick={handleClosedata}
           ></button>
-          <div className="d-flex justify-content-center align-items-center flex-column gap-3">
+          <div className="d-flex justify-content-center align-items-center flex-column gap-3 mt-5">
             <div className="mt-2">
               <MdErrorOutline style={{ color: "#dc3545", fontSize: "40px" }} />
             </div>
