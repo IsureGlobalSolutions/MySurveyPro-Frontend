@@ -56,11 +56,11 @@ const ListOfLaunchedServey = () => {
     setisLoading(true);
     dispatch(LaunchedSurveysStatusApi()).then((res) => {
       if (res?.payload) {
-        if (res?.payload?.length > 0) {
+        if (res?.payload) {
           const paymentStatusUpdates = {};
           const launch = [];
 
-          res.payload.forEach((element) => {
+          res?.payload?.surveyResponse?.forEach((element) => {
             paymentStatusUpdates[element?.surveyId] = {
               paymentStatus: element?.surveyPaymentStatus,
             };
@@ -173,9 +173,7 @@ const ListOfLaunchedServey = () => {
           <Loader />
         </div>
       ) : (launchSurveyData?.length > 0 && !startSurvey) ||
-        (Array.isArray(surveyPaymentStatuses) &&
-          surveyPaymentStatuses[0]?.surveyLaunchStatus &&
-          !startSurvey) ? (
+        (Array.isArray(surveyPaymentStatuses) && surveyPaymentStatuses[0]?.surveyLaunchStatus && !startSurvey) ? (
         <>
           <div className="top-section my-5 mx-2 d-flex justify-content-between">
             <h2 className="ps-3 welcome">Welcome</h2>

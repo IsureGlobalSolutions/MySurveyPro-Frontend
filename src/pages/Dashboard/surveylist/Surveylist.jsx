@@ -171,7 +171,7 @@ const openModalHandler = (id) => {
 }) 
 }
 const handledelete = (item) => {
-  console.log("🚀 ~ handledelete ~ item:", item)
+
   setShow(true);
   setPopupMessage("Are you want to delete this survey ");
   setdeletedata(item.id);
@@ -221,7 +221,7 @@ const handleClosedata = () => {
           <h1>Survey templates</h1>
         </div>
         <div className="d-flex  flex-wrap gap-5 mt-4 ms-4">
-          {surveyListData?.length > 0
+          {s?.length > 0
             ? surveyListData?.map((content, index) => (
                 <div
                   className="watchsectioncard col-sm-6 col-md-6 col-lg-3 d-flex flex-column align-items-start"
