@@ -5,6 +5,7 @@ import { Model } from "survey-core";
 import { useParams } from "react-router-dom";
 import { customsurveyresponse } from "../../../../Redux/slice/authSlice";
 import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 
 export default function SurveyRunner({ onComplete , customdata , data}) {
   const [survey, setSurvey] = useState(null);
@@ -54,14 +55,15 @@ export default function SurveyRunner({ onComplete , customdata , data}) {
     console.log("🚀 ~ handleComplete ~ surveyPayload:", surveyPayload);
     dispatch(customsurveyresponse(surveyPayload))
       .then((res) => {
-        console.log("🚀 ~ .then ~ res:", res)
-        if (res.payload && res.payload.success) {
-          toast.success(res.payload.alertMessage);
+        if (res?.payload?.isSuccess=== true) {
+          toast.success(res?.payload?.alertMessage);
+          console.log("🚀 ~ .then ~ res:", res?.payload)
           onComplete(surveyInstance.data);
         } 
   })
   };
 
+  
   if (!survey) { 
     return <div>No survey data available to launch.</div>;
  }

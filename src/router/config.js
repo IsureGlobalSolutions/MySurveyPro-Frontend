@@ -33,6 +33,8 @@ const TEITemplate = lazy(()=>import("../pages/Dashboard/templates/TEItemplate/TE
 const CustomSurvey = lazy(()=>import("../pages/Dashboard/survey/CustomeSurvey/SurveyCreatorWidget.jsx"))
 const Congratulation=lazy((import("../pages/Dashboard/survey/TEISurvey/TEICongratulation.jsx")))
 const Getcustomsurvey=lazy(()=>import("../pages/Dashboard/survey/CustomeSurvey/CustomSurveyResponse.jsx"))
+const AddCustomizeSurvey=lazy(()=>import("../pages/Dashboard/survey/CustomeSurvey/AddCustomizeSurvey.jsx"))
+
 const config = [
   {
   path: '/',
@@ -156,12 +158,17 @@ const config = [
   component:Surveylist
 },
 {
-  path: '/customsurvey',
+  path: '/customsurvey/:id', 
   loginRequired:true,
   layout: DashboardLayout,
   component:CustomSurvey,
 },
-
+{
+  path: '/addcustomsurvey', 
+  loginRequired:true,
+  layout: DashboardLayout,
+  component:AddCustomizeSurvey,
+},
 {
   path: '/mp12template',
   loginRequired:true,
