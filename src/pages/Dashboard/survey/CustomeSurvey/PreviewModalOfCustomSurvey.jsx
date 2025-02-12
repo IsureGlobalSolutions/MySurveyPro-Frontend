@@ -12,7 +12,6 @@ const PreviewModalOfCustomSurvey = ({Viewshow, handleCloseViewdata , surveyJson}
    
         if (surveyJson) {
           const surveyModel = new Model(surveyJson);
-          console.log("🚀 ~ useEffect ~ surveyModel:", surveyModel)
           const storedThemeJson = window.localStorage.getItem("survey-theme-json");
           if (storedThemeJson) {
             try {

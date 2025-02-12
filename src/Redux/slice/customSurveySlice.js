@@ -25,7 +25,6 @@ export const ListOfCustomSurveyApi = createAsyncThunk('survey/addCustomSurveyApi
   }
 });
 export const getCustomSurveyByIdApi = createAsyncThunk('survey/getCustomSurveyByIdApi', async (data, thunkAPI) => {
-  console.log("🚀 ~ getCustomSurveyByIdApi ~ data:", data)
   try {
     const res = await axiosPrivate.get('api/Survey/GetCustomsurveyJson',{
         params: { id: data  }
