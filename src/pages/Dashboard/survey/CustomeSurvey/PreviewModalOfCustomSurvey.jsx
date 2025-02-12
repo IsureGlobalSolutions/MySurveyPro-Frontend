@@ -12,7 +12,6 @@ const PreviewModalOfCustomSurvey = ({Viewshow, handleCloseViewdata , surveyJson}
    
         if (surveyJson) {
           const surveyModel = new Model(surveyJson);
-          console.log("🚀 ~ useEffect ~ surveyModel:", surveyModel)
           const storedThemeJson = window.localStorage.getItem("survey-theme-json");
           if (storedThemeJson) {
             try {
@@ -58,7 +57,7 @@ const PreviewModalOfCustomSurvey = ({Viewshow, handleCloseViewdata , surveyJson}
 
 
     <Modal.Body>
-        <div className="my-2 mt-4 overflow-y-auto"
+    <div className="my-2 mt-4 overflow-y-auto"
     style={{ maxHeight: 'calc(100vh - 150px)' }}>
               {  !survey?   <div className="d-flex justify-content-center"><Loader/></div>
   

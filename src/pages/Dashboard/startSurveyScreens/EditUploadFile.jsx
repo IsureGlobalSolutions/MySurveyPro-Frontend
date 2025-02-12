@@ -7,10 +7,6 @@ import { uploadEditFileOfEmployeesData } from '../../../Redux/slice/authSlice';
 import { useDropzone } from 'react-dropzone';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { saveAs } from 'file-saver';
-import xlsxFile from '../../../assets/downloadable-files/RecipientsDetail.xlsx'
-import csvFile from '../../../assets/downloadable-files/RecipientsDetail.csv'
-import { selectClasses } from '@mui/material';
 import Tooltip from '../../../components/Tooltip/Tooltip';
 import { getAllSurveyFiles } from '../../../Redux/slice/surveySlice';
 import { Navbarvalue } from '../../../context/NavbarValuesContext';

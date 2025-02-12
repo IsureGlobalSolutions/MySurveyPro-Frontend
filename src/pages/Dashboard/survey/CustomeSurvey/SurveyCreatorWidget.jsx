@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 const  SurveyCreatorWidget=()=> {
   const [creator, setCreator] = useState(null);
+
   const selectedSurveyId = window.localStorage.getItem("selectedSurveyId");
   const [isLoading, setisLoading] = useState(false)
   const dispatch = useDispatch();
@@ -28,13 +29,11 @@ const  SurveyCreatorWidget=()=> {
         showThemeTab: true, 
       };
       const creatorInstance = new SurveyCreator(creatorOptions);
-      dispatch(getCustomSurveyByIdApi(id)).then((res)=>{ 
-        console.log(res.payload, "resp data");
-        const localStorageJson =res?.payload?.surveyJsonData;
-        const savedThemeJson = res?.payload?.surveyThemeJsonData;
+      
+        const localStorageJson =localStorage.getItem("survey-json") || '';
+        const savedThemeJson = localStorage.getItem("survey-theme-json") || '';
       if (localStorageJson) {
         creatorInstance.JSON = JSON.parse(localStorageJson);
-        console.log(creatorInstance.JSON , "creatorInstance.JSON");
       }
       if (savedThemeJson) {
         try {
@@ -54,10 +53,10 @@ const  SurveyCreatorWidget=()=> {
         callback(saveNo, true);
       };
       setCreator(creatorInstance);
-    })
+    
     };
     initializeCreator();
-  }, [id]);
+  }, []);
 
   if (!creator) {
 
@@ -81,7 +80,7 @@ const  SurveyCreatorWidget=()=> {
     const surveyName = JSON.parse(creator?.text)
     const surveyJson = JSON.stringify(creator?.text)
 const updateSurveyId = window.localStorage.getItem("updata-survey-id")
-const surveyThemeJsonData = window.localStorage.getItem("survey-theme-json") || "";
+const surveyThemeJsonData= JSON.stringify(creator?.theme);
 
 dispatch(addUpdateCustomSurveyApi({
   id:updateSurveyId?updateSurveyId:null,
@@ -96,6 +95,8 @@ dispatch(addUpdateCustomSurveyApi({
    toast.success(res?.payload?.alertMessage)
    window.localStorage.setItem("survey-json", '');
     window.localStorage.setItem("updata-survey-id", '');
+    window.localStorage.setItem("selectedSurveyId", '');
+    window.localStorage.setItem("survey-theme-json", '');
    navigate('/startsurvey')
     setisLoading(false)
 
@@ -111,6 +112,8 @@ dispatch(addUpdateCustomSurveyApi({
     navigate('/startsurvey')
     window.localStorage.setItem("survey-json", '');
     window.localStorage.setItem("updata-survey-id", '');
+    window.localStorage.setItem("selectedSurveyId", '');
+    window.localStorage.setItem("survey-theme-json", '');
   }
   return (
     <div className="h-100">

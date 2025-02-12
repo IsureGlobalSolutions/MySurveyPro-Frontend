@@ -92,7 +92,7 @@ const handleCustomCheckboxClick =(item) => {
   const cutomeSurevyHandler = () => {
 
     window.localStorage.setItem("survey-json", ''); 
-       navigate("/addcustomsurvey");
+    navigate("/addcustomsurvey");
   };
 
   useEffect(() => {
@@ -154,24 +154,32 @@ const editCustomSurvey = (id) => {
   const parsedData = JSON.parse(res?.payload?.surveyJsonData)
   window.localStorage.setItem("updata-survey-id", res?.payload?.id);
   window.localStorage.setItem("survey-json", parsedData);
+  window.localStorage.setItem("survey-theme-json",res?.payload?.surveyThemeJsonData);
   navigate(`/customsurvey/${res?.payload?.id}`);
-})
+ })
 }
 
 const openModalHandler = (id) => {
-  setopenModal(!openModal)
+
   dispatch(getCustomSurveyByIdApi(id))
  .then((res) => {
-  console.log("🚀 ~ .then ~ res:", res)
-  const parsedData = JSON.parse(res?.payload?.surveyJsonData)
-  window.localStorage.setItem("updata-survey-id", res?.payload?.id);
-  window.localStorage.setItem("survey-json", JSON.stringify(parsedData));
-  setSurveyJson(parsedData);
+  
+    setopenModal(true)
+  const parsedData1 = JSON.parse(res?.payload?.surveyJsonData);
+  window.localStorage.setItem("survey-theme-json",res?.payload?.surveyThemeJsonData);
+
+  setSurveyJson(parsedData1);
 
 }) 
+
+}
+const closeModalHandler = (id) => {
+  setopenModal(false)
+
+localStorage.setItem("survey-theme-json", ''); 
 }
 const handledelete = (item) => {
-  console.log("🚀 ~ handledelete ~ item:", item)
+
   setShow(true);
   setPopupMessage("Are you want to delete this survey ");
   setdeletedata(item.id);
@@ -305,6 +313,8 @@ const handleClosedata = () => {
 {customSurveyList?.length > 0 ? 
 
 customSurveyList?.map((item, index) => {
+  
+  
   return(<>
     <div className="watchsectioncard col-sm-6 col-md-4 col-lg-3 d-flex flex-column align-items-center ms-4 mb-4" key={index}>
     <div className="card-body mb-2 text-center">
@@ -387,7 +397,7 @@ customSurveyList?.map((item, index) => {
 {/* <SurveyRunner customdata={customdata} /> */}
 {
   openModal?
-  <PreviewModalOfCustomSurvey Viewshow={openModal} handleCloseViewdata={openModalHandler}  surveyJson={surveyJson}/>
+  <PreviewModalOfCustomSurvey Viewshow={openModal} handleCloseViewdata={closeModalHandler}  surveyJson={surveyJson}/>
   :''
 }
     </>

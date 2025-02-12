@@ -30,7 +30,7 @@ const ListOfLaunchedServey = () => {
   const [page, setPage] = useState(0);
   const [isLoading, setisLoading] = useState(false);
   const [responsesData, setresponsesData] = useState({});
-  const [launchSurveyData, setlaunchSurveyData] = useState([]);
+  const [combinedSurveyData, setCombinedSurveyData] = useState([]); // Combined array for surveyResponse and customSurveyResponse
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const {
@@ -56,86 +56,60 @@ const ListOfLaunchedServey = () => {
     setisLoading(true);
     dispatch(LaunchedSurveysStatusApi()).then((res) => {
       if (res?.payload) {
-        if (res?.payload?.length > 0) {
-          const paymentStatusUpdates = {};
-          const launch = [];
+        const paymentStatusUpdates = {};
+        const combinedData = [];
 
-          res.payload.forEach((element) => {
-            paymentStatusUpdates[element?.surveyId] = {
-              paymentStatus: element?.surveyPaymentStatus,
-            };
+        // Combine surveyResponse and customSurveyResponse
+        const surveyResponse = res?.payload?.surveyResponse || [];
+        const customSurveyResponse = res?.payload?.customSurveyResponse || [];
 
-            if (element?.surveyLaunchStatus) {
-              launch.push(element);
+        // Process surveyResponse
+        surveyResponse.forEach((element) => {
+          paymentStatusUpdates[element?.surveyId] = {
+            paymentStatus: element?.surveyPaymentStatus,
+          };
 
-              // Fetch total number of respondents
-              dispatch(getTotalNumberOfRespondent(element?.surveyId)).then(
-                (res) => {
-                  setresponsesData((prevState) => ({
-                    ...prevState,
-                    [element?.surveyId]: {
-                      response: res?.payload,
-                    },
-                  }));
-                }
-              );
-            }
+          if (element?.surveyLaunchStatus) {
+            combinedData.push({ ...element, type: 'survey' }); // Add type to distinguish between survey and custom survey
+          }
+        });
+
+        // Process customSurveyResponse
+        customSurveyResponse.forEach((element) => {
+          if (element?.surveyLaunchStatus) {
+            combinedData.push({ ...element, type: 'customSurvey' }); // Add type to distinguish between survey and custom survey
+          }
+        });
+
+        // Fetch total number of respondents for each survey
+        combinedData.forEach((item) => {
+          const surveyId = item.type === 'survey' ? item.surveyId : item.customSurveyId;
+          dispatch(getTotalNumberOfRespondent(surveyId)).then((res) => {
+            setresponsesData((prevState) => ({
+              ...prevState,
+              [surveyId]: {
+                response: res?.payload,
+              },
+            }));
           });
+        });
 
-          // Dispatch the collected payment status updates to the store
-          store.dispatch(updatePaymentStatus(paymentStatusUpdates));
+        // Dispatch the collected payment status updates to the store
+        store.dispatch(updatePaymentStatus(paymentStatusUpdates));
 
-          setlaunchSurveyData(launch);
-          setisLoading(false);
-        } else {
-          store.dispatch(updatePaymentStatus([]));
-          setisLoading(false);
-        }
+        setCombinedSurveyData(combinedData); // Set combined survey data
+        setisLoading(false);
+      } else {
+        store.dispatch(updatePaymentStatus([]));
+        setisLoading(false);
       }
     });
-    // }
   }, []);
-
-  useEffect(() => {
-    if (surveyPaymentStatuses?.length > 0) {
-      console.log("🚀 ~ useEffect ~ surveyPaymentStatuses:", surveyPaymentStatuses)
-      setisLoading(true);
-      const paymentStatusUpdates = {};
-      const launch = [];
-      surveyPaymentStatuses.forEach((element) => {
-        paymentStatusUpdates[element?.surveyId] = {
-          paymentStatus: element?.surveyPaymentStatus,
-        };
-
-        if (element?.surveyLaunchStatus) {
-          launch.push(element);
-          dispatch(getTotalNumberOfRespondent(element?.surveyId)).then(
-            (res) => {
-              setresponsesData((prevState) => ({
-                ...prevState,
-                [element?.surveyId]: {
-                  response: res?.payload,
-                },
-              }));
-            }
-          );
-        }
-      });
-
-      store.dispatch(updatePaymentStatus(paymentStatusUpdates));
-
-      setlaunchSurveyData(launch);
-      setisLoading(false);
-    } else {
-      store.dispatch(updatePaymentStatus([]));
-      setisLoading(false);
-    }
-  }, [surveyPaymentStatuses?.length]);
 
   const handleChangeRowsPerPage = (event) => {
     const newRowsPerPage = +event.target.value;
     setRowsPerPage(newRowsPerPage);
-    setPage(0); 
+    setPage(0); // Reset to the first page when rows per page changes
   };
 
   const handleChangePage = (event, newPage) => {
@@ -149,10 +123,10 @@ const ListOfLaunchedServey = () => {
 
   const handleClose = (option, data) => {
     DashboardStateHandler("survey", {
-      id: data?.surveyId,
+      id: data?.surveyId || data?.customSurveyId,
       name: data?.surveyName,
     });
-    store.dispatch(setSelectedSurveyId(data?.surveyId));
+    store.dispatch(setSelectedSurveyId(data?.surveyId || data?.customSurveyId));
     if (option === "Analyze results") {
       StapperHandler(6);
       startSurveyHandler(true);
@@ -169,7 +143,7 @@ const ListOfLaunchedServey = () => {
         <div className="d-flex justify-content-between">
           <Loader />
         </div>
-      ) : (launchSurveyData?.length > 0 && !startSurvey) ||
+      ) : (combinedSurveyData?.length > 0 && !startSurvey) ||
         (Array.isArray(surveyPaymentStatuses) &&
           surveyPaymentStatuses[0]?.surveyLaunchStatus &&
           !startSurvey) ? (
@@ -183,11 +157,11 @@ const ListOfLaunchedServey = () => {
                 startSurveyHandler(true);
               }}
             >
-             <PiPlusBold className="me-1  mt-0 pt-0  plusicon" />  
-             <span className="mt-4 mt-4">
-             Create New Survey
-             </span>
-             </CustomeButton>
+              <PiPlusBold className="me-1  mt-0 pt-0  plusicon" />  
+              <span className="mt-4 mt-4">
+                Create New Survey
+              </span>
+            </CustomeButton>
           </div>
           <div className="table-responsive m-4  bg-red ">
             <Paper sx={{ width: "100%" }}>
@@ -211,7 +185,7 @@ const ListOfLaunchedServey = () => {
                         <Loader />
                       </div>
                     </div>
-                  ) : launchSurveyData?.length === 0 ? (
+                  ) : combinedSurveyData?.length === 0 ? (
                     <tr>
                       <td colSpan="6" className="text-center">
                         <p className="fw-bold fs-5">No file</p>
@@ -219,11 +193,9 @@ const ListOfLaunchedServey = () => {
                     </tr>
                   ) : (
                     <>
-                      {launchSurveyData?.map((item, index) => {
-                        console.log("🚀 ~ {launchSurveyData?.map ~ launchSurveyData:", launchSurveyData)
-                        const responseData =
-                          responsesData[item?.surveyId]?.response || {};
-                          console.log("🚀 ~ {launchSurveyData?.map ~ responsedata:", launchSurveyData)
+                      {combinedSurveyData?.map((item, index) => {
+                        const surveyId = item.type === 'survey' ? item.surveyId : item.customSurveyId;
+                        const responseData = responsesData[surveyId]?.response || {};
                         return (
                           <tr
                             key={index}
@@ -319,21 +291,17 @@ const ListOfLaunchedServey = () => {
                                 }}
                               ></Menu>
                             </td>
-                         
                           </tr>
-                          
                         );
                       })}
-                      
                     </>
                   )}
-                  
                 </tbody>
               </table>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
-                count={launchSurveyData?.length || 0}
+                count={combinedSurveyData?.length || 0}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
