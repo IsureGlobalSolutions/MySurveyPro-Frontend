@@ -57,7 +57,8 @@ const PreviewModalOfCustomSurvey = ({Viewshow, handleCloseViewdata , surveyJson}
 
 
     <Modal.Body>
-        <div className="my-2">
+    <div className="my-2 mt-4 overflow-y-auto"
+    style={{ maxHeight: 'calc(100vh - 150px)' }}>
               {  !survey?   <div className="d-flex justify-content-center"><Loader/></div>
   
 :  
