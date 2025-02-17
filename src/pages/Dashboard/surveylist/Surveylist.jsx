@@ -147,7 +147,6 @@ dispatch(deleteCustomSurveyApi(id))
   }
 } )
 }
-
 const editCustomSurvey = (id) => {
  dispatch(getCustomSurveyByIdApi(id))
  .then((res) => {
@@ -158,33 +157,24 @@ const editCustomSurvey = (id) => {
   navigate(`/customsurvey/${res?.payload?.id}`);
  })
 }
-
 const openModalHandler = (id) => {
-
   dispatch(getCustomSurveyByIdApi(id))
  .then((res) => {
-  
     setopenModal(true)
   const parsedData1 = JSON.parse(res?.payload?.surveyJsonData);
   window.localStorage.setItem("survey-theme-json",res?.payload?.surveyThemeJsonData);
-
   setSurveyJson(parsedData1);
-
 }) 
-
 }
 const closeModalHandler = (id) => {
   setopenModal(false)
-
 localStorage.setItem("survey-theme-json", ''); 
 }
 const handledelete = (item) => {
-
   setShow(true);
   setPopupMessage("Are you want to delete this survey ");
   setdeletedata(item.id);
-};
-
+}
 const handleClosedata = () => {
   setShow(false);
 };
@@ -394,7 +384,6 @@ customSurveyList?.map((item, index) => {
 </div>
 
 </div>
-{/* <SurveyRunner customdata={customdata} /> */}
 {
   openModal?
   <PreviewModalOfCustomSurvey Viewshow={openModal} handleCloseViewdata={closeModalHandler}  surveyJson={surveyJson}/>
