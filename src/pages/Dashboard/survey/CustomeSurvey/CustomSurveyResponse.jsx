@@ -25,10 +25,7 @@ import CustomSurvey from './CustomSurvey.jsx';
 const CustomSurveyResponse = () => {
     // const surveyId = useSelector((state) => state.user.selectedSurveyId);
     const dispatch = useDispatch();
-    const [data, setData] = useState({
-        surveyId: "",
-        surveyResponseJsonData: ""
-      });   
+    const [data, setData] = useState({});   
        const [staffid, setstaffid] = useState('');
     // const {isLoading,userData} =useSelector((state)=>state.user)
     const { userId, surveyId } = useParams();
@@ -47,83 +44,15 @@ const CustomSurveyResponse = () => {
     const fetchSurveyData = async (surveyId) => {
         try {
             const res = await dispatch(GetCustomSurveyJson(surveyId));
-            console.log("🚀 ~ fetchSurveyData ~ res:", res)
-            setData(res?.payload.surveyJsonData);
+            setData(res?.payload);
         } catch (error) {
             toast.error(error.message);
         }
     };
 
-    const loadProgress = () => {
-        const savedStep = localStorage.getItem('activeStep');
-        const savedChoices = localStorage.getItem('selectchoiseid');
-        if (savedStep ) setActiveStep(Number(savedStep));
-        if (savedChoices) setselectchoiseid(JSON.parse(savedChoices));
-    };
+  
 
-    const saveProgress = () => {
-        localStorage.setItem('activeStep', activeStep+1);
-        localStorage.setItem('selectchoiseid', JSON.stringify(selectchoiseid));
-    };
 
-    const handlechoiseID = (choiseid) => {
-        setselectchoiseid(prevchoiceid => ({
-            ...prevchoiceid,
-            [activeStep]: choiseid,
-        }));
-    };
-
-    const clearProgress = () => {
-        localStorage.removeItem('activeStep');
-        localStorage.removeItem('selectchoiseid');
-    };
-
-    const handleNext = async () => {
-        if(!selectchoiseid[activeStep])
-        {
-            toast.error('please select any choice')
-            return;
-        }
-        if (activeStep < data.length - 1) {
-            const choiceId = selectchoiseid[activeStep];
-            const questionId=data[activeStep].questionId
-            const recipientId= Number(staffid)
-            if (choiceId) {
-                try {
-                    const requestData = { choiceId, recipientId: recipientId , userId , surveyId:surveyId , questionId };
-                    await dispatch(surveyresponse(requestData));
-                    saveProgress();
-                } catch (error) {
-                    toast.error(error.message);
-                }
-            }
-            setActiveStep(prevActiveStep => prevActiveStep + 1);
-        } else if (activeStep === data.length - 1) {
-            const choiceId = selectchoiseid[activeStep];
-            const questionId=data[activeStep].questionId
-            const recipientId= Number(staffid)
-            if (choiceId) {
-                try {
-                    const requestData = { choiceId, recipientId: recipientId , userId , surveyId:surveyId, questionId };
-                    await dispatch(surveyresponse(requestData));
-                    saveProgress();
-                    clearProgress();
-                    setActiveStep(data.length); 
-                } catch (error) {
-                    toast.error(error.message);
-                }
-            }
-        }
-    };
-
-    const handleBack = () => {
-        setActiveStep(prevActiveStep => prevActiveStep - 1);
-        saveProgress();
-    };
-
-    if (typeof data !== "string") {
-        return <div><Loader/></div>;
-    }
 
     const getValueFromIdComponent = (value) => {
         setActiveStep(value);

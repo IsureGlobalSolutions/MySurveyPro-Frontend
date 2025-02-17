@@ -13,22 +13,20 @@ export default function SurveyRunner({ onComplete , customdata , data , staffid}
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const storedJson = data;
-    console.log("🚀 ~ useEffect ~ staffid:", staffid)
+    const storedJson = data.surveyJsonData;
 
     if (storedJson) {
       const surveyJson = JSON.parse(storedJson);
       const surveyModel = new Model(surveyJson);
-      const storedThemeJson = window.localStorage.getItem("survey-theme-json");
       surveyModel.onAfterRenderPage.add((sender, options) => {
         const completeButton = options.htmlElement.querySelector(".sv-action");
         if (completeButton) {
           completeButton.style.display = "none";
         }
       });
-      if (storedThemeJson) {
+      if (data?.surveyThemeJsonData) {
         try {
-          const savedTheme = JSON.parse(storedThemeJson);
+          const savedTheme = JSON.parse(data?.surveyThemeJsonData);
           surveyModel.applyTheme(savedTheme);
           console.log("Applied saved theme:", savedTheme);
         } catch (error) {
