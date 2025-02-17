@@ -147,7 +147,6 @@ dispatch(deleteCustomSurveyApi(id))
   }
 } )
 }
-
 const editCustomSurvey = (id) => {
  dispatch(getCustomSurveyByIdApi(id))
  .then((res) => {
@@ -158,33 +157,24 @@ const editCustomSurvey = (id) => {
   navigate(`/customsurvey/${res?.payload?.id}`);
  })
 }
-
 const openModalHandler = (id) => {
-
   dispatch(getCustomSurveyByIdApi(id))
  .then((res) => {
-  
     setopenModal(true)
   const parsedData1 = JSON.parse(res?.payload?.surveyJsonData);
   window.localStorage.setItem("survey-theme-json",res?.payload?.surveyThemeJsonData);
-
   setSurveyJson(parsedData1);
-
 }) 
-
 }
 const closeModalHandler = (id) => {
   setopenModal(false)
-
 localStorage.setItem("survey-theme-json", ''); 
 }
 const handledelete = (item) => {
-
   setShow(true);
   setPopupMessage("Are you want to delete this survey ");
   setdeletedata(item.id);
-};
-
+}
 const handleClosedata = () => {
   setShow(false);
 };
@@ -199,7 +189,7 @@ const handleClosedata = () => {
             style={{ position: "absolute", top: "0", right: "0" }}
             onClick={handleClosedata}
           ></button>
-          <div className="d-flex justify-content-center align-items-center flex-column gap-3">
+          <div className="d-flex justify-content-center align-items-center flex-column gap-3 mt-5">
             <div className="mt-2">
               <MdErrorOutline style={{ color: "#dc3545", fontSize: "40px" }} />
             </div>
@@ -394,7 +384,6 @@ customSurveyList?.map((item, index) => {
 </div>
 
 </div>
-{/* <SurveyRunner customdata={customdata} /> */}
 {
   openModal?
   <PreviewModalOfCustomSurvey Viewshow={openModal} handleCloseViewdata={closeModalHandler}  surveyJson={surveyJson}/>

@@ -131,6 +131,8 @@ const CustomSurveyResponse = () => {
      const sendIdParent=(value) => {
       
         setstaffid(value);
+    
+        
      }
     return (
         <>
@@ -250,7 +252,7 @@ const CustomSurveyResponse = () => {
                 //         </div>
                 //     </div>
                 // </div>
-                <SurveyRunner data={data} setData={setData}/>
+                <SurveyRunner data={data} setData={setData} staffid={staffid}/>
             )}
         </>
     );

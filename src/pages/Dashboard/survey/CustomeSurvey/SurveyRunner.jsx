@@ -7,14 +7,15 @@ import { customsurveyresponse } from "../../../../Redux/slice/authSlice";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 
-export default function SurveyRunner({ onComplete , customdata , data}) {
+export default function SurveyRunner({ onComplete , customdata , data , staffid}) {
   const [survey, setSurvey] = useState(null);
   const {  surveyId } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
     const storedJson = data;
-    console.log("🚀 ~ useEffect ~ storedJson:", storedJson)
+    console.log("🚀 ~ useEffect ~ staffid:", staffid)
+
     if (storedJson) {
       const surveyJson = JSON.parse(storedJson);
       const surveyModel = new Model(surveyJson);
@@ -51,6 +52,7 @@ export default function SurveyRunner({ onComplete , customdata , data}) {
     const surveyPayload = {
       surveyId: surveyId,
       surveyResponseJsonData: JSON.stringify(surveyInstance.data),
+      recepientId:staffid,
     };
     console.log("🚀 ~ handleComplete ~ surveyPayload:", surveyPayload);
     dispatch(customsurveyresponse(surveyPayload))
