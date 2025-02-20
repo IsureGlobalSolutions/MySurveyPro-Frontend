@@ -17,10 +17,12 @@ const { selectedDashboardValues } = Navbarvalue()
 const [departmentList, setdepartmentList] = useState([])
 const {listOfDepartments}=useSelector((state)=>state.survey)
   const {  userSingleDimensionForSingleDepartmentReportList } = useSelector((state) => state.teiSurvey);
+  console.log("🚀 ~ DepartmentDimensionQuestionResult ~ userSingleDimensionForSingleDepartmentReportList:", userSingleDimensionForSingleDepartmentReportList)
 
 
 
   useEffect(()=>{
+    
  
    if(userSingleDimensionForSingleDepartmentReportList?.data?.length>0){
  setResponseDataInTable(userSingleDimensionForSingleDepartmentReportList?.data)
@@ -48,6 +50,7 @@ const {listOfDepartments}=useSelector((state)=>state.survey)
   }
 
   const colors = userSingleDimensionForSingleDepartmentReportList?.data?.recipientTEIResults?.map((recipient) => {
+    
     const value = recipient.teiDimensionResult[0]?.teiDimension?.Result;
     if (value >= 90) return "#045f03"; 
     if (value <= 90 && value>=80) return "#62c109"; 
@@ -59,8 +62,8 @@ const {listOfDepartments}=useSelector((state)=>state.survey)
     return "#FF0000"; // Red
   });
   
-
-   let chartValues = SingleBarChartData({overAllScore,colors});
+console.log("🚀 ~ colors ~ colors:", colors)
+   let chartValues = SingleBarChartData(overAllScore);
 
    
 

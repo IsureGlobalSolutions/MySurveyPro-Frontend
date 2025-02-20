@@ -1,6 +1,7 @@
-export const SingleBarChartData = ( data=[],colors=[] ) => 
+export const SingleBarChartData = ( data=[]) => 
     
     (
+       
         {
             "annotations": {},
             "chart": {
@@ -21,7 +22,6 @@ export const SingleBarChartData = ( data=[],colors=[] ) =>
                     "allowMouseWheelZoom": true
                 }
             },
-            colors:[colors.length>0? colors:[]],
             "plotOptions": {
                 "line": {
                     "isSlopeChart": false,
@@ -57,6 +57,27 @@ export const SingleBarChartData = ( data=[],colors=[] ) =>
                     "borderRadius": 4,
                     "dataLabels": {
                         "format": "scale"
+                    },
+                    "seriesTitle": {
+                        "show": true,
+                        "offsetY": 1,
+                        "offsetX": 1,
+                        "borderColor": "#000",
+                        "borderWidth": 1,
+                        "borderRadius": 2,
+                        "style": {
+                            "background": "rgba(0, 0, 0, 0.6)",
+                            "color": "#fff",
+                            "fontSize": "12px",
+                            "fontWeight": 400,
+                            "cssClass": "",
+                            "padding": {
+                                "left": 6,
+                                "right": 6,
+                                "top": 2,
+                                "bottom": 2
+                            }
+                        }
                     }
                 },
                 "radialBar": {
@@ -87,6 +108,7 @@ export const SingleBarChartData = ( data=[],colors=[] ) =>
                     }
                 }
             },
+          
             "dataLabels": {
                 "enabled": false,
                 "style": {
@@ -96,6 +118,7 @@ export const SingleBarChartData = ( data=[],colors=[] ) =>
                     "dropShadow": {}
                 }
             },
+            // colors:[color.length>0? color:[]],
             "grid": {
                 "padding": {
                     "right": 25,
@@ -116,29 +139,28 @@ export const SingleBarChartData = ( data=[],colors=[] ) =>
                 }
             },
             "markers": {},
-            "series": [
+            "series":[
                 {
                     "name": "Column",
-                    "data": data?.length>0? data:[
+                    "data":data?.length>0? data : [
                         {
                             "x": "Item 1",
                             "y": 10
                         },
                         {
                             "x": "Item 2",
-                            "y": "70"
+                            "y": 70
                         },
                         {
                             "x": "Item 3",
-                            "y": "50"
+                            "y": 50
                         },
                         {
                             "x": "Item 4",
-                            "y": "90"
+                            "y": 90
                         }
                     ],
-                    "group": "apexcharts-axis-0",
-                    "zIndex": 0
+                    "group": "apexcharts-axis-0"
                 }
             ],
             "states": {
@@ -212,6 +234,6 @@ export const SingleBarChartData = ( data=[],colors=[] ) =>
                     }
                 }
             },
-           
+            
         }
 )
