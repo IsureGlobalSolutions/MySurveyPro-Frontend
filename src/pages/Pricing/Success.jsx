@@ -23,18 +23,17 @@ const Success = () => {
       // Uncomment and use API as needed
       dispatch(checkPaymentStatus({userId, surveyId}))
         .then((res) => {
-          console.log(res?.payload, 'success check payment status api');
+      
           if (res?.payload?.paymentStatus === 'paid') {
             toast.success('payment has been successfully paid');
 
    dispatch(LaunchedSurveysStatusApi())
       .then((res) => {
-        if (res?.payload) {
-          
-
-          if (res?.payload?.length > 0) {
+        console.log("🚀 ~ .then ~ res:", res?.payload)
+        
+          if (res?.payload?.surveyResponse?.length > 0) {
             const paymentStatusUpdates = {};
-            res.payload.forEach((element) => {
+            res?.payload?.surveyResponse?.forEach((element) => {
               // Add payment status object to the paymentStatusUpdates object
               paymentStatusUpdates[element?.surveyId] = {
                 paymentStatus: element?.surveyPaymentStatus,
@@ -45,7 +44,7 @@ const Success = () => {
             store.dispatch(updatePaymentStatus(paymentStatusUpdates)); 
             setisLoading(false);
           }
-        }
+       
       });
 
 
