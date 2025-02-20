@@ -182,7 +182,7 @@ const config = [
   component:TEITemplate
 },
 {
-  path: '/q12survey/:userId/:surveyId*',
+  path: '/MP12survey/:userId/:surveyId*',
   loginRequired:false,
   layout: PublicLayout,
   component:Survey
