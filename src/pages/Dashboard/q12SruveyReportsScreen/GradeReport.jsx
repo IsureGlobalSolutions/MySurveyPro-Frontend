@@ -12,7 +12,7 @@ import DesignationChart from './chats/gradeCharts/DesignationChart';
 const GradeReport = () => {
   const dispatch = useDispatch()
   const [listofGrades, setlistofGrades] = useState([])
-  // const [isloading, setisloading] = useState(false)
+  const [isloading, setisloading] = useState(false)
   const {selectedDashboardValues,DashboardStateHandler}=Navbarvalue()
 
   const [getGradeQuesitonsSurveyData, setgetGradeQuesitonsSurveyData] = useState([])
@@ -23,17 +23,17 @@ const GradeReport = () => {
 
     const showSelectedValues=(value)=>{ 
       if(value && value !='All'){
-  // setisloading(true)
+        setisloading(true)
       dispatch(getGradeQuestionsReport({ surveyId: selectedDashboardValues?.survey?.id, grade: value }))
          .then((res) => {
-          // setisloading(false)
+          setisloading(false)
            setgetGradeQuesitonsSurveyData(res?.payload)
          })
         }else if (!value || value ==='All'){
-          // setisLoading(true)
+          setisloading(true)
      dispatch(getDepartmentQuestionsReport({ surveyId: selectedDashboardValues?.survey?.id}))
         .then((res) => {
-          // setisLoading(false)
+          setisloading(false)
           setgetGradeQuesitonsSurveyData(res?.payload)
         })}
    }
@@ -45,11 +45,11 @@ const GradeReport = () => {
       const Grades = [{ columnValue: "All" }, ...res?.payload];
       setlistofGrades(Grades)
       showSelectedValues(selectedDashboardValues?.grade? 
-        selectedDashboardValues?.grade:
-          res?.payload?.length>0?
+        selectedDashboardValues?.grade
+        :
+        
           res?.payload[0]?.columnValue
-          :
-          ''
+         
       )
     })
 
@@ -198,7 +198,7 @@ showSelectedValues(selectedDashboardValues?.grade)
       
     ]
   }
-  // isLoading={isloading}
+  isLoading={isloading}
 />
          </div>
          <div className="department-card-data col-md-5 m-0 p-0">

@@ -88,15 +88,15 @@ const SetReportValueHandler = (data) => {
 
 
 
-useEffect(()=>{
- if(selectedDashboardValues?.department){
-  setisLoading(true)
+// useEffect(()=>{
+//  if(selectedDashboardValues?.department){
+//   setisLoading(true)
 
    
-showSelectedValues(selectedDashboardValues?.department)
- }
+// showSelectedValues(selectedDashboardValues?.department)
+//  }
 
-},[selectedDashboardValues?.department])
+// },[selectedDashboardValues?.department])
 
 
 
