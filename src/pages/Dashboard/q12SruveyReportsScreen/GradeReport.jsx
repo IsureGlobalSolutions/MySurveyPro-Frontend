@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SurveyTable from '../../../components/table/SurveyTable'
 import { useDispatch, useSelector } from 'react-redux';
 import { downloadColumnWiseReport,getDepartmentQuestionsReport, getGradeQuestionsReport, getListOfCoumnProperty } from '../../../Redux/slice/surveySlice';

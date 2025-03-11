@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState  } from 'react'
+import React, { useEffect, useState  } from 'react'
 import infographicImage from '../../assets/login-and-signup/login-infographic.png';
 import SurveyLogo from '../../assets/svgs/logoWithTitle.svg?react';
 import './login.css'
@@ -20,7 +20,7 @@ const LoginScreen = () => {
    console.log("🚀 ~ LoginScreen ~ isLoading:", isLoading)
   const navigate = useNavigate()
 
-useLayoutEffect(() => {
+useEffect(() => {
   if(userData?.accessToken){
     navigate('/startsurvey')
   }
