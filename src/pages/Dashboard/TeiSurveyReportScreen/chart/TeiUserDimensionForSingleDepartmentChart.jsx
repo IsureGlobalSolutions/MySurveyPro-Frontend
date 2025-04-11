@@ -7,6 +7,7 @@ import DropdownButton from '../../../../components/mySurveyProWebsiteBtn/Dropdow
 import { getListOfCoumnProperty } from '../../../../Redux/slice/surveySlice';
 import { Navbarvalue } from '../../../../context/NavbarValuesContext';
 import { getDepartmentDimensionsTEISurveyReportApi } from '../../../../Redux/slice/teiSlice';
+import { divide } from 'lodash';
 
 const TeiUserDimensionForSingleDepartmentChart = () => {
   const dispatch = useDispatch();
@@ -98,7 +99,9 @@ const TeiUserDimensionForSingleDepartmentChart = () => {
   const chartValues = FunnelChartData(reportValues);
 
   return (
-    <div className="age-card rounded-3 border p-3 shadow bg-white">
+   
+<div className='ps-3'>
+   <div className="age-card rounded-3 border p-3 shadow bg-white">
       <div className="d-flex justify-content-between">
         <div className="title d-flex align-items-center m-0">
           <p className="m-0 pb-3">Team Dimension Average Score</p>
@@ -127,6 +130,9 @@ const TeiUserDimensionForSingleDepartmentChart = () => {
         )}
       </div>
     </div>
+</div>
+    
+   
   );
 };
 

@@ -62,14 +62,15 @@ const {listOfDepartments}=useSelector((state)=>state.survey)
     return "#FF0000"; // Red
   });
   
-console.log("🚀 ~ colors ~ colors:", colors)
+
    let chartValues = SingleBarChartData(overAllScore);
 
    
 
   return (
     <>
-     <div className="age-card rounded-3 border p-3 shadow bg-white">
+    <div className="col-md-12 ps-3">
+     <div className="age-card rounded-3 border p-2 shadow bg-white">
  <div className="d-flex justify-content-between">
         <div className="title d-flex align-items-center m-0">
             <div className=""><p className='m-0 pb-3'>Department report for a dimension Chart</p></div>
@@ -106,7 +107,9 @@ console.log("🚀 ~ colors ~ colors:", colors)
     }
     </div>
      
+    </div>  
     </div>
+    
     </>
   )
 }

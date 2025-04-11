@@ -164,9 +164,9 @@ const DimensionsAsRowsComponent = () => {
 
   return (
     <>
-      <div className="row m-0 p-0 justify-content-between mt-4">
+      <div className="row m-0 p-0 justify-content-between mt-3">
         <div className="deparment-table-data col-md-12 p-0">
-          <div className="mx-3 py-1 row justify-content-between bg-white shadow">
+          <div className="mx-3 py-2 row justify-content-between bg-white shadow me-0 rounded-top-3">
             <div className="col-md-5 d-flex">
               <div className="d-flex align-items-center px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
                 <div>

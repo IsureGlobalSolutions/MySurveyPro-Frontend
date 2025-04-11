@@ -170,9 +170,9 @@ const DepartmentAndDimensionTable = () => {
   
   return (
     <>
-      <div className="row m-0 p-0 justify-content-between mt-3">
+      <div className="row m-0 p-0 justify-content-between mt-2">
         <div className="deparment-table-data col-md-12 p-0">
-          <div className="mx-3 py-1 row justify-content-between bg-white shadow">
+          <div className="mx-3 py-2 row justify-content-between bg-white shadow me-0 rounded-top-3">
             <div className="col-md-5 d-flex">
               <div className="d-flex align-items-center px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
                 <p className="ps-2 py-2 fs-6 fw-bold m-0">Department report for a dimension</p>

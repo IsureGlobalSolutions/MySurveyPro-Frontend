@@ -94,7 +94,8 @@ dispatch(getDepartmentDimensionsTEISurveyReportApi(
 
   return (
     <>
-     <div className="age-card rounded-3 border p-3 shadow bg-white">
+    <div className="ps-3">
+        <div className="age-card rounded-3 border p-3 shadow bg-white">
  <div className="d-flex justify-content-between">
         <div className="title d-flex align-items-center m-0">
             <div className=""><p className='m-0 pb-3'>Team's TEI Dimension Score</p></div>
@@ -132,6 +133,8 @@ dispatch(getDepartmentDimensionsTEISurveyReportApi(
     </div>
      
     </div>
+    </div>
+   
     </>
   )
 }

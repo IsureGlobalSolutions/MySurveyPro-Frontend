@@ -56,7 +56,9 @@ const OtpVerifyScreen = ({stepUPSendValue ,staffid}) => {
        
             </div>
             <div className=" col-md-5 t-4">
-              <WebsiteButton className='w-100' type='submit'   style={{ backgroundColor: "#14A48B" }} >
+              <WebsiteButton className='w-100' type='submit'   
+            //   style={{ backgroundColor: "#14A48B" }} 
+              >
               Next
               </WebsiteButton>
               </div>

@@ -29,12 +29,15 @@ const index = () => {
   return (
     <>
       <HeroCards />
-      <div className="row m-0 p-0">
-        <div className="col-md-6"><OverAllRadialChat /></div>
-        <div className="col-md-6"> <OverAllFunnelChat /></div>
-
+      <div className="col-md-12 m-0">
+     <div className="row m-0 p-0 ">
+        <div className="col-md-6 p-0 m-0 ps-3"><OverAllRadialChat /></div>
+        <div className="col-md-6 p-0 m-0 ps-3"> <OverAllFunnelChat /></div>
 
       </div>
+
+      </div>
+ 
       {listOfDepartments?.length > 0 &&
         (
           <>
