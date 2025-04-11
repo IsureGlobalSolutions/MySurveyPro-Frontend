@@ -10,7 +10,7 @@
     import { getstaffid } from '../../../../Redux/slice/authSlice';
     import toast from 'react-hot-toast';
     import { useDispatch, useSelector } from 'react-redux';
-    const TEISurvey = ({stepUPSendValue , sendIdParent}) => {
+    const TEISurvey = ({  sendIdParent,showOtpScreen}) => {
       // const surveyId= useSelector((state)=>state.user.selectedSurveyId)
         const dispatch =useDispatch();
         const { register , handleSubmit , formState: { errors } } = useForm();
@@ -23,7 +23,7 @@
             .then((res)=>{
               if(res.payload.isSuccess===true){
                 toast.success(res.payload.alertMessage)
-                stepUPSendValue(0);
+                showOtpScreen(true);
                 sendIdParent(()=>res.payload.recipientId);
               }else{
                 toast.error(res.payload.alertMessage)
@@ -43,7 +43,8 @@
                   <p>Please enter user id</p>
                 </div>
                 <div  className="g-4 mt-4 " >
-                <div  className='mb-4'>
+                  <form onSubmit={handleSubmit(onSubmit)}>
+   <div  className='mb-4'>
                 <InputField
             type="text"
             name="user id"
@@ -57,10 +58,13 @@
            
                 </div>
                 <div className=" col-md-12 t-4">
-                  <WebsiteButton className='w-100' type='button' onClick={handleSubmit(onSubmit)}  >
+                  <WebsiteButton className='w-100' type='submit' >
                   Next
                   </WebsiteButton>
                   </div>
+
+                  </form>
+             
                 </div>
               </div>
               <div className='col-md-8  mt-4 d-flex justify-content-end'>

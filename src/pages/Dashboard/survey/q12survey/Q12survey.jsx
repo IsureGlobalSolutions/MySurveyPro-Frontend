@@ -10,7 +10,7 @@
     import { getstaffid } from '../../../../Redux/slice/authSlice';
     import toast from 'react-hot-toast';
     import { useDispatch } from 'react-redux';
-    const Q12survey = ({stepUPSendValue , sendIdParent}) => {
+    const Q12survey = ({ sendIdParent,setshowOtpScreen}) => {
         const dispatch =useDispatch();
         const { register , handleSubmit , formState: { errors } } = useForm();
          const { userId, surveyId } = useParams();
@@ -22,7 +22,7 @@
               .then((res)=>{
               if(res.payload.isSuccess===true){
                 toast.success(res.payload.alertMessage)
-                stepUPSendValue(0);
+               setshowOtpScreen(true);
                 sendIdParent(()=>res.payload.recipientId);
               }else{
                 toast.error(res.payload.alertMessage)
@@ -42,7 +42,8 @@
                   <p>Please enter user id</p>
                 </div>
                 <div  className="g-4 mt-4 " >
-                <div  className='mb-4'>
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                      <div  className='mb-4'>
                 <InputField
             type="text"
             name="user id"
@@ -56,10 +57,12 @@
            
                 </div>
                 <div className=" col-md-12 t-4">
-                  <WebsiteButton className='w-100' type='button' onClick={handleSubmit(onSubmit)}  >
+                  <WebsiteButton className='w-100' type='submit'>
                   Next
                   </WebsiteButton>
-                  </div>
+                  </div>  
+                  </form>
+            
                 </div>
               </div>
               <div className='col-md-8  mt-4 d-flex justify-content-end'>
@@ -68,6 +71,7 @@
             </div>
           </div>
         </div>
+        
       );
     }
     

@@ -18,6 +18,7 @@ import Q12survey from './Q12survey.jsx';
 import img1 from '../../../../assets/Q12survey/stepperimage.png';
 import { jwtDecode } from "jwt-decode";
 import { useParams } from 'react-router-dom';
+import OtpVerifyScreen from '../OtpVerifyScreen.jsx';
 
 const SurveyResponseQuestion = () => {
     // const surveyId = useSelector((state) => state.user.selectedSurveyId);
@@ -25,6 +26,7 @@ const SurveyResponseQuestion = () => {
     const [data, setData] = useState([]);
     const [staffid, setstaffid] = useState('');
     const {isLoading,userData} =useSelector((state)=>state.user)
+    const [showOtpScreen, setshowOtpScreen] = useState(false)
     const { userId, surveyId } = useParams();
     // console.log(userId, surveyId, 'params');
 //   const userid = id;
@@ -128,7 +130,16 @@ const SurveyResponseQuestion = () => {
     return (
         <>
             {activeStep === 111 ? (
-                <Q12survey setstaffid={setstaffid} stepUPSendValue={getValueFromIdComponent}  sendIdParent={sendIdParent}  />
+               
+
+                
+                !showOtpScreen ? (
+                   <Q12survey setstaffid={setstaffid} showOtpScreen={setshowOtpScreen} sendIdParent={sendIdParent}  />
+                            )
+                            : showOtpScreen ? (
+                            <OtpVerifyScreen stepUPSendValue={getValueFromIdComponent}  staffid={staffid} />
+                            )  :''
+
             ) : activeStep === data.length ? ( 
                 <div className=' '>
                     <div className='d-flex justify-content-start flex-wrap gap-5 mb-4 m-0 p-4'>

@@ -174,7 +174,7 @@ export const customsurveyresponse = createAsyncThunk('Survey/customsurveyrespons
 });
 export const getstaffid = createAsyncThunk('Survey/getstaffid', async ({surveyId,employeeId,userId}, thunkAPI) => {
   try {
-    const res = await instance.get(`api/Recipient/VerifyRecipient`,{
+    const res = await instance.get(`api/Recipient/ValidateRecipientAndOTPSend`,{
     params:{surveyId,employeeId,userId}
     } );
     return res.data;
@@ -185,6 +185,22 @@ export const getstaffid = createAsyncThunk('Survey/getstaffid', async ({surveyId
     return thunkAPI.rejectWithValue(message);
   }
 });
+
+export const ValidateRecipientOtpApi = createAsyncThunk('Survey/validateRecipientOtp', async ({recipientId,otp}, thunkAPI) => {
+  try {
+    const res = await instance.get(`api/Recipient/ValidateRecipientOtp`,{
+    params:{recipientId,otp}
+    } );
+    return res.data;
+
+  } catch (error) {
+    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    toast.error(message);
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+
 export const profileapi = createAsyncThunk('survey/addprofile', async ( formData, thunkAPI) => {
   try {
     const res = await axiosPrivate.patch('api/Authentication/UpdateUserProfile' , formData,{

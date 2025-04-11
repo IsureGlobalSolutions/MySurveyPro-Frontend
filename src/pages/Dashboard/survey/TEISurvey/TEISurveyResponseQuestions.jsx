@@ -20,6 +20,7 @@ import { jwtDecode } from "jwt-decode";
 import { useParams } from 'react-router-dom';
 import TEISurvey from './TEISurvey';
 import TEICongratulation from './TEICongratulation';
+import OtpVerifyScreen from '../OtpVerifyScreen';
 const TEISurveyResponseQuestions = () => {
     // const surveyId = useSelector((state) => state.user.selectedSurveyId);
 
@@ -33,7 +34,7 @@ const TEISurveyResponseQuestions = () => {
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(111);
     const [selectchoiseid, setselectchoiseid] = useState([]);
-
+const [showOtpScreen, setshowOtpScreen] = useState(false)
     useEffect(() => {
         fetchSurveyData(surveyId);
         loadProgress();
@@ -137,7 +138,16 @@ const TEISurveyResponseQuestions = () => {
     return (
         <>
             {activeStep === 111 ? (
-                <TEISurvey setstaffid={setstaffid} stepUPSendValue={getValueFromIdComponent}  sendIdParent={sendIdParent} />
+              
+
+
+                !showOtpScreen ? (
+   
+                   <TEISurvey setstaffid={setstaffid} showOtpScreen={setshowOtpScreen}  sendIdParent={sendIdParent} />
+                          )
+                          : showOtpScreen ? (
+                          <OtpVerifyScreen stepUPSendValue={getValueFromIdComponent}  staffid={staffid} />
+                          )  :''
             ) : activeStep === data.dimensions.length ? (
                 <div className=' '>
                     <div className='d-flex justify-content-start flex-wrap gap-5 mb-4 m-0 p-4'>
