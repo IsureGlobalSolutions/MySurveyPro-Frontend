@@ -127,7 +127,7 @@ const SetReportValueHandler = (data) => {
     <div className="age-card rounded-3 border p-3 shadow bg-white">
  <div className="d-flex justify-content-between">
         <div className="title d-flex align-items-center m-0">
-            <div className=""><p className='m-0 pb-3'>Department </p></div>
+            <div className=""><h6 className='m-0 pb-3 fw-bold'>Department </h6></div>
             
         </div>
         <div className="d-flex align-items-center">

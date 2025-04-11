@@ -63,8 +63,8 @@ const ThankYouLunchSurvey = ({ setstepper, surveyId }) => {
     <>
      <div className="shadow rounded-4 bg-white w-100 m-2 d-flex justify-content-center py-5">
   <div className="container">
-    <div className="thanks-content d-flex flex-column flex-lg-row gap-4">
-      <div className="thanks-icon text-center d-flex align-items-center gap-3 col-12 col-lg-8">
+    <div className="thanks-content row gap-4">
+      <div className="thanks-icon text-center d-flex align-items-center gap-3 col-12 col-lg-7">
         <div className="text-survey-copy col-12 col-md-2">
           <p className="m-0 text-muted fs-4 fw-bold">Survey Link : </p>
         </div>
@@ -82,7 +82,7 @@ const ThankYouLunchSurvey = ({ setstepper, surveyId }) => {
     </div>
 
       </div>
-      <div className="thanks-info col-12 col-lg-4  col-md-5">
+      <div className="thanks-info col-12 col-lg-4  col-md-4">
         <img
           className="img-fluid"
           src={ThanksInfo}

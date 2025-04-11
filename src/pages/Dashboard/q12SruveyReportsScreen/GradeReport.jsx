@@ -152,10 +152,10 @@ showSelectedValues(selectedDashboardValues?.grade)
 
    <>
      <div className="row m-0 p-0 justify-content-between">
-         <div className="deparment-table-data col-md-7 p-0" >
-            <div className="mx-3 py-1 d-flex justify-content-between bg-white  shadow">
+         <div className="deparment-table-data col-md-7 p-0 pe-3" >
+            <div className="mx-3 py-1 d-flex justify-content-between bg-white rounded-top-3 me-0 shadow">
 
-                <div className="d-flex align-items-center  px-3" style={{borderRadius:'5px 5px 0px 0px'}}>
+                <div className="d-flex align-items-center  px-3 " style={{borderRadius:'5px 5px 0px 0px'}}>
     <div className="">
        <p className='ps-2 py-2 fs-6 fw-bold m-0 '>Grade Questions Report</p>
     </div>
@@ -169,7 +169,7 @@ showSelectedValues(selectedDashboardValues?.grade)
     </div>
              
         </div> 
-        <div className="col-md-3 col-sm-4">
+        <div className="col-md-3 col-sm-4 py-2 pe-2">
                    <DropdownButton items={listofGrades} listKeyName={'columnValue'} onSelect={handleSelect} selectionName={'All'}/>
 
         </div>

@@ -12,7 +12,7 @@ const NavbarValuesContext = ({ children }) => {
   const initialSelectedDashboardValues = {
     department: 'All',
     grade: 'All',
-    gender: 'male',
+    gender: 'Male',
     survey: { id: '', name: '' },
   };
 

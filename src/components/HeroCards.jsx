@@ -28,7 +28,7 @@ const HeroCards = () => {
   return (
     <>
      
-    <div className="border shadow py-3 px-2 my-3 mx-2 rounded-3 bg-white">
+    <div className="border shadow py-3 px-2 my-3 ms-3 rounded-3 bg-white me-0">
       <div className="row m-0">
         {/* Total Surveys Card */}
         <div className="col-12 col-sm-6 col-md-3 ">
@@ -39,7 +39,7 @@ const HeroCards = () => {
                   className="m-0 fw-semibold fs-5 text-nowrap"
                   style={{ color: "#9099A0" }}
                 >
-                  Total Surveys
+                  Total Respondents
                 </p>
                 <p
                   className="my-2 fs-3 fw-semibold"
@@ -66,7 +66,7 @@ const HeroCards = () => {
                   className="m-0 fw-semibold fs-5 text-nowrap"
                   style={{ color: "#9099A0" }}
                 >
-                  Complete Survey
+                  Completed Responses
                 </p>
                 <p
                   className="my-2 fs-3 fw-semibold"

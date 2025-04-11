@@ -40,9 +40,9 @@ else{
    <>
       <div className="shadow rounded-4 bg-white m-2 w-100 d-flex justify-content-center py-5">
         <div className="launch-survey text-center">
-            <p className='h3 fw-light my-4'>Are you agree with the detailed survey? 
-            Launch Now.</p>
-            <img className='img-fluid' src={LunchServey} alt="" />
+            <h3 className='fw-light my-4'>Are you agree with the detailed survey? 
+            Launch Now.</h3>
+            <img className='img-fluid 'style={{width:"400px"}} src={LunchServey} alt="" />
             <div className="d-flex justify-content-center">
                 <WebsiteButton type='button' disabled={isLoading} onClick={launchSurvey}>
                 {isLoading? 'please Wait':'Launch Survey'}

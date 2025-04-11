@@ -168,8 +168,8 @@ showSelectedValues(selectedDashboardValues?.department)
     <>
     
       <div className="row m-0 p-0 justify-content-between">
-        <div className="deparment-table-data col-md-7 p-0" >
-          <div className="mx-3 py-1 d-flex justify-content-between bg-white  shadow">
+        <div className="deparment-table-data col-md-7 p-0 pe-3" >
+          <div className="mx-3 py-1 d-flex justify-content-between bg-white rounded-top-3 shadow me-0">
 
             <div className="d-flex align-items-center  px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
               <div className="">
@@ -186,7 +186,7 @@ showSelectedValues(selectedDashboardValues?.department)
     </div>
 
             </div>
-            <div className="col-md-3 col-sm-4">
+            <div className="col-md-3 col-sm-4 py-2 pe-2">
 
                   <DropdownButton items={listOfDepartment} listKeyName={'columnValue'} onSelect={handleSelect} selectionName={'All'}/>
             </div>

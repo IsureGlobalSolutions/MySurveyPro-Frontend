@@ -4,7 +4,7 @@ import './dash-screen.css'
 
 import HeroCards from '../../../components/HeroCards';
 import { useDispatch, useSelector } from 'react-redux';
-import {  downloadOverAllSurveyReport, getAllSurveyList, getOverAllSurveyReport } from '../../../Redux/slice/surveySlice';
+import { downloadOverAllSurveyReport, getAllSurveyList, getOverAllSurveyReport } from '../../../Redux/slice/surveySlice';
 import SurveyTable from '../../../components/table/SurveyTable';
 import DepartmentReport from './DepartmentReport';
 import GradeReport from './GradeReport';
@@ -66,7 +66,7 @@ const index = () => {
 
   //get over all survey report data
   useEffect(() => {
-    if (selectedDashboardValues?.survey?.id && paymentStatus[selectedDashboardValues?.survey?.id].paymentStatus===true) {
+    if (selectedDashboardValues?.survey?.id && paymentStatus[selectedDashboardValues?.survey?.id].paymentStatus === true) {
 
       setisLoading(true)
       dispatch(getOverAllSurveyReport({ surveyId: selectedDashboardValues?.survey?.id }))
@@ -135,7 +135,7 @@ const index = () => {
       null
     :
     null
-console.log('data',data);
+  console.log('data', data);
 
 
   const downloadReport = () => {
@@ -162,9 +162,9 @@ console.log('data',data);
     <>
       <HeroCards />
       {/* dashboard screen  */}
- 
+
       <div className="">
-        <div className="px-3">
+        <div className="px-3 pe-0">
           <div className="bg-white d-flex   shadow  px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
             <div className="">
               <p className='ps-2 py-2 fs-6 fw-bold m-0 '>OverAll Survey Report</p>
@@ -211,53 +211,53 @@ console.log('data',data);
 
       </div>
 
-      <DepartmentReport />  
-      <div className="row m-0 p-0 mb-4">
-        <div className="col-md-6">  
-            <DepartMultiBarChart/>
-          
+      <DepartmentReport />
+      <div className="row m-0 p-0 mb-3">
+        <div className="col-md-6 ps-3">
+          <DepartMultiBarChart />
+
         </div>
-        <div className="col-md-6">
-        <DepartStackColumnChart/>
+        <div className="col-md-6 m-0 p-0">
+          <DepartStackColumnChart />
         </div>
       </div>
-      <div className="row m-0 p-0 mb-4">
-        <div className="col-md-6">
-         
- <DepartLineChart/> 
+      <div className="row m-0 p-0 mb-3">
+        <div className="col-md-6 ps-3">
+
+          <DepartLineChart />
         </div>
-        <div className="col-md-6">
-        <DepartFunnelChart/>
+        <div className="col-md-6 m-0 p-0">
+          <DepartFunnelChart />
 
         </div>
       </div>
-      
+
       <GradeReport />
 
-      <div className="row m-0 p-0 mb-4">
-        <div className="col-md-6">  
-            <GradeMultiBarChart/>
-          
+      <div className="row m-0 p-0 mb-3">
+        <div className="col-md-6 ps-3">
+          <GradeMultiBarChart />
+
         </div>
-        <div className="col-md-6">
-        <GradeStackColumnChart/>
+        <div className="col-md-6 m-0 p-0">
+          <GradeStackColumnChart />
         </div>
       </div>
-      <div className="row m-0 p-0 mb-4">
+      <div className="row m-0 p-0 mb-3">
         <div className="col-md-6">
-         
- <GradetLineChart/> 
+
+          <GradetLineChart />
         </div>
-        <div className="col-md-6">
-        <GradeFunnelChart/>
+        <div className="col-md-6 m-0 p-0">
+          <GradeFunnelChart />
 
         </div>
       </div>
       <GenderReport />
-    
-      
-     
-      
+
+
+
+
       {/* <Charts/> */}
     </>
   )

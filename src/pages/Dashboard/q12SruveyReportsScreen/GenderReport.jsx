@@ -15,8 +15,8 @@ const GenderReport = () => {
     const [isloading, setisloading] = useState(false)
     const {selectedDashboardValues,DashboardStateHandler}=Navbarvalue()
 const listOfGender=[
- { columnValue:'male'},
- {columnValue:'female'}
+ { columnValue:'Male'},
+ {columnValue:'Female'}
 ]
     const dispatch = useDispatch()
     const questionLabel = 'Questions';
@@ -36,7 +36,7 @@ const listOfGender=[
     useEffect(()=>{
       if(selectedDashboardValues?.survey?.id && paymentStatus[selectedDashboardValues?.survey?.id].paymentStatus===true ){
 
-   showSelectedValues('male')
+   showSelectedValues('Male')
 }
       
       
@@ -138,9 +138,9 @@ toast.error('data not Found')
         <>
             <div className=" m-0 p-0 justify-content-between">
                 <div className="deparment-table-data  p-0" >
-                    <div className="mx-3 py-1 d-flex justify-content-between bg-white  shadow">
+                    <div className="mx-3 py-1 d-flex justify-content-between bg-white rounded-top-3 shadow me-0">
 
-                        <div className="d-flex align-items-center  px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
+                        <div className="d-flex align-items-center  px-3 pe-0" style={{ borderRadius: '5px 5px 0px 0px' }}>
                             <div className="">
                                 <p className='ps-2 py-2 fs-6 fw-bold m-0 '>Gender Questions Report</p>
                             </div>
@@ -154,8 +154,8 @@ toast.error('data not Found')
     </div>
 
                         </div>
-                        <div className="col-md-3 col-sm-4">
-                           <DropdownButton items={listOfGender} listKeyName={'columnValue'} onSelect={handleSelect} selectionName={'male'}/>
+                        <div className="col-md-3 col-sm-4 py-2 pe-2">
+                           <DropdownButton items={listOfGender} listKeyName={'columnValue'} onSelect={handleSelect} selectionName={'Male'}/>
 
                         </div>
                     </div>

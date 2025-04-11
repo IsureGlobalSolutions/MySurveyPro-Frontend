@@ -164,8 +164,8 @@ const index = () => {
       {/* dashboard screen  */}
  
       <div className="">
-        <div className="px-3">
-          <div className="bg-white d-flex   shadow  px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
+        <div className="px-3 pe-0">
+          <div className="bg-white d-flex   shadow  px-3 " style={{ borderRadius: '5px 5px 0px 0px' }}>
             <div className="">
               <p className='ps-2 py-2 fs-6 fw-bold m-0 '>OverAll Survey Report</p>
             </div>
@@ -212,7 +212,7 @@ const index = () => {
       </div>
 
       <DepartmentReport />  
-      <div className="row m-0 p-0 mb-4">
+      <div className="row m-0 p-0 mb-3">
         <div className="col-md-6">  
             <DepartMultiBarChart/>
           
@@ -221,7 +221,7 @@ const index = () => {
         <DepartStackColumnChart/>
         </div>
       </div>
-      <div className="row m-0 p-0 mb-4">
+      <div className="row m-0 p-0 mb-3">
         <div className="col-md-6">
          
  <DepartLineChart/> 
@@ -234,7 +234,7 @@ const index = () => {
       
       <GradeReport />
 
-      <div className="row m-0 p-0 mb-4">
+      <div className="row m-0 p-0 mb-3">
         <div className="col-md-6">  
             <GradeMultiBarChart/>
           
@@ -243,7 +243,7 @@ const index = () => {
         <GradeStackColumnChart/>
         </div>
       </div>
-      <div className="row m-0 p-0 mb-4">
+      <div className="row m-0 p-0 mb-3">
         <div className="col-md-6">
          
  <GradetLineChart/> 

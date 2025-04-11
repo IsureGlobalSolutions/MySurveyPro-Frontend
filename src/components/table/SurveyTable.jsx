@@ -99,8 +99,8 @@ const SurveyTable = ({
   };
   return (
     <>
-      <div className="pb-3 px-3">
-        <Paper style={{ height: 350, width: "100%", borderRadius: "0px" }}>
+      <div className="pb-3 px-3 pe-0">
+        <Paper style={{ height: 350, width: "100%", borderRadius: "0px 0px 10px 10px" }}>
           {isLoading ? (
             <div className="loader-div d-flex justify-content-center align-items-center h-100">
               <Loader />
@@ -111,6 +111,7 @@ const SurveyTable = ({
               components={VirtuosoTableComponents}
               fixedHeaderContent={() => fixedHeaderContent(columns)}
               itemContent={(index, row) => rowContent(columns, index, row)}
+              style={{borderRadius: "0px 0px 10px 10px"}}
             />
           )}
         </Paper>
