@@ -19,10 +19,7 @@ import PreviewModalOfCustomSurvey from "../survey/CustomeSurvey/PreviewModalOfCu
 import { MdDeleteForever, MdErrorOutline } from "react-icons/md";
 import { Modal } from "react-bootstrap";
 import { HiMiniViewfinderCircle } from "react-icons/hi2";
-import { LiaEditSolid } from "react-icons/lia";
-// import { GrFormView } from "react-icons/gr";
-import { MdOutlinePlaylistAddCheck } from "react-icons/md";
-import SurveyRunner from "../survey/CustomeSurvey/SurveyRunner";
+
 const Surveylist = ({ setstepper, sendIdToParent }) => {
   const {
     StapperHandler,
@@ -35,6 +32,7 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
   const [surveyListData, setsurveyListData] = useState([]);
   const [customSurveyList, setcustomSurveyList] = useState([])
   const { surveysList } = useSelector((state) => state.survey);
+  console.log("🚀 ~ Surveylist ~ surveysList:", surveysList)
   const [isLoading, setisLoading] = useState(false)
   const [openModal, setopenModal] = useState(false)
   const { listOfCustomSurvey } = useSelector((state) => state.customSurvey);
@@ -120,7 +118,20 @@ const handleCustomCheckboxClick =(item) => {
             PreviewSurveylink: "/TEITemplate",
             // Surveylink:"/TEIsurvey",
           };
+        }else if (element.name === "EA") {
+          return{
+               img: form360img,
+          title: element.name,
+          id: element.id,
+        text: "Start your survey by clicking the 'View Survey'",
+          buttonviewsurvey: "View Survey",
+          buttonusersurvey: "Use Survey",
+          PreviewSurveylink: "/EATemplate",
+        
+          }
+       
         }
+
         return null;
       });
       setsurveyListData(formattedData.filter(Boolean)); // Remove null entries

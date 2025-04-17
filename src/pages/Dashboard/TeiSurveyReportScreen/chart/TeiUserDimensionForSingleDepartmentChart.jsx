@@ -7,7 +7,6 @@ import DropdownButton from '../../../../components/mySurveyProWebsiteBtn/Dropdow
 import { getListOfCoumnProperty } from '../../../../Redux/slice/surveySlice';
 import { Navbarvalue } from '../../../../context/NavbarValuesContext';
 import { getDepartmentDimensionsTEISurveyReportApi } from '../../../../Redux/slice/teiSlice';
-import { divide } from 'lodash';
 
 const TeiUserDimensionForSingleDepartmentChart = () => {
   const dispatch = useDispatch();

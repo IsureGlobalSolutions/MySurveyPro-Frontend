@@ -17,7 +17,6 @@ const { selectedDashboardValues } = Navbarvalue()
 const [departmentList, setdepartmentList] = useState([])
 const {listOfDepartments}=useSelector((state)=>state.survey)
   const {  userSingleDimensionForSingleDepartmentReportList } = useSelector((state) => state.teiSurvey);
-  console.log("🚀 ~ DepartmentDimensionQuestionResult ~ userSingleDimensionForSingleDepartmentReportList:", userSingleDimensionForSingleDepartmentReportList)
 
 
 
