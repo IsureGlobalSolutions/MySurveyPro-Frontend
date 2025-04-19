@@ -26,7 +26,7 @@ const PreviewQuestion = () => {
     const [activeStep, setActiveStep] = useState(111);
     const fetchSurveyData = async (surveyid) => {
         try {
-            const res = await dispatch(getSurveyById(surveyid));
+            const res = await dispatch(getSurveyById({surveyId:surveyid}));
             setData(res?.payload?.questions || []);
         } catch (error) {
             toast.error(error)
