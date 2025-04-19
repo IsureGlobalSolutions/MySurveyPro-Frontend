@@ -128,9 +128,11 @@ export const signout = createAsyncThunk('authentication/signout', async (_, thun
     return thunkAPI.rejectWithValue(message);
   }
 });
-export const getSurveyById = createAsyncThunk('Survey/getSurveyById', async (surveyid, thunkAPI) => {
+export const getSurveyById = createAsyncThunk('Survey/getSurveyById', async ({surveyId,surveyTypeId}, thunkAPI) => {
   try {
-    const res = await instance.get(`api/Survey/GetCompleteSurveyById/${surveyid}`);
+    const res = await instance.get(`api/Survey/GetCompleteSurveyById`,{
+      params: { surveyId, surveyTypeId},
+    });
     return res.data;
 
   } catch (error) {

@@ -20,13 +20,12 @@ import img3 from "../../../../assets/Q12survey/Figon_Component.png";
 const TEIPreviewQuestion = () => {
   const dispatch = useDispatch();
   const TEISurveyId = useSelector((state) => state.user.selectedSurveyId);
-  console.log("🚀 ~ TEIPreviewQuestion ~ TEISurveyId:", TEISurveyId);
   const [data, setData] = useState([]);
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(111);
   const fetchSurveyData = async (TEISurveyId) => {
     try {
-      const res = await dispatch(getSurveyById(TEISurveyId));
+      const res = await dispatch(getSurveyById({surveyId:TEISurveyId}));
       setData(res?.payload);
       console.log("res.payload", res.payload);
     } catch (error) {
@@ -34,8 +33,7 @@ const TEIPreviewQuestion = () => {
     }
   };
   useEffect(() => {
-    console.log("🚀 ~ TEIPreviewQuestion ~ TEISurveyId updated:", TEISurveyId);
-    if (TEISurveyId) {
+     if (TEISurveyId) {
       fetchSurveyData(TEISurveyId);
     } else {
       toast.error("Survey ID not found");
