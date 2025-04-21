@@ -41,7 +41,7 @@
 }
 .templateSignup-input::placeholder{
     color: grey;
-    font-family: var(--font-lato);
+    font-family: var(--font-poppins);
     font-size: 18px;
 }
 .templateSignup-input:focus{

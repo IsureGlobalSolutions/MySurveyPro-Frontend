@@ -63,7 +63,7 @@
   text-align: left;
   font-size: var(--font-size-3xl);
   color: var(--color-midnightblue);
-  font-family: var(--font-lato);
+  font-family: var(--font-poppins);
 }
 .navigation {
   /* width: 545px; */
@@ -186,7 +186,7 @@
   text-align: left;
   font-size: var(--font-size-3xl);
   color: var(--color-midnightblue);
-  font-family: var(--font-lato);
+  font-family: var(--font-poppins);
 }
 .header {
   width: 100%;
@@ -213,7 +213,7 @@
 .sidbar-item-list .sidbar-item{
   list-style: none;
   padding: 20px 10px;
-  font-family: var(--font-lato);
+  font-family: var(--font-poppins);
   font-weight: bold;
   color: #f5f5f5;
 }

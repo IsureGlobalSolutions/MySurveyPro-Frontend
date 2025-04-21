@@ -66,7 +66,7 @@
   line-height: 150%;
   text-transform: capitalize;
   display: inline-block;
-  font-family: var(--font-lato);
+  font-family: var(--font-poppins);
   color: var(--color-white);
   text-align: center;
   min-width: 79px;
@@ -114,7 +114,7 @@
   text-align: left;
   font-size: var(--font-size-15xl);
   color: var(--color-white);
-  font-family: var(--font-lato);
+  font-family: var(--font-poppins);
 }
 @media screen and (max-width: 800px) {
   .looking-for-targeted {

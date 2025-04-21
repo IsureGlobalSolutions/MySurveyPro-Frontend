@@ -128,7 +128,7 @@ margin: 0px 0px 5px 10px;
     text-align: left;
     font-size: var(--font-size-29xl);
     color: var(--color-black);
-    font-family: var(--font-lato);
+    font-family: var(--font-poppins);
   }
   .contact-form-title{
     font-size: 36px;

@@ -220,7 +220,7 @@
   text-align: left;
   font-size: var(--font-size-xl);
   color: var(--color-midnightblue);
-  font-family: var(--font-lato);
+  font-family: var(--font-poppins);
 }
 @media screen and (max-width: 1350px) {
   .footer {

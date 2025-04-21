@@ -7,21 +7,31 @@
     align-items: center;
     padding: 20px; 
     box-sizing: border-box; 
+    background-image: url("../../assets/login-and-signup/login_background.png");
+    background-size: cover; /* Cover the entire container */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent repeating the background image */
+    height: 100vh; /* Set height to 100vh to cover the full viewport height */
 }
 
 /* Define styles for the card */
 .card-login {
-    border-top: 10px solid #1F8BD4;
+    
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    max-width: 100%; 
+    /* max-width: 100%;  */
     max-height: 100%;
     overflow-y: auto; 
+    border-radius: 15px;
     background-color: #fff;
 }
 
 /* Define styles for the card body */
 .login-card-body {
     width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 15px;
+    background-color: #fff;
+    padding: 0px 30px;
 }
 
 /* Define styles for the login visuals container */
@@ -35,7 +45,7 @@
 
 /* Define styles for the login content container */
 .login-content {
-    padding: 90px 60px;
+    padding: 30px 0px;
     box-sizing: border-box;
 }
 
@@ -45,23 +55,31 @@
     justify-content: center;
     align-items: center;
     margin-top: 40px;
+    width: 100%;
 }
 
 /* Define styles for the welcome text */
 .welcome-text {
     margin: 0px;
-    font-family: var(--font-lato);
-    font-weight: 700;
-    line-height: 1.5; /* Use a relative line-height */
-    font-size: 2rem; /* Use relative units for font size */
-    color: #7E0077;
+    font-family: var(--font-poppins);
+    
+   
+   
     margin-bottom: 20px; /* Reduce margin for better spacing on small screens */
+
+  
+font-weight: 500;
+font-size: 50px;
+line-height: 100%;
+letter-spacing: 0%;
+vertical-align: middle;
+
 }
 
 /* Define styles for the account creation suggestion */
 .account-creation-suggestion {
-    color: var(--color-midnightblue);
-    font-size: 1rem;
+    color: #878D96;
+    font-size: 16px;
     line-height: 1.5;
     font-weight: 400;
     margin: 5px 0px;
@@ -69,19 +87,11 @@
 
 /* Define styles for the account creation suggestion span */
 .account-creation-suggestion span {
-    color: var(--color-darkorange);
+    color: #3B5BE4;;
     cursor: pointer;
+    font-weight: 600;
 }
 
-/* Define styles for input space */
-.input-space {
-    margin: 15px 0px;
-}
-
-/* Define styles for secondary input space */
-.input-space-2 {
-    margin: 15px 0px 0px 0px;
-}
 
 /* Define styles for the info image */
 .info-image {
@@ -99,8 +109,8 @@
     margin: 0px;
     line-height: 1.5;
     font-size: 1rem;
-    color: var(--color-darkorange);
-    margin-bottom: 10px;
+    color: #3B5BE4;
+    margin-bottom: 5px;
     cursor: pointer;
 }
 

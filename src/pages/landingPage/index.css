@@ -121,7 +121,7 @@ font-weight: 400;
   text-align: center;
   font-size: 52px;
   color: var(--color-midnightblue);
-  font-family: var(--font-lato);
+  font-family: var(--font-poppins);
 }
 
 .trust-section {
@@ -210,7 +210,7 @@ font-weight: 400;
   text-align: center;
   font-size: var(--font-size-41xl);
   color: #000;
-  font-family: var(--font-lato);
+  font-family: var(--font-poppins);
 }
 .my-survey-pro {
   width: 100%;
@@ -257,7 +257,7 @@ color: rgba(93, 93, 93, 1);
   border: 2px solid rgba(5, 70, 126, 1);
   border-radius: 10px;
   background-color:rgba(5, 70, 126, 1) ;
-  font-family: var(--font-lato);
+  font-family: var(--font-poppins);
   cursor: pointer;
   padding: 5px 20px 5px 20px;
   letter-spacing: 0.05em;
@@ -268,7 +268,7 @@ color: rgba(93, 93, 93, 1);
   border-radius: 10px;
   background-color:white;
   color: rgba(5, 70, 126, 1);
-  font-family: var(--font-lato);
+  font-family: var(--font-poppins);
 }
 .video-fluid {
   width: 80%; 
