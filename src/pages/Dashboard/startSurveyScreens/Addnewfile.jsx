@@ -39,7 +39,7 @@ const Addnewfile = ({  getUploadFile, closeModal, getFile}) => {
       setisLoading(true);
       const formdata = new FormData();
       formdata.append('file', uploadedFiles[0]);
-      if (surveyId === 1 || surveyId === 2) {
+      if (surveyId === 1 || surveyId === 2 || surveyId === 3) {
         formdata.append('surveyId', surveyId);
       } else {
         const customSurveyId=surveyId;

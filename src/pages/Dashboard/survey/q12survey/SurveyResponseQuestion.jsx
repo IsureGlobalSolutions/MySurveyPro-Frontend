@@ -42,7 +42,7 @@ const SurveyResponseQuestion = () => {
 
     const fetchSurveyData = async (surveyId) => {
         try {
-            const res = await dispatch(getSurveyById(surveyId));
+            const res = await dispatch(getSurveyById({surveyId}));
             setData(res?.payload.questions);
         } catch (error) {
             toast.error(error.message);

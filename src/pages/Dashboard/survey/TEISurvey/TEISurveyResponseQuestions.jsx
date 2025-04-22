@@ -30,7 +30,7 @@ const TEISurveyResponseQuestions = () => {
     const {userData} =useSelector((state)=>state.user)
     const [isLoading, setisLoading] = useState(false)
       const { userId, surveyId } = useParams();
-  console.log(userId, surveyId, 'params');
+
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(111);
     const [selectchoiseid, setselectchoiseid] = useState([]);
@@ -43,7 +43,7 @@ const [showOtpScreen, setshowOtpScreen] = useState(false)
 
     const fetchSurveyData = async (surveyId) => {
         try {
-            const res = await dispatch(getSurveyById(surveyId));
+            const res = await dispatch(getSurveyById({surveyId}));
             setData(res?.payload);
         } catch (error) {
             toast.error(error.message);

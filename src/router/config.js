@@ -26,6 +26,7 @@ const Setting=lazy (()=>import("../pages/Dashboard/setting/Setting.jsx"))
 const Surveylist= lazy(()=>import("../pages/Dashboard/surveylist/Surveylist.jsx"))
 const  Survey =lazy(()=>import("../pages/Dashboard/survey/q12survey/SurveyResponseQuestion.jsx"))
 const TEISurveyTemplate=lazy(()=>import("../pages/Dashboard/survey/TEISurvey/TEISurveyResponseQuestions.jsx"))
+const EASurveyTemplate=lazy(()=>import("../pages/Dashboard/survey/EASurvey/EASurveyResponseQuestions.jsx"))
 const Template=lazy(()=>import("../pages/Dashboard/templates/mp12template/PreviewQuestion.jsx"))
 const Paymentsuccess=lazy(()=>import ("../pages/Pricing/Success.jsx"))
 const Guidance =lazy(()=>import("../pages/Guidance/guidance.jsx"))
@@ -205,6 +206,12 @@ const config = [
   loginRequired:false,
   layout: PublicLayout,
   component:TEISurveyTemplate
+},
+{
+  path: '/EAsurvey/:userId/:surveyId*',
+  loginRequired:false,
+  layout: PublicLayout,
+  component:EASurveyTemplate
 },
 {
   path: '/thankupage',

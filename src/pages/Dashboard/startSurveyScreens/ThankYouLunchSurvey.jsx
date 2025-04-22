@@ -27,6 +27,7 @@ const ThankYouLunchSurvey = ({ setstepper, surveyId }) => {
   const q12text = `${FRONTEND_URL}/MP12survey/${id}/${surveyId}`;
   const TEItext = `${FRONTEND_URL}/TeamEffectivenessSurvey/${id}/${surveyId}`;
   const Customsurveytext = `${FRONTEND_URL}/CustomSurvey/${id}/${surveyId}`;
+  const EASurvey = `${FRONTEND_URL}/EAsurvey/${id}/${surveyId}`;
   const copyToClipboard = () => {
     if (surveyId === 2) {
       navigator.clipboard.writeText(TEItext).then(
@@ -46,7 +47,18 @@ const ThankYouLunchSurvey = ({ setstepper, surveyId }) => {
           console.error("Could not copy text: ", err);
         }
       );
-    } else {
+    } 
+    else if (surveyId === 3) {
+      navigator.clipboard.writeText(EASurvey).then(
+        () => {
+          setAbbrTitle("copied!");
+        },
+        (err) => {
+          console.error("Could not copy text: ", err);
+        }
+      );
+    }
+    else {
       navigator.clipboard.writeText(Customsurveytext).then(
         () => {
           setAbbrTitle("copied!");
@@ -70,10 +82,10 @@ const ThankYouLunchSurvey = ({ setstepper, surveyId }) => {
         </div>
         <div className="copylink-container">
         <p className="copylink-text">
-  {surveyId === 2
-    ? TEItext
-    : surveyId === 1
-      ? q12text
+  {surveyId === 2 ?
+     TEItext :
+     surveyId === 1 ?
+       q12text : surveyId === 3 ?EASurvey
       : Customsurveytext}
 </p>
       <Tooltip text={abbrTitle} style={{width:"150px"}}>

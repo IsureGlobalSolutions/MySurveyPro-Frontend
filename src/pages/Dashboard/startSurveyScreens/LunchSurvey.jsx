@@ -15,7 +15,7 @@ const LunchSurvey = ({setstepper,selectedFilesArray,surveyId}) => {
     if(selectedFilesArray.length>0 && surveyId){
       let params = { uniqueFileNames: selectedFilesArray };
 
-      if (surveyId === 1 || surveyId === 2) {
+      if (surveyId === 1 || surveyId === 2 || surveyId === 3) {
         params.surveyId = surveyId;
       } else {
         params.customSurveyId = surveyId;

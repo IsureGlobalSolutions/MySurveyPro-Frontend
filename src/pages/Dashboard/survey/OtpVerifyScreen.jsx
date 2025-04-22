@@ -8,7 +8,7 @@ import WebsiteButton from '../../../components/mySurveyProWebsiteBtn/WebsiteButt
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { ValidateRecipientOtpApi } from '../../../Redux/slice/authSlice';
-const OtpVerifyScreen = ({stepUPSendValue ,staffid}) => {
+const OtpVerifyScreen = ({stepUPSendValue ,staffid,getEAsurveydata}) => {
     const dispatch =useDispatch();
     const { register , handleSubmit , formState: { errors } } = useForm();
 
@@ -22,6 +22,7 @@ const OtpVerifyScreen = ({stepUPSendValue ,staffid}) => {
           if(res.payload.isSuccess===true){
             toast.success(res.payload.alertMessage)
             stepUPSendValue(0);
+            getEAsurveydata(res.payload) //this parameter is only user for EA survey 
          
           }else{
             toast.error(res.payload.alertMessage)

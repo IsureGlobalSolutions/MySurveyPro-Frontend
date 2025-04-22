@@ -27,7 +27,18 @@ const Pricing = () => {
     },
     {
       surveyName: 'MP12',
-      tagLine: 'Provides Q12-based employee engagement insights.',
+      tagLine: 'Provides MP12-based employee engagement insights.',
+      description: [
+        "<b>Tailored Employee Engagement Surveys</b> – Conduct MP12-based survey questions to match your organization’s culture.",
+        "<b>Comprehensive Analytics Dashboard</b> – Get detailed Overall, Department-wise, Grade-wise, and Gender-wise reports for meaningful insights.",
+        "<b>Algorithm-Driven Insights</b> – Gain accurate engagement trends using custom-built algorithms for precise analysis.",
+        "<b>Excel Export for Data Processing</b> – Download all reports in Excel format for further analysis.",
+        "<b>User-Based Data Access</b> – Provide secure, filtered access to HR Consultants and managers for better decision-making.",
+      ],
+    },
+    {
+      surveyName: 'EA',
+      tagLine: 'Provides Employee Assessment insights.',
       description: [
         "<b>Tailored Employee Engagement Surveys</b> – Conduct MP12-based survey questions to match your organization’s culture.",
         "<b>Comprehensive Analytics Dashboard</b> – Get detailed Overall, Department-wise, Grade-wise, and Gender-wise reports for meaningful insights.",
