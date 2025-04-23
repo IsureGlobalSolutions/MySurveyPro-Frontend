@@ -1,6 +1,6 @@
 
     
-    import React from 'react';
+    import React, { useState } from 'react';
     import './TEISurvey.css';
     import img1 from '../../../../assets/Q12survey/Q12surveystepperimg.png';
     import InputField from '../../../../components/mySurveyProInput/InputField';
@@ -15,22 +15,27 @@
         const dispatch =useDispatch();
         const { register , handleSubmit , formState: { errors } } = useForm();
         const { userId, surveyId } = useParams();
+        const [loading, setloading] = useState(false)
          const params = useParams();
           const onSubmit = async (data) => {
             const id = data.userid;
+            setloading(true)
             try {
              dispatch(getstaffid({surveyId:surveyId,employeeId:id, userId}))
             .then((res)=>{
               if(res.payload.isSuccess===true){
                 toast.success(res.payload.alertMessage)
+                setloading(false)
                 showOtpScreen(true);
                 sendIdParent(()=>res.payload.recipientId);
               }else{
                 toast.error(res.payload.alertMessage)
+                setloading(false)
               }
             })
             } catch (error) {
               toast.error(error.alertMessage);
+              setloading(false)
             }
           }
       return (
@@ -58,8 +63,9 @@
            
                 </div>
                 <div className=" col-md-12 t-4">
-                  <WebsiteButton className='w-100' type='submit' >
-                  Next
+                 
+                  <WebsiteButton className='w-100' type='submit' loading={loading}>
+                  {loading?" Loading" :'Next'}
                   </WebsiteButton>
                   </div>
 

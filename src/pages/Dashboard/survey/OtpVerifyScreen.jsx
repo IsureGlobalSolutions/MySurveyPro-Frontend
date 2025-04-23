@@ -8,28 +8,32 @@ import WebsiteButton from '../../../components/mySurveyProWebsiteBtn/WebsiteButt
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { ValidateRecipientOtpApi } from '../../../Redux/slice/authSlice';
+import { useState } from 'react';
 const OtpVerifyScreen = ({stepUPSendValue ,staffid,getEAsurveydata}) => {
     const dispatch =useDispatch();
     const { register , handleSubmit , formState: { errors } } = useForm();
-
+const [loading, setloading] = useState(false)
       const onSubmit = async (data) => {
         console.log("otp data", data);
-        
+        setloading(true)
         const id = data.otp;
         try {
           dispatch(ValidateRecipientOtpApi({recipientId:staffid,otp:id}))
           .then((res)=>{
           if(res.payload.isSuccess===true){
             toast.success(res.payload.alertMessage)
+            setloading(false)
             stepUPSendValue(0);
             getEAsurveydata(res.payload) //this parameter is only user for EA survey 
          
           }else{
             toast.error(res.payload.alertMessage)
+            setloading(false)
           }
         })
         } catch (error) {
           toast.error(error.alertMessage);
+          setloading(false)
         }
       }
   return (
@@ -57,11 +61,10 @@ const OtpVerifyScreen = ({stepUPSendValue ,staffid,getEAsurveydata}) => {
        
             </div>
             <div className=" col-md-5 t-4">
-              <WebsiteButton className='w-100' type='submit'   
-            //   style={{ backgroundColor: "#14A48B" }} 
-              >
-              Next
-              </WebsiteButton>
+      
+              <WebsiteButton className='w-100' type='submit' loading={loading}>
+                  {loading?" Loading" :'Next'}
+                  </WebsiteButton>
               </div>
                 </form>
            

@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './TEItemplate.css';
 import img1 from '../../../../assets/Q12survey/Q12surveystepperimg.png';
 import WebsiteButton from '../../../../components/mySurveyProWebsiteBtn/WebsiteButtton';
 import { useNavigate } from 'react-router-dom';
 const TEItemplate = ({  stepUPSendValue}) => {
+const [loading, setloading] = useState(false)
       const handleSubmit=() => {
         stepUPSendValue(0);
+        setloading(true)
+        
       }
   return (
     <div className='Q12-section m-5 d-flex justify-content-center align-items-center p-5'>
@@ -28,9 +31,10 @@ const TEItemplate = ({  stepUPSendValue}) => {
       />
             </div>
             <div className=" col-md-12 t-4">
-            <WebsiteButton className='w-100' type='button' onClick={handleSubmit}  >
-              Next
-              </WebsiteButton>
+          
+              <WebsiteButton className='w-100' type='button' onClick={handleSubmit} loading={loading}>
+                  {loading?" Loading" :'Next'}
+                  </WebsiteButton>
               </div>
             </div>
           </div>

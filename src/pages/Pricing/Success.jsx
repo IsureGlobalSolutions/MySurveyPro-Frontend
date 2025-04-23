@@ -67,7 +67,10 @@ const Success = () => {
           <h2>Payment Received!</h2>
 
           <Link to={`${isLoading ? '#' : '/pricing'}`} className="sidbar-item-link">
-            <WebsiteButton disabled={isLoading}> {isLoading ? 'Please Wait' : ' Back to Dashboard'}</WebsiteButton>
+       
+            <WebsiteButton className='w-100' type='submit' loading={isLoading}>
+                  {isLoading?" Loading" :'Back to Dashboard'}
+                  </WebsiteButton>
           </Link>
         </div>
       </div>

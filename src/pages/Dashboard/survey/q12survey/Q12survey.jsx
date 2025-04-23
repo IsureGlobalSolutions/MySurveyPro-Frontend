@@ -1,6 +1,6 @@
 
     
-    import React from 'react';
+    import React, { useState } from 'react';
     import './qsurvey.css';
     import img1 from '../../../../assets/Q12survey/Q12surveystepperimg.png';
     import InputField from '../../../../components/mySurveyProInput/InputField';
@@ -12,24 +12,29 @@
     import { useDispatch } from 'react-redux';
     const Q12survey = ({ sendIdParent,setshowOtpScreen}) => {
         const dispatch =useDispatch();
+        const [loading, setloading] = useState(false)
         const { register , handleSubmit , formState: { errors } } = useForm();
          const { userId, surveyId } = useParams();
 
           const onSubmit = async (data) => {
             const id = data.userid;
+            setloading(true)
             try {
               dispatch(getstaffid({surveyId:surveyId,employeeId:id, userId}))
               .then((res)=>{
               if(res.payload.isSuccess===true){
+                setloading(false)
                 toast.success(res.payload.alertMessage)
                setshowOtpScreen(true);
                 sendIdParent(()=>res.payload.recipientId);
               }else{
                 toast.error(res.payload.alertMessage)
+                setloading(false)
               }
             })
             } catch (error) {
               toast.error(error.alertMessage);
+              setloading(false)
             }
           }
       return (
@@ -57,8 +62,9 @@
            
                 </div>
                 <div className=" col-md-12 t-4">
-                  <WebsiteButton className='w-100' type='submit'>
-                  Next
+               
+                  <WebsiteButton className='w-100' type='submit' loading={loading}>
+                  {loading?" Loading" :'Next'}
                   </WebsiteButton>
                   </div>  
                   </form>

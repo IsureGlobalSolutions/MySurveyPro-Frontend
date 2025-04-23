@@ -24,6 +24,7 @@ import { useParams } from "react-router-dom";
 import TEICongratulation from "../TEISurvey/TEICongratulation";
 import OtpVerifyScreen from "../OtpVerifyScreen";
 import EASurvey from "./EASurvey";
+import EADepartmentSelection from "./EADepartmentSelection";
 
 const EASurveyResponseQuestions = () => {
   const dispatch = useDispatch();
@@ -144,47 +145,17 @@ const EASurveyResponseQuestions = () => {
   }
 
   if (showDepartmentSelection && otpScreenData) {
-    return (
-      <div className="department-selection-screen">
-        <h2>Select Department</h2>
-        <div className="department-list">
-          {otpScreenData.departments.map((dept) => (
-            <button
-              key={dept}
-              onClick={() => handleDepartmentSelect(dept)}
-              className={selectedDepartment === dept ? "selected" : ""}
-            >
-              {dept}
-            </button>
-          ))}
-        </div>
-
-        {selectedDepartment && (
-          <>
-            <h3>Select Employee from {selectedDepartment}</h3>
-            <div className="employee-list">
-              {otpScreenData.employees
-                .filter((emp) => emp.department === selectedDepartment)
-                .map((emp) => (
-                  <div
-                    key={emp.id}
-                    className={`employee-card ${
-                      selectedEmployee?.id === emp.id ? "selected" : ""
-                    }`}
-                    onClick={() => handleEmployeeSelect(emp)}
-                  >
-                    <h4>{emp.name}</h4>
-                    <p>Department: {emp.department}</p>
-                  </div>
-                ))}
-            </div>
-            <button onClick={handleEmployeeSubmit} disabled={!selectedEmployee}>
-              Submit Selection
-            </button>
-          </>
-        )}
-      </div>
-    );
+    return(
+      <EADepartmentSelection
+      departments={otpScreenData.departments}
+      employees={otpScreenData.employees}
+      onDepartmentSelect={handleDepartmentSelect}
+      onEmployeeSelect={handleEmployeeSelect}
+      onSubmit={handleEmployeeSubmit}
+      selectedDepartment={selectedDepartment}
+      selectedEmployee={selectedEmployee}
+    />
+    )
   }
 
   if (activeStep === data?.competencies?.length) {

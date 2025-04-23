@@ -131,12 +131,10 @@ dispatch(addUpdateCustomSurveyApi({
       <SurveyCreatorComponent creator={creator} />
 
       <div className="d-flex gap-3 justify-content-end py-3 me-2">
-        <WebsiteButton
-          
-          onClick={saveSurveyInServer}
-        >
-         {isLoading?'Loading...':'Save Survey'}
-        </WebsiteButton>
+      
+        <WebsiteButton className='w-100' type='submit' loading={isLoading} onClick={saveSurveyInServer}>
+                  {isLoading? " Loading" :'Save Survey'}
+                  </WebsiteButton>
         <WebsiteButton
          
           onClick={() => {

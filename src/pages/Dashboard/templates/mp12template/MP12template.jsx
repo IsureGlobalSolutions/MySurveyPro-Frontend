@@ -3,9 +3,13 @@ import './mp12template.css';
 import img1 from '../../../../assets/Q12survey/tb3.png';
 import WebsiteButton from '../../../../components/mySurveyProWebsiteBtn/WebsiteButtton';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
 const MP12template = ({  stepUPSendValue}) => {
+  const [loading, setloading] = useState(false)
       const handleSubmit=() => {
         stepUPSendValue(0);
+        setloading(true)
       }
   return (
     <div className='Q12-section m-5 d-flex justify-content-center align-items-center p-5'>
@@ -28,9 +32,10 @@ const MP12template = ({  stepUPSendValue}) => {
       />
             </div>
             <div className=" col-md-5 t-4">
-            <WebsiteButton className='w-100' type='button' onClick={handleSubmit}  >
-              Next
-              </WebsiteButton>
+            
+              <WebsiteButton className='w-100' type='button' onClick={handleSubmit} loading={loading}>
+                  {loading?" Loading" :'Next'}
+                  </WebsiteButton>
               </div>
             </div>
           </div>
