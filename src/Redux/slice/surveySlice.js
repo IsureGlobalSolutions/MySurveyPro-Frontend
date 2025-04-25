@@ -200,6 +200,15 @@ export const LaunchedSurveysStatusApi = createAsyncThunk('survey/LaunchedSurveys
     return thunkAPI.rejectWithValue(message);
   }
 });
+export const EASurveyResponseApi = createAsyncThunk('survey/EASurveyResponseApi', async (data, thunkAPI) => {
+  try {
+    const res = await axiosPrivate.post(`api/SurveyResponse/AddAssessmentSurveyResponse`, data);
+    return res.data;
+  } catch (error) {
+    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
 
 const initialState = {
   isLoading: false,
