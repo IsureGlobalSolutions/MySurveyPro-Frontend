@@ -1,5 +1,4 @@
 
-
 import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import PublicLayout from '../components/plugins/PublicLayout';

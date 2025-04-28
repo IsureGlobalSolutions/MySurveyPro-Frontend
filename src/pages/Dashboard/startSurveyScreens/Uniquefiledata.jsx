@@ -1,6 +1,8 @@
 import React from 'react';
 import './startsurvey.css'
 const Uniquefiledata = ({ Veiwdata, Filename }) => {
+  console.log("Veiwdata", Veiwdata);
+  
   return (
     <>
       <div className="card m-4">
@@ -31,7 +33,9 @@ const Uniquefiledata = ({ Veiwdata, Filename }) => {
           <thead>
             <tr>
               <th>Employee ID</th>
+              
               <th>Name</th>
+              <th>Email</th>
               <th>Department</th>
               <th>Designation</th>
               <th>Grade</th>
@@ -39,7 +43,11 @@ const Uniquefiledata = ({ Veiwdata, Filename }) => {
               <th>Age</th>
               <th>Gender</th>
               <th>DOJ</th>
+              <th>Location</th>
               <th>Status</th>
+              <th>Previous Job Title</th>
+              <th>Promotion Date</th>
+           
             </tr>
           </thead>
           <tbody>
@@ -52,14 +60,18 @@ const Uniquefiledata = ({ Veiwdata, Filename }) => {
                 >
                   <td>{data.employeeId}</td>
                   <td>{data.name}</td>
+                  <td>{data.email}</td>
                   <td>{data.department}</td>
-                  <td>{data.designation || "null"}</td>
+                  <td>{data.designation.title || "null"}</td>
                   <td>{data.grade || "null"}</td>
                   <td>{data.dob || "null"}</td>
                   <td>{data.age || "null"}</td>
                   <td>{data.gender || "null"}</td>
                   <td>{data.doj || "null"}</td>
+                  <td>{data.location || "null"}</td>
                   <td>{data.status || "null"}</td>
+                  <td>{data.previousJobTitle || "null"}</td>
+                  <td>{data.promotionDate || "null"}</td>
                 </tr>
               ))
             ) : (

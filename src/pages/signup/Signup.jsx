@@ -115,12 +115,11 @@ const SignupScreen = () => {
   };
 
   const handleSuccess = (response) => {
-    console.log("🚀 ~ handleSuccess ~ response:", response);
     const idToken = response.credential;
     const decodedToken = jwtDecode(idToken);
-    console.log("Decoded Token:", decodedToken);
-    console.log("ID Token:", idToken);
-    dispatch(Signinwithgoogle(idToken)).then((res) => {
+  
+    dispatch(Signinwithgoogle(idToken))
+    .then((res) => {
       if (res.payload.isSuccess) {
         toast.success("Login successful!");
         store.dispatch(updateAccessToken(res?.payload));

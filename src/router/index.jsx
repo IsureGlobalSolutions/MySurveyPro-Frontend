@@ -3,13 +3,12 @@ import {  Navigate, Route, Routes } from 'react-router-dom';
 
 // import { getAuthState } from '../utils/auth';
 import config from './config';
-import useAuth from '../hooks/useAuth';
 import RequireAuth from './RequireAuth.jsx';
 import PageNotFound from '../pages/PageNotFound/PageNotFound.jsx';
 
 const CustomRoute = ({ loginRequired = true, layout: Layout, component: Component }) => {
   
-const {auth}=useAuth()
+
 
 return (
   <Layout>

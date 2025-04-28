@@ -8,8 +8,8 @@ import { useDropzone } from 'react-dropzone';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { saveAs } from 'file-saver';
-import xlsxFile from '../../../assets/downloadable-files/RecipientsDetail.xlsx';
-import csvFile from '../../../assets/downloadable-files/RecipientsDetail.csv';
+import xlsxFile from '../../../assets/downloadable-files/survey_template.xlsx';
+import csvFile from '../../../assets/downloadable-files/survey_template.csv';
 import Tooltip from '../../../components/Tooltip/Tooltip';
 import Loader from '../../../components/plugins/Loader';
 
