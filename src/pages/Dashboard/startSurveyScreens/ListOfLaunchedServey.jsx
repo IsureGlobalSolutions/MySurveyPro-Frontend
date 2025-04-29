@@ -161,41 +161,34 @@ const ListOfLaunchedServey = () => {
   const handleDownloadClose = () => {
     setDownloadAnchorEl(null);
   };
-  const downloadReportHandler =  (surveyTypeId) => {
+
+
+  const downloadReportHandler = async (surveyTypeId) => {
     if (!selectedSurveyForDownload) return;
-    handleDownloadClose();
-    const surveyId = selectedSurveyForDownload.type === 'survey' 
-      ? selectedSurveyForDownload.surveyId 
-      : selectedSurveyForDownload.customSurveyId;
+         handleDownloadClose();
+
+         const surveyId = selectedSurveyForDownload.type === 'survey' 
+         ? selectedSurveyForDownload.surveyId 
+                : selectedSurveyForDownload.customSurveyId;
     try {
-       dispatch(EAsurveyReportDownload({
-        surveyId: surveyId, 
+      const response = await dispatch(EAsurveyReportDownload({
+        surveyId, 
         surveyTypeId: surveyTypeId, 
         format:'excel'
-      }))
-      .then((response)=>{ 
-         console.log("response", response);
-if(response?.payload?.isSuccess== false){
-  toast.error(response?.payload?.alertMessage)
-  return
-}
-else{
-  const fileName = surveyTypeId === 2 
-      ? 'supervisor_assessment_report.xlsx'
-      : 'employee_assessment_report.xlsx';
-      // Create a Blob URL directly
+      }));
+      
+  if(response?.meta?.requestStatus === 'rejected'){
+   toast.error('no data found');
+   return
+ }
       const url = window.URL.createObjectURL(new Blob([response.payload]));
       const link = document.createElement('a');
       link.href = url;
     
-      link.setAttribute('download', `${fileName}`);
+      link.setAttribute('download', `competencyAssessment_report.xlsx`);
       document.body.appendChild(link);
       link.click();
       link.remove();
-}
-      })
-    
-    
     } catch (error) {
       console.error('Download error:', error);
     }
