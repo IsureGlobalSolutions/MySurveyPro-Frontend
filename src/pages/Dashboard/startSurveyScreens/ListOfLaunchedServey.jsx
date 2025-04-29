@@ -4,6 +4,7 @@ import Loader from "../../../components/plugins/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import './Listoflaunchscreen.css';
 import {
+  EAsurveyReportDownload,
   getTotalNumberOfRespondent,
   LaunchedSurveysStatusApi,
   updatePaymentStatus,
@@ -22,6 +23,8 @@ import Analyze from "../../../assets/svgs/Analyze Icon.svg";
 import Surveyurl from "../../../assets/svgs/Url Icon2.svg";
 import Tooltip from "../../../components/Tooltip/Tooltip";
 import CustomeButton from "../../../components/mySurveyProWebsiteBtn/CustomeButton";
+import DownloadReportIcon from "../../../assets/dashboredsvg/downloadReportIcon.svg?react";
+import { saveAs } from 'file-saver';
 
 const ITEM_HEIGHT = 48;
 
@@ -137,6 +140,38 @@ const ListOfLaunchedServey = () => {
     setAnchorEl(null);
   };
 
+  // const downloadReportHandler = () => {
+  //   dispatch(EAsurveyReportDownload({surveyId:3,surveyTypeId:2,format:'excel'}))
+  //   .then((res) => {
+
+  //     const blob = new Blob([res?.payload], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  //     saveAs(blob, 'cAsurvey_supervisor_report.xlsx');
+  //   })
+  // }
+
+
+  const downloadReportHandler = async () => {
+    try {
+      const response = await dispatch(EAsurveyReportDownload({
+        surveyId: 3, 
+        surveyTypeId: 2, 
+        format:'excel'
+      }))
+      console.log("response", response);
+      
+      
+      // Create a Blob URL directly
+      const url = window.URL.createObjectURL(new Blob([response.payload]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `survey_report_employee.xlsx`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (error) {
+      console.error('Download error:', error);
+    }
+  }
   return (
     <>
       {isLoading ? (
@@ -225,7 +260,7 @@ const ListOfLaunchedServey = () => {
                               {responseData?.totalReceiver || 0} respondent
                             </td>
 
-                            <td className="pt-3">
+                            <td className="pt-3 g-2">
                               <Tooltip
                                 text={"Analyse results"}
                                 style={{ width: "140px" }}
@@ -271,25 +306,16 @@ const ListOfLaunchedServey = () => {
                                     handleClose("Survey Url", item)
                                   }
                                 />
+                              </Tooltip> 
+                              {
+                                item?.surveyName==='CA' &&
+                                 <Tooltip text={"Download Report"} style={{ width: "140px" }}>
+                                <DownloadReportIcon style={{cursor:'pointer',marginBottom:'2px' }} onClick={downloadReportHandler}/>
                               </Tooltip>
+                              }
+                             
 
-                              <Menu
-                                id="long-menu"
-                                MenuListProps={{
-                                  "aria-labelledby": "long-button",
-                                }}
-                                anchorEl={anchorEl}
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}
-                                slotProps={{
-                                  paper: {
-                                    style: {
-                                      maxHeight: ITEM_HEIGHT * 4.5,
-                                      width: "20ch",
-                                    },
-                                  },
-                                }}
-                              ></Menu>
+                             
                             </td>
                           </tr>
                         );

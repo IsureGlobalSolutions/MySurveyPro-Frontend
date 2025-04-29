@@ -19,7 +19,7 @@ const EAtemplateId = ({  stepUPSendValue,sendSurveyTypeId}) => {
         <div className='stepper row '>
           <div className='col-md-4 p-5 mt-3'>
             <div className='text'>
-              <h1>Preview Employee Assessment survey</h1>
+              <h1>Preview Competency Assessment survey</h1>
               <p>Please enter user id</p>
             </div>
             <div  className="g-4 mt-4 " >

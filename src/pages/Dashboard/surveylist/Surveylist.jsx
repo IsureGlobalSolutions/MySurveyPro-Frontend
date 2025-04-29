@@ -118,7 +118,7 @@ const handleCustomCheckboxClick =(item) => {
             PreviewSurveylink: "/TEITemplate",
             // Surveylink:"/TEIsurvey",
           };
-        }else if (element.name === "EA") {
+        }else if (element.name === "CA") {
           return{
                img: form360img,
           title: element.name,

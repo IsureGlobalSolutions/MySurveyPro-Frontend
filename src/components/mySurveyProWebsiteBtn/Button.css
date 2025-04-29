@@ -18,7 +18,7 @@
     font-weight: 600;
   }
   .website-button:hover {
-    background-color: var(--color-chocolate);
+    background-color: #0A42C2;
   }
   .website-button {
     /* padding-left: var(--padding-xl);
@@ -31,7 +31,8 @@
     cursor: pointer;
     border: 0;
     padding: var(--padding-3xs) var(--padding-27xl);
-    border:2px solid #3B5BE4;
+    
+    border: 0.87px solid #E6E7EA;
     background-color: white;
     border-radius: var(--br-81xl);
     overflow: hidden;
@@ -42,13 +43,13 @@
     justify-content: center;
     white-space: nowrap;
     /* width: 100%; */
-    color: #3B5BE4;
+    color: #031330;
     line-height: 28.8px;
     font-size: 18px;
     font-weight: 600;
   }
   .outliner-button:hover {
-    background-color: rgb(231, 231, 231);
+    background-color: #E2E0E0;
   }
   .website-button {
     /* padding-left: var(--padding-xl);

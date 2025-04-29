@@ -38,7 +38,7 @@ const Pricing = () => {
     },
     {
       surveyName: 'EA',
-      tagLine: 'Provides Employee Assessment insights.',
+      tagLine: 'Provides Competency Assessment insights.',
       description: [
         "<b>Tailored Employee Engagement Surveys</b> – Conduct MP12-based survey questions to match your organization’s culture.",
         "<b>Comprehensive Analytics Dashboard</b> – Get detailed Overall, Department-wise, Grade-wise, and Gender-wise reports for meaningful insights.",

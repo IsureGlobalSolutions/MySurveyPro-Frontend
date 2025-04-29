@@ -209,6 +209,18 @@ export const EASurveyResponseApi = createAsyncThunk('survey/EASurveyResponseApi'
     return thunkAPI.rejectWithValue(message);
   }
 });
+export const EAsurveyReportDownload = createAsyncThunk('survey/EAsurveyReportDownload', async ({surveyId,surveyTypeId,format}, thunkAPI) => {
+  try {
+    const res = await axiosPrivate.get(`api/ReportFileDownload/DownloadCompetencyDataDump`, {
+      params:{surveyId,surveyTypeId,format},
+      responseType: format === 'csv' ? 'text' : 'arraybuffer' // Critical change
+    });
+    return res.data;
+  } catch (error) {
+    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
 
 const initialState = {
   isLoading: false,

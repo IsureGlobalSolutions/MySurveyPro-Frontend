@@ -26,6 +26,7 @@ import OtpVerifyScreen from "../OtpVerifyScreen";
 import EASurvey from "./EASurvey";
 import EADepartmentSelection from "./EADepartmentSelection";
 import { EASurveyResponseApi } from "../../../../Redux/slice/surveySlice";
+import { set } from "lodash";
 
 const EASurveyResponseQuestions = () => {
   const dispatch = useDispatch();
@@ -90,6 +91,7 @@ const [loading, setloading] = useState(false)
   };
 
   const handleNext = async () => {
+    setloading(true)  
     // Check if all questions in current competency are answered
     const currentCompetency = data.competencies[activeStep];
     const unansweredQuestions = currentCompetency.questions.filter(
@@ -98,6 +100,7 @@ const [loading, setloading] = useState(false)
 
     if (unansweredQuestions.length > 0) {
       toast.error("Please answer all questions before proceeding");
+      setloading(false)
       return;
     }
 
@@ -130,11 +133,14 @@ const [loading, setloading] = useState(false)
 
       // Move to next step
       if (activeStep < data.competencies.length - 1) {
+        setloading(false)
         setActiveStep(activeStep + 1);
       } else {
+        setloading(false)
         setActiveStep(data.competencies.length);
       }
     } catch (error) {
+      setloading(false)
       toast.error("Failed to submit responses. Please try again.");
     }
   };
@@ -270,9 +276,28 @@ const [loading, setloading] = useState(false)
   const currentCompetency = data.competencies[activeStep];
 
   return (
-    <div className="">
-      <div className="d-flex justify-content-start flex-wrap gap-5 mb-4 m-0 p-4">
-        <div className="steppercard d-flex flex-column align-items-start w-100">
+    <div className="position-relative"> 
+       {loading && (
+        <div 
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent black
+            zIndex: 1000,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <Loader /> {/* Your loader component */}
+        </div>
+      )}
+      <div className={`d-flex justify-content-start flex-wrap gap-5 mb-4 m-0 p-4 ${loading ? 'opacity-50' : ''}`}>
+  
+           <div className="steppercard d-flex flex-column align-items-start w-100">
           <img
             src={img1}
             className="card-img img-fluid mb-5 "
@@ -388,19 +413,21 @@ const [loading, setloading] = useState(false)
                               </WebsiteButton>
                             }
                             backButton={
-                              <WebsiteButton>
-                                <Button
-                                  size="small"
+                              <WebsiteButton
+                                buttonDesign="outliner"
                                   onClick={handleBack}
                                   disabled={activeStep === 0}
-                                >
+                              >
+                              
+                                
+                                
                                   {theme.direction === "rtl" ? (
                                     <KeyboardArrowRight />
                                   ) : (
                                     <KeyboardArrowLeft />
                                   )}
                                   Back
-                                </Button>
+                              
                               </WebsiteButton>
                             }
                           />
@@ -413,6 +440,8 @@ const [loading, setloading] = useState(false)
             </div>
           </div>
         </div>
+        
+       
       </div>
     </div>
   );
