@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import '../TEItemplate/TEItemplate.css';
 import img1 from '../../../../assets/Q12survey/Q12surveystepperimg.png';
 import WebsiteButton from '../../../../components/mySurveyProWebsiteBtn/WebsiteButtton';
-import { set } from 'lodash';
 const EAtemplateId = ({  stepUPSendValue,sendSurveyTypeId}) => {
   const [surveyTypeId, setsurveyTypeId] = useState(1)
   console.log("🚀 ~ EAtemplateId ~ surveyTypeId:", surveyTypeId)
