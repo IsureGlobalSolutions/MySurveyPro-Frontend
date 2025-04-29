@@ -35,9 +35,9 @@ fill: #979797;
 }
 
 .active-sidebar {
-padding: 9px 5px 9px 18px;
+padding: 4px 4px 4px 18px;
 border-radius: 10px ;
-background: #F97300;
+background: #3B5BE4;
 box-shadow: 0px 20px 50px 0px #3745571A;
 color: #FFFFFF;
   }
@@ -82,7 +82,25 @@ color: #FFFFFF;
     gap: 0 !important;
 
 }
+.planButton{
+  width: 196;
+  height: 44;
+  top: 128px;
+  left: 16px;
+  gap: 8px;
+  border-radius: 70px;
+  border-width: 1px;
+  padding-top: 10px;
+  padding-right: 18px;
+  padding-bottom: 10px;
+  padding-left: 18px;
+  border: 1px solid #D5D7DA;
+  box-shadow: 0px 1px 2px 0px #0A0D120D;
 
+color: #1B2559;
+background: #FFFFFF;
+
+  }
 /* .container.collapsed .active  svg{
     fill: white;
     
@@ -107,9 +125,9 @@ color: #FFFFFF;
     overflow: hidden;
     white-space: nowrap;
 }
-.sidebarinner ul{
+/* .sidebarinner ul{
       padding-left: 1rem !important;
-}
+} */
 .container.collapsed ul{
     padding-left: 0.5rem !important;
 
@@ -121,6 +139,15 @@ color: #FFFFFF;
 .sidbar-item-link{
     text-decoration: none;
     list-style-type: none;
+   
+}
+.sidbar-item-link p{
+ 
+font-weight: 600;
+font-size: 12.25px;
+/* line-height: 100%; */
+letter-spacing: 0%;
+
 }
 .verticlenavbar ul{
     list-style: none;
@@ -177,8 +204,14 @@ color: #FFFFFF;
  
   }
   .text-small{
-    font-size: 16px;
-    font-weight: 600;
+    font-family: Poppins;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 28px;
+    letter-spacing: -2%;
+    text-align: center;
+    color: #FFFFFF;
+
   }
   .text-small.collapsed {
     font-size: 10px;
@@ -191,12 +224,32 @@ color: #FFFFFF;
   }
   
   .card-plan{
-     padding: 0 5px 0 5px;    
+    width: 228;
+height: 190;
+top: 351px;
+left: 31px;
+border-radius: 24px;
+background: linear-gradient(135deg, #868CFF 0%, #4318FF 100%);
+display: flex;
+flex-direction: column;
+justify-content: center;
+text-align: center;
+
+
+  
+  }
+  .text-small-paragraph{
+    font-family: Poppins;
+font-weight: 400;
+font-size: 12px;
+line-height: 24px;
+letter-spacing: -2%;
+text-align: center;
+color: #E9EDF7;
+
   }
   .text-small-paragraph.collapsed{
     /* display: none; */
     font-size: 10px;
   }
-  .card-width{
-    width: 46px;
-  }
+

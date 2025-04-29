@@ -4,9 +4,9 @@ import Surveyicon from '../../../assets/dashboredsvg/surveyicon.svg?react'
 import { RxCross1 } from "react-icons/rx";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import Logo from "../../../assets/svgs/logoWithTitle.svg?react";
 import { Navbarvalue } from '../../../context/NavbarValuesContext';
-import PaymentPlan from '../../../assets/Dashboredpng/paymentPlan.png'
-import CustomeButton from '../../../components/mySurveyProWebsiteBtn/CustomeButton';
+
 const Sidebar = ({ collapsed, setcollapsed }) => {
     const dispatch = useDispatch()
     const { DashboardNavValues, updateDashbaordNavValues, startSurveyHandler, StapperHandler } = Navbarvalue()
@@ -78,18 +78,18 @@ const Sidebar = ({ collapsed, setcollapsed }) => {
 
             <div className={`container sidebarinner ${collapsed ? 'collapsed' : ''}`}>
                 <div className='verticlenavbar d-flex flex-column'>
-                <ul className={` ${DashboardNavValues === 1 ? 'Mysurveypro p-2 pe-0 ' : ''} mb-4`}>
+                <ul className={`d-flex justify-content-center ${DashboardNavValues === 1 ? '  p-0 ' : ''} mb-4`}>
                         <li
                             onClick={moveToHome}
                         >
-                                <h1> Mysurveypro</h1>
+                              <Logo style={{width:"115px"}}/>
                         </li>
                     </ul>
                     <ul className={` ${DashboardNavValues === 1 ? 'active-sidebar  ' : ''} mb-4`}>
                         <li
                             onClick={() => handleButtonClick(1)}
                         >
-                            <Link className='d-flex sidbar-item-link justify-content-start gap-3 sidbar-text' to={'/startsurvey'} onClick={moveToHome}>
+                            <Link className='d-flex align-items-center sidbar-item-link justify-content-start gap-2 sidbar-text' to={'/startsurvey'} onClick={moveToHome}>
                                 <Surveyicon className="icon-fill" />
                                 <p>Start Survey</p>
 
@@ -97,20 +97,19 @@ const Sidebar = ({ collapsed, setcollapsed }) => {
                         </li>
                     </ul>
 
-                    <div className={`card-plan header border rounded-3 ${collapsed ? 'card-plan':' '}`}>
-                        <div className={`${collapsed ? 'card-width' : ''}`}>
-                            <div className="d-flex justify-content-start mb-2">
-                                <img src={PaymentPlan} width={40} className='pt-3' alt="" />
-                            </div>
+                    <div className={`card-plan   ${collapsed ? 'card-plan':' '}`}>
+                      
+                        
                             <small className={`text-small ${collapsed ? 'collapsed' : ''}`} >Get more with a paid plan</small>
-
-                            <li className='my-3'> <small className={`text-small-paragraph ${collapsed ? 'collapsed' : ''}`}>Use advanced question types</small></li>
+<br/>
+                          <small className={`text-small-paragraph my-3 ${collapsed ? 'collapsed' : ''}`}>Use advanced question types</small>
                             <div className="d-flex justify-content-center">
-                                <CustomeButton className='py-1 px-2 mb-2' onClick={()=>navigate('/pricing')}> 
-                                <small>Plans</small>
-                                </CustomeButton>
+                               
+                                <button className="planButton" type='button' onClick={()=>navigate('/pricing')}>
+                                    Get Plans Now
+                                </button>
                             </div>
-                        </div>
+                       
 
                     </div>
 
