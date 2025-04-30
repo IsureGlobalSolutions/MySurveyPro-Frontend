@@ -33,6 +33,12 @@ function App() {
   }, [currentPath, navigate]);
 
 
+  window.addEventListener('unhandledrejection', (event) => {
+    if (event.reason.message.includes('Failed to fetch dynamically imported module')) {
+      window.location.reload(true); // Force reload ignoring cache
+    }
+  });
+
   return (
     <>
       <GoogleOAuthProvider clientId="1035198617356-07e0vkaahbhrjn1e88mq71havfsacjm0.apps.googleusercontent.com">

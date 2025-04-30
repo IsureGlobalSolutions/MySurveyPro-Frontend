@@ -1,4 +1,4 @@
-import { Paper, TablePagination } from "@mui/material";
+import {  TablePagination } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Loader from "../../../components/plugins/Loader";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,9 +10,10 @@ import {
   updatePaymentStatus,
 } from "../../../Redux/slice/surveySlice";
 import NewSurvey from "../startSurveyScreens/index";
-import Menu from "@mui/material/Menu";
+
 import { Navbarvalue } from "../../../context/NavbarValuesContext";
 import { jwtDecode } from "jwt-decode";
+import { Paper, Menu, MenuItem } from "@mui/material";
 import {
   GetUserDetail,
   setSelectedSurveyId,
@@ -25,6 +26,8 @@ import Tooltip from "../../../components/Tooltip/Tooltip";
 import CustomeButton from "../../../components/mySurveyProWebsiteBtn/CustomeButton";
 import DownloadReportIcon from "../../../assets/dashboredsvg/downloadReportIcon.svg?react";
 import { saveAs } from 'file-saver';
+import toast from "react-hot-toast";
+import { set } from "lodash";
 
 const ITEM_HEIGHT = 48;
 
@@ -34,6 +37,9 @@ const ListOfLaunchedServey = () => {
   const [isLoading, setisLoading] = useState(false);
   const [responsesData, setresponsesData] = useState({});
   const [combinedSurveyData, setCombinedSurveyData] = useState([]); // Combined array for surveyResponse and customSurveyResponse
+  const [downloadAnchorEl, setDownloadAnchorEl] = useState(null);
+  const [selectedSurveyForDownload, setSelectedSurveyForDownload] = useState(null)
+  const [downloadLoading, setdownloadLoading] = useState(false)
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const {
@@ -149,27 +155,49 @@ const ListOfLaunchedServey = () => {
   //   })
   // }
 
+  const handleDownloadClick = (event, survey) => {
+    setDownloadAnchorEl(event.currentTarget);
+    setSelectedSurveyForDownload(survey);
+  };
 
-  const downloadReportHandler = async () => {
-    try {
+  const handleDownloadClose = () => {
+    setDownloadAnchorEl(null);
+  };
+
+
+  const downloadReportHandler = async (surveyTypeId) => {
+
+    if (!selectedSurveyForDownload) return;
+         handleDownloadClose();
+
+         const surveyId = selectedSurveyForDownload.type === 'survey' 
+         ? selectedSurveyForDownload.surveyId 
+                : selectedSurveyForDownload.customSurveyId;
+    try { 
+         setdownloadLoading(true)
       const response = await dispatch(EAsurveyReportDownload({
-        surveyId: 3, 
-        surveyTypeId: 2, 
+        surveyId, 
+        surveyTypeId: surveyTypeId, 
         format:'excel'
-      }))
-      console.log("response", response);
+      }));
       
-      
-      // Create a Blob URL directly
+  if(response?.meta?.requestStatus === 'rejected'){
+   toast.error('no data found');
+    setdownloadLoading(false) 
+   return
+ }
       const url = window.URL.createObjectURL(new Blob([response.payload]));
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', `survey_report_employee.xlsx`);
+    
+      link.setAttribute('download', `competencyAssessment_report.xlsx`);
       document.body.appendChild(link);
       link.click();
       link.remove();
+        setdownloadLoading(false)
     } catch (error) {
       console.error('Download error:', error);
+        setdownloadLoading(false)
     }
   }
   return (
@@ -309,9 +337,45 @@ const ListOfLaunchedServey = () => {
                               </Tooltip> 
                               {
                                 item?.surveyName==='CA' &&
-                                 <Tooltip text={"Download Report"} style={{ width: "140px" }}>
-                                <DownloadReportIcon style={{cursor:'pointer',marginBottom:'2px' }} onClick={downloadReportHandler}/>
+                                (downloadLoading ?( <i class="fa fa-circle-o-notch fa-spin text-primary"></i>)
+                                :
+                                  <>
+                                     <Tooltip text={"Download Report"} style={{ width: "140px" }}>
+                                <DownloadReportIcon style={{cursor:'pointer',marginBottom:'2px' }}
+                               onClick={(e) => handleDownloadClick(e, item)}
+                                 />
                               </Tooltip>
+                                 {/* Download Menu */}
+      <Menu
+        anchorEl={downloadAnchorEl}
+        open={Boolean(downloadAnchorEl)}
+        onClose={handleDownloadClose}
+        PaperProps={{
+          style: {
+            maxHeight: ITEM_HEIGHT * 4.5,
+            width: '250px',
+          },
+        }}
+      >
+        <MenuItem 
+          onClick={() => downloadReportHandler(2)}
+          sx={{ fontSize: '14px', padding: '10px 20px' }}
+        >
+          Supervisor Assessment Report
+        </MenuItem>
+        <MenuItem 
+          onClick={() => downloadReportHandler(1)}
+          sx={{ fontSize: '14px', padding: '10px 20px' }}
+        >
+          Employee Assessment Report
+        </MenuItem>
+      </Menu>
+      {/* ... (rest of your JSX) */}
+                                  </>
+                                )
+                              
+
+                              
                               }
                              
 

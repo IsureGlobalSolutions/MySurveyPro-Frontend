@@ -39,7 +39,7 @@ const [loading, setloading] = useState(false)
             </div>
           </div>
           <div className='col-md-8  mt-4 d-flex justify-content-end'>
-            <img src={img1} alt='image' className='img-fluid' />
+            <img src={img1} style={{width:"500px"}} alt='image' className='img-fluid' />
           </div>
         </div>
       </div>

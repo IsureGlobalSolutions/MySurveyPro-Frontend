@@ -213,12 +213,17 @@ export const EAsurveyReportDownload = createAsyncThunk('survey/EAsurveyReportDow
   try {
     const res = await axiosPrivate.get(`api/ReportFileDownload/DownloadCompetencyDataDump`, {
       params:{surveyId,surveyTypeId,format},
-      responseType: format === 'csv' ? 'text' : 'arraybuffer' // Critical change
+      responseType: 'arraybuffer'
     });
     return res.data;
   } catch (error) {
-    const message = error.response?.data?.alertMessage || error.message || error.toString();
+    if(error.response.meta.requestStatus==='rejected'){
+ const message = "No data Found";
     return thunkAPI.rejectWithValue(message);
+    }
+  
+    
+   
   }
 });
 

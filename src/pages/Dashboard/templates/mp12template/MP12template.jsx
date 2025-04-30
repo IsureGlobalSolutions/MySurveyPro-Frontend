@@ -40,7 +40,7 @@ const MP12template = ({  stepUPSendValue}) => {
             </div>
           </div>
           <div className='col-md-5   mt-4 d-flex justify-content-end'>
-            <img src={img1} alt='image' className='img-fluid' />
+            <img src={img1} style={{width:"500px"}} alt='image' className='img-fluid' />
           </div>
         </div>
       </div>
