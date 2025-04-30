@@ -37,7 +37,7 @@ const Pricing = () => {
       ],
     },
     {
-      surveyName: 'EA',
+      surveyName: 'CA',
       tagLine: 'Provides Competency Assessment insights.',
       description: [
         "<b>Tailored Employee Engagement Surveys</b> – Conduct MP12-based survey questions to match your organization’s culture.",
@@ -59,10 +59,15 @@ const Pricing = () => {
     setLoadingStates((prev) => ({ ...prev, [surveyId]: true }));
 
     try {
-      const res = await dispatch(paymentSurvey({ surveyId, surveyDescription: surveyName })).unwrap();
-      if (res?.url) {
-        window.location.replace(res.url);
-      }
+     
+        const res = await dispatch(paymentSurvey({ surveyId, surveyDescription: surveyName })).unwrap();
+        if (res?.url) {
+          window.location.replace(res.url);
+        }
+  
+   
+      
+      
     } catch (error) {
       toast.error('Something went wrong. Please try again.');
     } finally {

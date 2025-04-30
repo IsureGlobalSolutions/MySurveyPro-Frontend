@@ -27,6 +27,7 @@ import CustomeButton from "../../../components/mySurveyProWebsiteBtn/CustomeButt
 import DownloadReportIcon from "../../../assets/dashboredsvg/downloadReportIcon.svg?react";
 import { saveAs } from 'file-saver';
 import toast from "react-hot-toast";
+import { set } from "lodash";
 
 const ITEM_HEIGHT = 48;
 
@@ -38,6 +39,7 @@ const ListOfLaunchedServey = () => {
   const [combinedSurveyData, setCombinedSurveyData] = useState([]); // Combined array for surveyResponse and customSurveyResponse
   const [downloadAnchorEl, setDownloadAnchorEl] = useState(null);
   const [selectedSurveyForDownload, setSelectedSurveyForDownload] = useState(null)
+  const [downloadLoading, setdownloadLoading] = useState(false)
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const {
@@ -164,13 +166,15 @@ const ListOfLaunchedServey = () => {
 
 
   const downloadReportHandler = async (surveyTypeId) => {
+
     if (!selectedSurveyForDownload) return;
          handleDownloadClose();
 
          const surveyId = selectedSurveyForDownload.type === 'survey' 
          ? selectedSurveyForDownload.surveyId 
                 : selectedSurveyForDownload.customSurveyId;
-    try {
+    try { 
+         setdownloadLoading(true)
       const response = await dispatch(EAsurveyReportDownload({
         surveyId, 
         surveyTypeId: surveyTypeId, 
@@ -179,6 +183,7 @@ const ListOfLaunchedServey = () => {
       
   if(response?.meta?.requestStatus === 'rejected'){
    toast.error('no data found');
+    setdownloadLoading(false) 
    return
  }
       const url = window.URL.createObjectURL(new Blob([response.payload]));
@@ -189,8 +194,10 @@ const ListOfLaunchedServey = () => {
       document.body.appendChild(link);
       link.click();
       link.remove();
+        setdownloadLoading(false)
     } catch (error) {
       console.error('Download error:', error);
+        setdownloadLoading(false)
     }
   }
   return (
@@ -330,7 +337,8 @@ const ListOfLaunchedServey = () => {
                               </Tooltip> 
                               {
                                 item?.surveyName==='CA' &&
-                                (
+                                (downloadLoading ?( <i class="fa fa-circle-o-notch fa-spin text-primary"></i>)
+                                :
                                   <>
                                      <Tooltip text={"Download Report"} style={{ width: "140px" }}>
                                 <DownloadReportIcon style={{cursor:'pointer',marginBottom:'2px' }}
