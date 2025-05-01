@@ -1,6 +1,5 @@
 import React, { useState , useEffect , useRef } from 'react';
 import './Profilesetting.css'
-import profilebackgroundimg from '../../../assets/profilebackgroundimg.png'
 import WebsiteButton from '../../../components/mySurveyProWebsiteBtn/WebsiteButtton'
 import InputField from '../../../components/mySurveyProInput/InputField'
 import { useForm } from 'react-hook-form';
@@ -93,11 +92,9 @@ const handleInputChange = (e) => {
 };
   return (
     <div>
-        <div className="profile container mt-5 mb-5" >
-        <div className="m-5 mb-0 containe">
-        <div className="ms-3">
-          <h1>Profile Settings</h1>
-        </div>
+        <div className="profile " >
+        <div className=" mb-0 ">
+      
         <div className="row d-flex flex-wrap flex-column flex-lg-row ">
           <div className="col-md-6 col-10 mx-auto m-5 p-2 ">
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
@@ -139,9 +136,7 @@ profileAvatar
               </div>
             </div>
           </div>
-          <div className="col-md-6 col-10 mx-auto  d-flex justify-content-center">
-            <img src={profilebackgroundimg} className="img-fluid" alt="Profile Background" />
-          </div>
+         
         </div>
       </div>
       <div className='ms-5 mb-4'>

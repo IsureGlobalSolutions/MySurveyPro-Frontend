@@ -7,10 +7,11 @@ import { useSelector } from "react-redux";
 import { FRONTEND_URL } from "../../../consts/environments";
 import Tooltip from "../../../components/Tooltip/Tooltip";
 import WebsiteButton from "../../../components/mySurveyProWebsiteBtn/WebsiteButtton";
+import CustomeButton from "../../../components/mySurveyProWebsiteBtn/CustomeButton";
 import { Navbarvalue } from "../../../context/NavbarValuesContext";
 import "./startsurvey.css";
+import { IoIosArrowBack } from "react-icons/io";
 const ThankYouLunchSurvey = ({ setstepper, surveyId }) => {
-  console.log("🚀 ~ ThankYouLunchSurvey ~ surveyId:", surveyId);
   const {
     register,
     handleSubmit,
@@ -23,7 +24,6 @@ const ThankYouLunchSurvey = ({ setstepper, surveyId }) => {
   const { selectedDashboardValues, DashboardStateHandler } = Navbarvalue();
 
   const [surveytext, setsurveytext] = useState("");
-  console.log("🚀 ~ ThankYouLunchSurvey ~ surveytext:", surveytext);
   const q12text = `${FRONTEND_URL}/MP12survey/${id}/${surveyId}`;
   const TEItext = `${FRONTEND_URL}/TeamEffectivenessSurvey/${id}/${surveyId}`;
   const Customsurveytext = `${FRONTEND_URL}/CustomSurvey/${id}/${surveyId}`;
@@ -74,11 +74,21 @@ const ThankYouLunchSurvey = ({ setstepper, surveyId }) => {
   return (
     <>
      <div className="shadow rounded-4 bg-white w-100 m-2 d-flex justify-content-center py-5">
-  <div className="container">
-    <div className="thanks-content row gap-4">
-      <div className="thanks-icon text-center d-flex align-items-center gap-3 col-12 col-lg-7">
-        <div className="text-survey-copy col-12 col-md-2">
-          <p className="m-0 text-muted fs-4 fw-bold">Survey Link : </p>
+  <div className="container thanks-content-main">
+    <div className="thanks-content  ">
+       <div className="thanks-info ">
+        <img
+          className="img-fluid"
+          src={ThanksInfo}
+         style={{ width: "300px" }}
+          alt=""
+        />
+      </div>
+      <p className="congrates-title">Congratulations!</p>
+      <p className="congrates-title-2">You have launched survey</p>
+      <div className="thanks-icon  ">
+        <div className="text-survey-copy">
+          <p className="m-0 text-muted text-nowrap">Survey Link </p>
         </div>
         <div className="copylink-container">
         <p className="copylink-text">
@@ -94,16 +104,13 @@ const ThankYouLunchSurvey = ({ setstepper, surveyId }) => {
     </div>
 
       </div>
-      <div className="thanks-info col-12 col-lg-4  col-md-4">
-        <img
-          className="img-fluid"
-          src={ThanksInfo}
-          style={{ maxWidth: "100%", height: "auto" }}
-          alt=""
-        />
-      </div>
+     
     </div>
-    <div className="d-flex justify-content-center mt-4">
+    <div className="d-flex justify-content-center mt-4 gap-2">
+      <WebsiteButton buttonDesign="outliner" >
+<IoIosArrowBack className="me-2" />
+        Back to Dashboard
+      </WebsiteButton>
       <WebsiteButton onClick={() => setstepper(6)}> Summary </WebsiteButton>
     </div>
   </div>

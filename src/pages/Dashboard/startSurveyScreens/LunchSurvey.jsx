@@ -7,7 +7,6 @@ import toast from 'react-hot-toast'
 import { useState } from 'react'
 import './startsurvey.css'
 const LunchSurvey = ({setstepper,selectedFilesArray,surveyId}) => {
-  console.log("🚀 ~ LunchSurvey ~ surveyId:", surveyId)
   const [isLoading, setisLoading] = useState(false)
   const dispatch = useDispatch();
 
@@ -41,11 +40,12 @@ else{
    <>
       <div className="shadow rounded-4 bg-white m-2 w-100 d-flex justify-content-center py-5">
         <div className="launch-survey text-center">
-            <h3 className='fw-light my-4'>Are you agree with the detailed survey 1? 
+          <img className='img-fluid 'style={{width:"400px"}} src={LunchServey} alt="" />
+            <h3 className='launch-survey-text'>Are you agree with the detailed survey? 
             Launch Now.</h3>
-            <img className='img-fluid 'style={{width:"400px"}} src={LunchServey} alt="" />
+            
             <div className="d-flex justify-content-center">
-                <WebsiteButton type='button' disabled={isLoading} onClick={launchSurvey}>
+                <WebsiteButton className='mt-3' type='button' disabled={isLoading} onClick={launchSurvey}>
                 {isLoading? 'please Wait':'Launch Survey'}
             </WebsiteButton>
             </div>

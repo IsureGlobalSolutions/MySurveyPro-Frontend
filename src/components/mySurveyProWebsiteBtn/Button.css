@@ -82,18 +82,18 @@
     
     .website-button {
       padding: 10px !important; 
-      background-color: #3B5BE4; /* Use your defined variable */
-      border-radius: var(--br-81xl); /* Consistent border-radius */
-      border: none; /* Remove default border */
-      font-size: 15px; /* Maintain readability */
-      font-weight: 500; /* Medium font weight */
-      line-height: 1.5; /* Adjust line height for text alignment */
-      color: #ffffff; /* Accessible text color */
-      text-align: center; /* Center align text */
-      text-decoration: none; /* Remove underline if it's a link */
-      cursor: pointer; /* Pointer cursor for buttons */
-      display: inline-block; /* Prevent extra margin from surrounding elements */
-      transition: background-color 0.3s ease, transform 0.2s ease; /* Add hover effect */
+      background-color: #3B5BE4; 
+      border-radius: var(--br-81xl); 
+      border: none; 
+      font-size: 15px; 
+      font-weight: 500;
+      line-height: 1.5; 
+      color: #ffffff; 
+      text-align: center; 
+      text-decoration: none; 
+      cursor: pointer; 
+      display: inline-block; 
+      transition: background-color 0.3s ease, transform 0.2s ease; 
     }
     .outliner-button {
       padding: 2px 4px  0px 10px !important;
@@ -112,7 +112,7 @@
     cursor: pointer;
     border: 0;
     padding: var(--padding-3xs) var(--padding-27xl);
-    background-color: #4BA3FA;
+    background-color: #3B5BE4;
     border-radius: var(--br-81xl);
     overflow: hidden;
     display: flex;
@@ -126,6 +126,9 @@
     line-height: 28.8px;
     font-size: 18px;
     font-weight: 600;
+  }
+  .custom-website-button:hover {
+    background-color: #0A42C2;
   }
   /* Button.css */
 .website-button {

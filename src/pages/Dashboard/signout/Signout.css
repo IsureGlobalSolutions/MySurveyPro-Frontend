@@ -1,9 +1,34 @@
+.logout-screen-main{
+        background-image: url(../../../assets/Dashboredpng/background-gradiant.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+.logout-content .logout-title{
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 105%;
+        letter-spacing: 0%;
+            
+}
+.logout-content .logout-description{
+        font-family: Poppins;
+font-weight: 300;
+font-size: 15.48px;
+line-height: 100%;
+letter-spacing: 0%;
+color: #5E5E5E;
+
+}
 .signout{
-        border-radius: 20px ;
-        border: 1px solid #D7D7D7;
-        opacity: 0px;
-        background: #FFFFFF;
-        box-shadow: 0px 4px 14.7px 0px #00000026;
+      
+       
+       
 }
 .signout h1{
 font-size: 32px;

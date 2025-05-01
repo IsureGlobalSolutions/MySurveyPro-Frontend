@@ -12,7 +12,7 @@ import xlsxFile from '../../../assets/downloadable-files/survey_template.xlsx';
 import csvFile from '../../../assets/downloadable-files/survey_template.csv';
 import Tooltip from '../../../components/Tooltip/Tooltip';
 import Loader from '../../../components/plugins/Loader';
-
+import { GoDownload } from "react-icons/go";
 const csvText = 'Download template file to fill in required data. After filling out, upload it';
 const downloadText = 'Upload the file containing the required data for all individuals to whom the survey will be launched';
 
@@ -106,7 +106,8 @@ const Addnewfile = ({  getUploadFile, closeModal, getFile}) => {
                     }}
                     buttonDesign="outliner"
                   >
-                    Download CSV
+                    Download Sample File 
+<GoDownload/>
                   </WebsiteButton>
                 </Tooltip>
 

@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Logo from "../../../assets/svgs/logoWithTitle.svg?react";
 import { Navbarvalue } from '../../../context/NavbarValuesContext';
-
+import PlanCardIcon from '../../../assets/dashboredsvg/planCardIcon.svg?react';
 const Sidebar = ({ collapsed, setcollapsed }) => {
     const dispatch = useDispatch()
     const { DashboardNavValues, updateDashbaordNavValues, startSurveyHandler, StapperHandler } = Navbarvalue()
@@ -99,11 +99,16 @@ const Sidebar = ({ collapsed, setcollapsed }) => {
 
                     <div className={`card-plan   ${collapsed ? 'card-plan':' '}`}>
                       
-                        
-                            <small className={`text-small ${collapsed ? 'collapsed' : ''}`} >Get more with a paid plan</small>
-<br/>
-                          <small className={`text-small-paragraph my-3 ${collapsed ? 'collapsed' : ''}`}>Use advanced question types</small>
-                            <div className="d-flex justify-content-center">
+                        <div className='card-pan-vector '>
+                            <PlanCardIcon className="plan-card-icon" />
+                        </div>
+                        <div>
+                                              <p className='text-center'><small className={`text-small ${collapsed ? 'collapsed' : ''}`} >Get more with a paid plan</small></p> 
+<p  className='text-center'><small className={`text-small-paragraph  ${collapsed ? 'collapsed' : ''}`}>Use advanced question types</small></p>
+                        </div>
+         
+                          
+                            <div className="d-flex justify-content-center mb-3">
                                
                                 <button className="planButton" type='button' onClick={()=>navigate('/pricing')}>
                                     Get Plans Now

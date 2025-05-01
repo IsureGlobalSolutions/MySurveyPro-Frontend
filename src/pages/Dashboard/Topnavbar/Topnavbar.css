@@ -38,6 +38,23 @@
 .screen-title{
   display: block;
 }
+.screen-name .screen-title p{
+font-weight: 700;
+font-size: 34px;
+line-height: 42px;
+letter-spacing: -2%;
+color: #1F245E;
+
+}
+.screen-name .main-navigater p{
+  color: #707EAE;
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  
+}
 .topnav-search{
   display: block;
 }

@@ -1,4 +1,4 @@
-import {  TablePagination } from "@mui/material";
+import { TablePagination } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Loader from "../../../components/plugins/Loader";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +10,6 @@ import {
   updatePaymentStatus,
 } from "../../../Redux/slice/surveySlice";
 import NewSurvey from "../startSurveyScreens/index";
-
 import { Navbarvalue } from "../../../context/NavbarValuesContext";
 import { jwtDecode } from "jwt-decode";
 import { Paper, Menu, MenuItem } from "@mui/material";
@@ -20,14 +19,45 @@ import {
 } from "../../../Redux/slice/authSlice";
 import { store } from "../../../Redux/store";
 import { PiPlusBold } from "react-icons/pi";
-import Analyze from "../../../assets/svgs/Analyze Icon.svg";
-import Surveyurl from "../../../assets/svgs/Url Icon2.svg";
+import AnalyzeIcon from "../../../assets/svgs/Analyze Icon.svg?react";
+import Surveyurl from "../../../assets/svgs/Url Icon2.svg?react";
 import Tooltip from "../../../components/Tooltip/Tooltip";
 import CustomeButton from "../../../components/mySurveyProWebsiteBtn/CustomeButton";
 import DownloadReportIcon from "../../../assets/dashboredsvg/downloadReportIcon.svg?react";
 import { saveAs } from 'file-saver';
 import toast from "react-hot-toast";
-import { set } from "lodash";
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: '#E0E3E9',
+    color: theme.palette.common.black,
+    fontWeight: 600, // Header font weight 600
+    fontSize: '17px', // Font size 17px
+    fontFamily: 'Poppins, sans-serif', // Poppins font family
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: '17px', // Font size 17px for body
+    fontWeight: 400, // Record font weight 400
+    fontFamily: 'Poppins, sans-serif', // Poppins font family
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: '#F3F7FF',
+  },
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+  fontFamily: 'Poppins, sans-serif', // Apply Poppins to rows as well
+}));
 
 const ITEM_HEIGHT = 48;
 
@@ -36,7 +66,7 @@ const ListOfLaunchedServey = () => {
   const [page, setPage] = useState(0);
   const [isLoading, setisLoading] = useState(false);
   const [responsesData, setresponsesData] = useState({});
-  const [combinedSurveyData, setCombinedSurveyData] = useState([]); // Combined array for surveyResponse and customSurveyResponse
+  const [combinedSurveyData, setCombinedSurveyData] = useState([]);
   const [downloadAnchorEl, setDownloadAnchorEl] = useState(null);
   const [selectedSurveyForDownload, setSelectedSurveyForDownload] = useState(null)
   const [downloadLoading, setdownloadLoading] = useState(false)
@@ -50,9 +80,7 @@ const ListOfLaunchedServey = () => {
   } = Navbarvalue();
 
   const { surveyPaymentStatuses } = useSelector((state) => state.survey);
-
   const { userData } = useSelector((state) => state.user);
-
   const tokenValues = jwtDecode(userData?.accessToken);
 
   useEffect(() => {
@@ -68,29 +96,25 @@ const ListOfLaunchedServey = () => {
         const paymentStatusUpdates = {};
         const combinedData = [];
 
-        // Combine surveyResponse and customSurveyResponse
         const surveyResponse = res?.payload?.surveyResponse || [];
         const customSurveyResponse = res?.payload?.customSurveyResponse || [];
 
-        // Process surveyResponse
         surveyResponse.forEach((element) => {
           paymentStatusUpdates[element?.surveyId] = {
             paymentStatus: element?.surveyPaymentStatus,
           };
 
           if (element?.surveyLaunchStatus) {
-            combinedData.push({ ...element, type: 'survey' }); // Add type to distinguish between survey and custom survey
+            combinedData.push({ ...element, type: 'survey' });
           }
         });
 
-        // Process customSurveyResponse
         customSurveyResponse.forEach((element) => {
           if (element?.surveyLaunchStatus) {
-            combinedData.push({ ...element, type: 'customSurvey' }); // Add type to distinguish between survey and custom survey
+            combinedData.push({ ...element, type: 'customSurvey' });
           }
         });
 
-        // Fetch total number of respondents for each survey
         combinedData.forEach((item) => {
           const surveyId = item.type === 'survey' ? item.surveyId : item.customSurveyId;
           dispatch(getTotalNumberOfRespondent(surveyId)).then((res) => {
@@ -103,10 +127,8 @@ const ListOfLaunchedServey = () => {
           });
         });
 
-        // Dispatch the collected payment status updates to the store
         store.dispatch(updatePaymentStatus(paymentStatusUpdates));
-
-        setCombinedSurveyData(combinedData); // Set combined survey data
+        setCombinedSurveyData(combinedData);
         setisLoading(false);
       } else {
         store.dispatch(updatePaymentStatus([]));
@@ -118,7 +140,7 @@ const ListOfLaunchedServey = () => {
   const handleChangeRowsPerPage = (event) => {
     const newRowsPerPage = +event.target.value;
     setRowsPerPage(newRowsPerPage);
-    setPage(0); // Reset to the first page when rows per page changes
+    setPage(0);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -146,15 +168,6 @@ const ListOfLaunchedServey = () => {
     setAnchorEl(null);
   };
 
-  // const downloadReportHandler = () => {
-  //   dispatch(EAsurveyReportDownload({surveyId:3,surveyTypeId:2,format:'excel'}))
-  //   .then((res) => {
-
-  //     const blob = new Blob([res?.payload], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-  //     saveAs(blob, 'cAsurvey_supervisor_report.xlsx');
-  //   })
-  // }
-
   const handleDownloadClick = (event, survey) => {
     setDownloadAnchorEl(event.currentTarget);
     setSelectedSurveyForDownload(survey);
@@ -164,42 +177,41 @@ const ListOfLaunchedServey = () => {
     setDownloadAnchorEl(null);
   };
 
-
   const downloadReportHandler = async (surveyTypeId) => {
-
     if (!selectedSurveyForDownload) return;
-         handleDownloadClose();
+    handleDownloadClose();
 
-         const surveyId = selectedSurveyForDownload.type === 'survey' 
-         ? selectedSurveyForDownload.surveyId 
-                : selectedSurveyForDownload.customSurveyId;
+    const surveyId = selectedSurveyForDownload.type === 'survey' 
+      ? selectedSurveyForDownload.surveyId 
+      : selectedSurveyForDownload.customSurveyId;
+      
     try { 
-         setdownloadLoading(true)
+      setdownloadLoading(true)
       const response = await dispatch(EAsurveyReportDownload({
         surveyId, 
         surveyTypeId: surveyTypeId, 
         format:'excel'
       }));
       
-  if(response?.meta?.requestStatus === 'rejected'){
-   toast.error('no data found');
-    setdownloadLoading(false) 
-   return
- }
+      if(response?.meta?.requestStatus === 'rejected'){
+        toast.error('no data found');
+        setdownloadLoading(false) 
+        return
+      }
       const url = window.URL.createObjectURL(new Blob([response.payload]));
       const link = document.createElement('a');
       link.href = url;
-    
       link.setAttribute('download', `competencyAssessment_report.xlsx`);
       document.body.appendChild(link);
       link.click();
       link.remove();
-        setdownloadLoading(false)
+      setdownloadLoading(false)
     } catch (error) {
       console.error('Download error:', error);
-        setdownloadLoading(false)
+      setdownloadLoading(false)
     }
   }
+
   return (
     <>
       {isLoading ? (
@@ -226,168 +238,122 @@ const ListOfLaunchedServey = () => {
               </span>
             </CustomeButton>
           </div>
-          <div className="table-responsive m-4  bg-red ">
-            <Paper sx={{ width: "100%" }}>
-              <table className="table table-borderless ">
-                <thead className="p-4">
-                  <tr
-                    className="fw-semobold shadow-lg "
-                    style={{ backgroundColor: "#00003A" }}
-                  >
-                    <th className="py-4 text-list ps-4">Survey Status</th>
-                    <th className="py-4 text-list">Survey title</th>
-                    <th className="py-4 text-list">Selected files</th>
-                    <th className="py-4 text-list">Responses</th>
-                    <th className="py-4 text-list">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
+          <div className="m-4">
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell>Survey Status</StyledTableCell>
+                    <StyledTableCell>Survey title</StyledTableCell>
+                    <StyledTableCell>Selected files</StyledTableCell>
+                    <StyledTableCell>Responses</StyledTableCell>
+                    <StyledTableCell>Actions</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
                   {isLoading ? (
-                    <div className="d-flex justify-content-center p-5">
-                      <div className="w-100 d-flex justify-content-center">
+                    <StyledTableRow>
+                      <StyledTableCell colSpan={5} align="center">
                         <Loader />
-                      </div>
-                    </div>
+                      </StyledTableCell>
+                    </StyledTableRow>
                   ) : combinedSurveyData?.length === 0 ? (
-                    <tr>
-                      <td colSpan="6" className="text-center">
-                        <p className="fw-bold fs-5">No file</p>
-                      </td>
-                    </tr>
+                    <StyledTableRow>
+                      <StyledTableCell colSpan={5} align="center" className="fw-bold fs-5">
+                        No file
+                      </StyledTableCell>
+                    </StyledTableRow>
                   ) : (
-                    <>
-                      {combinedSurveyData?.map((item, index) => {
+                    combinedSurveyData
+                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                      .map((item, index) => {
                         const surveyId = item.type === 'survey' ? item.surveyId : item.customSurveyId;
                         const responseData = responsesData[surveyId]?.response || {};
                         return (
-                          <tr
-                            key={index}
-                            style={{ borderBottom: "1px solid #D9D5EC" }}
-                            className="shadow-sm rounded-4 fw-semibold"
-                          >
-                            <td className="pt-2 ps-4">
+                          <StyledTableRow key={index}>
+                            <StyledTableCell>
                               <div className="d-flex ms-1">
                                 <p
-                                  className="p-2"
-                                  style={{ backgroundColor: "#F97300" , color:"white" , borderRadius:"8px"}}
+                                  className="p-1 fw-bold" 
+                                  style={{ 
+                                    backgroundColor: "#2AC116", 
+                                    color: "white", 
+                                    borderRadius: "3px"
+                                  }}
                                 >
-                                  {item.surveyLaunchStatus === true
-                                    ? "Active"
-                                    : "InActive"}
+                                  {item.surveyLaunchStatus === true ? "Active" : "InActive"}
                                 </p>
                               </div>
-                            </td>
-                            <td className="pt-3 ms-2 text-listitem">{item?.surveyName}</td>
-                            <td className="pt-3  ms-2 text-listitem">
+                            </StyledTableCell>
+                            <StyledTableCell>{item?.surveyName}</StyledTableCell>
+                            <StyledTableCell>
                               {item.fileNames?.map((data, index) => (
                                 <p key={index}>{data}</p>
                               ))}
-                            </td>
-                            <td className="pt-3 text-listitem  ms-2">
-                              {responseData?.totalRespondents || 0}/
-                              {responseData?.totalReceiver || 0} respondent
-                            </td>
-
-                            <td className="pt-3 g-2">
-                              <Tooltip
-                                text={"Analyse results"}
-                                style={{ width: "140px" }}
-                              >
-                                <img
-                                  src={Analyze}
-                                  alt="analyze result"
-                                  width="30"
-                                  height="30"
-                                  className="vsgraph"
-                                  size={28}
-                                  style={{
-                                    cursor: "pointer",
-                                    border: "2px solid #dee2e6",
-                                    padding: "2px",
-                                    color: "#F97300",
-                                    borderRadius: "5px",
-                                  }}
-                                  onClick={() =>
-                                    handleClose("Analyze results", item)
-                                  }
-                                />
-                              </Tooltip>
-                              <Tooltip
-                                text={"Survey Url"}
-                                style={{ width: "140px" }}
-                              >
-                                <img
-                                  src={Surveyurl}
-                                  alt="survey url"
-                                  width="30"
-                                  height="30"
-                                  className="ms-1 vsgraph-design"
-                                  size={28}
-                                  style={{
-                                    cursor: "pointer",
-                                    border: "2px solid #dee2e6",
-                                    padding: "2px",
-                                    color: "#F97300",
-                                    borderRadius: "5px",
-                                  }}
-                                  onClick={() =>
-                                    handleClose("Survey Url", item)
-                                  }
-                                />
-                              </Tooltip> 
-                              {
-                                item?.surveyName==='CA' &&
-                                (downloadLoading ?( <i class="fa fa-circle-o-notch fa-spin text-primary"></i>)
-                                :
-                                  <>
-                                     <Tooltip text={"Download Report"} style={{ width: "140px" }}>
-                                <DownloadReportIcon style={{cursor:'pointer',marginBottom:'2px' }}
-                               onClick={(e) => handleDownloadClick(e, item)}
-                                 />
-                              </Tooltip>
-                                 {/* Download Menu */}
-      <Menu
-        anchorEl={downloadAnchorEl}
-        open={Boolean(downloadAnchorEl)}
-        onClose={handleDownloadClose}
-        PaperProps={{
-          style: {
-            maxHeight: ITEM_HEIGHT * 4.5,
-            width: '250px',
-          },
-        }}
-      >
-        <MenuItem 
-          onClick={() => downloadReportHandler(2)}
-          sx={{ fontSize: '14px', padding: '10px 20px' }}
-        >
-          Supervisor Assessment Report
-        </MenuItem>
-        <MenuItem 
-          onClick={() => downloadReportHandler(1)}
-          sx={{ fontSize: '14px', padding: '10px 20px' }}
-        >
-          Employee Assessment Report
-        </MenuItem>
-      </Menu>
-      {/* ... (rest of your JSX) */}
-                                  </>
-                                )
-                              
-
-                              
-                              }
-                             
-
-                             
-                            </td>
-                          </tr>
+                            </StyledTableCell>
+                            <StyledTableCell>
+                              {responseData?.totalRespondents || 0}/{responseData?.totalReceiver || 0} respondent
+                            </StyledTableCell>
+                            <StyledTableCell>
+                              <div className="custom-sruvey-icon-main">
+                                <div className="custom-sruvey-icon custom-iconborder">  
+                                  <Tooltip text={"Analyse results"} style={{ width: "140px" }}>
+                                    <AnalyzeIcon onClick={() => handleClose("Analyze results", item)} />
+                                  </Tooltip>
+                                </div>
+                                {item?.surveyName === 'CA' && (
+                                  downloadLoading ? (
+                                    <i className="fa fa-circle-o-notch fa-spin text-primary"></i>
+                                  ) : (
+                                    <>
+                                      <div className="custom-sruvey-icon custom-iconborder">
+                                        <Tooltip text={"Download Report"} style={{ width: "140px" }}>
+                                          <DownloadReportIcon 
+                                            style={{ cursor: 'pointer' }}
+                                            onClick={(e) => handleDownloadClick(e, item)}
+                                          />
+                                        </Tooltip>
+                                      </div>
+                                      <Menu
+                                        anchorEl={downloadAnchorEl}
+                                        open={Boolean(downloadAnchorEl)}
+                                        onClose={handleDownloadClose}
+                                        PaperProps={{
+                                          style: {
+                                            maxHeight: ITEM_HEIGHT * 4.5,
+                                            width: '250px',
+                                          },
+                                        }}
+                                      >
+                                        <MenuItem 
+                                          onClick={() => downloadReportHandler(2)}
+                                          sx={{ fontSize: '14px', padding: '10px 20px' }}
+                                        >
+                                          Supervisor Assessment Report
+                                        </MenuItem>
+                                        <MenuItem 
+                                          onClick={() => downloadReportHandler(1)}
+                                          sx={{ fontSize: '14px', padding: '10px 20px' }}
+                                        >
+                                          Employee Assessment Report
+                                        </MenuItem>
+                                      </Menu>
+                                    </>
+                                  )
+                                )}
+                                <div className="custom-sruvey-icon">
+                                  <Tooltip text={"Survey Url"} style={{ width: "140px" }}>
+                                    <Surveyurl onClick={() => handleClose("Survey Url", item)}/>
+                                  </Tooltip> 
+                                </div>
+                              </div>
+                            </StyledTableCell>
+                          </StyledTableRow>
                         );
-                      })}
-                    </>
+                      })
                   )}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
@@ -397,7 +363,7 @@ const ListOfLaunchedServey = () => {
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
               />
-            </Paper>
+            </TableContainer>
           </div>
         </>
       ) : (
