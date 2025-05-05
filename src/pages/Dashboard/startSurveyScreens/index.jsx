@@ -35,7 +35,7 @@ const Index = () => {
   return (
     <div className="px-2">
    <Stepper
-  className="stepper-container"
+  className="stepper-container  mt-2 bg-white border rounded-4 shadow-sm"
   steps={[
     { label: "Select Survey" },
     { label: "Upload File" },

@@ -91,13 +91,13 @@ const handleInputChange = (e) => {
 
 };
   return (
-    <div>
+    <>
         <div className="profile " >
         <div className=" mb-0 ">
       
-        <div className="row d-flex flex-wrap flex-column flex-lg-row ">
+        <div className="row m-0 p-0">
           <div className="col-md-6 col-10 mx-auto m-5 p-2 ">
-            <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <div className="d-flex flex-column justify-content-between align-items-center">
               <div className="mb-4 ms-2 mb-md-0">
               
 
@@ -118,10 +118,9 @@ profileAvatar
 
               
               </div>
-              <div className="d-flex flex-column gap-4">
-               <WebsiteButton className="mt-2 mt-md-0" onClick={handleClickChangePicture}>
-                    Change Picture
-                  </WebsiteButton>
+              <div className="">
+                <p style={{color:'#4379EE',cursor:'pointer'}} onClick={handleClickChangePicture} > Upload Photo</p>
+          
                   <input
                     type="file"
                     accept="image/*"
@@ -232,17 +231,20 @@ profileAvatar
      	</div>
     	</div>
           	
-     	<div className="signup-button col-md-2 ms-3 mt-5">
-                	<WebsiteButton className='w-100 save-text' type="submit" onClick={()=>{}}  disabled={isLoading}>
+     	<div className="d-flex justify-content-center align-items-center mt-4">
+        <div className="">
+          <WebsiteButton className='w-100 save-text' type="submit" onClick={()=>{}}  disabled={isLoading}>
                    	{isLoading? 'loading...':'Save Changes'}
                 	</WebsiteButton>
+        </div>
+                	
               	</div>
         	</form>
       
     </div>
     </div>
       
-    </div>
+    </>
      
   
   )

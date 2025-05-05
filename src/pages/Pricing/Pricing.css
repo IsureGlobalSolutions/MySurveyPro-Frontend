@@ -1,4 +1,4 @@
-.pricing{
+/* .pricing{
     margin: 10px;
     background-color: #FFFFFF !important;
 border-radius: 20px;
@@ -28,37 +28,7 @@ span.five {
     text-align: center !important;
     color: #FFFFFF !important;
 }
-.paymentsuccess{
-    border-radius: 20px;
-    border: 1px solid #E1E3E8;
-    box-shadow: 0px 4px 15px 0px #00000026;
-    background-color:#FFFF !important;
-    background:  
-    url("../../assets/Q12survey/backgournd.png") no-repeat;
-  /* background-size: contain; */
-  background-position: fixed;
-}
-.paymentsuccess h1{
-font-size: 60px;
-font-weight: 700;
-line-height: 90px;
-text-align: center;
-color: #00C900;
-}
-.paymentsuccess h2{
-font-size: 40px;
-font-weight: 400;
-line-height: 60px;
-text-align: center;
-    color: #000000;
-    }
-.paymentsuccess p{
-font-size: 24px;
-font-weight: 400;
-line-height: 36px;
-text-align: center;
-color: #000000;
-}
+
 .sidbar-item-link{
     text-decoration: none;
     list-style-type: none;
@@ -75,8 +45,7 @@ box-shadow: 0px 5px 10px 0px #00000040;
 background: #FEFEFC;
 position: relative;
   display: inline-block;
-  /* width: 80px; 
-  height: 90px; */
+
 }
 .pricingcard h1{
     font-size: 33px;
@@ -132,13 +101,13 @@ color: #1b223c;
   }
   
   .pricing-image {
-    /* margin-top: -50px; */
+    
     width: 100%;
     height: 100%;
   }
   
   .text-overlay {
-    /* margin-top: -50px; */
+  
     position: absolute;
     top: 40%;
     left: 60%;
@@ -149,4 +118,245 @@ color: #1b223c;
     font-size: 15px;
     text-align: center;
   }
+   */
+
+   .paymentsuccess{
+    border-radius: 20px;
+    border: 1px solid #E1E3E8;
+    box-shadow: 0px 4px 15px 0px #00000026;
+    background-color:#FFFF !important;
+    background:  
+    url("../../assets/Q12survey/backgournd.png") no-repeat;
+
+  background-position: fixed;
+}
+.paymentsuccess h1{
+font-size: 60px;
+font-weight: 700;
+line-height: 90px;
+text-align: center;
+color: #00C900;
+}
+.paymentsuccess h2{
+font-size: 40px;
+font-weight: 400;
+line-height: 60px;
+text-align: center;
+    color: #000000;
+    }
+.paymentsuccess p{
+font-size: 24px;
+font-weight: 400;
+line-height: 36px;
+text-align: center;
+color: #000000;
+}
+   .pricing {
+    margin: 10px;
+   background-image: url(../../assets/Dashboredpng/background-gradiant.png);
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+  }
   
+  .pricingcard {
+    padding: 20px;
+    
+    border: 1px solid #E7EBFF;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.05);
+    background: #FEFEFC;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .pricingcard:hover {
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  .pricing-header {
+    margin-bottom: 20px;
+  }
+  
+  .pricing-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  .pricing-header .pricing-amount{
+    width: 153px;
+    height:55px;
+    background: #3B5BE4;
+text-align: center;
+display: flex;
+align-items: center;
+justify-content: center;
+    border-radius: 65.45px;
+    margin: 30px 0px;
+    
+  }
+  .pricing-header .pricing-amount span{
+  color: white;
+  text-align: center;
+  }
+  .pricing-header .pricing-amount .price{
+
+font-weight: 600;
+font-size: 43.47px;
+line-height: 28.07px;
+letter-spacing: 0px;
+vertical-align: middle;
+
+  }
+  .pricing-header .pricing-amount .currency{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .pricing-amount .currency .usd{
+
+font-weight: 600;
+font-size: 12.03px;
+line-height: 8.21px;
+letter-spacing: 0px;
+vertical-align: middle;
+
+  }
+  .pricing-amount .currency .period{
+    font-family: Poppins;
+font-weight: 600;
+font-size: 18.72px;
+line-height: 8.21px;
+letter-spacing: 0px;
+vertical-align: middle;
+
+  }
+  .pricing-title h3 {
+
+    font-weight: 700;
+    font-size: 32.75px;
+    line-height: 12.03px;
+    letter-spacing: 0px;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 30px;
+  }
+  
+
+  
+  .pricing-amount .price {
+    font-size: 24px;
+    font-weight: 500;
+    color: #1B223C;
+  }
+  
+  .pricing-amount .currency {
+    font-size: 14px;
+    color: #797878;
+    margin-left: 5px;
+  }
+  
+  .pricing-amount .period {
+    font-size: 14px;
+    color: #797878;
+  }
+  
+  .tagline {
+   
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 16.03px;
+    line-height: 16.7px;
+    letter-spacing: 0.67px;
+    text-align: center;
+    vertical-align: middle;
+   
+ 
+    
+    text-align: center;
+    border-bottom: 1.67px dotted #7F7F7F;
+  }
+  
+  .pricing-cta {
+    text-align: center;
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+
+  }
+  .no-credit{
+     margin: 30px 0px;
+     text-align: center;
+  }
+  .no-credit p{
+    font-size: 14px;
+    color: #797878;
+   
+    
+  }
+  
+
+
+  
+  
+  .pricing-details li span {
+    font-size: 16px;
+    color: #1B223C;
+    line-height: 1.4;
+  }
+  
+  @media (max-width: 768px) {
+    .pricingcard {
+      padding: 15px;
+    }
+    
+    .pricing-title h3 {
+      font-size: 20px;
+    }
+    
+    .pricing-amount .price {
+      font-size: 20px;
+    }
+    
+    .tagline {
+      font-size: 14px;
+    }
+    
+    .pricing-details li span {
+      font-size: 14px;
+    }
+  }
+
+  .pricing-details {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+border: 0px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .active-card{
+    background: #f8f9fa !important;
+  }
+  
+  .pricing-details h4 {
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .pricing-details ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .pricing-details li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  
+  .pricing-details li svg {
+    margin-right: 10px;
+    min-width: 20px;
+  }

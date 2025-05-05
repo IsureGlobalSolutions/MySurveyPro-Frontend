@@ -25,6 +25,7 @@ import { HiMiniViewfinderCircle } from "react-icons/hi2";
 import DeleteIcon from "../../../assets/dashboredsvg/deleteIcon.svg?react";
 import ViewIcon from "../../../assets/dashboredsvg/viewIcon.svg?react";
 import EditIcon from "../../../assets/dashboredsvg/editIcon.svg?react";
+import DeleteModal from "../../../components/Modals/DeleteModal";
 
 const Surveylist = ({ setstepper, sendIdToParent }) => {
   const {
@@ -194,7 +195,7 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
   };
   return (
     <>
-      <Modal show={show} onHide={handleClosedata} centered>
+      {/* <Modal show={show} onHide={handleClosedata} centered>
         <Modal.Body style={{ position: "relative", margin: "10px" }}>
           <button
             type="button"
@@ -227,7 +228,7 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
             </button>
           </div>
         </Modal.Body>
-      </Modal>
+      </Modal> */}
       <div className="surveylist-section  p-4 pt-2 ">
         <div className="m-2 ps-3">
           <p className="survey-template-title">Survey templates</p>
@@ -394,6 +395,15 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
       ) : (
         ""
       )}
+     {show &&(
+        <DeleteModal
+        show={show}
+        handleClosedata={handleClosedata}
+        deleteHandler={deleteCustomSurvey}
+        />
+      )
+
+      }
     </>
   );
 };

@@ -73,7 +73,7 @@ const ThankYouLunchSurvey = ({ setstepper, surveyId }) => {
 
   return (
     <>
-     <div className="shadow rounded-4 bg-white w-100 m-2 d-flex justify-content-center py-5">
+     <div className="shadow rounded-4 bg-white w-100 my-2 d-flex justify-content-center py-5">
   <div className="container thanks-content-main">
     <div className="thanks-content  ">
        <div className="thanks-info ">

@@ -34,6 +34,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import CustomeButton from "../../../components/mySurveyProWebsiteBtn/CustomeButton";
+import DeleteModal from "../../../components/Modals/DeleteModal";
+import BootstrapPagination from "../../../components/pagination/Pagination";
 
 // Styled components for the table
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -80,10 +82,12 @@ const Filedata = ({ setstepper, surveyId, sendSelectedFilesToParent }) => {
   const [Editshow, setEditshow] = useState(false);
   const [addnewfile, setaddnewfile] = useState(false);
   const [Uniquefilename, setUniquefilename] = useState();
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = rowsPerPage; // Use the same rowsPerPage from your existing state
+  const totalPages = Math.ceil((listOfDepartment?.length || 0) / itemsPerPage);
+  
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
 
   useEffect(() => {
     if (surveyList?.length > 0) {
@@ -91,19 +95,21 @@ const Filedata = ({ setstepper, surveyId, sendSelectedFilesToParent }) => {
     }
   }, [surveyList]);
 
+  // Handle page change
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+    setPage(newPage - 1); // Update the existing page state (0-based index)
+  };
+
+  // Update currentData to use currentPage instead of page
   const currentData =
     listOfDepartment && Array.isArray(listOfDepartment)
       ? listOfDepartment.slice(
-          page * rowsPerPage,
-          page * rowsPerPage + rowsPerPage
+          (currentPage - 1) * itemsPerPage,
+          currentPage * itemsPerPage
         )
       : [];
 
-  const handleChangeRowsPerPage = (event) => {
-    const newRowsPerPage = +event.target.value;
-    setRowsPerPage(newRowsPerPage);
-    setPage(0);
-  };
 
   const handleCloseViewdata = () => {
     setViewshow(false);
@@ -191,41 +197,7 @@ const Filedata = ({ setstepper, surveyId, sendSelectedFilesToParent }) => {
 
   return (
     <>
-       <Modal show={show} onHide={handleClosedata} centered>
-        <Modal.Body style={{ position: "relative", margin: "10px" }}>
-          <button
-            type="button"
-            className="btn-close"
-            aria-label="Close"
-            style={{ position: "absolute", top: "0", right: "0" }}
-            onClick={handleClosedata}
-          ></button>
-          <div className="d-flex justify-content-center align-items-center flex-column gap-3">
-            <div className="mt-2">
-              <MdErrorOutline style={{ color: "#dc3545", fontSize: "40px" }} />
-            </div>
-            <div severity="success ps-4" style={{ fontSize: "20px" }}>
-              {popupMessage}
-            </div>
-          </div>
-          <div
-            style={{
-              textAlign: "center",
-              marginTop: "30px",
-              marginBottom: "10px",
-            }}
-          >
-            <button
-              type="button"
-              className="btn btn-danger"
-              onClick={conformDelete}
-            >
-              Delete
-            </button>
-          </div>
-        </Modal.Body>
-      </Modal>
-
+      
       <Modal
         show={Viewshow}
         onHide={handleCloseViewdata}
@@ -376,13 +348,14 @@ const Filedata = ({ setstepper, surveyId, sendSelectedFilesToParent }) => {
                               </div>
                             </StyledTableCell>
                             <StyledTableCell>
-                              <div className="custom-sruvey-icon-main">
-                                <div className="custom-sruvey-icon custom-iconborder">
-                                  <DeleteIcon
-                                    onClick={() => handledelete(item)}
+                              <div className="custom-sruvey-icon-main"> 
+                                 <div className="custom-sruvey-icon custom-iconborder">
+                                  <EditIcon
+                                    onClick={() => handleEditFile(item)}
                                     style={{ cursor: "pointer" }}
                                   />
                                 </div>
+                              
                                 <div className="custom-sruvey-icon custom-iconborder">
                                   <ViewIcon
                                     onClick={() => handleViewFile(item)}
@@ -390,8 +363,8 @@ const Filedata = ({ setstepper, surveyId, sendSelectedFilesToParent }) => {
                                   />
                                 </div>
                                 <div className="custom-sruvey-icon ">
-                                  <EditIcon
-                                    onClick={() => handleEditFile(item)}
+                                  <DeleteIcon
+                                    onClick={() => handledelete(item)}
                                     style={{ cursor: "pointer" }}
                                   />
                                 </div>
@@ -402,15 +375,13 @@ const Filedata = ({ setstepper, surveyId, sendSelectedFilesToParent }) => {
                       )}
                     </TableBody>
                   </Table>
-                  <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
-                    component="div"
-                    count={listOfDepartment?.length || 0}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                  />
+                  <div className="d-flex justify-content-end my-3 pe-3">
+                    <BootstrapPagination
+                      currentPage={currentPage}
+                      totalPages={totalPages}
+                      onPageChange={handlePageChange}
+                    />
+                  </div>
                 </TableContainer>
               </div>
               <div className="d-flex justify-content-end mt-2">
@@ -427,9 +398,21 @@ const Filedata = ({ setstepper, surveyId, sendSelectedFilesToParent }) => {
                 </WebsiteButton>
               </div>
             </div>
+
+
+
           </div>
         </div>
       </div>
+      {show &&(
+        <DeleteModal
+        show={show}
+        handleClosedata={handleClosedata}
+        deleteHandler={conformDelete}
+        />
+      )
+
+      }
     </>
   );
 };

@@ -102,7 +102,7 @@ const UploadFile = ({ setstepper, getUploadFile, surveyId }) => {
         </div>
       ) : (
         <>
-          <div className=" download-card-main shadow rounded-4 bg-white w-100 p-5 mb-2">
+          <div className=" download-card-main shadow rounded-4 bg-white w-100 p-5 my-2">
             <p className="m-0 download-csv-title">Download CSV File</p>
             <p className="download-csv-description">
               If you do not have a file you can use the sample below:
@@ -208,13 +208,15 @@ const UploadFile = ({ setstepper, getUploadFile, surveyId }) => {
                 </div>
               </div>
 
-                <div className="my-3 d-flex justify-content-center">
+                <div className="my-3 row justify-content-center">
+                  <div className="col-md-6 d-flex justify-content-center">
                       <WebsiteButton
                         type="button"
                         buttonDesign="outliner"
                         className="w-100"
                         onClick={() => {
                          setUploadedFiles([])
+                         setstepper(1);
                         }}
                         disabled={isLoading}
                       >
@@ -230,6 +232,8 @@ const UploadFile = ({ setstepper, getUploadFile, surveyId }) => {
                       >
                         {isLoading ? "Uploading..." : "Submit"}
                       </WebsiteButton>
+                  </div>
+                    
                     </div>
             </div>
           </div>

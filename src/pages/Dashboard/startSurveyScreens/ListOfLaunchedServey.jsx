@@ -33,6 +33,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import BootstrapPagination from "../../../components/pagination/Pagination";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -82,6 +83,23 @@ const ListOfLaunchedServey = () => {
   const { surveyPaymentStatuses } = useSelector((state) => state.survey);
   const { userData } = useSelector((state) => state.user);
   const tokenValues = jwtDecode(userData?.accessToken);
+
+   // Add these pagination states
+   const [currentPage, setCurrentPage] = useState(1);
+   const itemsPerPage = rowsPerPage; // Use your existing rowsPerPage
+   const totalPages = Math.ceil((combinedSurveyData?.length || 0) / itemsPerPage);
+ 
+   // Replace handleChangePage with this
+   const handlePageChange = (newPage) => {
+     setCurrentPage(newPage);
+     setPage(newPage - 1); // Update the existing page state (0-based index)
+   };
+ 
+   // Update your data slicing to use currentPage
+   const paginatedData = combinedSurveyData?.slice(
+     (currentPage - 1) * itemsPerPage,
+     currentPage * itemsPerPage
+   ) || [];
 
   useEffect(() => {
     if (tokenValues?.sid) {
@@ -354,15 +372,13 @@ const ListOfLaunchedServey = () => {
                   )}
                 </TableBody>
               </Table>
-              <TablePagination
-                rowsPerPageOptions={[5, 10, 25]}
-                component="div"
-                count={combinedSurveyData?.length || 0}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
+              <div className="d-flex justify-content-end my-3 pe-3">
+        <BootstrapPagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </div>
             </TableContainer>
           </div>
         </>

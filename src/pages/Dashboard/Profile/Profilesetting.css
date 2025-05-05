@@ -1,3 +1,22 @@
+
+.profile{
+
+background-image: url(../../../assets/Dashboredpng/background-gradiant.png); 
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+height: 100vh;
+
+}
+.form-label{
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 15.29px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #606060;
+
+}
 .profile h1{
 font-size: 30px;
 font-weight: 600;
@@ -15,7 +34,7 @@ color: #000000;
     margin: auto; 
 
 opacity: 0px;
-border: 3px solid #ECECEC
+
 /* Ensures the image covers the circle without stretching */
   }
   
@@ -26,9 +45,7 @@ border: 3px solid #ECECEC
       width: 40vw; /* Larger relative width for smaller screens */
       height: 40vw;
     }
-    .signup-button{
-      width: 50%;
-    }
+   
     .save-text{
       font-size: 13px !important;
       
@@ -49,20 +66,3 @@ border: 3px solid #ECECEC
   }
   
   
-.profile{
-border-radius: 20px ;
-
-background-image: url(../../../assets/Dashboredpng/background-gradiant.png); 
-background-repeat: no-repeat;
-background-size: cover;
-background-position: center;
-height: 100vh;
-
-}
-.form-label{
-font-size: 16px;
-font-weight: 600;
-line-height: 19.2px;
-text-align: left;
-color: #32012F;
-}
