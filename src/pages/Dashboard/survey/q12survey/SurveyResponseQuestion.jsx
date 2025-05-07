@@ -86,7 +86,7 @@ const SurveyResponseQuestion = () => {
             if (choiceId) {
                 try {
                     const requestData = { choiceId, recipientId: recipientId , userId , surveyId:surveyId , questionId };
-                    await dispatch(surveyresponse(requestData));
+                    await dispatch(surveyresponse([requestData]));
                     saveProgress();
                 } catch (error) {
                     toast.error(error.message);
@@ -100,7 +100,7 @@ const SurveyResponseQuestion = () => {
             if (choiceId) {
                 try {
                     const requestData = { choiceId, recipientId: recipientId , userId , surveyId:surveyId, questionId };
-                    await dispatch(surveyresponse(requestData));
+                    await dispatch(surveyresponse([requestData]));
                     saveProgress();
                     clearProgress();
                     setActiveStep(data.length); 

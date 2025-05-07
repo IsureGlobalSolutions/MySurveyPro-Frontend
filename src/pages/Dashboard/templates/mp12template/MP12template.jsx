@@ -12,22 +12,24 @@ const MP12template = ({  stepUPSendValue}) => {
         setloading(true)
       }
   return (
-    <div className='Q12-section m-5 d-flex justify-content-center align-items-center p-5'>
+    <div className='Q12-section d-flex justify-content-center align-items-center p-5'>
       <div className='container'>
         <div className='stepper gap-5 container row ' >
           <div className='col-md-6   d-flex flex-column justify-content-start p-5 mt-3'>
             <div className='text'>
-              <h1>Preview MP12 Survey</h1>
-              <p>Please enter user id</p>
+              <h1 className='survey-start-welcome '>Welcome</h1>
+              <h1 className='survey-start-tagline'>Preview MP12 Survey</h1>
+              <p className='survey-tage-text'>Provide your generted ID to access the MP12 Survey.</p>
             </div>
             <div  className="g-4 mt-4 " >
             <div  className='mb-4 col-md-8'>
+              <label className='' htmlFor="">Please Enter Your ID</label>
         <input
         className='mysurveypro-input-field'
         type="text"
         id="userid"
         name="userid"
-        placeholder="UserId"
+        placeholder="Enter here"
         readOnly
       />
             </div>

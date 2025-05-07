@@ -20,6 +20,10 @@
   .website-button:hover {
     background-color: #0A42C2;
   }
+  .website-button:disabled{
+    background-color: #E2E0E0;
+    color: gray;
+  }
   .website-button {
     /* padding-left: var(--padding-xl);
     padding-right: var(--padding-xl); */
@@ -50,6 +54,10 @@
   }
   .outliner-button:hover {
     background-color: #E2E0E0;
+  }
+  .outliner-button:disabled{
+    background-color: #E2E0E0;
+    color: gray;
   }
   .website-button {
     /* padding-left: var(--padding-xl);

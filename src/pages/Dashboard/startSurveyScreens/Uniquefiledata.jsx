@@ -89,7 +89,7 @@ const Uniquefiledata = ({ Veiwdata, Filename }) => {
                     <StyledTableCell>{data.name}</StyledTableCell>
                     <StyledTableCell>{data.email}</StyledTableCell>
                     <StyledTableCell>{data.department}</StyledTableCell>
-                    <StyledTableCell>{data.designation.title || "null"}</StyledTableCell>
+                    <StyledTableCell>{data?.designation?.title ? data?.designation?.title : "null"}</StyledTableCell>
                     <StyledTableCell>{data.grade || "null"}</StyledTableCell>
                     <StyledTableCell>{data.dob || "null"}</StyledTableCell>
                     <StyledTableCell>{data.age || "null"}</StyledTableCell>

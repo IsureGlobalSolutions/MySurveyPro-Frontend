@@ -13,7 +13,7 @@ const EADepartmentSelection = ({
   selectedEmployee 
 }) => {
   return (
-    <div className='Q12-section m-5 d-flex justify-content-center align-items-center p-5'>
+    <div className='Q12-section d-flex justify-content-center align-items-center p-5'>
       <div className='container'>
         <div className='stepper row '>
           <div className='col-md-8 p-5 mt-3'>

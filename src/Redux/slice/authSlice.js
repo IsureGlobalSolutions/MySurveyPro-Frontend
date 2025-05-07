@@ -155,7 +155,7 @@ export const GetCustomSurveyJson = createAsyncThunk('Survey/GetCustomSurveyJson'
 });
 export const surveyresponse = createAsyncThunk('Survey/surveyresponse', async ( data, thunkAPI) => {
   try {
-    const res = await instance.post('api/SurveyResponse/AddSurveyResponse' , [data]);
+    const res = await instance.post('api/SurveyResponse/AddSurveyResponse' , data);
     return res.data;
 
   } catch (error) {

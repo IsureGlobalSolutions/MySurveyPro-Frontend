@@ -32,7 +32,7 @@ const CustomSurvey = ({ sendIdParent ,showOtpScreen}) => {
         }
       }
   return (
-    <div className='Q12-section m-5 d-flex justify-content-center align-items-center p-5'>
+    <div className='Q12-section d-flex justify-content-center align-items-center p-5'>
       <div className='container'>
         <div className='stepper row p-5'>
           <div className='col-md-6 p-5 mt-4'>

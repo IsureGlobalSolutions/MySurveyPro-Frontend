@@ -303,11 +303,11 @@ const Filedata = ({ setstepper, surveyId, sendSelectedFilesToParent }) => {
               </div>
               <div>
                 <TableContainer component={Paper}>
-                  <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                  <Table sx={{ width:'100%' }} aria-label="customized table">
                     <TableHead>
                       <TableRow>
-                        <StyledTableCell>File Name</StyledTableCell>
-                        <StyledTableCell>Actions</StyledTableCell>
+                        <StyledTableCell sx={{ width: '80%' }}>File Name</StyledTableCell>
+                        <StyledTableCell sx={{ width: '20%' }}>Actions</StyledTableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>

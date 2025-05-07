@@ -1,7 +1,7 @@
 .Q12-section {
-    height: 80vh;
+    height: 100vh;
     border-radius: 20px;
-    background-image: url("../../../../assets/Q12survey/backkdark..png");
+    background-image: url("../../../../assets/Q12survey/Q12image.png");
     background-size: cover; 
     background-position: center center; 
     background-repeat: no-repeat; 
@@ -14,7 +14,33 @@
     background-position: center center; 
     background-repeat: no-repeat; 
 }
+.Q12-section .stepper .survey-start-welcome{
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 35.85px;
+    line-height: 105%;
+    letter-spacing: 0%;
+    
+     
+}
 
+.Q12-section .stepper .text .survey-start-tagline{
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 28.27px;
+    line-height: 105%;
+    letter-spacing: 0%;
+     
+}
+.Q12-section .stepper .survey-tage-text{
+    font-family: Poppins;
+font-weight: 300;
+font-size: 14px;
+line-height: 100%;
+letter-spacing: 0%;
+color: #5E5E5E;
+
+}
 
 .form-check-input {
     position: relative;
