@@ -10,6 +10,7 @@ import Loader from '../../../../../components/plugins/Loader';
 import { getListOfCoumnProperty, getOverAllGradeReport} from '../../../../../Redux/slice/surveySlice';
 import { Navbarvalue } from '../../../../../context/NavbarValuesContext';
 import { donutChartData } from '../../../../../components/cartsComponents/donutChartData';
+import '../../../TeiSurveyReportScreen/Report.css';
 
 const DesignationChart = () => {
 
@@ -108,10 +109,10 @@ null
 
   return (
     <>
-    <div className="age-card rounded-3 border p-3 shadow bg-white">
+    <div className="table-card-background ">
  <div className="d-flex justify-content-between">
-        <div className="title d-flex align-items-center m-0">
-            <div className=""><h6 className='m-0 pb-3 fw-bold'>Grades </h6></div>
+        <div className=" d-flex align-items-center m-0">
+<h6 className='m-0 pb-3 table-heading'>Grades </h6>
             
         </div>
         <div className="d-flex align-items-center">

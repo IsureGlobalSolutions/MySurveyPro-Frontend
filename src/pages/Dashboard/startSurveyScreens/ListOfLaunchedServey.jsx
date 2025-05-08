@@ -262,8 +262,8 @@ const ListOfLaunchedServey = () => {
                 <TableHead>
                   <TableRow>
                     <StyledTableCell>Survey Status</StyledTableCell>
-                    <StyledTableCell>Survey title</StyledTableCell>
-                    <StyledTableCell>Selected files</StyledTableCell>
+                    <StyledTableCell>Survey Title</StyledTableCell>
+                    <StyledTableCell>Selected Files</StyledTableCell>
                     <StyledTableCell>Responses</StyledTableCell>
                     <StyledTableCell>Actions</StyledTableCell>
                   </TableRow>

@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getOverAllDepartmentReport } from '../../../../../Redux/slice/surveySlice';
 import DropdownButton from '../../../../../components/mySurveyProWebsiteBtn/DropdownButton';
 import Loader from '../../../../../components/plugins/Loader';
-
+import '../../../TeiSurveyReportScreen/Report.css';
 const listOfResponseReport=[
   {name:'Actively Engaged'},
   {name:'Actively Disengaged'},
@@ -119,15 +119,20 @@ SetReportValueHandler(getAllReportData,data?.name)
 }
   return (
     <>
-    <div className="age-card rounded-3 border p-3 shadow bg-white">
+    <div className="table-card-background">
  <div className="d-flex justify-content-between">
-        <div className="title d-flex align-items-center m-0">
-            <div className=""><h6 className='m-0 pb-3 fw-bold'>Department </h6></div>
+        <div className=" d-flex align-items-center m-0">
+          <h6 className='table-heading m-0 pb-3 fw-bold'>Department </h6>
             
         </div>
         <div className="d-flex align-items-center w-100 justify-content-end">
-        <div className="col-md-4 col-sm-5">
-              <DropdownButton items={listOfResponseReport} listKeyName={'name'} onSelect={handleSelect} selectionName='Actively Engaged'/>
+        <div className="">
+              <DropdownButton 
+              items={listOfResponseReport} 
+              listKeyName={'name'} 
+              onSelect={handleSelect} 
+              style={{width:'200px'}}
+              selectionName='Actively Engaged'/>
 
         </div>
  

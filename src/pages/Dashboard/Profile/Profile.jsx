@@ -142,7 +142,7 @@ profileAvatar
       <form onSubmit={handleSubmit(onSubmit )}   className="g-4 " >
     	<div className='row g-4 container'>
     	<div className='col-md-4'>
-     	<label htmlFor="validationCustom01" className="form-label">firstName</label>
+     	<label htmlFor="validationCustom01" className="form-label">First Name</label>
       	<InputField
         	type="text"
         	name="firstName"
@@ -155,7 +155,7 @@ profileAvatar
         	/>
      	</div>
      	<div className='col-md-4'>
-     	<label htmlFor="validationCustom01" className="form-label">Last name</label>
+     	<label htmlFor="validationCustom01" className="form-label">Last Name</label>
       	<InputField
         	type="text"
         	name="lastName"
@@ -170,7 +170,7 @@ profileAvatar
 	
      	</div>
        <div className='col-md-4'>
-     	<label htmlFor="validationCustom01" className="form-label">email</label>
+     	<label htmlFor="validationCustom01" className="form-label">Email</label>
       	<InputField
         	type="text"
         	name="email"

@@ -8,7 +8,8 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import {Navbarvalue} from '../../../context/NavbarValuesContext';
 import DropdownButton from '../../../components/mySurveyProWebsiteBtn/DropdownButton';
-
+import DownloadReportIcon from "../../../assets/dashboredsvg/download_report_icon.svg?react";
+import "../TeiSurveyReportScreen/Report.css";
 const GenderReport = () => {
     const [surveyOverAllData, setsurveyOverAllData] = useState([])
     const { paymentStatus } = useSelector((state) => state.survey)
@@ -136,28 +137,47 @@ toast.error('data not Found')
 
     return (
         <>
-            <div className=" m-0 p-0 justify-content-between">
+            <div className="table-card-background  justify-content-between">
                 <div className="deparment-table-data  p-0" >
-                    <div className=" py-1 d-flex justify-content-between bg-white rounded-top-3 shadow me-0">
+                    <div className=" py-1 d-flex justify-content-between ">
 
                         <div className="d-flex align-items-center   pe-0" style={{ borderRadius: '5px 5px 0px 0px' }}>
                             <div className="">
-                                <p className='ps-2 py-2 fs-6 fw-bold m-0 '>Gender Questions Report</p>
+                                <p className='ps-2 py-2 table-heading m-0 '>Gender Questions Report</p>
                             </div>
-                            <div className="d-flex align-items-center">
-                            <OverlayTrigger 
-      placement="bottom"
-      overlay={<Tooltip  id="button-tooltip-2">Download report file</Tooltip>}
-    >
-            <small className='ps-2 py-2  fw-bold m-0 ' style={{color:'orange',cursor:'pointer'}} onClick={downloadReport}>Download</small>
-    </OverlayTrigger>
-    </div>
+                          
 
                         </div>
-                        <div className="col-md-3 col-sm-4 py-2 pe-2">
-                           <DropdownButton items={listOfGender} listKeyName={'columnValue'} onSelect={handleSelect} selectionName={'Male'}/>
+                        <div className="d-flex gap-3 px-2">
+                        <div className="d-flex align-items-center justify-content-center">
+                 <div className="downlaod-report-icon d-flex align-items-center">
+                <OverlayTrigger
+                  placement="bottom"
+                  overlay={
+                    <Tooltip id="button-tooltip-2">
+                      Download report file
+                    </Tooltip>
+                  }
+                >
+                  <DownloadReportIcon
+                    style={{ cursor: "pointer" }}
+                    onClick={downloadReport}
+                  />
+                </OverlayTrigger>
+              </div>
+              </div>
+                            <div className=" py-2 pe-2">
+                           <DropdownButton 
+                           items={listOfGender} 
+                           listKeyName={'columnValue'}
+                            onSelect={handleSelect} 
+                            selectionName={'Male'}
+                            style={{width:'200px'}}
+                            />
 
                         </div>
+                        </div>
+                      
                     </div>
 
                     <SurveyTable
