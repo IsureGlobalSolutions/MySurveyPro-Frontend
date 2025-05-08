@@ -14,7 +14,7 @@ import TeiUserDimensionForSingleDepartmentChart from './chart/TeiUserDimensionFo
 import { getListOfCoumnProperty } from '../../../Redux/slice/surveySlice'
 import DimensionDataForAllDepartment from './DimensionDataForAllDepartment'
 import DepartmentDimensionQuestionResult from './chart/DepartmentDimensionQuestionResult'
-
+import './Report.css'
 const index = () => {
   const { selectedDashboardValues, DashboardStateHandler } = Navbarvalue()
   const { listOfDepartments } = useSelector((state) => state.survey)
@@ -26,13 +26,15 @@ const index = () => {
       dispatch(getListOfCoumnProperty({ surveyId: selectedDashboardValues?.survey?.id, columnProperty: "department" }))
     }
   }, [selectedDashboardValues, dispatch])
+
   return (
     <>
-      <HeroCards />
+    <div className="report-background">
+        <HeroCards />
       <div className="col-md-12 m-0">
-     <div className="row m-0 p-0 ">
-        <div className="col-md-6 p-0 m-0 ps-3"><OverAllRadialChat /></div>
-        <div className="col-md-6 p-0 m-0 ps-3"> <OverAllFunnelChat /></div>
+     <div className="d-flex gap-2 m-0 p-0 ">
+        <div className="w-50 p-0 m-0 "><OverAllRadialChat /></div>
+        <div className="w-50 p-0 m-0"> <OverAllFunnelChat /></div>
 
       </div>
 
@@ -56,6 +58,8 @@ const index = () => {
 
 
       }
+    </div>
+    
 
     </>
   )

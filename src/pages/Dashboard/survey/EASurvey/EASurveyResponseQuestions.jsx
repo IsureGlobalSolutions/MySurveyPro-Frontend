@@ -126,9 +126,11 @@ const EASurveyResponseQuestions = () => {
     }));
 
     try {
-      await dispatch(EASurveyResponseApi(payload)).unwrap();
-      
-      setResponses(prev => ({
+      await dispatch(EASurveyResponseApi(payload))
+      .then((res)=>{
+        if(res?.payload?.isSuccess){
+          setloading(false);
+            setResponses(prev => ({
         ...prev,
         [currentCompetency.competencyId]: currentCompetencyResponses
       }));
@@ -143,6 +145,10 @@ const EASurveyResponseQuestions = () => {
         setloading(false);
         setActiveStep(data.competencies.length);
       }
+        }
+      })
+      
+    
     } catch (error) {
       setloading(false);
       toast.error("Failed to submit responses. Please try again.");

@@ -138,9 +138,9 @@ toast.error('data not Found')
         <>
             <div className=" m-0 p-0 justify-content-between">
                 <div className="deparment-table-data  p-0" >
-                    <div className="mx-3 py-1 d-flex justify-content-between bg-white rounded-top-3 shadow me-0">
+                    <div className=" py-1 d-flex justify-content-between bg-white rounded-top-3 shadow me-0">
 
-                        <div className="d-flex align-items-center  px-3 pe-0" style={{ borderRadius: '5px 5px 0px 0px' }}>
+                        <div className="d-flex align-items-center   pe-0" style={{ borderRadius: '5px 5px 0px 0px' }}>
                             <div className="">
                                 <p className='ps-2 py-2 fs-6 fw-bold m-0 '>Gender Questions Report</p>
                             </div>

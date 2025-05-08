@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import WebsiteButton from "../../../../components/mySurveyProWebsiteBtn/WebsiteButtton";
 import { useTheme } from "@mui/material/styles";
-import MobileStepper from "@mui/material/MobileStepper";
-import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,26 +8,36 @@ import { getSurveyById } from "../../../../Redux/slice/authSlice";
 import toast from "react-hot-toast";
 import Loader from "../../../../components/plugins/Loader";
 import img1 from "../../../../assets/Q12survey/c2.png";
-import "../TEItemplate/TEItemplate.css";
+import CompetencyIcon from '../../../../assets/Q12survey/competencyIcon.svg?react'
 import PreveiwCongratulationsurvey from "../mp12template/PreveiwCongratulationsurvey";
-import img3 from "../../../../assets/Q12survey/Figon_Component.png";
 import EAtemplateId from "./EAtemplateId";
-
+import Radio from '@mui/material/Radio';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Paper from "@mui/material/Paper";
+import '../TEItemplate/TEItemplate.css'
 const EAPreviewQuestion = () => {
   const dispatch = useDispatch();
   const TEISurveyId = useSelector((state) => state.user.selectedSurveyId);
   const [data, setData] = useState(null);
   const theme = useTheme();
   const [surveyTypeId, setSurveyTypeId] = useState(null);
-  const [activeStep, setActiveStep] = useState(0); // Start from 0 for competency index
+  const [activeStep, setActiveStep] = useState(0);
   const [showIdVerification, setShowIdVerification] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const fetchSurveyData = async (TEISurveyId) => {
+    setLoading(true);
     try {
-      const res = await dispatch(getSurveyById({surveyId: TEISurveyId, surveyTypeId: surveyTypeId, designationId:1}));
+      const res = await dispatch(getSurveyById({
+        surveyId: TEISurveyId, 
+        surveyTypeId: surveyTypeId, 
+        designationId: 1
+      }));
       setData(res?.payload);
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -40,13 +47,12 @@ const EAPreviewQuestion = () => {
     } else {
       toast.error("Survey ID not found");
     }
-  }, [surveyTypeId,TEISurveyId, dispatch]);
+  }, [surveyTypeId, TEISurveyId, dispatch]);
 
   const handleNext = () => {
     if (activeStep < data?.competencies?.length - 1) {
       setActiveStep(activeStep + 1);
     } else {
-      // When we reach the end, show congratulations
       setActiveStep(data.competencies.length);
     }
   };
@@ -59,11 +65,13 @@ const EAPreviewQuestion = () => {
 
   const handleIdVerified = () => {
     setShowIdVerification(false);
-    setActiveStep(0); // Start with first competency
+    setActiveStep(0);
   };
+
   const getSurveyTypeIdHandler = (surveyTypeId) => {
     setSurveyTypeId(surveyTypeId);
   }
+
   if (!data) {
     return <Loader />;
   }
@@ -74,16 +82,13 @@ const EAPreviewQuestion = () => {
 
   if (activeStep === data.competencies.length) {
     return (
-      <div className=" ">
+      <div className="position-relative">
         <div className="d-flex justify-content-start flex-wrap gap-5 mb-4 m-0 p-4">
-          <div className="steppercard d-flex flex-column align-items-start w-100">
-            <img src={img1} className="card-img img-fluid mb-3" />
+          <div className="congratulations-main d-flex flex-column align-items-start w-100">
             <div className="container">
               <div className="row">
                 <div className="col-12 p-5">
-                  <div className="row">
-                    <PreveiwCongratulationsurvey />
-                  </div>
+                  <PreveiwCongratulationsurvey />
                 </div>
               </div>
             </div>
@@ -96,116 +101,98 @@ const EAPreviewQuestion = () => {
   const currentCompetency = data.competencies[activeStep];
 
   return (
-    <div className="">
-      <div className="d-flex justify-content-start flex-wrap gap-5 mb-4 m-0 p-4">
-        <div className="steppercard d-flex flex-column align-items-start w-100">
-          <img
-            src={img1}
-            className="card-img img-fluid mb-5 "
-            style={{ borderRadius: "20px 20px 0px 0px" }}
-          />
-          <div className="container">
-            <div className="row">
-              <div className="col-12 p-5">
-                <div className="row">
-                  <div className="col-12 col-md-7 surveyQuestion"></div>
-                  <div className="tableheader m-0 p-0">
-                    <div>
+    <div className="position-relative"> 
+      {loading && (
+        <div 
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 1000,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <Loader />
+        </div>
+      )}
+      <div className={`d-flex justify-content-start flex-wrap gap-5 m-0 ${loading ? 'opacity-50' : ''}`}>
+        <div className="steppercard">
+          <div className="stepper-card-gradiant">
+            <div className="stepper-card-opecity">
+              <div className="">
+                <div className="col-12 ">
+                  <div className="">
+                    <div className="col-12 col-md-7 surveyQuestion"></div>
+                    <div className="tableheader m-0 p-0">
                       <div className="table-body p-2 mb-1">
                         <div className="d-flex align-items-center">
-                          <img src={img3} alt="Image" className="custom-img" />
-                          <span
-                            className="ms-2 me-2 dimension-text"
-                            style={{ fontSize: "18px", color: "white" }}
-                          >
+                          <CompetencyIcon/>
+                          <span className="ms-2 me-2 dimension-text">
                             {currentCompetency.competencyId}
                           </span>
-                          <span
-                            className="dimension-text"
-                            style={{ fontSize: "18px", color: "white" }}
-                          >
+                          <span className="dimension-text">
                             {currentCompetency.competency}
                           </span>
                         </div>
                       </div>
-                      {currentCompetency.questions.map((question, index) => (
-                        <div className="p-2 pt-1 pb-1" key={question.questionId}>
-                          <div className="Question-section mt-1">
-                            <div className="question-question-nmber p-2 ps-3 dimension-text">
-                              Question {index + 1}
-                            </div>
-                            <div className="m-3 d-flex question-text gap-2">
-                              <span className="dimension-text">{index + 1}</span>
-                              <span>
-                                <span
-                                  className="line-width"
-                                  style={{
-                                    border: "none",
-                                    borderLeft: "3px solid #f97300",
-                                    height: "100%",
-                                    marginRight: "0px",
-                                    display: "inline-block",
-                                    marginTop: "-2px"
-                                  }}
-                                />
-                              </span>
-                              <h3 className="dimension-text">{question.questionText}</h3>
-                            </div>
-                            <div className="Question-options d-flex flex-wrap gap-5 p-2 mt-0 pt-0">
-                              {question.choices.map((choice) => (
-                                <Paper
-                                  key={choice.choiceId}
-                                  square
-                                  elevation={0}
-                                  sx={{
-                                    display: "flex",
-                                    alignItems: "start",
-                                  }}
-                                  className="ms-2"
-                                >
-                                  <input
-                                    type="radio"
-                                    name={`question-${question.questionId}`}
-                                    className="form-check-input-TEI mt-1"
-                                    id={`choice-${choice.choiceId}`}
-                                  />
-                                  <span className="ms-2 TEIcheckmark dimension-text">
-                                    {choice.text}
-                                  </span>
-                                </Paper>
-                              ))}
-                            </div>
+                      <div className="set-question-portion-main">
+                        <div className="set-question-counter">
+                          <div className="">
+                            <p className="m-0 fw-semibold fs-md-5">Questions</p>
+                            <small className="text-center" style={{color:'#999999'}}>
+                              {activeStep+1}/{data?.competencies?.length}
+                            </small>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                    <div className="container">
-                      <div className="row justify-content-center">
-                        <div className="col-12 col-md-8 col-lg-6 mui-button-resp">
-                          <MobileStepper
-                            variant="text"
-                            steps={data.competencies.length + 1} // +1 for congratulations step
-                            position="static"
-                            activeStep={activeStep}
-                            style={{ backgroundColor: "#d3d3d3" }}
-                            nextButton={
-                              <WebsiteButton
-                                size="small"
-                                onClick={handleNext}
-                                disabled={activeStep === data.competencies.length}
-                              >
-                                Next
-                                {theme.direction === "rtl" ? (
-                                  <KeyboardArrowLeft />
-                                ) : (
-                                  <KeyboardArrowRight />
-                                )}
-                              </WebsiteButton>
-                            }
-                            backButton={
-                              <WebsiteButton>
-                                <Button
-                                  size="small"
+                        <div className="set-question-list-portion">
+                          {currentCompetency.questions.map((question, index) => (
+                            <div 
+                              key={question.questionId} 
+                              id={`question-${question.questionId}`}
+                            >
+                              <div className="Question-section">
+                                <div className="question-question-nmber dimension-text">
+                                  Question {index + 1}
+                                </div>
+                                <div className="question-text question-text-top">
+                                  <h3 className="question-text">
+                                    {question.questionText}
+                                  </h3>
+                                </div>
+                                <div className="Question-options d-flex flex-wrap gap-1 mt-0 pt-0">
+                                  {question.choices.map((choice) => (
+                                    <Paper
+                                      key={choice.choiceId}
+                                      square
+                                      elevation={0}
+                                      className="ms-2"
+                                    >
+                                      <FormControlLabel 
+                                        sx={{backgroundColor:"transparent"}} 
+                                        value="other" 
+                                        control={
+                                          <Radio
+                                            id={`choice-${choice.choiceId}`}
+                                          />
+                                        } 
+                                        label={choice.text} 
+                                      />
+                                    </Paper>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                          <div className="container">
+                            <div className="row justify-content-center">
+                              <div className="col-12 col-md-8 col-lg-6 d-flex gap-4">
+                                <WebsiteButton
+                                  buttonDesign="outliner"
                                   onClick={handleBack}
                                   disabled={activeStep === 0}
                                 >
@@ -215,10 +202,22 @@ const EAPreviewQuestion = () => {
                                     <KeyboardArrowLeft />
                                   )}
                                   Back
-                                </Button>
-                              </WebsiteButton>
-                            }
-                          />
+                                </WebsiteButton>
+                                <WebsiteButton
+                                  size="small"
+                                  onClick={handleNext}
+                                  disabled={activeStep === data.competencies.length}
+                                >
+                                  {activeStep === data.competencies.length - 1 ? "Submit" : "Next"}
+                                  {theme.direction === "rtl" ? (
+                                    <KeyboardArrowLeft />
+                                  ) : (
+                                    <KeyboardArrowRight />
+                                  )}
+                                </WebsiteButton>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>

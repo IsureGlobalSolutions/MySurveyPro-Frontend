@@ -164,10 +164,10 @@ const index = () => {
       {/* dashboard screen  */}
 
       <div className="">
-        <div className="px-3 pe-0">
-          <div className="bg-white d-flex   shadow  px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
+        <div className="pe-0">
+          <div className="bg-white d-flex   shadow  " style={{ borderRadius: '5px 5px 0px 0px' }}>
             <div className="">
-              <p className='ps-2 py-2 fs-6 fw-bold m-0 '>OverAll Survey Report</p>
+              <p className='ps-2 py-2 fs-6 fw-bold m-0 '>OverAll Survey Report1</p>
             </div>
             <div className="d-flex align-items-center">
               <OverlayTrigger
@@ -212,21 +212,21 @@ const index = () => {
       </div>
 
       <DepartmentReport />
-      <div className="row m-0 p-0 mb-3">
-        <div className="col-md-6 ps-3">
+      <div className="d-flex gap-2 m-0 p-0 mb-3">
+        <div className="w-50 p-0 ">
           <DepartMultiBarChart />
 
         </div>
-        <div className="col-md-6 m-0 p-0">
+        <div className="w-50 m-0 p-0">
           <DepartStackColumnChart />
         </div>
       </div>
-      <div className="row m-0 p-0 mb-3">
-        <div className="col-md-6 ps-3">
+      <div className="d-flex gap-2 m-0 p-0 mb-3">
+        <div className="w-50 p-0">
 
           <DepartLineChart />
         </div>
-        <div className="col-md-6 m-0 p-0">
+        <div className="w-50 m-0 p-0">
           <DepartFunnelChart />
 
         </div>
@@ -234,21 +234,21 @@ const index = () => {
 
       <GradeReport />
 
-      <div className="row m-0 p-0 mb-3">
-        <div className="col-md-6 ps-3">
+    <div className="d-flex gap-2 m-0 p-0 mb-3">
+        <div className="w-50 p-0">
           <GradeMultiBarChart />
 
         </div>
-        <div className="col-md-6 m-0 p-0">
+        <div className="w-50 m-0 p-0">
           <GradeStackColumnChart />
         </div>
       </div>
-      <div className="row m-0 p-0 mb-3">
-        <div className="col-md-6">
+      <div className="d-flex gap-2 m-0 p-0 mb-3">
+        <div className="w-50 p-0">
 
           <GradetLineChart />
         </div>
-        <div className="col-md-6 m-0 p-0">
+        <div className="w-50 m-0 p-0">
           <GradeFunnelChart />
 
         </div>

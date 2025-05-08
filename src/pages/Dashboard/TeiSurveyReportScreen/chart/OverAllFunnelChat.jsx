@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Chart from 'react-apexcharts';
 import Loader from '../../../../components/plugins/Loader';
 import { FunnelChartData } from '../../../../components/cartsComponents/FunnelChartData';
-
+import '../Report.css'
 
 const OverAllFunnelChat = () => {
   const dispatch = useDispatch();
@@ -61,10 +61,10 @@ const OverAllFunnelChat = () => {
 
   return (
     <>
-      <div className="age-card rounded-3 border p-3 shadow bg-white">
+      <div className="table-card-background ">
         <div className="d-flex justify-content-between">
-          <div className="title d-flex align-items-center m-0">
-            <div className=""><p className='m-0 pb-3'>Over All Report </p></div>
+          <div className=" d-flex align-items-center m-0">
+           <p className='table-heading m-0 pb-3'>Over All Report </p>
 
           </div>
           <div className="d-flex align-items-center">

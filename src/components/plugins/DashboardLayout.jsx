@@ -12,7 +12,7 @@ const dispatch = useDispatch()
     return (
         <>
 
-            <div className='d-flex '>
+            <div className='d-flex ' style={{ overflowX: "hidden" }}>
                 <div className={`${collapsed ? ' collapsedsidebar' : 'sidebar '}`}>
                     <Sidebar collapsed={collapsed} setcollapsed={setcollapsed} />
                 </div>

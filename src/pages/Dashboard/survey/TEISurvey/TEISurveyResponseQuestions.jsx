@@ -106,7 +106,7 @@ const TEISurveyResponseQuestions = () => {
               }
           }
   
-          toast.error("Please answer all questions before proceeding");
+          
           return;
       }
   
@@ -116,15 +116,16 @@ const TEISurveyResponseQuestions = () => {
           const responses = currentDimension.questions.map((question) => ({
               questionId: question.questionId,
               choiceId: selectchoiseid[question.questionId],
-              recipientId: Number(staffid),
+              respondentRecipientId: Number(staffid),
               userId,
               surveyId: question.surveyId,
           }));
   
           // Send all responses in a single API call
-          await dispatch(surveyresponse(responses));
-  
-          saveProgress();
+          await dispatch(surveyresponse(responses))
+  .then((res)=>{
+    if(res?.payload?.isSuccess){
+         saveProgress();
   
           if (activeStep < data.dimensions.length - 1) {
               // Move to the next dimension
@@ -136,6 +137,9 @@ const TEISurveyResponseQuestions = () => {
               clearProgress();
               setIsLoading(false);
           }
+    }
+  })
+         
       } catch (error) {
           toast.error(error.message || "An error occurred. Please try again.");
           setIsLoading(false);
@@ -170,10 +174,10 @@ const TEISurveyResponseQuestions = () => {
 
     if (activeStep === data.dimensions.length) {
         return (
-            <div className=" ">
-                <div className="d-flex justify-content-start flex-wrap gap-5 mb-4 m-0 p-4">
-                    <div className="steppercard d-flex flex-column align-items-start w-100">
-                        <img src={img1} className="card-img img-fluid mb-3" alt="Survey Complete" />
+            <div className=" position-relative">
+                <div className="d-flex justify-content-start flex-wrap ">
+                    <div className="congratulations-main ">
+                    
                         <div className="container">
                             <div className="row">
                                 <div className="col-12 p-5">

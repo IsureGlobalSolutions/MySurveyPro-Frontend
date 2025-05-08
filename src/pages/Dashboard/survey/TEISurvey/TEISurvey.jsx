@@ -67,7 +67,7 @@
                 </div>
                 <div className=" col-md-12 t-4">
                  
-                  <WebsiteButton  type='submit' loading={loading}>
+                  <WebsiteButton  style={{width:'350px'}} type='submit' loading={loading}>
                   {loading?" Loading" :'Next'}
                   </WebsiteButton>
                   </div>

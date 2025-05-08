@@ -104,6 +104,7 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
           return {
             img: templateImage3,
             title: element.name,
+            fullname:'Mysurveypro12',
             id: element.id,
             text: "Start your survey by clicking the 'View Survey'",
             buttonviewsurvey: "View Survey",
@@ -115,6 +116,7 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
           return {
             img: form360img,
             title: element.name,
+            fullname:'Team Effectiveness Indicater',
             id: element.id,
             text: "Start your survey by clicking the 'View Survey'",
             buttonviewsurvey: "View Survey",
@@ -126,6 +128,7 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
           return {
             img: q12image,
             title: element.name,
+            fullname:'Competency Assessment',
             id: element.id,
             text: "Start your survey by clicking the 'View Survey'",
             buttonviewsurvey: "View Survey",
@@ -195,40 +198,7 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
   };
   return (
     <>
-      {/* <Modal show={show} onHide={handleClosedata} centered>
-        <Modal.Body style={{ position: "relative", margin: "10px" }}>
-          <button
-            type="button"
-            className="btn-close"
-            aria-label="Close"
-            style={{ position: "absolute", top: "0", right: "0" }}
-            onClick={handleClosedata}
-          ></button>
-          <div className="d-flex justify-content-center align-items-center flex-column gap-3 mt-5">
-            <div className="mt-2">
-              <MdErrorOutline style={{ color: "#dc3545", fontSize: "40px" }} />
-            </div>
-            <div severity="success ps-4" style={{ fontSize: "20px" }}>
-              {popupMessage}
-            </div>
-          </div>
-          <div
-            style={{
-              textAlign: "center",
-              marginTop: "30px",
-              marginBottom: "10px",
-            }}
-          >
-            <button
-              type="button"
-              className="btn btn-danger"
-              onClick={deleteCustomSurvey}
-            >
-              Delete
-            </button>
-          </div>
-        </Modal.Body>
-      </Modal> */}
+     
       <div className="surveylist-section  p-4 pt-2 ">
         <div className="m-2 ps-3">
           <p className="survey-template-title">Survey templates</p>
@@ -248,7 +218,10 @@ const Surveylist = ({ setstepper, sendIdToParent }) => {
                     alt={content.title}
                   />
                   <div className="card-body mb-2">
-                    <p className="card-title m-3">{content.title}</p>
+                    <p className="card-title m-3">{content.fullname}
+                       <span><small>{` (${content.title})`}</small></span>
+                    </p>
+                   
 
                     <p className="titletext ms-3">{content.text}</p>
 

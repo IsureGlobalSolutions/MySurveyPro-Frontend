@@ -10,7 +10,7 @@
     import { getstaffid } from '../../../../Redux/slice/authSlice';
     import toast from 'react-hot-toast';
     import { useDispatch } from 'react-redux';
-    const Q12survey = ({ sendIdParent,setshowOtpScreen}) => {
+    const Q12survey = ({ sendIdParent,showOtpScreen}) => {
         const dispatch =useDispatch();
         const [loading, setloading] = useState(false)
         const { register , handleSubmit , formState: { errors } } = useForm();
@@ -25,7 +25,7 @@
               if(res.payload.isSuccess===true){
                 setloading(false)
                 toast.success(res.payload.alertMessage)
-               setshowOtpScreen(true);
+                showOtpScreen(true);
                 sendIdParent(()=>res.payload.recipientId);
               }else{
                 toast.error(res.payload.alertMessage)
@@ -58,6 +58,7 @@
             errors={errors}
             // onChange={(e) => setstaffid(e.target.value)}       
              placeholder="Enter here"
+             style={{width:'350px'}}
             {...register('userid', { required: 'Userid is required' })}
             readonly
             />
@@ -65,7 +66,7 @@
                 </div>
                 <div className=" col-md-12 t-4">
                
-                  <WebsiteButton className='w-100' type='submit' loading={loading}>
+                  <WebsiteButton style={{width:'350px'}} type='submit' loading={loading}>
                   {loading?" Loading" :'Next'}
                   </WebsiteButton>
                   </div>  
