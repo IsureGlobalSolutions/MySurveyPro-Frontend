@@ -24,7 +24,10 @@ export const   MultiBarChartData = (xaxis = [], series = []) =>
             bar: {
               horizontal: false,
               columnWidth: '55%',
-              endingShape: 'rounded'
+               borderRadius: "3",
+              // endingShape: 'rounded'
+                          borderRadiusApplication: "end",
+
             },
           },
           colors: [

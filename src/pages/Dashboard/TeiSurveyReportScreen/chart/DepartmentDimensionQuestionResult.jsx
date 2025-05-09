@@ -3,10 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import Chart from 'react-apexcharts';
 import Loader from '../../../../components/plugins/Loader';
 import { SingleBarChartData } from '../../../../components/cartsComponents/SingleBarChartData';
-import { getListOfCoumnProperty } from '../../../../Redux/slice/surveySlice';
 import { Navbarvalue } from '../../../../context/NavbarValuesContext';
-import DropdownButton from '../../../../components/mySurveyProWebsiteBtn/DropdownButton';
-import { getDepartmentDimensionsTEISurveyReportApi } from '../../../../Redux/slice/teiSlice';
+
 import '../Report.css'
 const DepartmentDimensionQuestionResult = () => {
 const dispatch =useDispatch();
@@ -75,16 +73,7 @@ const {listOfDepartments}=useSelector((state)=>state.survey)
         <p className='m-0 pb-3 table-heading'>Department report for a dimension Chart</p>
             
         </div>
-        {/* <div className="d-flex align-items-center">
-        
-                  {departmentList?.length>0? 
- <DropdownButton items={departmentList} listKeyName={'columnValue'} onSelect={handleSelectDepartment} selectionName={departmentList[0]?.columnValue}/>
- :''
-}
-         
   
- 
-    </div> */}
     </div>
     <hr  className='m-1'/>
     <div className="" ref={chartRef} >

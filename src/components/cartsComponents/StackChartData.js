@@ -28,6 +28,7 @@ export const StackChartData = ( series = []) => ({
         "bar": {
             "columnWidth": "18%",
             "borderRadiusApplication": "end",
+             "borderRadius": "3",
             "borderRadiusWhenStacked": "last",
             "hideZeroBarsWhenGrouped": false,
             "isDumbbell": false,
