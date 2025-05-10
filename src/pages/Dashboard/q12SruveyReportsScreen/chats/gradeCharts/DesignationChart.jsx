@@ -1,22 +1,37 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Chart from 'react-apexcharts';
+import { PieChart } from '@mui/x-charts/PieChart';
 
-import { saveAs } from 'file-saver';
-import * as ExcelJS from 'exceljs';
 
-import { toPng } from 'html-to-image'; 
+
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../../../../../components/plugins/Loader';
 import { getListOfCoumnProperty, getOverAllGradeReport} from '../../../../../Redux/slice/surveySlice';
 import { Navbarvalue } from '../../../../../context/NavbarValuesContext';
 import { donutChartData } from '../../../../../components/cartsComponents/donutChartData';
 import '../../../TeiSurveyReportScreen/Report.css';
-
+const desktopOS = [
+  {
+    label: 'noData',
+    value: 25,
+  },
+  {
+    label: 'noData',
+    value: 25,
+  },
+  {
+    label: 'noData',
+    value: 50,
+  },
+  
+];
 const DesignationChart = () => {
 
     const {selectedDashboardValues}=Navbarvalue()
 
 const [reportValues, setreportValues] = useState()
+const colorPalette = ['#7DCCB7', '#1F245E', '#3B5BE4'] 
+
 const { paymentStatus } = useSelector((state) => state.survey)
 const [isLoading, setisLoading] = useState(false)
 const chartRef = useRef(null);  
@@ -71,26 +86,35 @@ if(selectedDashboardValues?.survey?.id && paymentStatus[selectedDashboardValues?
       }, [paymentStatus, selectedDashboardValues?.survey?.id])
 
 
-      const SetReportValueHandler = (value,data)=>{
-         Array.isArray(data)?
-        data?.length>0 ?
-        data.map((item,index)=>{
-            
-                if(value===item?.grade ||value ===item?.report){
-                    let labels=Object.keys(item?.responsesReport) 
-                    let series = Object.values(item?.responsesReport)
-setreportValues({labels,series})
-setisLoading(false)
-                }
-                
-            
-        })
-        :
-        null
-        :
-null
-      }
+  const SetReportValueHandler = (value, data) => {
+   
+        
+        if (!Array.isArray(data) || data?.length === 0) {
+            setisLoading(false);
+            return;
+        }
 
+        data.forEach((item) => {
+            if ((value === 'All' && item.report === 'All') || 
+                (value === item.department)) {
+                
+                const responses = item?.responsesReport || {};
+                const transformedData = Object.entries(responses).map(([label, value], index) => ({
+                    label,
+                    value,
+                    color: colorPalette[index % colorPalette.length] // Assign colors from palette
+                }));
+                
+                setreportValues({
+                    labels: transformedData.map(item => item.label),
+                    value: transformedData.map(item => item.value),
+                    chartData: transformedData
+                });
+                
+                setisLoading(false);
+            }
+        });
+    };
 
   
       useEffect(()=>{
@@ -112,7 +136,7 @@ null
     <div className="table-card-background ">
  <div className="d-flex justify-content-between">
         <div className=" d-flex align-items-center m-0">
-<h6 className='m-0 pb-3 table-heading'>Grades </h6>
+<h6 className='m-0 pb-3 table-heading'>Grades1 </h6>
             
         </div>
         <div className="d-flex align-items-center">
@@ -120,21 +144,26 @@ null
     </div>
     </div>
     <hr  className='m-1'/>
-    <div className="" style={{height:"330px"}} ref={chartRef} >
+    <div className="" ref={chartRef} >
         {
              isLoading?  
              <div className="loader-div d-flex justify-content-center align-items-center h-100">
               <Loader/>
                </div> 
                :
-              <Chart
-            options={chartValues}
-            series={chartValues.series}
-            type="donut"
-            height='320'
-
-            // width="500"
-          />   
+         <PieChart
+              series={[
+                {
+                 data: reportValues?.chartData? reportValues?.chartData:desktopOS,
+                 innerRadius: 30,
+                 highlightScope: { fade: 'global', highlight: 'item' },
+                 faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
+               
+               },
+             ]}
+             height={400}
+             width={300}
+           />
         }
             
     </div>

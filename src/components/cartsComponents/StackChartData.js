@@ -27,9 +27,9 @@ export const StackChartData = ( series = []) => ({
         },
         "bar": {
             "columnWidth": "18%",
-            "borderRadiusApplication": "end",
-             "borderRadius": "3",
-            "borderRadiusWhenStacked": "last",
+            "borderRadiusApplication": "around",
+             "borderRadius": "5",
+            "borderRadiusWhenStacked": "all",
             "hideZeroBarsWhenGrouped": false,
             "isDumbbell": false,
             "isFunnel": false,
@@ -84,11 +84,11 @@ export const StackChartData = ( series = []) => ({
             }
         }
     },
-    "colors": [
-        "#FDA779",
-        "#F97300",
-        "#6FCFFD"
-    ],
+   colors: [
+            "#7DCCB7",
+            "#1F245E",
+            "#3B5BE4"
+        ],
     "dataLabels": {
         "enabled": false,
         "style": {

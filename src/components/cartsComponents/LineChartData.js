@@ -1,26 +1,38 @@
-export const LineChartData = ( series = {}) => ({
+export const LineChartData = ( series = {}) => (
+    
+{
     "annotations": {},
     "chart": {
         "animations": {
             "enabled": false
         },
-        "background": "",
         "foreColor": "#333",
         "fontFamily": "Roboto",
-        "height": 250,
-        "id": "zzywa",
+        "height": 326,
+        "id": "ewJZb",
         "stackOnlyBar": true,
         "toolbar": {
-            "show": true
+            "show": false,
+            "tools": {
+                "selection": true,
+                "zoom": true,
+                "zoomin": true,
+                "zoomout": true,
+                "pan": true,
+                "reset": true
+            }
         },
-        "width": 480,
+        "width": 503,
         "zoom": {
             "allowMouseWheelZoom": true
         }
     },
     "plotOptions": {
         "line": {
-            "isSlopeChart": false
+            "isSlopeChart": false,
+            "colors": {
+                "threshold": 0
+            }
         },
         "bar": {
             "borderRadius": 10,
@@ -50,6 +62,27 @@ export const LineChartData = ( series = {}) => ({
             "borderRadius": 4,
             "dataLabels": {
                 "format": "scale"
+            },
+            "seriesTitle": {
+                "show": true,
+                "offsetY": 1,
+                "offsetX": 1,
+                "borderColor": "#000",
+                "borderWidth": 1,
+                "borderRadius": 2,
+                "style": {
+                    "background": "rgba(0, 0, 0, 0.6)",
+                    "color": "#fff",
+                    "fontSize": "12px",
+                    "fontWeight": 400,
+                    "cssClass": "",
+                    "padding": {
+                        "left": 6,
+                        "right": 6,
+                        "top": 2,
+                        "bottom": 2
+                    }
+                }
             }
         },
         "radialBar": {
@@ -81,13 +114,19 @@ export const LineChartData = ( series = {}) => ({
         }
     },
     "dataLabels": {
-        "enabled": false,
         "style": {
             "fontWeight": 700
         },
         "background": {
+            "foreColor": "#0DB4F3",
+            "borderRadius": 20,
+            "padding": 3,
+            "borderColor": "#0DB4F3",
             "dropShadow": {}
         }
+    },
+    "fill": {
+        "type": "gradient"
     },
     "grid": {
         "padding": {
@@ -98,6 +137,8 @@ export const LineChartData = ( series = {}) => ({
     "legend": {
         "fontSize": 14,
         "offsetY": 0,
+        "clusterGroupedSeries": true,
+        "clusterGroupedSeriesOrientation": "vertical",
         "markers": {
             "size": 7
         },
@@ -106,6 +147,7 @@ export const LineChartData = ( series = {}) => ({
         }
     },
     "markers": {
+        "size": 2,
         "hover": {
             "size": 0,
             "sizeOffset": 6
@@ -131,9 +173,16 @@ export const LineChartData = ( series = {}) => ({
             "group": "apexcharts-axis-0"
         }
     ],
+    "states": {
+        "hover": {
+            "filter": {}
+        },
+        "active": {
+            "filter": {}
+        }
+    },
     "stroke": {
-        "curve": "straight",
-        "width": 4,
+        "width": 5,
         "fill": {
             "type": "solid",
             "opacity": 0.85,
@@ -157,7 +206,6 @@ export const LineChartData = ( series = {}) => ({
         "hideEmptySeries": false
     },
     "xaxis": {
-        "type": "numeric",
         "labels": {
             "trim": true,
             "style": {}
@@ -179,9 +227,6 @@ export const LineChartData = ( series = {}) => ({
         }
     },
     "yaxis": {
-        "tickAmount": 10,
-        "max": 100,
-        "min": 0,
         "labels": {
             "showDuplicates": false,
             "style": {}
@@ -192,5 +237,9 @@ export const LineChartData = ( series = {}) => ({
             }
         }
     },
-   
-})
+    "theme": {
+        "palette": "palette3"
+    },
+
+}   
+)
