@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react';
 import WebsiteButton from '../../../../components/mySurveyProWebsiteBtn/WebsiteButtton';
-import img2 from '../../../../assets/Q12survey/Q12cardimage1.png';
 import './TEISurvey.css';
-import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
-import MobileStepper from "@mui/material/MobileStepper";
-import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,27 +9,26 @@ import { getSurveyById, surveyresponse } from '../../../../Redux/slice/authSlice
 import toast from 'react-hot-toast';
 import Loader from '../../../../components/plugins/Loader';
 import img1 from '../../../../assets/Q12survey/c2.png';
-import img3 from "../../../../assets/Q12survey/Figon_Component.png";
-
-import { jwtDecode } from "jwt-decode";
+import CompetencyIcon from '../../../../assets/Q12survey/competencyIcon.svg?react'
 import { useParams } from 'react-router-dom';
 import TEISurvey from './TEISurvey';
 import TEICongratulation from './TEICongratulation';
 import OtpVerifyScreen from '../OtpVerifyScreen';
-const TEISurveyResponseQuestions = () => {
-    // const surveyId = useSelector((state) => state.user.selectedSurveyId);
+import { FormControlLabel, Paper, Radio } from '@mui/material';
 
+const TEISurveyResponseQuestions = () => {
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
     const [staffid, setstaffid] = useState('');
-    const {userData} =useSelector((state)=>state.user)
-    const [isLoading, setisLoading] = useState(false)
-      const { userId, surveyId } = useParams();
-
+    const { userData } = useSelector((state) => state.user);
+    const [isLoading, setIsLoading] = useState(false);
+    const { userId, surveyId } = useParams();
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(111);
-    const [selectchoiseid, setselectchoiseid] = useState([]);
-const [showOtpScreen, setshowOtpScreen] = useState(false)
+    const [selectchoiseid, setSelectchoiseid] = useState([]);
+    const [showOtpScreen, setShowOtpScreen] = useState(false);
+    const [validationErrors, setValidationErrors] = useState({});
+
     useEffect(() => {
         fetchSurveyData(surveyId);
         loadProgress();
@@ -43,7 +37,7 @@ const [showOtpScreen, setshowOtpScreen] = useState(false)
 
     const fetchSurveyData = async (surveyId) => {
         try {
-            const res = await dispatch(getSurveyById({surveyId}));
+            const res = await dispatch(getSurveyById({ surveyId }));
             setData(res?.payload);
         } catch (error) {
             toast.error(error.message);
@@ -53,20 +47,29 @@ const [showOtpScreen, setshowOtpScreen] = useState(false)
     const loadProgress = () => {
         const savedStep = localStorage.getItem('activeStep');
         const savedChoices = localStorage.getItem('selectchoiseid');
-        if (savedStep ) setActiveStep(Number(savedStep));
-        if (savedChoices) setselectchoiseid(JSON.parse(savedChoices));
+        if (savedStep) setActiveStep(Number(savedStep));
+        if (savedChoices) setSelectchoiseid(JSON.parse(savedChoices));
     };
 
     const saveProgress = () => {
-        localStorage.setItem('activeStep', activeStep+1);
+        localStorage.setItem('activeStep', activeStep + 1);
         localStorage.setItem('selectchoiseid', JSON.stringify(selectchoiseid));
     };
 
     const handlechoiseID = (questionId, choiseid) => {
-        setselectchoiseid((prevchoiceid) => ({
+        setSelectchoiseid((prevchoiceid) => ({
             ...prevchoiceid,
             [questionId]: choiseid,
         }));
+
+        // Clear validation error when user selects an option
+        if (validationErrors[questionId]) {
+            setValidationErrors(prev => {
+                const newErrors = { ...prev };
+                delete newErrors[questionId];
+                return newErrors;
+            });
+        }
     };
 
     const clearProgress = () => {
@@ -75,241 +78,257 @@ const [showOtpScreen, setshowOtpScreen] = useState(false)
     };
 
     const handleNext = async () => {
-        const currentDimension = data.dimensions[activeStep];
-    
-        // Check if all questions in the current dimension are answered
-        const allAnswered = currentDimension.questions.every(
-            (question) => selectchoiseid[question.questionId] !== undefined
-        );
-        if (!allAnswered) {
-            toast.error("Please answer all questions before proceeding.");
-            return;
-        }
-    
-        try {
-            // Prepare API request data for all questions in the current dimension
-            setisLoading(true)
-            const responses = currentDimension.questions.map((question) => ({
-                questionId: question.questionId,
-                choiceId: selectchoiseid[question.questionId],
-                recipientId: Number(staffid),
-                userId,
-                surveyId: question.surveyId, // Assuming surveyId is part of the question object
-            }));
-    
-            // Dispatch responses as a batch or individual calls
-            for (const response of responses) {
-                await dispatch(surveyresponse(response));
-            }
-    
-            saveProgress();
-    
-            if (activeStep < data.dimensions.length - 1) {
-                // Move to the next dimension
-                setActiveStep((prevActiveStep) => prevActiveStep + 1);
-                setisLoading(false)
-            } else {
-                // Final dimension - handle end of survey logic
-                console.log("etyeyeyu");
-                setActiveStep(data.dimensions.length);
-                clearProgress();
-                setisLoading(false)
-                // Move to the summary or finish screen
-            }
-        } catch (error) {
-            toast.error(error.message || "An error occurred. Please try again.");
-            setisLoading(false)
-        }
-    };
+      const currentDimension = data.dimensions[activeStep];
+      const newValidationErrors = {};
+      let hasErrors = false;
+  
+      // Check if all questions in current dimension are answered
+      currentDimension.questions.forEach((question) => {
+          if (!selectchoiseid[question.questionId]) {
+              newValidationErrors[question.questionId] = `Please select an answer for Question ${currentDimension.questions.indexOf(question) + 1}`;
+              hasErrors = true;
+          }
+      });
+  
+      setValidationErrors(newValidationErrors);
+  
+      if (hasErrors) {
+          // Scroll to the first unanswered question
+          const firstUnansweredQuestionId = Object.keys(newValidationErrors)[0];
+          if (firstUnansweredQuestionId) {
+              const element = document.getElementById(`question-${firstUnansweredQuestionId}`);
+              if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  element.classList.add('highlight-validation');
+                  setTimeout(() => {
+                      element.classList.remove('highlight-validation');
+                  }, 2000);
+              }
+          }
+  
+          
+          return;
+      }
+  
+      try {
+          setIsLoading(true);
+          // Prepare all responses in a single array
+          const responses = currentDimension.questions.map((question) => ({
+              questionId: question.questionId,
+              choiceId: selectchoiseid[question.questionId],
+              respondentRecipientId: Number(staffid),
+              userId,
+              surveyId: question.surveyId,
+          }));
+  
+          // Send all responses in a single API call
+          await dispatch(surveyresponse(responses))
+  .then((res)=>{
+    if(res?.payload?.isSuccess){
+         saveProgress();
+  
+          if (activeStep < data.dimensions.length - 1) {
+              // Move to the next dimension
+              setActiveStep((prevActiveStep) => prevActiveStep + 1);
+              setIsLoading(false);
+          } else {
+              // Final dimension - handle end of survey logic
+              setActiveStep(data.dimensions.length);
+              clearProgress();
+              setIsLoading(false);
+          }
+    }
+  })
+         
+      } catch (error) {
+          toast.error(error.message || "An error occurred. Please try again.");
+          setIsLoading(false);
+      }
+  };
+
     const handleBack = () => {
         setActiveStep(prevActiveStep => prevActiveStep - 1);
         saveProgress();
+        setValidationErrors({}); // Clear validation errors when going back
     };
-    if (!Array.isArray(data.dimensions) || data.dimensions.length === 0) {
-        return <Loader />;
-    }
+
     const getValueFromIdComponent = (value) => {
         setActiveStep(value);
     };
-     const sendIdParent=(value) => {
-      
+
+    const sendIdParent = (value) => {
         setstaffid(value);
-     }
+    }
+
+    if (!Array.isArray(data.dimensions) || data.dimensions.length === 0) {
+        return <Loader />;
+    }
+
+    if (activeStep === 111) {
+        return !showOtpScreen ? (
+            <TEISurvey setstaffid={setstaffid} showOtpScreen={setShowOtpScreen} sendIdParent={sendIdParent} />
+        ) : showOtpScreen ? (
+            <OtpVerifyScreen stepUPSendValue={getValueFromIdComponent} staffid={staffid} />
+        ) : null;
+    }
+
+    if (activeStep === data.dimensions.length) {
+        return (
+            <div className=" position-relative">
+                <div className="d-flex justify-content-start flex-wrap ">
+                    <div className="congratulations-main ">
+                    
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-12 p-5">
+                                    <TEICongratulation />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    const currentDimension = data.dimensions[activeStep];
+
     return (
-        <>
-            {activeStep === 111 ? (
-              
+        <div className="position-relative">
+            {isLoading && (
+                <div style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    zIndex: 1000,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <Loader />
+                </div>
+            )}
+            <div className={`d-flex justify-content-start flex-wrap gap-5  ${isLoading ? 'opacity-50' : ''}`}>
+                <div className="steppercard">
+                    <div className="stepper-card-gradiant">
+                        <div className="stepper-card-opecity">
+                            <div className="">
+                                <div className="col-12 p-5">
+                                    <div className="">
+                                        <div className="col-12 col-md-7 surveyQuestion"></div>
+                                        <div className="tableheader m-0 p-0">
+                                            <div className="table-body p-2 mb-1">
+                                                <div className="d-flex align-items-center">
+                                                    <CompetencyIcon />
+                                                    <span className="ms-2 me-2 dimension-text">
+                                                        {currentDimension.dimensionId}
+                                                    </span>
+                                                    <span className="dimension-text">
+                                                        {currentDimension.dimension}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div className="set-question-portion-main">
+                                                <div className="set-question-counter">
+                                                    <div className="">
+                                                        <p className="m-0 fw-semibold fs-md-5">Questions</p>
+                                                        <small className="text-center" style={{ color: '#999999' }}>
+                                                            {activeStep + 1}/{data.dimensions.length}
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <div className="set-question-list-portion">
+                                                    {currentDimension.questions.map((question, index) => (
+                                                        <div
+                                                            key={question.questionId}
+                                                            id={`question-${question.questionId}`}
+                                                            className={validationErrors[question.questionId] ? 'question-highlight' : ''}
+                                                        >
+                                                            <div className={`Question-section ${validationErrors[question.questionId] ? 'question-section-validation' : ''}`}>
+                                                                <div className="question-question-nmber dimension-text">
+                                                                    Question {index + 1}
+                                                                </div>
+                                                                <div className="question-text question-text-top">
+                                                                    <h3 className="question-text">
+                                                                        {question.questionText}
+                                                                    </h3>
+                                                                </div>
+                                                               
+                                                                <div className="Question-options d-flex flex-wrap gap-1 mt-0 pt-0">
+                                                                    {question.choices.map((choice) => (
+                                                                        <Paper
+                                                                            key={choice.choiceId}
+                                                                            square
+                                                                            elevation={0}
+                                                                            className="ms-2"
+                                                                        >
+                                                                           
 
+       <FormControlLabel 
+                                        sx={{backgroundColor:"transparent"}} 
+                                        value="other" 
+                                        control={
+                                          <Radio
+                                          id={`choice-${choice.choiceId}`}
+                                                                                    name={`question-${question.questionId}`}
+                                                                                    checked={selectchoiseid[question.questionId] === choice.choiceId}
+                                                                                    onChange={() => handlechoiseID(question.questionId, choice.choiceId)}
+                                          />
+                                        } 
+                                        label={choice.text} 
+                                      />
 
-                !showOtpScreen ? (
-   
-                   <TEISurvey setstaffid={setstaffid} showOtpScreen={setshowOtpScreen}  sendIdParent={sendIdParent} />
-                          )
-                          : showOtpScreen ? (
-                          <OtpVerifyScreen stepUPSendValue={getValueFromIdComponent}  staffid={staffid} />
-                          )  :''
-            ) : activeStep === data.dimensions.length ? (
-                <div className=' '>
-                    <div className='d-flex justify-content-start flex-wrap gap-5 mb-4 m-0 p-4'>
-                        <div className="steppercard d-flex flex-column align-items-start w-100">
-                            <img type="button" src={img1} className="card-img img-fluid mb-3" alt="Survey Stepper" />
-                            <div className='container'>
-                                <div className='row'>
-                                    <div className='col-12 p-5'>
-                                        <TEICongratulation/>
+                                                                        </Paper>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                    <div className="container">
+                                                        <div className="row justify-content-center">
+                                                            <div className="col-12 col-md-8 col-lg-6 d-flex gap-4">
+                                                                <WebsiteButton
+                                                                    buttonDesign="outliner"
+                                                                    onClick={handleBack}
+                                                                    disabled={activeStep === 0}
+                                                                >
+                                                                    {theme.direction === "rtl" ? (
+                                                                        <KeyboardArrowRight />
+                                                                    ) : (
+                                                                        <KeyboardArrowLeft />
+                                                                    )}
+                                                                    Back
+                                                                </WebsiteButton>
+                                                                <WebsiteButton
+                                                                    size="small"
+                                                                    onClick={handleNext}
+                                                                    disabled={activeStep === data.dimensions.length}
+                                                                >
+                                                                    {activeStep === data.dimensions.length - 1 ? "Submit" : "Next"}
+                                                                    {theme.direction === "rtl" ? (
+                                                                        <KeyboardArrowLeft />
+                                                                    ) : (
+                                                                        <KeyboardArrowRight />
+                                                                    )}
+                                                                </WebsiteButton>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            ) : (
-                <div className=" ">
-          <div className="d-flex justify-content-start flex-wrap gap-5 mb-4 m-0 p-4">
-            <div className="steppercard d-flex flex-column align-items-start w-100">
-              <img
-                type="button"
-                src={img1}
-                className="card-img img-fluid mb-5 "
-                style={{ borderRadius: "20px 20px 0px 0px" }}
-              />
-              <div className="container">
-                <div className="row">
-                  <div className="col-12 p-5">
-                    <div className="row">
-                      <div className="col-12 col-md-7 surveyQuestion">
-                       
-                      </div>
-                      <div className="tableheader m-0 p-0">
-                        <div>
-                          <div className="table-body  p-2  mb-1">
-                            <div className="d-flex align-items-center ">
-                              <img
-                                src={img3}
-                                alt="Image"
-                                className="custom-img"
-                              />
-                              <span
-                                className="ms-2 me-2"
-                                style={{ fontSize: "18px", color: "white" }}
-                              >
-                                {" "}
-                                {data.dimensions[activeStep].dimensionId}
-                              </span>
-                              <span
-                                style={{ fontSize: "18px", color: "white" }}
-                              >
-                                {" "}
-                                {data.dimensions[activeStep].dimension}
-                              </span>
-                            </div>
-                          </div>
-                          {data.dimensions[activeStep].questions.map(
-                            (question, index) => (
-                              <div className="p-2 pt-1 pb-1" key={index}>
-                                <div className="Question-section mt-1">
-                                  <div className="question-question-nmber p-2 ps-3">
-                                    Question {index + 1}
-                                  </div>
-                                  <div className="m-3 d-flex question-text gap-2">
-                                    <span>{index + 1}</span>
-                                    <span>
-                                      <span
-                                      className='line-width'
-                                        style={{
-                                          border: "none",
-                                          borderLeft: "3px solid #f97300",
-                                          height: "100%",
-                                          marginRight: "0px",
-                                          display: "inline-block", 
-                                          marginTop:"-2px"
-                                        }}
-                                      />
-                                    </span>
-                                    <h3>{question.questionText}</h3>
-                                  </div>
-                                  <div className="Question-options d-flex flex-wrap gap-5 p-2 mt-0 pt-0">
-  {question.choices.map((choice) => (
-    <Paper
-      key={choice.choiceId}
-      square
-      elevation={0}
-      sx={{
-        display: "flex",
-        alignItems: "start",
-      }}
-      className="ms-2"
-    >
-      <input
-        type="checkbox"
-        className="form-check-input-TEI mt-1"
-        id={`choice${choice.choiceId}`}
-        checked={selectchoiseid[question.questionId] === choice.choiceId}
-        onChange={() => handlechoiseID(question.questionId, choice.choiceId)}
-      />
-      <span className="ms-2 TEIcheckmark">
-        {choice.text}
-      </span>
-    </Paper>
-  ))}
-</div>
-
-                                </div>
-                              </div>
-                            )
-                          )}
-                        </div>
-                        {/* )} */}
-                        <MobileStepper
-                          variant="text"
-                          steps={data.dimensions.length}
-                          position="static"
-                          activeStep={activeStep}
-                          style={{backgroundColor:"#d3d3d3" ,  justifyContent:"space-evenly"}}
-                          nextButton={
-                            <WebsiteButton
-                              size="small"
-                              onClick={handleNext}
-                              disabled={isLoading}
-                            >
-                              {isLoading? 'Please Wait':'Next'}
-                              {theme.direction === "rtl" ? (
-                                <KeyboardArrowLeft />
-                              ) : (
-                                <KeyboardArrowRight />
-                              )}
-                            </WebsiteButton>
-                          }
-                          backButton={
-                            <WebsiteButton>
-                              <Button
-                                size="small"
-                                onClick={handleBack}
-                                disabled={activeStep === 0}
-                              >
-                                {theme.direction === "rtl" ? (
-                                  <KeyboardArrowRight />
-                                ) : (
-                                  <KeyboardArrowLeft />
-                                )}
-                                Back
-                              </Button>
-                            </WebsiteButton>
-                          }
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-            )}
-        </>
     );
 };
 
 export default TEISurveyResponseQuestions;
-
-

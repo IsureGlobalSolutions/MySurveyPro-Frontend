@@ -16,7 +16,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { Navbarvalue } from '../../../context/NavbarValuesContext';
 
-
+import '../TeiSurveyReportScreen/Report.css';
 import DepartFunnelChart from './chats/departmentCharts/DepartFunnelChart';
 import DepartLineChart from './chats/departmentCharts/DepartLineChart';
 import DepartStackColumnChart from './chats/departmentCharts/DepartStackColumnChart';
@@ -26,6 +26,7 @@ import GradeStackColumnChart from './chats/gradeCharts/GradeStackColumnChart';
 import GradetLineChart from './chats/gradeCharts/GradetLineChart';
 import GradeFunnelChart from './chats/gradeCharts/GradeFunnelChart';
 
+import DownloadReportIcon from '../../../assets/dashboredsvg/download_report_icon.svg?react';
 
 const index = () => {
   const dispatch = useDispatch()
@@ -160,24 +161,34 @@ const index = () => {
 
   return (
     <>
-      <HeroCards />
+       <div className="report-background">
+
+             <HeroCards />
       {/* dashboard screen  */}
 
-      <div className="">
-        <div className="px-3 pe-0">
-          <div className="bg-white d-flex   shadow  px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
+      <div className="table-card-background">
+        <div className="pe-0">
+          <div className=" d-flex  justify-content-between  " style={{ borderRadius: '5px 5px 0px 0px' }}>
             <div className="">
-              <p className='ps-2 py-2 fs-6 fw-bold m-0 '>OverAll Survey Report</p>
+              <p className='ps-2 py-2 table-heading m-0 '>OverAll Survey Report</p>
             </div>
-            <div className="d-flex align-items-center">
-              <OverlayTrigger
-                placement="bottom"
-                overlay={<Tooltip id="button-tooltip-2">Download report file</Tooltip>}
-              >
-                <small className='ps-2 py-2  fw-bold m-0 ' style={{ color: 'orange', cursor: 'pointer' }} onClick={downloadReport}>Download</small>
-              </OverlayTrigger>
-
-            </div>
+            <div className="d-flex align-items-center justify-content-center">
+                 <div className="downlaod-report-icon d-flex align-items-center">
+                <OverlayTrigger
+                  placement="bottom"
+                  overlay={
+                    <Tooltip id="button-tooltip-2">
+                      Download report file
+                    </Tooltip>
+                  }
+                >
+                  <DownloadReportIcon
+                    style={{ cursor: "pointer" }}
+                    onClick={downloadReport}
+                  />
+                </OverlayTrigger>
+              </div>
+              </div>
 
 
           </div>
@@ -212,21 +223,21 @@ const index = () => {
       </div>
 
       <DepartmentReport />
-      <div className="row m-0 p-0 mb-3">
-        <div className="col-md-6 ps-3">
+      <div className="d-flex gap-2 m-0 p-0 ">
+        <div className="w-50 p-0 ">
           <DepartMultiBarChart />
 
         </div>
-        <div className="col-md-6 m-0 p-0">
+        <div className="w-50 m-0 p-0">
           <DepartStackColumnChart />
         </div>
       </div>
-      <div className="row m-0 p-0 mb-3">
-        <div className="col-md-6 ps-3">
+      <div className="d-flex gap-2 m-0 p-0 ">
+        <div className="w-50 p-0">
 
           <DepartLineChart />
         </div>
-        <div className="col-md-6 m-0 p-0">
+        <div className="w-50 m-0 p-0">
           <DepartFunnelChart />
 
         </div>
@@ -234,21 +245,21 @@ const index = () => {
 
       <GradeReport />
 
-      <div className="row m-0 p-0 mb-3">
-        <div className="col-md-6 ps-3">
+    <div className="d-flex gap-2 m-0 p-0 ">
+        <div className="w-50 p-0">
           <GradeMultiBarChart />
 
         </div>
-        <div className="col-md-6 m-0 p-0">
+        <div className="w-50 m-0 p-0">
           <GradeStackColumnChart />
         </div>
       </div>
-      <div className="row m-0 p-0 mb-3">
-        <div className="col-md-6">
+      <div className="d-flex gap-2 m-0 p-0 ">
+        <div className="w-50 p-0">
 
           <GradetLineChart />
         </div>
-        <div className="col-md-6 m-0 p-0">
+        <div className="w-50 m-0 p-0">
           <GradeFunnelChart />
 
         </div>
@@ -257,6 +268,8 @@ const index = () => {
 
 
 
+       </div>
+ 
 
       {/* <Charts/> */}
     </>

@@ -191,25 +191,25 @@ const config = [
 {
   path: '/MP12survey/:userId/:surveyId*',
   loginRequired:false,
-  layout: PublicLayout,
+  layout: LoginLayout,
   component:Survey
 },
 {
   path: '/CustomSurvey/:userId/:surveyId*',
   loginRequired:false,
-  layout: PublicLayout,
+  layout: LoginLayout,
   component:Getcustomsurvey
 },
 {
   path: '/TeamEffectivenessSurvey/:userId/:surveyId*',
   loginRequired:false,
-  layout: PublicLayout,
+  layout: LoginLayout,
   component:TEISurveyTemplate
 },
 {
   path: '/EAsurvey/:userId/:surveyId*',
   loginRequired:false,
-  layout: PublicLayout,
+  layout: LoginLayout,
   component:EASurveyTemplate
 },
 {

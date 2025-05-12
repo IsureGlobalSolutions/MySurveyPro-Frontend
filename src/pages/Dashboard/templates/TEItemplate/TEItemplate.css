@@ -2,7 +2,7 @@
 
 
 .Q12-section {
-    height: 80vh;
+    height: 100vh;
     border-radius: 20px;
     background-image: url("../../../../assets/Q12survey/Q12image.png");
     background-size: cover; 
@@ -16,74 +16,66 @@
     background-position: center center; 
     background-repeat: no-repeat; 
 }
+.Q12-section .stepper .survey-start-welcome{
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 39.85px;
+    line-height: 105%;
+    letter-spacing: 0%;
+    
+     
+}
+.Q12-section .stepper .survey-start-tagline{
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 28.27px;
+    line-height: 105%;
+    letter-spacing: 0%;
+     
+}
+.Q12-section .stepper .survey-tage-text{
+    font-family: Poppins;
+font-weight: 300;
+font-size: 14px;
+line-height: 100%;
+letter-spacing: 0%;
+color: #5E5E5E;
 
+}
+.table-body .dimension-text{
+    font-family: Poppins;
+font-weight: 600;
+font-size: 24.68px;
+line-height: 22.51px;
+letter-spacing: 0px;
+vertical-align: middle;
 
-.form-check-input-TEI {
-    position: relative;
-    width: 15px; 
-    height: 15px; 
-    border-radius: 20px;
-    border: none !important; 
-    background-color: #F97300;
-    cursor: pointer; 
-    appearance: none; 
-    outline: none; 
-    box-shadow: none !important; 
-    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8) !important;
+}
+.table-body .question-text{
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 18.76px;
+    line-height: 24.91px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    color: #282828;
+   
+ 
+}
+.question-text.question-text-top{
+  margin: 20px 0px;   
 }
 
-.form-check-input-TEI:checked {
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5); 
-    background-color: #F97300; 
-    border: 2px solid #F97300; 
-}
 
-.form-check-input-TEI:checked::before {
-    content: "	\2713"; 
-    position: absolute;
-    left: 50%; 
-    top: 43%; 
-    transform: translate(-50%, -50%); 
-    font-size: 16px; 
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-      text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
-    width: 90%; 
-    height: 90%; 
-    border-radius: 4px;
-    background-color: transparent; 
-    margin: 0; 
-    padding: 0; 
-    overflow: hidden; 
-}
+
+
 
 .form-check-input-TEI:focus {
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .2); 
     box-shadow: none; 
 }
 
-.TEIcheckmark {
-    margin-top: 1px; 
-    line-height: 25px; 
-    font-size: 16px;
-font-weight: 500;
-line-height: 22.8px;
-text-align: left;
-color: #151D48;
-}
 
-.form-check-input-TEI:checked[type=checkbox] {
-    --bs-form-check-bg-image: none; 
-}
-
-.mysurveypro-input-field{
-    border-radius: 10px;
-    border: 1px solid #B7BBBE;
-    padding: 18px 13px 18px 13px;
-    width: 100%;
-}
 .mysurveypro-input-field::placeholder{
   color: #C5C5C5;
   font-weight: 500;
@@ -140,15 +132,52 @@ color: #151D48;
     border: 1px solid;
 }
 .steppercard{
-    border-radius: 20px  ;
-    border: 1px solid #D9D9D9;
-    background-color: #fff;
+    /* height: 100vh; */
+  background-image: url(../../../../assets/Dashboredpng/survey-gradiant.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+.congratulations-main{
+    /* height: 100vh; */
+  background-image: url(../../../../assets/Dashboredpng/background-gradiant.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+.mp12-height{
+    height: 100vh;
+}
+.stepper-card-gradiant{
+    background-color: linear-gradient(180deg, rgba(145, 147, 150, 0) 0.52%, #F4F7FC 91.56%);
+   
+ width: 95%;
+border-radius: 24px;
+margin: 50px 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
-
+.stepper-card-gradiant .stepper-card-opecity{
+    width: 100%;
+    background: #FFFFFF21;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;   
+}
 @media (max-width: 600px) {
     .backgroundcolor h1{
         font-size: 40px;
@@ -158,16 +187,13 @@ color: #151D48;
         }
 }
 .tableheader{
-    margin-top: -180px !important;
-    background-color: #d3d3d3;
-    box-shadow:  0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);;
+
 }
 .table-body{
     /* border-radius: 8px; */
 
-    border-top: 1px solid #2d2d2e;
-    background-color: hsl(206deg 59.96% 54.26%);
-    color: white;
+    width: 900px;
+    color: #282828;
     text-align: start;
 }
 .Question-header{
@@ -179,19 +205,42 @@ color: #151D48;
     color: #000000;
    
 }
+
 .question-question-nmber{
-    font-size: 15px;
-    font-weight: 900;
-    border-bottom:2px solid #c4c1c1 ;
+    font-family: Poppins;
+    font-weight: 700;
+    font-size: 22.76px;
+    line-height: 24.91px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    color: #282828;
+ 
 
 }
-.Question-section{
-    border-radius: 5px;
-    background-color: #ffff;
+.set-question-portion-main{
+    display: flex;
+ 
+
+}
+.set-question-counter{
+    width: calc(20%);
+    padding-top: 35px;
     text-align: start;
-    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px 0px rgba(255, 255, 255, .8) !important;
-
-}
+    }
+    .set-question-list-portion{
+    width: calc(80%);
+    }
+    .Question-section{
+      
+        text-align: start;
+    margin: 25px 0px;
+    padding: 10px 0px;
+    border-bottom: 1px solid #97979726;
+    
+    }
+    .MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation0.ms-2.css-9mq7az-MuiPaper-root{
+        background-color: transparent;
+    }
 .question-text h3 {
     font-size: 16px;
 }
@@ -326,13 +375,4 @@ textarea.form-contro:active {
         
       }
 }
-@media (max-width:600px) {
-    .tableheader {
-        margin-top: -150px !important;
-    }
-}
-@media (max-width:450px) {
-    .tableheader {
-        margin-top: -110px !important;
-    }
-}
+

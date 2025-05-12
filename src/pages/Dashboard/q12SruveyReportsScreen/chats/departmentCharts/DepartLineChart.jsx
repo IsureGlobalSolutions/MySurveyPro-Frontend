@@ -8,6 +8,7 @@ import { getOverAllDepartmentReport } from '../../../../../Redux/slice/surveySli
 import DropdownButton from '../../../../../components/mySurveyProWebsiteBtn/DropdownButton';
 import { LineChartData } from '../../../../../components/cartsComponents/LineChartData';
 import Loader from '../../../../../components/plugins/Loader';
+import '../../../TeiSurveyReportScreen/Report.css';
 
 const listOfResponseReport=[
   {name:'Actively Engaged'},
@@ -99,16 +100,6 @@ return [];
 
 
 
-// useEffect(()=>{
-// if(selectedDashboardValues?.department){
-
-//   setisLoading(true)
-
-// showSelectedValues(selectedDashboardValues?.department)
-// }
-
-// },[selectedDashboardValues?.department])
-
 
 const handleSelect=(data)=>{
 setselectedReport(data?.name)
@@ -117,15 +108,21 @@ SetReportValueHandler(getAllReportData,data?.name)
 }
   return (
     <>
-    <div className="age-card rounded-3 border p-3 shadow bg-white">
+    <div className="table-card-background">
  <div className="d-flex justify-content-between">
-        <div className="title d-flex align-items-center m-0">
-            <div className=""><h6 className='m-0 pb-3 fw-bold'>Department </h6></div>
+        <div className=" d-flex align-items-center m-0">
+         <h6 className='m-0 pb-3 table-heading'>Department </h6>
             
         </div>
         <div className="d-flex align-items-center w-100 justify-content-end">
-        <div className="col-md-4 col-sm-5">
-              <DropdownButton items={listOfResponseReport} listKeyName={'name'} onSelect={handleSelect} selectionName='Actively Engaged'/>
+        <div className="">
+              <DropdownButton 
+              items={listOfResponseReport} 
+              listKeyName={'name'} 
+              onSelect={handleSelect} 
+              selectionName='Actively Engaged'
+              style={{width:'200px'}}
+              />
 
         </div>
  

@@ -24,13 +24,16 @@ export const   MultiBarChartData = (xaxis = [], series = []) =>
             bar: {
               horizontal: false,
               columnWidth: '55%',
-              endingShape: 'rounded'
+               borderRadius: "5",
+              // endingShape: 'rounded'
+                          borderRadiusApplication: "around",
+
             },
           },
           colors: [
-            "#FDA779",
-            "#F97300",
-            "#6FCFFD"
+            "#7DCCB7",
+            "#1F245E",
+            "#3B5BE4"
         ],
           dataLabels: {
             enabled: false

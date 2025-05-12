@@ -9,6 +9,8 @@ import { object } from 'prop-types';
 import Tooltip from '../../../components/Tooltip/Tooltip';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
+import './Report.css';
+import DownloadReportIcon from '../../../assets/dashboredsvg/download_report_icon.svg?react';
 const UserDimensionsDataForAllDepartments = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [columns, setColumns] = useState([]);
@@ -198,25 +200,32 @@ fetchData(selectedDepartment,params[2],params[3])
   
   
   return (
-    <div className="row m-0 p-0 justify-content-between mt-3">
+    <div className="table-card-background  row  justify-content-between ">
       <div className="deparment-table-data col-md-12 p-0">
-        <div className="mx-3 py-2 row justify-content-between bg-white shadow me-0 rounded-top-3">
-          <div className="col-md-5 d-flex">
-            <div className="d-flex align-items-center px-3" style={{ borderRadius: '5px 5px 0px 0px' }}>
-              <p className="ps-2 py-2 fs-6 fw-bold m-0">User Dimensions For All Department Report</p>
+        <div className="mx-0 py-2 d-flex justify-content-between ">
+          <div className=" d-flex">
+            <div className="d-flex align-items-center " style={{ borderRadius: '5px 5px 0px 0px' }}>
+              <p className="ps-2 py-2 table-heading m-0">User Dimensions For All Department Report</p>
             </div>
-            <div className="d-flex align-items-center">
-
-<Tooltip text={'Download report file'} style={{ width: '200px' }}>
-  <small className='ps-1 py-2  fw-bold m-0 ' style={{ color: 'orange', cursor: 'pointer' }} onClick={downloadTableReport}>Download</small>
-</Tooltip>
-</div>
+           
           </div>
-          <div className="col-md-3 col-sm-4">
+          <div className="d-flex gap-3">
+          <div className="d-flex gap-2">
+                <div className="downlaod-report-icon d-flex align-items-center">
+                  <Tooltip
+                    text={"Download report file"}
+                    style={{ width: "200px" }}
+                  >
+                   
+                    <DownloadReportIcon style={{cursor: "pointer" }}  onClick={downloadTableReport}/>
+                  </Tooltip>
+                </div>
+              </div>
             {departmentList?.length > 0 ? (
               <DropdownButton
                 items={departmentList}
                 listKeyName={'columnValue'}
+                style={{ width: "200px" }}
                 onSelect={handleSelectDepartment}
                 selectionName={departmentList[0]?.columnValue}
               />

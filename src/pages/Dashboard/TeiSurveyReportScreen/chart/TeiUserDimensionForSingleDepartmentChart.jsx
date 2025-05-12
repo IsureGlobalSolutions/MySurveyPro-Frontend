@@ -99,17 +99,18 @@ const TeiUserDimensionForSingleDepartmentChart = () => {
 
   return (
    
-<div className='ps-3'>
-   <div className="age-card rounded-3 border p-3 shadow bg-white">
+<div className='table-card-background row justify-content-between'>
+   <div className="">
       <div className="d-flex justify-content-between">
-        <div className="title d-flex align-items-center m-0">
-          <p className="m-0 pb-3">Team Dimension Average Score</p>
+        <div className=" d-flex align-items-center m-0">
+          <p className="m-0 pb-3 table-heading">Team Dimension Average Score</p>
         </div>
         <div className="d-flex align-items-center">
           {departmentList?.length > 0 && (
             <DropdownButton
               items={departmentList}
               listKeyName={'columnValue'}
+              style={{ width: "200px" }}
               onSelect={handleSelectDepartment}
               selectionName={selectedDepartment || departmentList[0]?.columnValue}
             />

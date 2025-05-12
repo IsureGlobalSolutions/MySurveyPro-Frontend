@@ -1,0 +1,13 @@
+.delte-icon-circle{
+    background-color: #DC3449;
+    border-radius: 50%;
+    height: 68px;
+    width: 68px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.logout-button-main{
+    background-color: #F8F8F8;
+}

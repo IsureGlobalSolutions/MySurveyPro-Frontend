@@ -8,7 +8,7 @@ export const donutChartData = ( reportValues = {}) =>
         },
         "foreColor": "#333",
         "fontFamily": "Roboto",
-        "height": 248,
+        "height": 278,
         "id": "XqUpw",
         "stackOnlyBar": true,
         "toolbar": {
@@ -162,7 +162,8 @@ export const donutChartData = ( reportValues = {}) =>
             "filter": {}
         }
     },
-    "stroke": {
+      "stroke": {
+        "width": 12,
         "fill": {
             "type": "solid",
             "opacity": 0.85,
@@ -220,3 +221,5 @@ export const donutChartData = ( reportValues = {}) =>
   
 }
     )
+
+

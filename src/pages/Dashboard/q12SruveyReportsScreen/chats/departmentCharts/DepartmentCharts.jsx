@@ -1,25 +1,38 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Chart from 'react-apexcharts';
-import { saveAs } from 'file-saver';
-import * as ExcelJS from 'exceljs';
 
-import { toPng } from 'html-to-image'; 
+import { PieChart } from '@mui/x-charts/PieChart';
 import { useDispatch, useSelector } from 'react-redux';
 import {  getOverAllDepartmentReport } from '../../../../../Redux/slice/surveySlice';
 import { Navbarvalue } from '../../../../../context/NavbarValuesContext';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
+
 import Loader from '../../../../../components/plugins/Loader';
-import { donutChartData } from '../../../../../components/cartsComponents/donutChartData';
+// import { donutChartData } from '../../../../../components/cartsComponents/donutChartData';
+import '../../../TeiSurveyReportScreen/Report.css';
+ const desktopOS = [
+  {
+    label: 'noData',
+    value: 25,
+  },
+  {
+    label: 'noData',
+    value: 25,
+  },
+  {
+    label: 'noData',
+    value: 50,
+  },
+  
+];
+
 const DepartmentCharts = () => {
 
     const {selectedDashboardValues}=Navbarvalue()
     const [isLoading, setisLoading] = useState(false)
-
+const colorPalette = ['#7DCCB7', '#1F245E', '#3B5BE4'] 
 const [reportValues, setreportValues] = useState()
 const { paymentStatus } = useSelector((state) => state.survey)
 const chartRef = useRef(null); 
-  const chartValues = donutChartData(reportValues);
+  // const chartValues = donutChartData(reportValues);
 
     const dispatch = useDispatch()
 
@@ -44,7 +57,6 @@ const chartRef = useRef(null);
              dispatch(getOverAllDepartmentReport({surveyId:selectedDashboardValues?.survey?.id,option:value}))
         .then((res) => {
            SetReportValueHandler(value,res?.payload)
-            console.log(value, res?.payload);
             
         }) 
         .finally(()=>{
@@ -72,31 +84,35 @@ if(selectedDashboardValues?.survey?.id && paymentStatus[selectedDashboardValues?
 
 
 
-      const SetReportValueHandler = (value,data)=>{
+ const SetReportValueHandler = (value, data) => {
+     
         
-         Array.isArray(data)?
-        data?.length>0 ?
-        data.map((item,index)=>{
-            
-                if(value===item?.department){
-                    let labels=Object.keys(item?.responsesReport) 
-                    let series = Object.values(item?.responsesReport)
-setreportValues({labels,series})
-setisLoading(false)
-                }else if(value=== item?.report){
-                    let labels=Object.keys(item?.responsesReport) 
-                    let series = Object.values(item?.responsesReport)
-setreportValues({labels,series})
-setisLoading(false)
+        if (!Array.isArray(data) || data?.length === 0) {
+            setisLoading(false);
+            return;
+        }
 
-                }
-            
-        })
-        :
-        null
-        :
-null
-      }
+        data.forEach((item) => {
+            if ((value === 'All' && item.report === 'All') || 
+                (value === item.department)) {
+                
+                const responses = item?.responsesReport || {};
+                const transformedData = Object.entries(responses).map(([label, value], index) => ({
+                    label,
+                    value,
+                    color: colorPalette[index % colorPalette.length] // Assign colors from palette
+                }));
+                
+                setreportValues({
+                    labels: transformedData.map(item => item.label),
+                    value: transformedData.map(item => item.value),
+                    chartData: transformedData
+                });
+                
+                setisLoading(false);
+            }
+        });
+    };
 
 
   
@@ -116,10 +132,10 @@ null
 
   return (
     <>
-    <div className="age-card rounded-3 border p-3 shadow bg-white">
+    <div className="table-card-background">
  <div className="d-flex justify-content-between">
-        <div className="title d-flex align-items-center m-0">
-            <div className=""><h6 className='m-0 pb-3 fw-bold'>Department </h6></div>
+        <div className=" d-flex align-items-center m-0">
+        <h6 className='m-0 pb-3 table-heading'>Department </h6>
             
         </div>
         <div className="d-flex align-items-center">
@@ -128,7 +144,7 @@ null
     </div>
     </div>
     <hr  className='m-1'/>
-    <div className="  " style={{height:"330px"}} ref={chartRef} >
+    <div className="  " ref={chartRef} >
     {
              isLoading?  
              <div className="loader-div d-flex justify-content-center align-items-center h-100">
@@ -136,14 +152,21 @@ null
                </div> 
                :
 
-         <Chart 
-            options={chartValues}
-            series={chartValues.series}
-            type="donut"
-            height='320'
+                 <PieChart
+       series={[
+         {
+          data: reportValues?.chartData? reportValues?.chartData:desktopOS,
+          innerRadius: 30,
+          highlightScope: { fade: 'global', highlight: 'item' },
+          faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
+        
+        },
+      ]}
+      height={400}
+      width={300}
+    />
 
-            // width="500"
-          /> 
+
     }
     </div>
      

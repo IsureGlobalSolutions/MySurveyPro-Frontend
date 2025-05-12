@@ -31,6 +31,7 @@ export const SingleBarChartData = ( data=[]) =>
                 },
                 "bar": {
                     "columnWidth": "22%",
+                     "borderRadius": "8",
                     "borderRadiusApplication": "end",
                     "borderRadiusWhenStacked": "last",
                     "hideZeroBarsWhenGrouped": false,
@@ -118,7 +119,7 @@ export const SingleBarChartData = ( data=[]) =>
                     "dropShadow": {}
                 }
             },
-            // colors:[color.length>0? color:[]],
+            colors:['#3B5BE4'],
             "grid": {
                 "padding": {
                     "right": 25,

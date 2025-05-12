@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import WebsiteButton from "../../../../components/mySurveyProWebsiteBtn/WebsiteButtton";
-import img2 from "../../../../assets/Q12survey/Q12cardimage1.png";
 import "../TEISurvey/TEISurvey.css";
-import Box from "@mui/material/Box";
+import Radio from '@mui/material/Radio';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import { useTheme } from "@mui/material/styles";
 import MobileStepper from "@mui/material/MobileStepper";
 import Paper from "@mui/material/Paper";
@@ -10,28 +10,21 @@ import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getSurveyById,
-  surveyresponse,
-  
-} from "../../../../Redux/slice/authSlice";
+import { getSurveyById } from "../../../../Redux/slice/authSlice";
 import toast from "react-hot-toast";
 import Loader from "../../../../components/plugins/Loader";
 import img1 from "../../../../assets/Q12survey/c2.png";
-import img3 from "../../../../assets/Q12survey/Figon_Component.png";
-import { jwtDecode } from "jwt-decode";
+import CompetencyIcon from '../../../../assets/Q12survey/competencyIcon.svg?react'
 import { useParams } from "react-router-dom";
 import TEICongratulation from "../TEISurvey/TEICongratulation";
 import OtpVerifyScreen from "../OtpVerifyScreen";
 import EASurvey from "./EASurvey";
 import EADepartmentSelection from "./EADepartmentSelection";
 import { EASurveyResponseApi } from "../../../../Redux/slice/surveySlice";
-import { set } from "lodash";
 
 const EASurveyResponseQuestions = () => {
   const dispatch = useDispatch();
   const [data, setData] = useState(null);
-  console.log("🚀 ~ EASurveyResponseQuestions ~ data:", data)
   const theme = useTheme();
   const [surveyTypeId, setSurveyTypeId] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
@@ -42,46 +35,42 @@ const EASurveyResponseQuestions = () => {
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [otpScreenData, setOtpScreenData] = useState(null);
-  const [responses, setResponses] = useState({}); // Store all responses
-  const [currentCompetencyResponses, setCurrentCompetencyResponses] = useState({}); // Store current competency responses
+  const [responses, setResponses] = useState({});
+  const [currentCompetencyResponses, setCurrentCompetencyResponses] = useState({});
   const { userId, surveyId } = useParams();
-const [loading, setloading] = useState(false)
+  const [loading, setloading] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({});
+
   const fetchSurveyData = async (surveyTypeId, designationId) => {
-    setloading(true)
+    setloading(true);
     try {
       const res = await dispatch(
-        getSurveyById(surveyTypeId===1 ?{
+        getSurveyById(surveyTypeId === 1 ? {
           surveyId: surveyId,
           surveyTypeId: surveyTypeId,
           designationId: designationId,
-        }:
-        
-      {
-        surveyId: surveyId,
-        surveyTypeId: surveyTypeId,
-        designationId: designationId,
-        employeeRecipientId: selectedEmployee?.id,
-        respondentRecipientId: parseInt(recipentId),
-      })
-      )
-      .then((response) => {
-        if(response?.payload?.isSuccess && surveyTypeId===2){
-          setloading(false)
-         console.log("enter successfully" ,response?.payload);
-         setData(response?.payload);
+        } : {
+          surveyId: surveyId,
+          surveyTypeId: surveyTypeId,
+          designationId: designationId,
+          employeeRecipientId: selectedEmployee?.id,
+          respondentRecipientId: parseInt(recipentId),
+        })
+      ).then((response) => {
+        if (response?.payload?.isSuccess && surveyTypeId === 2) {
+          setloading(false);
+          setData(response?.payload);
           setShowDepartmentSelection(false);
           setShowIdVerification(false);
-          
         }
-        else if(response?.payload?.isSuccess && surveyTypeId===1){
-          setloading(false)
-           setData(response?.payload);
-           setShowIdVerification(false);
+        else if (response?.payload?.isSuccess && surveyTypeId === 1) {
+          setloading(false);
+          setData(response?.payload);
+          setShowIdVerification(false);
         }
-      })
-     
+      });
     } catch (error) {
-      setloading(false)
+      setloading(false);
       toast.error(error.message);
     }
   };
@@ -91,25 +80,43 @@ const [loading, setloading] = useState(false)
   };
 
   const handleNext = async () => {
-    setloading(true)  
-    // Check if all questions in current competency are answered
+    setloading(true);
     const currentCompetency = data.competencies[activeStep];
-    const unansweredQuestions = currentCompetency.questions.filter(
-      (question) => !currentCompetencyResponses[question.questionId]
-    );
+    const newValidationErrors = {};
+    let hasErrors = false;
 
-    if (unansweredQuestions.length > 0) {
-      toast.error("Please answer all questions before proceeding");
-      setloading(false)
+    currentCompetency.questions.forEach((question) => {
+      if (!currentCompetencyResponses[question.questionId]) {
+        newValidationErrors[question.questionId] = `Please select an answer for Question ${currentCompetency.questions.indexOf(question) + 1}`;
+        hasErrors = true;
+      }
+    });
+
+    setValidationErrors(newValidationErrors);
+
+    if (hasErrors) {
+      const firstUnansweredQuestionId = Object.keys(newValidationErrors)[0];
+      if (firstUnansweredQuestionId) {
+        const element = document.getElementById(`question-${firstUnansweredQuestionId}`);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          element.classList.add('highlight-validation');
+          setTimeout(() => {
+            element.classList.remove('highlight-validation');
+          }, 2000);
+        }
+      }
+      
+     
+      setloading(false);
       return;
     }
 
-    // Prepare payload for current competency
     const payload = currentCompetency.questions.map((question) => ({
       userId: userId,
       questionId: question.questionId,
       choiceId: currentCompetencyResponses[question.questionId],
-      respondentRecipientId:  parseInt(recipentId),
+      respondentRecipientId: parseInt(recipentId),
       surveyId: parseInt(surveyId),
       competencyId: currentCompetency.competencyId,
       surveyTypeId: surveyTypeId,
@@ -119,44 +126,46 @@ const [loading, setloading] = useState(false)
     }));
 
     try {
-      // Send responses for current competency
-      await dispatch(EASurveyResponseApi(payload)).unwrap();
-      
-      // Save responses to overall state
-      setResponses(prev => ({
+      await dispatch(EASurveyResponseApi(payload))
+      .then((res)=>{
+        if(res?.payload?.isSuccess){
+          setloading(false);
+            setResponses(prev => ({
         ...prev,
         [currentCompetency.competencyId]: currentCompetencyResponses
       }));
 
-      // Clear current competency responses
       setCurrentCompetencyResponses({});
+      setValidationErrors({});
 
-      // Move to next step
       if (activeStep < data.competencies.length - 1) {
-        setloading(false)
+        setloading(false);
         setActiveStep(activeStep + 1);
       } else {
-        setloading(false)
+        setloading(false);
         setActiveStep(data.competencies.length);
       }
+        }
+      })
+      
+    
     } catch (error) {
-      setloading(false)
+      setloading(false);
       toast.error("Failed to submit responses. Please try again.");
     }
   };
 
   const handleBack = () => {
     if (activeStep > 0) {
-      // Save current responses before going back
       const currentCompetency = data.competencies[activeStep];
       setResponses(prev => ({
         ...prev,
         [currentCompetency.competencyId]: currentCompetencyResponses
       }));
       
-      // Load responses for previous competency if they exist
       const prevCompetency = data.competencies[activeStep - 1];
       setCurrentCompetencyResponses(responses[prevCompetency.competencyId] || {});
+      setValidationErrors({});
       
       setActiveStep(activeStep - 1);
     }
@@ -176,7 +185,6 @@ const [loading, setloading] = useState(false)
     setSurveyTypeId(data.surveyTypeId);
     if (data.surveyTypeId === 1) {
       fetchSurveyData(data.surveyTypeId, data.designationId);
-      
     } else if (data.surveyTypeId === 2) {
       setShowDepartmentSelection(true);
     }
@@ -195,11 +203,7 @@ const [loading, setloading] = useState(false)
       toast.error("Please select an employee");
       return;
     }
-  
-      fetchSurveyData(otpScreenData.surveyTypeId, selectedEmployee.designationId)
-
-           
- 
+    fetchSurveyData(otpScreenData.surveyTypeId, selectedEmployee.designationId);
   };
 
   const handleResponseChange = (questionId, choiceId) => {
@@ -207,13 +211,21 @@ const [loading, setloading] = useState(false)
       ...prev,
       [questionId]: choiceId
     }));
+    
+    if (validationErrors[questionId]) {
+      setValidationErrors(prev => {
+        const newErrors = {...prev};
+        delete newErrors[questionId];
+        return newErrors;
+      });
+    }
   };
 
-  // Load responses for current competency when step changes
   useEffect(() => {
     if (data?.competencies && activeStep < data.competencies.length) {
       const currentCompetency = data.competencies[activeStep];
       setCurrentCompetencyResponses(responses[currentCompetency.competencyId] || {});
+      setValidationErrors({});
     }
   }, [activeStep, data, responses]);
 
@@ -229,9 +241,7 @@ const [loading, setloading] = useState(false)
         getEAsurveydata={getOtpScreenData}
         staffid={recipentId}
       />
-    ) : (
-      ""
-    );
+    ) : null;
   }
 
   if (showDepartmentSelection && otpScreenData) {
@@ -254,10 +264,10 @@ const [loading, setloading] = useState(false)
 
   if (activeStep === data.competencies.length) {
     return (
-      <div className=" ">
+      <div className="">
         <div className="d-flex justify-content-start flex-wrap gap-5 mb-4 m-0 p-4">
           <div className="steppercard d-flex flex-column align-items-start w-100">
-            <img src={img1} className="card-img img-fluid mb-3" />
+            <img src={img1} className="card-img img-fluid mb-3" alt="Congratulations" />
             <div className="container">
               <div className="row">
                 <div className="col-12 p-5">
@@ -277,7 +287,7 @@ const [loading, setloading] = useState(false)
 
   return (
     <div className="position-relative"> 
-       {loading && (
+      {loading && (
         <div 
           style={{
             position: 'fixed',
@@ -285,152 +295,118 @@ const [loading, setloading] = useState(false)
             left: 0,
             width: '100%',
             height: '100%',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent black
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
             zIndex: 1000,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center'
           }}
         >
-          <Loader /> {/* Your loader component */}
+          <Loader />
         </div>
       )}
-      <div className={`d-flex justify-content-start flex-wrap gap-5 mb-4 m-0 p-4 ${loading ? 'opacity-50' : ''}`}>
-  
-           <div className="steppercard d-flex flex-column align-items-start w-100">
-          <img
-            src={img1}
-            className="card-img img-fluid mb-5 "
-            style={{ borderRadius: "20px 20px 0px 0px" }}
-          />
-          <div className="container">
-            <div className="row">
-              <div className="col-12 p-5">
-                <div className="row">
-                  <div className="col-12 col-md-7 surveyQuestion"></div>
-                  <div className="tableheader m-0 p-0">
-                    <div>
+      <div className={`d-flex justify-content-start flex-wrap gap-5 m-0 ${loading ? 'opacity-50' : ''}`}>
+        <div className="steppercard">
+          <div className="stepper-card-gradiant">
+            <div className="stepper-card-opecity">
+              <div className="">
+                <div className="col-12 p-5">
+                  <div className="">
+                    <div className="col-12 col-md-7 surveyQuestion"></div>
+                    <div className="tableheader m-0 p-0">
                       <div className="table-body p-2 mb-1">
                         <div className="d-flex align-items-center">
-                          <img src={img3} alt="Image" className="custom-img" />
-                          <span
-                            className="ms-2 me-2 dimension-text"
-                            style={{ fontSize: "18px", color: "white" }}
-                          >
+                          <CompetencyIcon/>
+                          <span className="ms-2 me-2 dimension-text">
                             {currentCompetency.competencyId}
                           </span>
-                          <span
-                            className="dimension-text"
-                            style={{ fontSize: "18px", color: "white" }}
-                          >
+                          <span className="dimension-text">
                             {currentCompetency.competency}
                           </span>
                         </div>
                       </div>
-                      {currentCompetency.questions.map((question, index) => (
-                        <div
-                          className="p-2 pt-1 pb-1"
-                          key={question.questionId}
-                        >
-                          <div className="Question-section mt-1">
-                            <div className="question-question-nmber p-2 ps-3 dimension-text">
-                              Question {index + 1}
-                            </div>
-                            <div className="m-3 d-flex question-text gap-2">
-                              <span className="dimension-text">
-                                {index + 1}
-                              </span>
-                              <span>
-                                <span
-                                  className="line-width"
-                                  style={{
-                                    border: "none",
-                                    borderLeft: "3px solid #f97300",
-                                    height: "100%",
-                                    marginRight: "0px",
-                                    display: "inline-block",
-                                    marginTop: "-2px",
-                                  }}
-                                />
-                              </span>
-                              <h3 className="dimension-text">
-                                {question.questionText}
-                              </h3>
-                            </div>
-                            <div className="Question-options d-flex flex-wrap gap-5 p-2 mt-0 pt-0">
-                              {question.choices.map((choice) => (
-                                <Paper
-                                  key={choice.choiceId}
-                                  square
-                                  elevation={0}
-                                  sx={{
-                                    display: "flex",
-                                    alignItems: "start",
-                                  }}
-                                  className="ms-2"
-                                >
-                                  <input
-                                    type="radio"
-                                    name={`question-${question.questionId}`}
-                                    className="form-check-input-TEI mt-1"
-                                    id={`choice-${choice.choiceId}`}
-                                    checked={currentCompetencyResponses[question.questionId] === choice.choiceId}
-                                    onChange={() => handleResponseChange(question.questionId, choice.choiceId)}
-                                  />
-                                  <span className="ms-2 TEIcheckmark dimension-text">
-                                    {choice.text}
-                                  </span>
-                                </Paper>
-                              ))}
-                            </div>
+                      <div className="set-question-portion-main">
+                        <div className="set-question-counter">
+                          <div className="">
+                            <p className="m-0 fw-semibold fs-md-5">Questions</p>
+                            <small className="text-center" style={{color:'#999999'}}>
+                              {activeStep+1}/{data?.competencies?.length}
+                            </small>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                    <div className="container">
-                      <div className="row justify-content-center">
-                        <div className="col-12 col-md-8 col-lg-6 mui-button-resp">
-                          <MobileStepper
-                            variant="text"
-                            steps={data.competencies.length + 1}
-                            position="static"
-                            activeStep={activeStep}
-                            style={{ backgroundColor: "#d3d3d3" }}
-                            nextButton={
-                              <WebsiteButton
-                                size="small"
-                                onClick={handleNext}
-                                disabled={
-                                  activeStep === data.competencies.length
-                                }
-                              >
-                                {activeStep === data.competencies.length - 1 ? "Submit" : "Next"}
-                                {theme.direction === "rtl" ? (
-                                  <KeyboardArrowLeft />
-                                ) : (
-                                  <KeyboardArrowRight />
-                                )}
-                              </WebsiteButton>
-                            }
-                            backButton={
-                              <WebsiteButton
-                                buttonDesign="outliner"
+                        <div className="set-question-list-portion">
+                          {currentCompetency.questions.map((question, index) => (
+                            <div 
+                              key={question.questionId} 
+                              id={`question-${question.questionId}`}
+                              className={validationErrors[question.questionId] ? 'question-highlight' : ''}
+                            >
+                              <div className={`Question-section ${validationErrors[question.questionId] ? 'question-section-validation' : ''}`}>
+                                <div className="question-question-nmber dimension-text">
+                                  Question {index + 1}
+                                </div>
+                                <div className="question-text question-text-top">
+                                  <h3 className="question-text">
+                                    {question.questionText}
+                                  </h3>
+                                </div>
+                              
+                                <div className="Question-options d-flex flex-wrap gap-1 mt-0 pt-0">
+                                  {question.choices.map((choice) => (
+                                    <Paper
+                                      key={choice.choiceId}
+                                      square
+                                      elevation={0}
+                                      className="ms-2"
+                                    >
+                                      <FormControlLabel 
+                                        sx={{backgroundColor:"transparent"}} 
+                                        value="other" 
+                                        control={
+                                          <Radio
+                                            id={`choice-${choice.choiceId}`}
+                                            checked={currentCompetencyResponses[question.questionId] === choice.choiceId}
+                                            onChange={() => handleResponseChange(question.questionId, choice.choiceId)}
+                                          />
+                                        } 
+                                        label={choice.text} 
+                                      />
+                                    </Paper>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                          <div className="container">
+                            <div className="row justify-content-center">
+                              <div className="col-12 col-md-8 col-lg-6 d-flex gap-4">
+                                <WebsiteButton
+                                  buttonDesign="outliner"
                                   onClick={handleBack}
                                   disabled={activeStep === 0}
-                              >
-                              
-                                
-                                
+                                >
                                   {theme.direction === "rtl" ? (
                                     <KeyboardArrowRight />
                                   ) : (
                                     <KeyboardArrowLeft />
                                   )}
                                   Back
-                              
-                              </WebsiteButton>
-                            }
-                          />
+                                </WebsiteButton>
+                                <WebsiteButton
+                                  size="small"
+                                  onClick={handleNext}
+                                  disabled={activeStep === data.competencies.length}
+                                >
+                                  {activeStep === data.competencies.length - 1 ? "Submit" : "Next"}
+                                  {theme.direction === "rtl" ? (
+                                    <KeyboardArrowLeft />
+                                  ) : (
+                                    <KeyboardArrowRight />
+                                  )}
+                                </WebsiteButton>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -440,8 +416,6 @@ const [loading, setloading] = useState(false)
             </div>
           </div>
         </div>
-        
-       
       </div>
     </div>
   );

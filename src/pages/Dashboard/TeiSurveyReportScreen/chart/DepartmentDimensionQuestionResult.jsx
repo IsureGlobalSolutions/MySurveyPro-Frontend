@@ -3,11 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import Chart from 'react-apexcharts';
 import Loader from '../../../../components/plugins/Loader';
 import { SingleBarChartData } from '../../../../components/cartsComponents/SingleBarChartData';
-import { getListOfCoumnProperty } from '../../../../Redux/slice/surveySlice';
 import { Navbarvalue } from '../../../../context/NavbarValuesContext';
-import DropdownButton from '../../../../components/mySurveyProWebsiteBtn/DropdownButton';
-import { getDepartmentDimensionsTEISurveyReportApi } from '../../../../Redux/slice/teiSlice';
 
+import '../Report.css'
 const DepartmentDimensionQuestionResult = () => {
 const dispatch =useDispatch();
 const [isLoading, setisLoading] = useState(false)
@@ -68,23 +66,14 @@ const {listOfDepartments}=useSelector((state)=>state.survey)
 
   return (
     <>
-    <div className="col-md-12 ps-3">
-     <div className="age-card rounded-3 border p-2 shadow bg-white">
+    <div className="table-card-background  ">
+     <div className="age-card ">
  <div className="d-flex justify-content-between">
-        <div className="title d-flex align-items-center m-0">
-            <div className=""><p className='m-0 pb-3'>Department report for a dimension Chart</p></div>
+        <div className=" d-flex align-items-center m-0">
+        <p className='m-0 pb-3 table-heading'>Department report for a dimension Chart</p>
             
         </div>
-        {/* <div className="d-flex align-items-center">
-        
-                  {departmentList?.length>0? 
- <DropdownButton items={departmentList} listKeyName={'columnValue'} onSelect={handleSelectDepartment} selectionName={departmentList[0]?.columnValue}/>
- :''
-}
-         
   
- 
-    </div> */}
     </div>
     <hr  className='m-1'/>
     <div className="" ref={chartRef} >

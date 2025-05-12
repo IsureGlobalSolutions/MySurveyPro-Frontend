@@ -1,27 +1,31 @@
 .setting-section{
-   margin:  30px;
-gap: 0px;
-border-radius: 20px;
-border: 1px solid white;
-opacity: 0px;
-background: #FFFFFF;
 
+background-image: url("../../../assets/Dashboredpng/background-gradiant.png");
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
 
 }
-.coontent h2{
-font-size: 24px;
-font-weight: 700;
-line-height: 40px;
-text-align: left;
-color: #32012F;
+.content h2{
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 105%;
+    letter-spacing: 0%;
+    
 
 } 
-.coontent p{
-font-size: 16px;
-font-weight: 400;
-line-height: 40px;
-text-align: left;
-color: #32012F;
+.content p{
+    font-family: Poppins;
+    font-weight: 300;
+    font-size: 13.48px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    
 }
 .pricing{
     margin: 10px;
@@ -84,3 +88,29 @@ color: #1B223C;
 .price-line{
     border: 1px solid #E7EBFF
 }
+
+.password-input-container {
+    position: relative;
+  }
+  
+  .password-toggle-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: #666;
+  }
+  
+  .password-toggle-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Make sure the input field has padding to accommodate the eye icon */
+  .InputField {
+    padding-right: 35px !important;
+  }

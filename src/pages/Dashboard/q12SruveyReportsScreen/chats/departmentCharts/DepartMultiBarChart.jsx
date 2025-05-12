@@ -11,6 +11,8 @@ import { Navbarvalue } from '../../../../../context/NavbarValuesContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOverAllDepartmentReport } from '../../../../../Redux/slice/surveySlice';
 import Loader from '../../../../../components/plugins/Loader';
+import '../../../TeiSurveyReportScreen/Report.css';
+
 const DepartMultiBarChart = () => {
   const [reportValues, setreportValues] = useState()
   const [isLoading, setisLoading] = useState(false)
@@ -88,24 +90,14 @@ const SetReportValueHandler = (data) => {
 
 
 
-// useEffect(()=>{
-//  if(selectedDashboardValues?.department){
-//   setisLoading(true)
-
-   
-// showSelectedValues(selectedDashboardValues?.department)
-//  }
-
-// },[selectedDashboardValues?.department])
-
 
 
   return (
     <>
-    <div className="age-card rounded-3 border p-3 shadow bg-white">
+    <div className="table-card-background">
  <div className="d-flex justify-content-between">
-        <div className="title d-flex align-items-center m-0">
-            <div className=""><h6 className='m-0 pb-3 fw-bold'>Department </h6></div>
+        <div className=" d-flex align-items-center m-0">
+      <h6 className='m-0 pb-3 table-heading'>Department </h6>
             
         </div>
         <div className="d-flex align-items-center">

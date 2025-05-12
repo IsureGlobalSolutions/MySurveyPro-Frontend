@@ -64,7 +64,8 @@ export const RadialBarChart = ( reportValues=[] ,color) =>
                 },
                 "radialBar": {
                     "hollow": {
-                        "background": "#fff"
+                        "background": "#fff",
+                          size: '60%',
                     },
                     "dataLabels": {
                         "name": {},
@@ -134,26 +135,9 @@ export const RadialBarChart = ( reportValues=[] ,color) =>
                     "filter": {}
                 }
             },
-            "stroke": {
-                "fill": {
-                    "type": "solid",
-                    "opacity": 0.85,
-                    "gradient": {
-                        "shade": "dark",
-                        "type": "horizontal",
-                        "shadeIntensity": 0.5,
-                        "inverseColors": true,
-                        "opacityFrom": 1,
-                        "opacityTo": 1,
-                        "stops": [
-                            0,
-                            50,
-                            100
-                        ],
-                        "colorStops": []
-                    }
-                }
-            },
+        stroke: {
+                lineCap: 'round'
+              },
             "tooltip": {
                 "enabled": false,
                 "hideEmptySeries": false,

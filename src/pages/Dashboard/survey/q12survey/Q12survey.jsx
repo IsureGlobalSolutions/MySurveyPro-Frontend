@@ -10,7 +10,7 @@
     import { getstaffid } from '../../../../Redux/slice/authSlice';
     import toast from 'react-hot-toast';
     import { useDispatch } from 'react-redux';
-    const Q12survey = ({ sendIdParent,setshowOtpScreen}) => {
+    const Q12survey = ({ sendIdParent,showOtpScreen}) => {
         const dispatch =useDispatch();
         const [loading, setloading] = useState(false)
         const { register , handleSubmit , formState: { errors } } = useForm();
@@ -25,7 +25,7 @@
               if(res.payload.isSuccess===true){
                 setloading(false)
                 toast.success(res.payload.alertMessage)
-               setshowOtpScreen(true);
+                showOtpScreen(true);
                 sendIdParent(()=>res.payload.recipientId);
               }else{
                 toast.error(res.payload.alertMessage)
@@ -38,24 +38,27 @@
             }
           }
       return (
-        <div className='Q12-section m-5 d-flex justify-content-center align-items-center p-5'>
+        <div className='Q12-section d-flex justify-content-center align-items-center p-5'>
           <div className='container'>
             <div className='stepper row p-5'>
-              <div className='col-md-4 p-5 mt-3'>
+              <div className='col-md-6 p-5 mt-3'>
                 <div className='text'>
-                  <h1>MP12 Survey</h1>
-                  <p>Please enter user id</p>
+                <h1 className='survey-start-welcome '>Welcome</h1>
+              <h1 className='survey-start-tagline'> MP12 Survey</h1>
+              <p className='survey-tage-text'>Provide your generted ID to access the MP12 Survey.</p>
                 </div>
                 <div  className="g-4 mt-4 " >
                   <form onSubmit={handleSubmit(onSubmit)}>
                       <div  className='mb-4'>
+                      <label className='' htmlFor="">Please Enter Your ID</label>
                 <InputField
             type="text"
             name="user id"
             register={register}
             errors={errors}
             // onChange={(e) => setstaffid(e.target.value)}       
-             placeholder="user id"
+             placeholder="Enter here"
+             style={{width:'350px'}}
             {...register('userid', { required: 'Userid is required' })}
             readonly
             />
@@ -63,7 +66,7 @@
                 </div>
                 <div className=" col-md-12 t-4">
                
-                  <WebsiteButton className='w-100' type='submit' loading={loading}>
+                  <WebsiteButton style={{width:'350px'}} type='submit' loading={loading}>
                   {loading?" Loading" :'Next'}
                   </WebsiteButton>
                   </div>  
@@ -71,7 +74,7 @@
             
                 </div>
               </div>
-              <div className='col-md-8  mt-4 d-flex justify-content-end'>
+              <div className='col-md-6  mt-4 d-flex justify-content-end'>
                 <img src={img1} alt='image' className='img-fluid' />
               </div>
             </div>

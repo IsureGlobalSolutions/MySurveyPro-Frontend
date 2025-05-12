@@ -7,7 +7,7 @@ import InprogressIcon from "../assets/dashboredsvg/inprogessSurvey.svg?react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTotalNumberOfRespondent } from "../Redux/slice/surveySlice";
 import { Navbarvalue } from "../context/NavbarValuesContext";
-
+import '../pages/Dashboard/q12SruveyReportsScreen/dash-screen.css'
 const HeroCards = () => {
   const dispatch = useDispatch();
   const { getTotalNumberOfRespondentValue, isLoading } = useSelector(
@@ -28,16 +28,20 @@ const HeroCards = () => {
   return (
     <>
      
-    <div className="border shadow py-3 px-2 my-3 ms-3 rounded-3 bg-white me-0">
-      <div className="row m-0">
+    <div className=" py-3 px-2 my-3   me-0">
+      <div className="d-flex gap-2 m-0">
         {/* Total Surveys Card */}
-        <div className="col-12 col-sm-6 col-md-3 ">
+     
           <div className="total-survey-card">
-            <div className="d-flex py-2 px-2 justify-content-center gap-3 flex-column flex-md-row">
+            <div className="d-flex py-2 px-2  gap-2 flex-column flex-md-row">
+
+                <div className="total-survey-icon d-flex  align-items-center">
+                <TotalSurveyIcon />
+              </div>
               <div className="total-suvrvey-content d-flex flex-column justify-content-center">
                 <p
                   className="m-0 fw-semibold fs-5 text-nowrap"
-                  style={{ color: "#9099A0" }}
+                  style={{ color: "#9C9A9A",fontSize:"18px",fontWeight:'500' }}
                 >
                   Total Respondents
                 </p>
@@ -50,21 +54,22 @@ const HeroCards = () => {
                     : 0}
                 </p>
               </div>
-              <div className="total-survey-icon d-flex justify-content-center align-items-center">
-                <TotalSurveyIcon />
-              </div>
+            
             </div>
           </div>
-        </div>
+       
 
         {/* Complete Survey Card */}
-        <div className="col-12 col-sm-6 col-md-3 ">
+       
           <div className="response-card">
-            <div className="d-flex py-2 px-2 justify-content-center gap-3 flex-column flex-md-row">
+            <div className="d-flex py-2 px-2  gap-2 flex-column flex-md-row">
+               <div className="total-survey-icon d-flex  align-items-center">
+                <CompleteSurveyIcon />
+              </div>
               <div className="total-suvrvey-content d-flex flex-column justify-content-center">
                 <p
                   className="m-0 fw-semibold fs-5 text-nowrap"
-                  style={{ color: "#9099A0" }}
+                  style={{ color: "#9C9A9A",fontSize:"18px",fontWeight:'500' }}
                 >
                   Completed Responses
                 </p>
@@ -77,21 +82,23 @@ const HeroCards = () => {
                     : 0}
                 </p>
               </div>
-              <div className="total-survey-icon d-flex justify-content-center align-items-center">
-                <CompleteSurveyIcon />
-              </div>
+             
             </div>
           </div>
-        </div>
+       
 
         {/* Not Yet Started Card */}
-        <div className="col-12 col-sm-6 col-md-3">
+     
           <div className="not-response-card">
-            <div className="d-flex py-2 px-2 justify-content-center gap-3 flex-column flex-md-row">
+            <div className="d-flex py-2 px-2  gap-2 flex-column flex-md-row">
+<div className="total-survey-icon d-flex  align-items-center">
+                <NotYetStartCompleteIcon />
+              </div>
+
               <div className="total-suvrvey-content d-flex flex-column justify-content-center">
                 <span
                   className="m-0 fw-semibold fs-5 text-nowrap"
-                  style={{ color: "#9099A0" }}
+                  style={{ color: "#9C9A9A",fontSize:"18px",fontWeight:'500' }}
                 >
                   Not Yet Started
                 </span>
@@ -104,21 +111,23 @@ const HeroCards = () => {
                     : 0}
                 </p>
               </div>
-              <div className="total-survey-icon d-flex justify-content-center align-items-center">
-                <NotYetStartCompleteIcon />
-              </div>
+              
             </div>
           </div>
-        </div>
+       
 
         {/* In Progress Card */}
-        <div className="col-12 col-sm-6 col-md-3">
+       
           <div className="pending-card">
-            <div className="d-flex py-2 px-2 justify-content-center gap-3 flex-column flex-md-row">
+            <div className="d-flex py-2 px-2  gap-2 flex-column flex-md-row">
+ <div className="total-survey-icon d-flex  align-items-center">
+                <InprogressIcon />
+              </div>
+
               <div className="total-suvrvey-content d-flex flex-column justify-content-center">
                 <p
                   className="m-0 fw-semibold fs-5 text-nowrap"
-                  style={{ color: "#9099A0" }}
+                  style={{ color: "#9C9A9A",fontSize:"18px",fontWeight:'500' }}
                 >
                   In Progress
                 </p>
@@ -131,12 +140,10 @@ const HeroCards = () => {
                     : 0}
                 </p>
               </div>
-              <div className="total-survey-icon d-flex justify-content-center align-items-center">
-                <InprogressIcon />
-              </div>
+             
             </div>
           </div>
-        </div>
+       
       </div>
     </div>
     </>

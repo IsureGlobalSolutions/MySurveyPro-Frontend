@@ -1,20 +1,22 @@
 .total-survey-card{
-    background: linear-gradient(360deg, #F8E9E3 41.93%, #FDF5F1 100%);
+    background: #FFE2E699;
     border-radius: 10px;
-
+width: calc(25%);
 }
 .response-card{
-    background: linear-gradient(360deg, #E3EEF7 41.93%, #F1F7FD 100%);
-
+    background: #FFF4DE99;
+    width: calc(27%);
     border-radius: 10px;
 }
 .not-response-card{
-    background: linear-gradient(360deg, #F8E9E3 41.93%, #FDF5F1 100%);  
-      border-radius: 10px;
+    background: #DCFCE799;
+    border-radius: 10px;
+    width: calc(24%);
 }
 .pending-card{
-    background: linear-gradient(360deg, #F8E9E3 41.93%, #FDF5F1 100%);
+    background: #F4E8FF99;
     border-radius: 10px;
+    width: calc(24%);
 }
 .total-survey-icon{
     width:91px;

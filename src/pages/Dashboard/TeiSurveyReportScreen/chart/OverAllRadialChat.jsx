@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Chart from 'react-apexcharts';
 import { RadialBarChart } from '../../../../components/cartsComponents/RadialBarChart';
 import Loader from '../../../../components/plugins/Loader';
-
+import '../Report.css'
 
 const OverAllRadialChat = () => {
 const dispatch =useDispatch();
@@ -28,10 +28,10 @@ const color = getColor();
 
   return (
     <>
-     <div className="age-card rounded-3 border p-3 shadow bg-white">
+     <div className="table-card-background ">
  <div className="d-flex justify-content-between">
-        <div className="title d-flex align-items-center m-0">
-            <div className=""><p className='m-0 pb-3'>Over All Report </p></div>
+        <div className=" d-flex align-items-center m-0">
+           <p className='table-heading m-0 pb-3'>Over All Report </p>
             
         </div>
         <div className="d-flex align-items-center">

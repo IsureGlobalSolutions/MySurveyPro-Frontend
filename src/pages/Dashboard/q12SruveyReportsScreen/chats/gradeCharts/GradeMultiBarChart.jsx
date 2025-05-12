@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Chart from 'react-apexcharts';
 import { saveAs } from 'file-saver';
 import * as ExcelJS from 'exceljs';
+import '../../../TeiSurveyReportScreen/Report.css';
 
 import { MultiBarChartData } from '../../../../../components/cartsComponents/MultiBarChartData';
 import { Navbarvalue } from '../../../../../context/NavbarValuesContext';
@@ -96,10 +97,10 @@ const SetReportValueHandler = (data) => {
 
   return (
     <>
-    <div className="age-card rounded-3 border p-3 shadow bg-white">
+    <div className="table-card-background">
  <div className="d-flex justify-content-between">
-        <div className="title d-flex align-items-center m-0">
-            <div className=""><h6 className='m-0 pb-3 fw-bold'>Grades </h6></div>
+        <div className=" d-flex align-items-center m-0">
+     <h6 className='m-0 pb-3 table-heading'>Grades </h6>
             
         </div>
         <div className="d-flex align-items-center">
