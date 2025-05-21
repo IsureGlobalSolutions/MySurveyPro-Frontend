@@ -107,7 +107,7 @@ const ThankYouLunchSurvey = ({ setstepper, surveyId }) => {
      
     </div>
     <div className="d-flex justify-content-center mt-4 gap-2">
-      <WebsiteButton buttonDesign="outliner" >
+      <WebsiteButton buttonDesign="outliner"onClick={() => setstepper(1)} >
 <IoIosArrowBack className="me-2" />
         Back to Dashboard
       </WebsiteButton>

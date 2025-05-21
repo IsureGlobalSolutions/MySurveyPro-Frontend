@@ -27,7 +27,7 @@ const EADepartmentSelection = ({
                     <div className="col"> 
                         <h3>Departments</h3>
               <div className="department-list mb-4">
-                {departments.map((dept) => (
+                {departments?.map((dept) => (
                   <div 
                     key={dept} 
                     className={`department-item ${selectedDepartment === dept ? 'selected' : ''}`}
@@ -44,14 +44,18 @@ const EADepartmentSelection = ({
                   <h3>Employees in {selectedDepartment}</h3>
                   <div className="employee-list mb-4">
                     {employees
-                      .filter(emp => emp.department === selectedDepartment)
-                      .map(emp => (
+                      .filter(emp => emp.department === selectedDepartment)?.map(emp => (
                         <div 
                           key={emp.id} 
-                          className={`employee-item ${selectedEmployee?.id === emp.id ? 'selected' : ''}`}
-                          onClick={() => onEmployeeSelect(emp)}
+                          style={{backgroundColor:`${emp.isAssessed? "#d2d2d2":''}`}}
+                          className={`employee-item   ${selectedEmployee?.id === emp.id ? 'selected' : ''}`}
+                          onClick={emp.isAssessed ? ()=>{}:() => onEmployeeSelect(emp)}
                         >
-                          <div className="employee-name">{emp.name}</div>
+                          <div className="d-flex justify-content-between">
+                               <div className="employee-name">{emp.name}</div>
+                               <div className={`employee-name`}><small className={` ${emp.isAssessed? 'text-success':'text-danger'}`}>{emp.isAssessed? `Completed`:`Pending`}</small> </div>
+                          </div>
+                       
                           <div className="employee-department">{emp.department}</div>
                         </div>
                       ))}
@@ -65,9 +69,9 @@ const EADepartmentSelection = ({
 
             
 
-              <div className="col-md-12 t-4">
+              <div className="col-md-12 t-4 d-flex justify-content-center" >
                 <WebsiteButton 
-                  className='w-100' 
+                  className='' 
                   onClick={onSubmit} 
                   disabled={!selectedEmployee}
                 >

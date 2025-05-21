@@ -6,7 +6,7 @@ const InputField = ({ label, value , type = 'text', register, name, onChange , e
 
   
   return (
-// kffj
+
     <div className="input-field">
       {label && <label>{label}</label>}
       <input
@@ -18,6 +18,7 @@ const InputField = ({ label, value , type = 'text', register, name, onChange , e
         onChange={onChange}
         {...props}
       />
+      <br />
       {errors[name] && <small className="error-message">{errors[name].message}</small>}
     </div>
   );

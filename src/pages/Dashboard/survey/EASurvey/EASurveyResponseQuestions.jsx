@@ -21,6 +21,7 @@ import OtpVerifyScreen from "../OtpVerifyScreen";
 import EASurvey from "./EASurvey";
 import EADepartmentSelection from "./EADepartmentSelection";
 import { EASurveyResponseApi } from "../../../../Redux/slice/surveySlice";
+import SelfOrEmployeeAssessmentCheck from "./SelfOrEmployeeAssessmentCheck";
 
 const EASurveyResponseQuestions = () => {
   const dispatch = useDispatch();
@@ -28,13 +29,14 @@ const EASurveyResponseQuestions = () => {
   const theme = useTheme();
   const [surveyTypeId, setSurveyTypeId] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
+  const [showAssessmentCheck, setshowAssessmentCheck] = useState(false)
   const [showIdVerification, setShowIdVerification] = useState(true);
   const [recipentId, setrecipentId] = useState("");
   const [showOtpScreen, setshowOtpScreen] = useState(false);
   const [showDepartmentSelection, setShowDepartmentSelection] = useState(false);
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
-  const [otpScreenData, setOtpScreenData] = useState(null);
+  const [survareData, setsurvareData] = useState(null);
   const [responses, setResponses] = useState({});
   const [currentCompetencyResponses, setCurrentCompetencyResponses] = useState({});
   const { userId, surveyId } = useParams();
@@ -49,6 +51,7 @@ const EASurveyResponseQuestions = () => {
           surveyId: surveyId,
           surveyTypeId: surveyTypeId,
           designationId: designationId,
+           respondentRecipientId: parseInt(recipentId),
         } : {
           surveyId: surveyId,
           surveyTypeId: surveyTypeId,
@@ -68,6 +71,14 @@ const EASurveyResponseQuestions = () => {
           setData(response?.payload);
           setShowIdVerification(false);
         }
+        else if(!response?.payload?.isSuccess){
+          setloading(false)
+       window.location.reload();
+          setshowAssessmentCheck(false)
+          setshowOtpScreen(false)
+          setShowIdVerification(true)
+
+        }
       });
     } catch (error) {
       setloading(false);
@@ -75,9 +86,7 @@ const EASurveyResponseQuestions = () => {
     }
   };
 
-  const getRecipentId = (value) => {
-    setrecipentId(value);
-  };
+
 
   const handleNext = async () => {
     setloading(true);
@@ -172,23 +181,25 @@ const EASurveyResponseQuestions = () => {
   };
 
   const handleIdVerified = () => {
-    setShowIdVerification(false);
+ 
     setActiveStep(0);
   };
 
-  const getSurveyTypeIdHandler = (surveyTypeId) => {
-    setSurveyTypeId(surveyTypeId);
-  };
 
-  const getOtpScreenData = (data) => {
-    setOtpScreenData(data);
-    setSurveyTypeId(data.surveyTypeId);
-    if (data.surveyTypeId === 1) {
-      fetchSurveyData(data.surveyTypeId, data.designationId);
-    } else if (data.surveyTypeId === 2) {
+
+  useEffect(()=>{
+if(surveyTypeId){
+  
+if (surveyTypeId === 1) {
+      fetchSurveyData(surveyTypeId, survareData.designationId);
+    } else if (surveyTypeId === 2) {
       setShowDepartmentSelection(true);
+      
     }
-  };
+    setShowIdVerification(false)
+    setshowAssessmentCheck(false)
+}
+  },[surveyTypeId])
 
   const handleDepartmentSelect = (department) => {
     setSelectedDepartment(department);
@@ -203,7 +214,7 @@ const EASurveyResponseQuestions = () => {
       toast.error("Please select an employee");
       return;
     }
-    fetchSurveyData(otpScreenData.surveyTypeId, selectedEmployee.designationId);
+    fetchSurveyData(surveyTypeId, selectedEmployee.designationId);
   };
 
   const handleResponseChange = (questionId, choiceId) => {
@@ -221,6 +232,21 @@ const EASurveyResponseQuestions = () => {
     }
   };
 
+  const idHandler=(data)=>{
+    if(data){
+    setsurvareData(data)  
+    }
+
+  }
+  
+  const getOtpScreenData = (data) => {
+   setsurvareData(data)  
+   
+
+    
+  };
+
+
   useEffect(() => {
     if (data?.competencies && activeStep < data.competencies.length) {
       const currentCompetency = data.competencies[activeStep];
@@ -229,26 +255,42 @@ const EASurveyResponseQuestions = () => {
     }
   }, [activeStep, data, responses]);
 
-  if (showIdVerification) {
-    return !showOtpScreen ? (
-      <EASurvey
-        showOtpScreen={setshowOtpScreen}
-        sendIdParent={getRecipentId}
-      />
-    ) : showOtpScreen ? (
-      <OtpVerifyScreen
-        stepUPSendValue={handleIdVerified}
-        getEAsurveydata={getOtpScreenData}
-        staffid={recipentId}
-      />
-    ) : null;
+ if (showIdVerification) {
+    if (showOtpScreen) {
+      return (
+        <OtpVerifyScreen
+          stepUPSendValue={handleIdVerified}
+          showOtpScreen={setshowOtpScreen}
+          showAssessmentCheckScreen={setshowAssessmentCheck}
+          staffid={recipentId}
+            surveyTypeId={setSurveyTypeId}
+          setoptscreendata={getOtpScreenData}
+        />
+      );
+    } else if (showAssessmentCheck) {
+      return (
+        <SelfOrEmployeeAssessmentCheck
+          surveyTypeId={setSurveyTypeId}
+        />
+      );
+    } else {
+      return (
+        <EASurvey
+          showOtpScreen={setshowOtpScreen}
+          sendDataToParent={idHandler}
+          recipientId={setrecipentId}
+      surveyTypeId={setSurveyTypeId}
+          showDepartmentSelection={setShowDepartmentSelection}
+          showAssessmentCheckScreen={setshowAssessmentCheck}
+        />
+      );
+    }
   }
-
-  if (showDepartmentSelection && otpScreenData) {
+  if (showDepartmentSelection && surveyTypeId==2) {
     return (
       <EADepartmentSelection
-        departments={otpScreenData.departments}
-        employees={otpScreenData.employees}
+        departments={survareData?.departments}
+        employees={survareData?.employees}
         onDepartmentSelect={handleDepartmentSelect}
         onEmployeeSelect={handleEmployeeSelect}
         onSubmit={handleEmployeeSubmit}
@@ -267,7 +309,6 @@ const EASurveyResponseQuestions = () => {
       <div className="">
         <div className="d-flex justify-content-start flex-wrap gap-5 mb-4 m-0 p-4">
           <div className="steppercard d-flex flex-column align-items-start w-100">
-            <img src={img1} className="card-img img-fluid mb-3" alt="Congratulations" />
             <div className="container">
               <div className="row">
                 <div className="col-12 p-5">
@@ -318,7 +359,7 @@ const EASurveyResponseQuestions = () => {
                         <div className="d-flex align-items-center">
                           <CompetencyIcon/>
                           <span className="ms-2 me-2 dimension-text">
-                            {currentCompetency.competencyId}
+                            {activeStep+1}
                           </span>
                           <span className="dimension-text">
                             {currentCompetency.competency}

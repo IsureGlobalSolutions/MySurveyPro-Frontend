@@ -233,7 +233,7 @@ const ListOfLaunchedServey = () => {
   return (
     <>
       {isLoading ? (
-        <div className="d-flex justify-content-between">
+        <div className="loading-overlay">
           <Loader />
         </div>
       ) : (combinedSurveyData?.length > 0 && !startSurvey) ||
@@ -372,7 +372,14 @@ const ListOfLaunchedServey = () => {
                   )}
                 </TableBody>
               </Table>
-              <div className="d-flex justify-content-end my-3 pe-3">
+              <div className="d-flex justify-content-between my-3 ">
+           <div className="">
+    <small style={{color:"#B4B4B4"}}>
+      Showing data {(currentPage - 1) * itemsPerPage + 1} to{" "}
+      {Math.min(currentPage * itemsPerPage, combinedSurveyData?.length || 0)} of{" "}
+      {combinedSurveyData?.length || 0} entries
+    </small>
+    </div>
         <BootstrapPagination
           currentPage={currentPage}
           totalPages={totalPages}

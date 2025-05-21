@@ -21,11 +21,13 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontWeight: 500,
     fontSize: '16px',
     fontFamily: 'Poppins, sans-serif',
+     textAlign: 'left', // Force left align for body cells
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: '14px',
     fontWeight: 400,
     fontFamily: 'Poppins, sans-serif',
+     textAlign: 'left', // Force left align for body cells
   },
 }));
 
@@ -139,11 +141,7 @@ const SurveyTable = ({
               />
               {/* Add Bootstrap Pagination */}
               <div className="d-flex justify-content-end mt-3 pe-3 pb-2">
-                {/* <BootstrapPagination
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  onPageChange={handlePageChange}
-                /> */}
+             
               </div>
             </>
           )}

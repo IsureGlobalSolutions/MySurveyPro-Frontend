@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import { saveAs } from "file-saver";
 import xlsxFile from "../../../assets/downloadable-files/RecipientsDetail.xlsx";
 import csvFile from "../../../assets/downloadable-files/RecipientsDetail.csv";
-import { selectClasses } from "@mui/material";
+import { Checkbox, FormControlLabel, Radio, selectClasses } from "@mui/material";
 import Tooltip from "../../../components/Tooltip/Tooltip";
 import { getAllSurveyFiles } from "../../../Redux/slice/surveySlice";
 import Loader from "../../../components/plugins/Loader";
@@ -31,6 +31,7 @@ const UploadFile = ({ setstepper, getUploadFile, surveyId }) => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [toggleSelector, settoggleSelector] = useState(false);
   const { paymentStatus } = useSelector((state) => state.survey);
+  const [optCheck, setoptCheck] = useState(false)
   const { listOfAllFilesData } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
@@ -66,6 +67,7 @@ const UploadFile = ({ setstepper, getUploadFile, surveyId }) => {
       setisLoading(true);
       const formdata = new FormData();
       formdata.append("file", uploadedFiles[0]);
+      formdata.append("sendOTP",optCheck)
       if (surveyId === 1 || surveyId === 2 || surveyId === 3) {
         formdata.append("surveyId", surveyId);
       } else {
@@ -206,6 +208,22 @@ const UploadFile = ({ setstepper, getUploadFile, surveyId }) => {
                   
                   </div>
                 </div>
+              </div>
+              <div className="my-1">
+          
+                                                 <FormControlLabel 
+  sx={{backgroundColor: "transparent"}}  
+  required 
+  control={
+    <Checkbox 
+
+      checked={optCheck === true} 
+      onChange={(e) => setoptCheck(e.target.checked ? true : false)}
+      
+    />
+  } 
+  label="Want to send the otp when survey start" 
+/>
               </div>
 
                 <div className="my-3 row justify-content-center">

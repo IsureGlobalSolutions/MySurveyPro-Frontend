@@ -10,12 +10,15 @@ import toast from 'react-hot-toast';
 import Tooltip from '../../../components/Tooltip/Tooltip';
 import { getAllSurveyFiles } from '../../../Redux/slice/surveySlice';
 import { Navbarvalue } from '../../../context/NavbarValuesContext';
+import { Checkbox, FormControlLabel } from '@mui/material';
 
 const downloadText = 'Upload the file containing the required data for all individuals to whom the survey will be launched'
 const EditUploadFile = ({ getUploadFile  , Uniquefilename , handleCloseEditdata , surveyId}) => {
 const fileInputRef = useRef(null);
   const dispatch = useDispatch()
   const [uploadedFiles, setUploadedFiles] = useState([]);
+    const [optCheck, setoptCheck] = useState(false)
+
   const [toggleSelector, settoggleSelector] = useState(false)
   const { paymentStatus } = useSelector((state) => state.survey)
   const {isLaoding}=useSelector((state)=>state.user)
@@ -40,6 +43,7 @@ const handleClickChangePicture = () => {
         const formdata = new FormData();
         formdata.append('file', uploadedFiles[0]);
         formdata.append('surveyId', surveyId);
+         formdata.append("sendOTP",optCheck)
         formdata.append('uniqueFileName', Uniquefilename);
   
         try {
@@ -130,7 +134,22 @@ const handleClickChangePicture = () => {
                     onChange={(e) => setUploadedFiles([e.target.files[0]])}
                   />
                 </div>
+           <div className="my-1">
+          
+                                                 <FormControlLabel 
+  sx={{backgroundColor: "transparent"}}  
+  required 
+  control={
+    <Checkbox 
 
+      checked={optCheck === true} 
+      onChange={(e) => setoptCheck(e.target.checked ? true : false)}
+      
+    />
+  } 
+  label="Want to send the otp when survey start" 
+/>
+              </div>
 
                 <div className="my-3 d-flex justify-content-center">
                   <WebsiteButton type='button' onClick={() => {

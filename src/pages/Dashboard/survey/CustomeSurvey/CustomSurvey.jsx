@@ -50,7 +50,7 @@ const CustomSurvey = ({ sendIdParent ,showOtpScreen}) => {
         errors={errors}
         // onChange={(e) => setstaffid(e.target.value)}        
          placeholder="user id"
-        {...register('userid', { required: 'Userid is required' })}
+        {...register('userid', { required: 'Employee id is required' })}
         readonly
         />
        

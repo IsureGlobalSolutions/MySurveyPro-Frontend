@@ -375,7 +375,14 @@ const Filedata = ({ setstepper, surveyId, sendSelectedFilesToParent }) => {
                       )}
                     </TableBody>
                   </Table>
-                  <div className="d-flex justify-content-end my-3 pe-3">
+                  <div className="d-flex justify-content-between my-3 ">
+                     <div className="">
+    <small style={{color:"#B4B4B4"}}>
+      Showing data {(currentPage - 1) * itemsPerPage + 1} to{" "}
+      {Math.min(currentPage * itemsPerPage, currentData?.length || 0)} of{" "}
+      {currentData?.length || 0} entries
+    </small>
+    </div>
                     <BootstrapPagination
                       currentPage={currentPage}
                       totalPages={totalPages}

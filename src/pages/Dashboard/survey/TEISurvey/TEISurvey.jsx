@@ -60,7 +60,7 @@
             // onChange={(e) => setstaffid(e.target.value)}       
              placeholder="Enter here"
              style={{width:"350px"}}
-            {...register('userid', { required: 'Userid is required' })}
+            {...register('userid', { required: 'Employee id is required' })}
             readonly
             />
            

@@ -9,7 +9,14 @@ import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { ValidateRecipientOtpApi } from '../../../Redux/slice/authSlice';
 import { useState } from 'react';
-const OtpVerifyScreen = ({stepUPSendValue ,staffid,getEAsurveydata}) => {
+const OtpVerifyScreen = ({stepUPSendValue,
+  showOtpScreen ,
+  staffid,
+  showAssessmentCheckScreen,
+  surveyTypeId=null,
+
+setoptscreendata
+}) => {
     const dispatch =useDispatch();
     const { register , handleSubmit , formState: { errors } } = useForm();
 const [loading, setloading] = useState(false)
@@ -32,7 +39,20 @@ const handleChange = (newValue) => {
             toast.success(res.payload.alertMessage)
             setloading(false)
             stepUPSendValue(0);
-            getEAsurveydata(res.payload) //this parameter is only user for EA survey 
+
+            //this condition is for CA survey
+      if (res?.payload?.employees == null) {
+            
+              showOtpScreen(false);
+              surveyTypeId(1);
+          showOtpScreen(false)
+
+            }else{
+ showAssessmentCheckScreen(true)
+              showOtpScreen(false)
+            }
+             
+              setoptscreendata(res.payload)
          
           }else{
             toast.error(res.payload.alertMessage)

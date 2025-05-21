@@ -87,7 +87,7 @@ const Uniquefiledata = ({ Veiwdata, Filename }) => {
                   <StyledTableRow key={index}>
                     <StyledTableCell>{data.employeeId}</StyledTableCell>
                     <StyledTableCell>{data.name}</StyledTableCell>
-                    <StyledTableCell>{data.email}</StyledTableCell>
+                    <StyledTableCell>{data.recipientEmail}</StyledTableCell>
                     <StyledTableCell>{data.department}</StyledTableCell>
                     <StyledTableCell>{data?.designation?.title ? data?.designation?.title : "null"}</StyledTableCell>
                     <StyledTableCell>{data.grade || "null"}</StyledTableCell>
