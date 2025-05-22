@@ -63,17 +63,7 @@ const Sidebar = ({ collapsed, setcollapsed }) => {
                         <RxCross1 size={30} />
                     </span>
                 ) : ""}
-                                                {/* <Surveyicon className="icon-fill" /> */}
-                                               {/* <div className={`mysurvey-logo ${collapsed ? 'collapsed ' : ' ' }`}>
-                                               <h1
-    // className=' '
-    className={`${DashboardNavValues === 1 ? 'Mysurveypro mt-3': 'Mysurveypro-logo mt-3'}`}
-    style={{ }}  // Adjust for spacing between the icon and text
-    onClick={moveToHome}
-  >
-    Mysurveypro
-  </h1>
-                                               </div> */}
+                                   
             </div>
 
             <div className={`container sidebarinner ${collapsed ? 'collapsed' : ''}`}>
