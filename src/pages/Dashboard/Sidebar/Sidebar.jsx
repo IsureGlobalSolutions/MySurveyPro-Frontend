@@ -36,6 +36,9 @@ const Sidebar = ({ collapsed, setcollapsed }) => {
             if (window.innerWidth <= 1100) {
                 setcollapsed(true);
             }
+            else if (window.innerWidth > 1100) {
+                setcollapsed(false);
+            }
         };
 
         window.addEventListener('resize', handleResize);
@@ -66,22 +69,22 @@ const Sidebar = ({ collapsed, setcollapsed }) => {
                                    
             </div>
 
-            <div className={`container sidebarinner ${collapsed ? 'collapsed' : ''}`}>
-                <div className='verticlenavbar d-flex flex-column'>
+            <div className={` sidebarinner ${collapsed ? 'collapsed' : ''}`}>
+                <div className='verticlenavbar d-flex flex-column  justify-content-between align-items-center'>    
                 <ul className={`d-flex justify-content-center ${DashboardNavValues === 1 ? '  p-0 ' : ''} mb-4`}>
                         <li
                             onClick={moveToHome}
                         >
-                              <Logo style={{width:"115px"}}/>
+                              <Logo className="sidebar-logo" />
                         </li>
                     </ul>
-                    <ul className={` ${DashboardNavValues === 1 ? 'active-sidebar  ' : ''} mb-4`}>
+                    <ul className={` ${DashboardNavValues === 1 ? 'active-sidebar  w-100' : ''} mb-4`}>
                         <li
                             onClick={() => handleButtonClick(1)}
                         >
-                            <Link className='d-flex align-items-center sidbar-item-link justify-content-start gap-2 sidbar-text' to={'/startsurvey'} onClick={moveToHome}>
+                            <Link className='d-flex align-items-center sidbar-item-link  gap-2 sidbar-text' to={'/startsurvey'} onClick={moveToHome}>
                                 <Surveyicon className="icon-fill" />
-                                <p>Start Survey</p>
+                                <p className='m-0 start-survey-text'>Start Survey</p>
 
                             </Link>
                         </li>
@@ -93,8 +96,8 @@ const Sidebar = ({ collapsed, setcollapsed }) => {
                             <PlanCardIcon className="plan-card-icon" />
                         </div>
                         <div>
-                                              <p className='text-center'><small className={`text-small ${collapsed ? 'collapsed' : ''}`} >Get more with a paid plan</small></p> 
-<p  className='text-center'><small className={`text-small-paragraph  ${collapsed ? 'collapsed' : ''}`}>Use advanced question types</small></p>
+                                              <p className={` text-center mb-1 text-small ${collapsed ? 'collapsed' : ''}`}>Get more with a paid plan</p> 
+<p  className={`text-small-paragraph mb-1 ${collapsed ? 'collapsed' : ''}`}>Use advanced question types</p>
                         </div>
          
                           

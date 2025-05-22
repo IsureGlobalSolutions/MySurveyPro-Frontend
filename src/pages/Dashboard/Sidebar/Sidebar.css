@@ -5,6 +5,12 @@ line-height: 45px;
 text-align: left;
 color: #151D48;
 }
+.sidebar-logo{
+  width: 115px;
+}
+.sidebarinner{
+  padding: 0px 10px 0px 10px;
+}
 .sidebartitle span{
     cursor: pointer;
     font-weight: 600;
@@ -106,7 +112,7 @@ background: #FFFFFF;
     
 } */
 .sidebarinner.collapsed .verticlenavbar li h1 {
-  width: 70%; 
+  width: 80%; 
   height: 57%; 
   overflow: hidden;
   white-space: nowrap;
@@ -139,10 +145,11 @@ background: #FFFFFF;
 .sidbar-item-link{
     text-decoration: none;
     list-style-type: none;
+    justify-content: start;
    
 }
-.sidbar-item-link p{
- 
+.sidbar-item-link .start-survey-text{
+ display: block;
 font-weight: 600;
 font-size: 12.25px;
 /* line-height: 100%; */
@@ -152,6 +159,78 @@ letter-spacing: 0%;
 .verticlenavbar ul{
     list-style: none;
 }
+
+.Mysurveypro{
+    display: inline-block;
+    padding: 0 20px; /* Default padding */
+    transition: all 0.3s ease;
+    font-size: 19px;
+    font-weight: 700;
+  }
+
+  .Mysurveypro:hover {
+    border-radius: 8px;
+    user-select: none;
+    cursor: pointer;
+    background-color: rgb(247, 247, 246);
+    padding: 0 20px; /* Ensures the padding doesn't change */
+ 
+  }
+
+
+  
+  .card-plan{
+    width: 228px;
+
+
+border-radius: 24px;
+background: linear-gradient(135deg, #5B63E9 0%, #3B5BE4 100%);
+
+display: flex;
+flex-direction: column;
+justify-content: center;
+text-align: center;
+gap: 10px;
+ position: relative;
+ padding-top: 50px;
+ margin-top: 50px;
+  }
+     .card-plan .text-small{
+    font-family: Poppins;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 28px;
+    letter-spacing: -2%;
+    text-align: center;
+    color: #FFFFFF;
+
+  }
+  .card-pan-vector{
+  position:absolute;
+  width: 94px;
+height: 94px;
+top: -48px;
+left: 68px;
+border-width: 5px;
+background: linear-gradient(135deg, #5B63E9 0%, #3B5BE4 100%);
+border: 5px solid #FFFFFF;
+box-shadow: 0px 18px 40px 0px #7090B01F;
+border-radius: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+ .card-plan .text-small-paragraph{
+    font-family: Poppins;
+font-weight: 400;
+font-size: 12px;
+line-height: 24px;
+letter-spacing: -2%;
+text-align: center;
+color: #E9EDF7;
+
+  }
+
 
 @media only screen and (max-width: 1599px) {
     .sidebartitle h1{
@@ -176,8 +255,16 @@ letter-spacing: 0%;
        
   }
   @media (max-width: 1100px) {
+    .sidbar-item-link .start-survey-text{
+      display: none;
+    }
+    .sidbar-item-link{
+      justify-content: center !important;
+    }
     .active-sidebar {
-      padding: 5px 0px 1px 0;
+      padding: 5px 0px 5px 0px;
+      border-radius: 8px;
+
     }
     .cross-icon {
         display: none;
@@ -185,88 +272,72 @@ letter-spacing: 0%;
     .container.collapsed {
         margin-top: 20px;
     }
-}
+    .sidebar-logo{
+      width: 50px;
+    }
+    .card-pan-vector .plan-card-icon{
+      width: 12px;
+      height: 12px;
+    }
+      .card-plan{
+    width: 70px;
+gap: 1px;
 
-.Mysurveypro{
-    display: inline-block;
-    padding: 0 20px; /* Default padding */
-    transition: all 0.3s ease;
-    font-size: 19px;
-    font-weight: 700;
+border-radius: 10px;
+ padding-top: 25px;
+ margin-top: 20px;
   }
 
-  .Mysurveypro:hover {
-    border-radius: 8px;
-    user-select: none;
-    cursor: pointer;
-    background-color: rgb(247, 247, 246);
-    padding: 0 20px; /* Ensures the padding doesn't change */
- 
-  }
-  .text-small{
-    font-family: Poppins;
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 28px;
-    letter-spacing: -2%;
-    text-align: center;
-    color: #FFFFFF;
-
-  }
-  .text-small.collapsed {
-    font-size: 10px;
-    font-weight: 600;
-    width: 100px; /* Adjust width to control text wrapping */
-    white-space: normal; /* Allows text to wrap */
-    word-break: break-word; /* Ensures words break if necessary */
-    text-align: center; /* Centers the text */
-    line-height: 1.2; /* Adjust line height for better spacing */
-  }
-  
-  .card-plan{
-    width: 228px;
-
-
-border-radius: 24px;
-background: linear-gradient(135deg, #5B63E9 0%, #3B5BE4 100%);
-
-display: flex;
-flex-direction: column;
-justify-content: center;
-text-align: center;
-gap: 10px;
- position: relative;
- padding-top: 50px;
- margin-top: 50px;
-  }
-  
-  .card-pan-vector{
+    .card-pan-vector{
   position:absolute;
-  width: 94px;
-height: 94px;
-top: -48px;
-left: 68px;
+  width: 28px;
+height: 28px;
+top: -10px;
+left: 21px;
 border-width: 5px;
-background: linear-gradient(135deg, #5B63E9 0%, #3B5BE4 100%);
-border: 5px solid #FFFFFF;
-box-shadow: 0px 18px 40px 0px #7090B01F;
-border-radius: 50%;
-display: flex;
-justify-content: center;
-align-items: center;
+
+border: 1px solid #FFFFFF;
+
 }
-  .text-small-paragraph{
-    font-family: Poppins;
+
+  .text-small-paragraph.collapsed{
+font-family: Poppins;
 font-weight: 400;
-font-size: 12px;
-line-height: 24px;
+font-size: 3.66px;
+line-height: 7.31px;
 letter-spacing: -2%;
 text-align: center;
-color: #E9EDF7;
+
 
   }
-  .text-small-paragraph.collapsed{
-    /* display: none; */
-    font-size: 10px;
+    .text-small.collapsed {
+font-family: Poppins;
+font-weight: 700;
+font-size: 4.57px;
+line-height: 8.53px;
+letter-spacing: -2%;
+text-align: center;
+
+  }
+  .planButton{
+  width: 60px;
+  height: 44;
+  top: 8px;
+  left: 4px;
+  gap:2px;
+  font-size: 4.27px;
+  border-radius: 70px;
+  border-width: 1px;
+  padding-top: 3px;
+  padding-right: 5px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  border: 1px solid #D5D7DA;
+  box-shadow: 0px 1px 2px 0px #0A0D120D;
+
+color: #1B2559;
+background: #FFFFFF;
+
   }
 
+}
